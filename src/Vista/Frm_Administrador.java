@@ -5,6 +5,7 @@
  */
 package Vista;
 
+
 /**
  *
  * @author Willian
@@ -17,6 +18,7 @@ public class Frm_Administrador extends javax.swing.JFrame {
     public Frm_Administrador() {
         initComponents();
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
