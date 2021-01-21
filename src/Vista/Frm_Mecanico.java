@@ -14,6 +14,7 @@ public class Frm_Mecanico extends javax.swing.JFrame {
     /**
      * Creates new form Frm_Mecanico
      */
+    FrmCliente RgCliente=new FrmCliente();
     public Frm_Mecanico() {
         initComponents();
     }
@@ -34,7 +35,7 @@ public class Frm_Mecanico extends javax.swing.JFrame {
         jButton6 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
         jToolBar2 = new javax.swing.JToolBar();
-        jButton1 = new javax.swing.JButton();
+        btnAgregarCliente = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
 
@@ -91,11 +92,16 @@ public class Frm_Mecanico extends javax.swing.JFrame {
         jToolBar2.setRollover(true);
         jToolBar2.setOpaque(false);
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/clienteNuevos.png"))); // NOI18N
-        jButton1.setBorder(null);
-        jButton1.setBorderPainted(false);
-        jButton1.setContentAreaFilled(false);
-        jToolBar2.add(jButton1);
+        btnAgregarCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/clienteNuevos.png"))); // NOI18N
+        btnAgregarCliente.setBorder(null);
+        btnAgregarCliente.setBorderPainted(false);
+        btnAgregarCliente.setContentAreaFilled(false);
+        btnAgregarCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarClienteActionPerformed(evt);
+            }
+        });
+        jToolBar2.add(btnAgregarCliente);
 
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/IconoVerCliente.png"))); // NOI18N
         jButton3.setBorder(null);
@@ -122,6 +128,10 @@ public class Frm_Mecanico extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnAgregarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarClienteActionPerformed
+        RgCliente.setVisible(true);       // TODO add your handling code here:
+    }//GEN-LAST:event_btnAgregarClienteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -159,7 +169,7 @@ public class Frm_Mecanico extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnAgregarCliente;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;

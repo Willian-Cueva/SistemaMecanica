@@ -6,6 +6,9 @@
 package Vista;
 
 import Controlador.ControladorCuenta;
+import Controlador.MantenerCesion;
+import Controlador.Utiles;
+import Modelo.Cuenta;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -22,9 +25,14 @@ public class Frm_Login extends javax.swing.JFrame {
      * Creates new form Frm_Login
      */
     RecuperarClave rec = new RecuperarClave(new eventoCerrar());
-
+    Utiles uti = new Utiles();
+    ControladorCuenta ctr = new ControladorCuenta();
+    MantenerCesion cs = new MantenerCesion();
+    Frm_Mecanico mec = new Frm_Mecanico();
+    Frm_Administrador adm=new Frm_Administrador();
     public Frm_Login() {
         initComponents();
+        ctr.RecuperarData();
     }
 
     /**
@@ -125,27 +133,24 @@ public class Frm_Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnContinuarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnContinuarMousePressed
-        btnContinuar.setBackground(new Color(14, 29, 95));
+        btnContinuar.setBackground(new Color(12, 12, 47));
         btnContinuar.setForeground(Color.WHITE);
-        String Usuario = txtUsuario.getText();
-        String contraseña = txtContraseña.getText();
-        ControladorCuenta ctrCuenta = new ControladorCuenta();
-        ctrCuenta.verificarCuenta(Usuario, contraseña);
-        if (ctrCuenta.getCuenta() != null) {
-            Frm_Administrador admin = new Frm_Administrador();
-            Frm_Mecanico mecanic = new Frm_Mecanico();
-            System.out.println("Encontrado");
-            System.out.println("Cuenta: " + ctrCuenta.getCuenta().getCedula() + " " + ctrCuenta.getCuenta().getNombre() + " " + ctrCuenta.getCuenta().getTipoRol());
-            if (ctrCuenta.getCuenta().getTipoRol().equals("Administrador")) {
-                System.out.println("no entra");
-                admin.setVisible(true);
-            } else if (ctrCuenta.getCuenta().getTipoRol().equals("Mecanico")) {
-
-                mecanic.setVisible(true);
+        ctr.buscarCuenta(ctr.getLiCuenta(), ctr.getLiPersona(), ctr.getLiRol(), txtUsuario.getText(), txtContraseña.getText());
+        cs.mantenerdatos(ctr.getCuenta(), ctr.getPersona(), ctr.getRol());
+        System.out.println("Persona: " + ctr.getPersona().getNombre());
+        System.out.println("Rol: " + ctr.getRol().getNombreRol());
+        if (ctr.isExisteCuenta()) {
+            if (ctr.getRol().getNombreRol().equals("Administrador")) {
+                  adm.setVisible(true);
+                  this.dispose();
+            } else if (ctr.getRol().getNombreRol().equals("Mecanico")) {
+                  mec.setVisible(true);
+                  this.dispose();
             } else {
-                System.out.println("entra");
+
             }
-        }        // TODO add your handling code here:
+        }
+// TODO add your handling code here:
     }//GEN-LAST:event_btnContinuarMousePressed
 
     private void btnContinuarMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnContinuarMouseReleased
@@ -154,7 +159,6 @@ public class Frm_Login extends javax.swing.JFrame {
     }//GEN-LAST:event_btnContinuarMouseReleased
 
     private void btnRecuperarCuentaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRecuperarCuentaMousePressed
-
         btnRecuperarCuenta.setForeground(Color.WHITE);
         jSeparator1.setBackground(Color.WHITE);
         rec.setVisible(true);// TODO add your handling code here:
@@ -162,7 +166,8 @@ public class Frm_Login extends javax.swing.JFrame {
 
     private void btnRecuperarCuentaMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRecuperarCuentaMouseReleased
         btnRecuperarCuenta.setForeground(Color.BLACK);
-        jSeparator1.setBackground(Color.BLACK);// TODO add your handling code here:
+        jSeparator1.setBackground(Color.BLACK);
+        // TODO add your handling code here:
     }//GEN-LAST:event_btnRecuperarCuentaMouseReleased
 
     class eventoCerrar implements MouseListener {

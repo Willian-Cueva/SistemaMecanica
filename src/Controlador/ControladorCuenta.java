@@ -5,7 +5,10 @@
  */
 package Controlador;
 
+import Lista.ListaSimple;
 import Modelo.Cuenta;
+import Modelo.Persona;
+import Modelo.Rol;
 import java.io.FileInputStream;
 import java.sql.Statement;
 import java.sql.Blob;
@@ -20,58 +23,140 @@ import java.util.logging.Logger;
  * @author Cris2
  */
 public class ControladorCuenta {
-
+    
+    Utiles uti = new Utiles();
+    ListaSimple<Cuenta> liCuenta = new ListaSimple<>();
+    ListaSimple<Persona> liPersona = new ListaSimple<>();
+    ListaSimple<Rol> liRol = new ListaSimple<>();
+    Persona persona;
+    Rol rol;
     Cuenta cuenta;
-    /**
-     * 
-     * @return 
-     */
+
     public Cuenta getCuenta() {
         return cuenta;
     }
-    /**
-     * 
-     * @param cuenta 
-     */
+
     public void setCuenta(Cuenta cuenta) {
         this.cuenta = cuenta;
     }
     
-    Utiles uti = new Utiles();
-    /**
-     * 
-     * @param usuario
-     * @param contraseña 
-     */
-    public void verificarCuenta(String usuario, String contraseña) {
-        Blob imagen = null;
-        Cuenta aux = null;
-        try {
-            Statement stmt = uti.IniciarConexion().createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM cuentas WHERE Usuario ='" + usuario + "' AND Contraseña='" + contraseña + "'");
-            if (rs.next()) {
-                imagen = (Blob) rs.getBlob(8);
-                aux = new Cuenta(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(5), rs.getString(6), rs.getString(7), imagen);
-                System.out.println(rs.getString(1)+" "+ rs.getString(2)+" "+rs.getString(7));
-            }
-        } catch (SQLException ex) {
-            System.out.println("Error Obteniendo datos de la cuenta "+ex.getMessage());
-        }
-        cuenta=aux;
-
+    public Persona getPersona() {
+        return persona;
     }
-    /**
-     * 
-     * @param nuevaContraseña
-     * @param Cedula
-     * @param Correo 
-     */
-    public void recuperarCuenta(String nuevaContraseña, String Cedula, String Correo){
+    
+    public void setPersona(Persona persona) {
+        this.persona = persona;
+    }
+    
+    public Rol getRol() {
+        return rol;
+    }
+    
+    public void setRol(Rol rol) {
+        this.rol = rol;
+    }
+    
+    public ListaSimple<Cuenta> getLiCuenta() {
+        return liCuenta;
+    }
+    
+    public void setLiCuenta(ListaSimple<Cuenta> liCuenta) {
+        this.liCuenta = liCuenta;
+    }
+    
+    public ListaSimple<Persona> getLiPersona() {
+        return liPersona;
+    }
+    
+    public void setLiPersona(ListaSimple<Persona> liPersona) {
+        this.liPersona = liPersona;
+    }
+    
+    public ListaSimple<Rol> getLiRol() {
+        return liRol;
+    }
+    
+    public void setLiRol(ListaSimple<Rol> liRol) {
+        this.liRol = liRol;
+    }
+    
+    public void RecuperarData() {
+        int CantCuentas = 0;
+        int CantPersonas = 0;
+        int CantRoles = 0;
+        
         try {
             Statement stmt = (Statement) uti.IniciarConexion().createStatement();
-            stmt.executeUpdate("UPDATE cuentas SET Contraseña = '"+nuevaContraseña+"' WHERE cuentas.Cedula = "+Cedula+" AND cuentas.Correo="+Correo);
+            //Cargar la lista de cuentas
+            ResultSet rsCuentas = stmt.executeQuery("SELECT * FROM cuentas");
+            if (rsCuentas.next()) {
+                do {
+                    //ListaCuenta
+                    liCuenta.insertar(new Cuenta(rsCuentas.getLong(1), rsCuentas.getString(2), rsCuentas.getString(3), rsCuentas.getString(4), rsCuentas.getLong(5)));
+                    CantCuentas++;
+                } while (rsCuentas.next());
+            }
+            //Cargar la lista de personas
+            ResultSet rsPersonas = stmt.executeQuery("SELECT * FROM personas");
+            if (rsPersonas.next()) {
+                do {
+                    //ListaPersona
+                    liPersona.insertar(new Persona(rsPersonas.getLong(1), rsPersonas.getString(2), rsPersonas.getString(3), rsPersonas.getString(4), rsPersonas.getString(5), rsPersonas.getString(6), rsPersonas.getString(7), rsPersonas.getString(8),rsPersonas.getLong(10), rsPersonas.getBlob(9)));
+                    CantPersonas++;
+                } while (rsPersonas.next());
+            }
+            //Cargar la lista de roles
+            ResultSet rsRol = stmt.executeQuery("SELECT * FROM rol");
+            if (rsRol.next()) {
+                do {
+                    //ListaRol
+                    liRol.insertar(new Rol(rsRol.getLong(1), rsRol.getString(2)));
+                    CantRoles++;
+                } while (rsRol.next());
+            }
+            
         } catch (SQLException ex) {
-            Logger.getLogger(ControladorCuenta.class.getName()).log(Level.SEVERE, null, ex);
+            
+            System.out.println("Error de conexion: " + ex.getMessage());
+        } catch (NullPointerException ex) {
+            System.out.println("Error: " + ex.getMessage());
+        }
+        
+    }
+
+    public boolean isExisteCuenta() {
+        if (cuenta!=null) {
+            return true;
+        }
+        return false;
+    }
+    
+    public void buscarCuenta(ListaSimple<Cuenta> lic, ListaSimple<Persona> lip, ListaSimple<Rol> lir, String Usuario, String Contraseña) {     
+        
+        for (int i = 0; i < lic.tamano(); i++) {
+            if (lic.obtenerPorPosicion(i).getUsuario().equals(Usuario) && lic.obtenerPorPosicion(i).getContraseña().equals(Contraseña)) {
+                System.out.println("Existe Cuenta"+lic.obtenerPorPosicion(i).getUsuario());
+                cuenta = lic.obtenerPorPosicion(i);
+            }else{
+            }
+        }
+        if (cuenta != null) {
+            System.out.println("Entrofallo");
+            for (int i = 0; i < lip.tamano(); i++) {
+                if (lip.obtenerPorPosicion(i).getId().equals(cuenta.getIdPersona())) {
+                    System.out.println("Persona correspondiente");
+                    persona = lip.obtenerPorPosicion(i);
+                } else {
+                }
+            }
+        }
+        if (persona != null) {
+            for (int i = 0; i < lir.tamano(); i++) {
+                if (lir.obtenerPorPosicion(i).getId().equals(persona.getIdRol())) {
+                    rol = lir.obtenerPorPosicion(i);
+                }
+            }
+            
         }
     }
     

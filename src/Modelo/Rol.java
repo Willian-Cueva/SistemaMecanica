@@ -12,35 +12,31 @@ import java.sql.Blob;
  *
  * @author Cris2
  */
-public class Rol extends Persona {
-    String tipoRol;
-    /**
-     * 
-     * @param cedula
-     * @param nombre
-     * @param correo
-     * @param telefono
-     * @param tipoRol
-     * @param imagenObtenida 
-     */
-    public Rol(  String cedula,String nombre, String correo, String telefono,String tipoRol, Blob imagenObtenida) {
-        super(nombre, cedula, correo, telefono, imagenObtenida);
-        this.tipoRol = tipoRol;
+public class Rol{
+    Long id;
+    String nombreRol;
+
+    public Rol(Long id, String nombreRol) {
+        this.id = id;
+        this.nombreRol = nombreRol;
     }
-    /**
-     * 
-     * @param tipoRol
-     * @param nombre
-     * @param cedula
-     * @param correo
-     * @param telefono
-     * @param archivoImagen 
-     */
-    public Rol(String tipoRol, String nombre, String cedula, String correo, String telefono, File archivoImagen) {
-        super(nombre, cedula, correo, telefono, archivoImagen);
-        this.tipoRol = tipoRol;
+
+    
+
+    public Long getId() {
+        return id;
     }
-    
-    
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getNombreRol() {
+        return nombreRol;
+    }
+
+    public void setNombreRol(String nombreRol) {
+        this.nombreRol = nombreRol;
+    }   
     
 }
