@@ -48,9 +48,9 @@ public class ControladorMecanico {
     }
     
     public void RegistrarCliente(String cedula, String nombre, String apellido, String correo, String telefono, String direccion, File file, Long idRol, String contraseña) {
-        persona = new Persona(Long.parseLong(cedula), nombre, apellido, cedula, correo, telefono, direccion, "", idRol, file);
+        persona = new Persona(Long.parseLong(cedula), nombre, apellido, cedula, correo, telefono, direccion,true, "", idRol, file);
         if (contraseña != null) {
-          cuenta = new Cuenta(Long.parseLong("0"), correo, contraseña, "fg56dh7d8", persona.getId());  
+          cuenta = new Cuenta(Long.parseLong("0"), correo, contraseña,true, "fg56dh7d8", persona.getId());  
         }
         
     }
@@ -60,7 +60,7 @@ public class ControladorMecanico {
             int i = 0;
             FileInputStream archivofoto;
             archivofoto = new FileInputStream(persona.getArchivoImagen());
-            String insertar = "INSERT INTO personas(idPersonas,Nombre,Apellido,Cedula,correo,telefono,Direccion,idExternal,imagen,idRol) VALUES (?,?,?,?,?,?,?,?,?,?)";
+            String insertar = "INSERT INTO personas(idPersona,nombre,apellido,cedula,correo,telefono,direccion,estado,external_idPersona,imagen,idRol) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
             PreparedStatement stmt = (PreparedStatement) uti.IniciarConexion().prepareStatement(insertar);
             stmt.setString(1, persona.getId().toString());
             stmt.setString(2, persona.getNombre());
@@ -68,10 +68,11 @@ public class ControladorMecanico {
             stmt.setString(4, persona.getCedula());
             stmt.setString(5, persona.getCorreo());
             stmt.setString(6, persona.getTelefono());
-            stmt.setString(7, persona.getDireccion());
-            stmt.setString(8, persona.getExternal_id());
-            stmt.setBinaryStream(9, archivofoto);
-            stmt.setString(10, persona.getIdRol().toString());
+            stmt.setBoolean(7, persona.getEstado());
+            stmt.setString(8, persona.getDireccion());
+            stmt.setString(9, persona.getExternal_id());
+            stmt.setBinaryStream(10, archivofoto);
+            stmt.setString(11, persona.getIdRol().toString());
             i = stmt.executeUpdate();
             if (i > 0) {
                 JOptionPane.showMessageDialog(null, "Se guardo correctamente");
@@ -83,13 +84,14 @@ public class ControladorMecanico {
     public void GuardarCuenta(){
         try {
             int i = 0;
-            String insertar = "INSERT INTO cuentas(idCuentas,Usuario,Contraseña,idExternal,idPersona) VALUES (?,?,?,?,?)";
+            String insertar = "INSERT INTO cuentas(idCuenta,usuario,clave,estado,external_idCuenta,idPersona) VALUES (?,?,?,?,?,?)";
             PreparedStatement stmt = (PreparedStatement) uti.IniciarConexion().prepareStatement(insertar);
             stmt.setString(1, cuenta.getId().toString());
             stmt.setString(2, cuenta.getUsuario());
             stmt.setString(3, cuenta.getContraseña());
-            stmt.setString(4, cuenta.getExternal_id());
-            stmt.setString(5, cuenta.getIdPersona().toString());
+            stmt.setBoolean(4,cuenta.getEstado());
+            stmt.setString(5, cuenta.getExternal_id());
+            stmt.setString(6, cuenta.getIdPersona().toString());
             i = stmt.executeUpdate();
             if (i > 0) {
                 JOptionPane.showMessageDialog(null, "Se guardo correctamente");

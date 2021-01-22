@@ -92,7 +92,7 @@ public class ControladorCuenta {
             if (rsCuentas.next()) {
                 do {
                     //ListaCuenta
-                    liCuenta.insertar(new Cuenta(rsCuentas.getLong(1), rsCuentas.getString(2), rsCuentas.getString(3), rsCuentas.getString(4), rsCuentas.getLong(5)));
+                    liCuenta.insertar(new Cuenta(rsCuentas.getLong(1), rsCuentas.getString(2), rsCuentas.getString(3),rsCuentas.getBoolean(4), rsCuentas.getString(5), rsCuentas.getLong(6)));
                     CantCuentas++;
                 } while (rsCuentas.next());
             }
@@ -101,7 +101,7 @@ public class ControladorCuenta {
             if (rsPersonas.next()) {
                 do {
                     //ListaPersona
-                    liPersona.insertar(new Persona(rsPersonas.getLong(1), rsPersonas.getString(2), rsPersonas.getString(3), rsPersonas.getString(4), rsPersonas.getString(5), rsPersonas.getString(6), rsPersonas.getString(7), rsPersonas.getString(8),rsPersonas.getLong(10), rsPersonas.getBlob(9)));
+                    liPersona.insertar(new Persona(rsPersonas.getLong(1), rsPersonas.getString(2), rsPersonas.getString(3), rsPersonas.getString(4), rsPersonas.getString(5), rsPersonas.getString(6), rsPersonas.getString(7),rsPersonas.getBoolean(8), rsPersonas.getString(9),rsPersonas.getLong(10), rsPersonas.getBlob(11)));
                     CantPersonas++;
                 } while (rsPersonas.next());
             }

@@ -6,14 +6,18 @@
 package Vista;
 
 import Controlador.ControladorCuenta;
-import Controlador.MantenerCesion;
 import Controlador.Utiles;
+import ControladorDao.MantenerCesion;
 import Modelo.Cuenta;
+import Modelo.Persona;
+import Modelo.Rol;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -27,7 +31,6 @@ public class Frm_Login extends javax.swing.JFrame {
     RecuperarClave rec = new RecuperarClave(new eventoCerrar());
     Utiles uti = new Utiles();
     ControladorCuenta ctr = new ControladorCuenta();
-    MantenerCesion cs = new MantenerCesion();
     Frm_Mecanico mec = new Frm_Mecanico();
     Frm_Administrador adm=new Frm_Administrador();
     public Frm_Login() {
@@ -136,9 +139,19 @@ public class Frm_Login extends javax.swing.JFrame {
         btnContinuar.setBackground(new Color(12, 12, 47));
         btnContinuar.setForeground(Color.WHITE);
         ctr.buscarCuenta(ctr.getLiCuenta(), ctr.getLiPersona(), ctr.getLiRol(), txtUsuario.getText(), txtContraseña.getText());
-        cs.mantenerdatos(ctr.getCuenta(), ctr.getPersona(), ctr.getRol());
-        System.out.println("Persona: " + ctr.getPersona().getNombre());
-        System.out.println("Rol: " + ctr.getRol().getNombreRol());
+        //cs.mantenerdatos(ctr.getCuenta(), ctr.getPersona(), ctr.getRol());
+        MantenerCesion<Cuenta> cuenta=new MantenerCesion<>();
+        MantenerCesion<Persona> persona=new MantenerCesion<>();
+        MantenerCesion<Rol> rol=new MantenerCesion<>();
+        try {
+            cuenta.guardar(ctr.getCuenta(), "Cuenta");
+            persona.guardar(ctr.getPersona(),"Persona");
+            rol.guardar(ctr.getRol(),"Rol");
+        } catch (Exception ex) {
+            Logger.getLogger(Frm_Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        System.out.println("llega hasta aqui");
         if (ctr.isExisteCuenta()) {
             if (ctr.getRol().getNombreRol().equals("Administrador")) {
                   adm.setVisible(true);

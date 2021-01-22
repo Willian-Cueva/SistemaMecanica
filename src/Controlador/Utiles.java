@@ -30,7 +30,7 @@ public class Utiles {
         String Driver = "com.mysql.cj.jdbc.Driver";
         String Usuario = "root";
         String Contraseña = "root";
-        String NombreDB = "sistemamecanica";
+        String NombreDB = "baseddmecanica";
         String Puerto = "3306";
         String TimeZone = "?useUnicode=true&use"
                 + "JDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false"

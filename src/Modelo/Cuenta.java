@@ -17,16 +17,27 @@ public class Cuenta{
     private Long id;
     private String Usuario;
     private String contraseña;
+    private Boolean Estado;
     private String External_id;
     private Long idPersona;
 
-    public Cuenta(Long id, String Usuario, String contraseña, String External_id, Long idPersona) {
+    public Cuenta(Long id, String Usuario, String contraseña,Boolean Estado , String External_id, Long idPersona) {
         this.id = id;
         this.Usuario = Usuario;
         this.contraseña = contraseña;
+        this.Estado=Estado;
         this.External_id = External_id;
         this.idPersona = idPersona;
     }
+
+    public Boolean getEstado() {
+        return Estado;
+    }
+
+    public void setEstado(Boolean Estado) {
+        this.Estado = Estado;
+    }
+    
     public Long getId() {
         return id;
     }

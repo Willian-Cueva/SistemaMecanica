@@ -7,8 +7,8 @@ package Vista;
 
 import Controlador.ControladorCuenta;
 import Controlador.ControladorMecanico;
-import Controlador.MantenerCesion;
 import Controlador.Utiles;
+import ControladorDao.MantenerCesion;
 import Modelo.Rol;
 import java.awt.Color;
 import java.awt.Image;
@@ -28,26 +28,12 @@ public class FrmCliente extends javax.swing.JFrame {
      */
     ControladorMecanico ctr = new ControladorMecanico();
     Utiles uti = new Utiles();
-    MantenerCesion cs = new MantenerCesion();
     ControladorCuenta ctrc = new ControladorCuenta();
     File file;
 
     public FrmCliente() {
         initComponents();
-        ctr.llenarboxRoles(cmbRol);
-//        if (cs.getRol() != null && cs.getRol().getId().equals(3)) {
-            cmbRol.removeItem("Administrador");
-            cmbRol.removeItem("Mecanico");
-//        } else {
-//            txtContraseña = new JTextField();
-//            jLabel9 = new JLabel("Contraseña");
-//            jPanel1.add(txtContraseña);
-//            jPanel1.add(jLabel9);
-//            txtContraseña.setBounds(90, 330, 230, 30);
-//            jLabel9.setBounds(10, 330, 70, 30);
-//            txtContraseña.setVisible(true);
-//            jLabel9.setVisible(true);
-//        }
+        
     }
 
     /**
@@ -80,6 +66,11 @@ public class FrmCliente extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(255, 204, 51));
         jPanel1.setLayout(null);
@@ -229,6 +220,10 @@ public class FrmCliente extends javax.swing.JFrame {
         btnBuscarImagen.setBackground(new Color(255, 153, 0));
         btnBuscarImagen.setForeground(Color.BLACK);        // TODO add your handling code here:
     }//GEN-LAST:event_btnBuscarImagenMouseExited
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here:
+    }//GEN-LAST:event_formWindowOpened
 
     /**
      * @param args the command line arguments

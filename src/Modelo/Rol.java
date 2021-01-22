@@ -16,6 +16,9 @@ public class Rol{
     Long id;
     String nombreRol;
 
+    public Rol() {
+    }
+    
     public Rol(Long id, String nombreRol) {
         this.id = id;
         this.nombreRol = nombreRol;

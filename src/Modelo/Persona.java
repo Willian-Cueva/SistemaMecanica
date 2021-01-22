@@ -20,12 +20,13 @@ public class Persona{
     private String correo;
     private String telefono;
     private String direccion;
+    private Boolean Estado;
     private String External_id;
     private Long idRol;
     private Blob imagenObtenida;
     private File archivoImagen;
 
-    public Persona(Long id, String nombre, String apellido, String cedula, String correo, String telefono, String direccion, String External_id, Long idRol, Blob imagenObtenida) {
+    public Persona(Long id, String nombre, String apellido, String cedula, String correo, String telefono, String direccion,Boolean Estado , String External_id, Long idRol, Blob imagenObtenida) {
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -33,12 +34,13 @@ public class Persona{
         this.correo = correo;
         this.telefono = telefono;
         this.direccion = direccion;
+        this.Estado=Estado;
         this.External_id = External_id;
         this.idRol = idRol;
         this.imagenObtenida = imagenObtenida;
     }
 
-    public Persona(Long id, String nombre, String apellido, String cedula, String correo, String telefono, String direccion, String External_id, Long idRol, File archivoImagen) {
+    public Persona(Long id, String nombre, String apellido, String cedula, String correo, String telefono, String direccion,Boolean Estado, String External_id, Long idRol, File archivoImagen) {
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -46,6 +48,7 @@ public class Persona{
         this.correo = correo;
         this.telefono = telefono;
         this.direccion = direccion;
+        this.Estado= Estado;
         this.External_id = External_id;
         this.idRol = idRol;
         this.archivoImagen = archivoImagen;
@@ -59,6 +62,14 @@ public class Persona{
         this.idRol = idRol;
     }
 
+    public Boolean getEstado() {
+        return Estado;
+    }
+
+    public void setEstado(Boolean Estado) {
+        this.Estado = Estado;
+    }
+    
     
 
     
