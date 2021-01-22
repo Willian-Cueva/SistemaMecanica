@@ -78,7 +78,7 @@ public class Frm_Vehiculo extends javax.swing.JFrame {
                                     .addComponent(jTextField3)
                                     .addComponent(jTextField1)
                                     .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addContainerGap(159, Short.MAX_VALUE))
+                .addContainerGap(373, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
