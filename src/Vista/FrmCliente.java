@@ -67,6 +67,9 @@ public class FrmCliente extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
             }
@@ -189,14 +192,23 @@ public class FrmCliente extends javax.swing.JFrame {
     private void btnGuardarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuardarMousePressed
         btnGuardar.setBackground(new Color(255, 204, 51));
         btnGuardar.setForeground(Color.WHITE);
-        ctr.RegistrarCliente(txtCedula.getText(), txtNombre.getText(), txtApellido.getText(), txtCorreo.getText(), txtTelefono.getText(), txtDireccion.getText(), file, ctr.idRol(cmbRol.getSelectedItem().toString()), txtContraseña.getText());        // TODO add your handling code here:
+        if (cmbRol.getSelectedItem().toString().equals("Cliente")) {
+            ctr.RegistrarCliente(txtCedula.getText(), txtNombre.getText(), txtApellido.getText(), txtCorreo.getText(), txtTelefono.getText(), txtDireccion.getText(), file, ctr.idRol(cmbRol.getSelectedItem().toString()),null);        // TODO add your handling code here:
+
+        }else{
+            ctr.RegistrarCliente(txtCedula.getText(), txtNombre.getText(), txtApellido.getText(), txtCorreo.getText(), txtTelefono.getText(), txtDireccion.getText(), file, ctr.idRol(cmbRol.getSelectedItem().toString()), txtContraseña.getText());        // TODO add your handling code here:
+
+        }
     }//GEN-LAST:event_btnGuardarMousePressed
 
     private void btnGuardarMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuardarMouseReleased
         btnGuardar.setBackground(new Color(255, 153, 0));
         btnGuardar.setForeground(Color.BLACK);
         ctr.GuardarPersona(ctr.getPersona());
-        ctr.GuardarCuenta();// TODO add your handling code here:
+        if (!cmbRol.getSelectedItem().toString().equals("Cliente")) {
+            ctr.GuardarCuenta();
+        }
+        // TODO add your handling code here:
     }//GEN-LAST:event_btnGuardarMouseReleased
 
     private void btnBuscarImagenMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarImagenMousePressed
@@ -221,9 +233,34 @@ public class FrmCliente extends javax.swing.JFrame {
         btnBuscarImagen.setForeground(Color.BLACK);        // TODO add your handling code here:
     }//GEN-LAST:event_btnBuscarImagenMouseExited
 
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+         
+               // TODO add your handling code here:
+    }//GEN-LAST:event_formWindowActivated
+
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        // TODO add your handling code here:
+       ctrc.RecuperarData();
+        ctr.llenarboxRoles(cmbRol);  
+        MantenerCesion<Rol> cs = new MantenerCesion();
+        System.out.println("Rol de quien entro: "+cs.listar("Rol").getNombreRol());
+        if (cs.listar("Rol").getNombreRol().equals("Mecanico")) {
+            cmbRol.removeItem("Administrador");
+            cmbRol.removeItem("Mecanico");
+        } else {
+            txtContraseña = new JTextField();
+            jLabel9 = new JLabel("Contraseña");
+            jPanel1.add(txtContraseña);
+            jPanel1.add(jLabel9);
+            txtContraseña.setBounds(90, 330, 230, 30);
+            jLabel9.setBounds(10, 330, 70, 30);
+            txtContraseña.setVisible(true);
+            jLabel9.setVisible(true);
+        } // TODO add your handling code here:
     }//GEN-LAST:event_formWindowOpened
+
+    private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
+               // TODO add your handling code here:
+    }//GEN-LAST:event_formWindowGainedFocus
 
     /**
      * @param args the command line arguments

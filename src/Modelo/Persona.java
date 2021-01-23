@@ -26,6 +26,11 @@ public class Persona{
     private Blob imagenObtenida;
     private File archivoImagen;
 
+    public Persona(Long id) {
+        this.id = id;
+    }
+    
+    
     public Persona(Long id, String nombre, String apellido, String cedula, String correo, String telefono, String direccion,Boolean Estado , String External_id, Long idRol, Blob imagenObtenida) {
         this.id = id;
         this.nombre = nombre;

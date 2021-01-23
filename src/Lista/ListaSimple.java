@@ -166,4 +166,19 @@ public class ListaSimple<T> {
             
         }
     }
+        public void removerPorPosicion(int posicion){
+        if(posicion>=0 && posicion<tamano()){
+            if(posicion == 0){
+                cabecera = cabecera.getSig();
+            }
+            else{
+                Nodo aux = cabecera;
+                for (int i = 0; i < posicion-1; i++) {
+                    aux = aux.getSig();
+                }
+                Nodo siguiente = aux.getSig();
+                aux.setSig(siguiente.getSig());
+            }
+        }
+    }
 }

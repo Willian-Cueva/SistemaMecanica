@@ -15,6 +15,7 @@ public class Frm_Mecanico extends javax.swing.JFrame {
      * Creates new form Frm_Mecanico
      */
     FrmCliente RgCliente=new FrmCliente();
+    Frm_Vehiculo RgVehiculo=new Frm_Vehiculo();
     public Frm_Mecanico() {
         initComponents();
     }
@@ -56,6 +57,11 @@ public class Frm_Mecanico extends javax.swing.JFrame {
         jButton2.setFocusable(false);
         jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
         jToolBar1.add(jButton2);
 
         jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/descarga (1).png"))); // NOI18N
@@ -132,6 +138,10 @@ public class Frm_Mecanico extends javax.swing.JFrame {
     private void btnAgregarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarClienteActionPerformed
         RgCliente.setVisible(true);       // TODO add your handling code here:
     }//GEN-LAST:event_btnAgregarClienteActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        RgVehiculo.setVisible(true);        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments

@@ -136,10 +136,12 @@ public class Frm_Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnContinuarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnContinuarMousePressed
+       //Aqui es donde te permite ingresar decide tu rol y de acuerdo a eso te da paso a la ventana que te corresponde
         btnContinuar.setBackground(new Color(12, 12, 47));
         btnContinuar.setForeground(Color.WHITE);
         ctr.buscarCuenta(ctr.getLiCuenta(), ctr.getLiPersona(), ctr.getLiRol(), txtUsuario.getText(), txtContraseña.getText());
         //cs.mantenerdatos(ctr.getCuenta(), ctr.getPersona(), ctr.getRol());
+        //Aqui tambien guarda los datos en un archivo para mantener la cesion
         MantenerCesion<Cuenta> cuenta=new MantenerCesion<>();
         MantenerCesion<Persona> persona=new MantenerCesion<>();
         MantenerCesion<Rol> rol=new MantenerCesion<>();
@@ -167,22 +169,25 @@ public class Frm_Login extends javax.swing.JFrame {
     }//GEN-LAST:event_btnContinuarMousePressed
 
     private void btnContinuarMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnContinuarMouseReleased
+        //Estetica del boton
         btnContinuar.setBackground(new Color(102, 102, 255));
         btnContinuar.setForeground(Color.BLACK);// TODO add your handling code here:
     }//GEN-LAST:event_btnContinuarMouseReleased
 
     private void btnRecuperarCuentaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRecuperarCuentaMousePressed
+       //Estetica del boton y hace visible una ventanita para recuperar contraseña que aun no programo
         btnRecuperarCuenta.setForeground(Color.WHITE);
         jSeparator1.setBackground(Color.WHITE);
         rec.setVisible(true);// TODO add your handling code here:
     }//GEN-LAST:event_btnRecuperarCuentaMousePressed
 
     private void btnRecuperarCuentaMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRecuperarCuentaMouseReleased
+        //Estetica del boton
         btnRecuperarCuenta.setForeground(Color.BLACK);
         jSeparator1.setBackground(Color.BLACK);
         // TODO add your handling code here:
     }//GEN-LAST:event_btnRecuperarCuentaMouseReleased
-
+    //A esto no le paren bola jjj
     class eventoCerrar implements MouseListener {
 
         @Override

@@ -48,8 +48,8 @@ public class ControladorMecanico {
     }
     
     public void RegistrarCliente(String cedula, String nombre, String apellido, String correo, String telefono, String direccion, File file, Long idRol, String contraseña) {
-        persona = new Persona(Long.parseLong(cedula), nombre, apellido, cedula, correo, telefono, direccion,true, "", idRol, file);
-        if (contraseña != null) {
+        persona = new Persona(Long.parseLong(cedula), nombre, apellido, cedula, correo, telefono, direccion,false, "f57c756c6fj6", idRol, file);
+        if (contraseña!=null) {
           cuenta = new Cuenta(Long.parseLong("0"), correo, contraseña,true, "fg56dh7d8", persona.getId());  
         }
         
@@ -68,8 +68,8 @@ public class ControladorMecanico {
             stmt.setString(4, persona.getCedula());
             stmt.setString(5, persona.getCorreo());
             stmt.setString(6, persona.getTelefono());
-            stmt.setBoolean(7, persona.getEstado());
-            stmt.setString(8, persona.getDireccion());
+            stmt.setString(7, persona.getDireccion());
+            stmt.setBoolean(8, persona.getEstado());
             stmt.setString(9, persona.getExternal_id());
             stmt.setBinaryStream(10, archivofoto);
             stmt.setString(11, persona.getIdRol().toString());
