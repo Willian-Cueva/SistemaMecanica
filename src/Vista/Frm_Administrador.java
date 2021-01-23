@@ -12,6 +12,7 @@ import Controlador.Utiles.UtilesComponentes;
 import Modelo.Rol;
 import Vista.Modelo.TablaPersonas;
 import com.mysql.jdbc.PreparedStatement;
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
 /**
@@ -19,8 +20,11 @@ import javax.swing.JOptionPane;
  * @author Willian
  */
 public class Frm_Administrador extends javax.swing.JFrame {
+
     private AdministradorControlador ac = new AdministradorControlador();
     private TablaPersonas tp = new TablaPersonas();
+    private int idPersona = -1;
+
     /**
      * Creates new form Frm_Administrador
      */
@@ -30,6 +34,7 @@ public class Frm_Administrador extends javax.swing.JFrame {
         actualizarLista();
         UtilesComponentes.cargarComboTipoRol(comboTipo);
     }
+
     private void limpiarReg() {
         txtNombre.setText("");
         txtApellido.setText("");
@@ -42,7 +47,7 @@ public class Frm_Administrador extends javax.swing.JFrame {
 //        cargarTablaPersonas();
         actualizarLista();
     }
-    
+
     private void guardarPersona() {
         try {
 
@@ -85,18 +90,43 @@ public class Frm_Administrador extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "No se pudo  insertar");
         }
     }
-    
+
     private void cargarTablaPersonas() {
         tp.setLsa(ac.getPersonas());
         tablaPersonas.setModel(tp);
         tablaPersonas.updateUI();
     }
-    
+
     private void actualizarLista() {
         ac.setPersonas(Utiles.listaPersonas());
         cargarTablaPersonas();
     }
-    
+
+    private void llenarCampos(int s) {
+        idPersona = Integer.parseInt(String.valueOf(tablaPersonas.getValueAt(s, 0)));
+        txtNombre.setText(String.valueOf(tablaPersonas.getValueAt(s, 1)));
+        txtApellido.setText(String.valueOf(tablaPersonas.getValueAt(s, 2)));
+        txtCedula.setText(String.valueOf(tablaPersonas.getValueAt(s, 3)));
+        txtCorreo.setText(String.valueOf(tablaPersonas.getValueAt(s, 4)));
+        txtTelefono.setText(String.valueOf(tablaPersonas.getValueAt(s, 5)));
+        txtDireccion.setText(String.valueOf(tablaPersonas.getValueAt(s, 6)));
+        btnGuardar.setEnabled(false);
+        btnModificar.setEnabled(false);
+        btnLimpiar1.setEnabled(false);
+        btnActualizar1.setEnabled(true);
+        tablaPersonas.setEnabled(false);
+    }
+
+    private void modificarPersona() {
+        int s = tablaPersonas.getSelectedRow();
+        if (s > -1) {
+            llenarCampos(s);
+        } else {
+            JOptionPane.showConfirmDialog(this, "Seleccione un elemento de la tabla", "No Seleccionado", JOptionPane.INFORMATION_MESSAGE);
+        }
+
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -110,11 +140,12 @@ public class Frm_Administrador extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
+        jPanel20 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
+        jButton14 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
-        jButton14 = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
@@ -143,7 +174,7 @@ public class Frm_Administrador extends javax.swing.JFrame {
         btnLimpiar1 = new javax.swing.JButton();
         btnInf2 = new javax.swing.JButton();
         btnActualizar1 = new javax.swing.JButton();
-        jButton16 = new javax.swing.JButton();
+        btnModificar = new javax.swing.JButton();
         btnGuardar = new javax.swing.JButton();
         jPanel26 = new javax.swing.JPanel();
         rdNombre3 = new javax.swing.JRadioButton();
@@ -194,8 +225,13 @@ public class Frm_Administrador extends javax.swing.JFrame {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Administrador"));
 
+        jPanel20.setBorder(javax.swing.BorderFactory.createTitledBorder("Menu"));
+
         jButton1.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         jButton1.setText("Registrar Cliente");
+
+        jButton14.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
+        jButton14.setText("Administrar Almacen");
 
         jButton2.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         jButton2.setText("Ver Vehiculos");
@@ -206,42 +242,51 @@ public class Frm_Administrador extends javax.swing.JFrame {
         jButton4.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         jButton4.setText("Ver Facturas");
 
-        jButton14.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
-        jButton14.setText("Administrar Almacen");
+        javax.swing.GroupLayout jPanel20Layout = new javax.swing.GroupLayout(jPanel20);
+        jPanel20.setLayout(jPanel20Layout);
+        jPanel20Layout.setHorizontalGroup(
+            jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel20Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton1)
+                    .addComponent(jButton14)
+                    .addComponent(jButton2)
+                    .addComponent(jButton3)
+                    .addComponent(jButton4))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel20Layout.setVerticalGroup(
+            jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel20Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jButton1)
+                .addGap(18, 18, 18)
+                .addComponent(jButton14)
+                .addGap(18, 18, 18)
+                .addComponent(jButton2)
+                .addGap(18, 18, 18)
+                .addComponent(jButton3)
+                .addGap(18, 18, 18)
+                .addComponent(jButton4)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGap(32, 32, 32)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton1)
-                    .addComponent(jButton3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton4, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(480, Short.MAX_VALUE)
-                .addComponent(jButton14)
-                .addGap(266, 266, 266))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(728, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(51, 51, 51)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
-                .addGap(62, 62, 62)
-                .addComponent(jButton14)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 193, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton4)
-                    .addComponent(jButton3))
-                .addGap(74, 74, 74))
+                .addContainerGap()
+                .addComponent(jPanel20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(172, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Administrador", jPanel2);
@@ -443,18 +488,24 @@ public class Frm_Administrador extends javax.swing.JFrame {
         });
 
         btnInf2.setText("inf");
+        btnInf2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnInf2ActionPerformed(evt);
+            }
+        });
 
         btnActualizar1.setText("Actualizar");
+        btnActualizar1.setEnabled(false);
         btnActualizar1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnActualizar1ActionPerformed(evt);
             }
         });
 
-        jButton16.setText("jButton16");
-        jButton16.addActionListener(new java.awt.event.ActionListener() {
+        btnModificar.setText("Modificar");
+        btnModificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton16ActionPerformed(evt);
+                btnModificarActionPerformed(evt);
             }
         });
 
@@ -480,7 +531,7 @@ public class Frm_Administrador extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnActualizar1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton16))
+                        .addComponent(btnModificar))
                     .addComponent(btnGuardar))
                 .addContainerGap(61, Short.MAX_VALUE))
         );
@@ -492,7 +543,7 @@ public class Frm_Administrador extends javax.swing.JFrame {
                     .addComponent(btnInf2)
                     .addComponent(btnLimpiar1)
                     .addComponent(btnActualizar1)
-                    .addComponent(jButton16))
+                    .addComponent(btnModificar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(10, Short.MAX_VALUE))
@@ -582,7 +633,7 @@ public class Frm_Administrador extends javax.swing.JFrame {
             jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel14Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 631, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 644, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel14Layout.setVerticalGroup(
@@ -620,7 +671,7 @@ public class Frm_Administrador extends javax.swing.JFrame {
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addComponent(jPanel26, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -729,7 +780,7 @@ public class Frm_Administrador extends javax.swing.JFrame {
         jPanel12Layout.setHorizontalGroup(
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel12Layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 646, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 656, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel12Layout.setVerticalGroup(
@@ -896,13 +947,13 @@ public class Frm_Administrador extends javax.swing.JFrame {
         jPanel18Layout.setHorizontalGroup(
             jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel18Layout.createSequentialGroup()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 664, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 674, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel18Layout.setVerticalGroup(
             jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel18Layout.createSequentialGroup()
-                .addGap(0, 144, Short.MAX_VALUE)
+                .addGap(0, 129, Short.MAX_VALUE)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -1064,18 +1115,23 @@ public class Frm_Administrador extends javax.swing.JFrame {
 
     private void btnActualizar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizar1ActionPerformed
         // TODO add your handling code here:
-        actualizarLista();
+        actualizarPersona();
+        btnGuardar.setEnabled(true);
+        btnModificar.setEnabled(true);
+        btnLimpiar1.setEnabled(true);
+        btnActualizar1.setEnabled(false);
+        tablaPersonas.setEnabled(true);
     }//GEN-LAST:event_btnActualizar1ActionPerformed
 
-    private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
+    private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
         // TODO add your handling code here:
-        JOptionPane.showMessageDialog(this, comboTipo.getSelectedItem());
-        if (comboTipo.getSelectedItem() instanceof Rol) {
-            JOptionPane.showMessageDialog(this, "Si es un rol");
+        int s = tablaPersonas.getSelectedRow();
+        if (s > -1) {
+            modificarPersona();
         } else {
-            JOptionPane.showMessageDialog(this, "No, solo es un string :(");
+            JOptionPane.showMessageDialog(this, "Selecciones un elemento de la tabla", "Seleccion", JOptionPane.PLAIN_MESSAGE);
         }
-    }//GEN-LAST:event_jButton16ActionPerformed
+    }//GEN-LAST:event_btnModificarActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         // TODO add your handling code here:
@@ -1085,6 +1141,10 @@ public class Frm_Administrador extends javax.swing.JFrame {
     private void rdApellido3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdApellido3ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_rdApellido3ActionPerformed
+
+    private void btnInf2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInf2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnInf2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1127,6 +1187,7 @@ public class Frm_Administrador extends javax.swing.JFrame {
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnInf2;
     private javax.swing.JButton btnLimpiar1;
+    private javax.swing.JButton btnModificar;
     private javax.swing.JComboBox<String> comboEstado;
     private javax.swing.JComboBox<String> comboTipo;
     private javax.swing.JButton jButton1;
@@ -1135,7 +1196,6 @@ public class Frm_Administrador extends javax.swing.JFrame {
     private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton13;
     private javax.swing.JButton jButton14;
-    private javax.swing.JButton jButton16;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
@@ -1165,6 +1225,7 @@ public class Frm_Administrador extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel18;
     private javax.swing.JPanel jPanel19;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel20;
     private javax.swing.JPanel jPanel26;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -1201,4 +1262,28 @@ public class Frm_Administrador extends javax.swing.JFrame {
     private javax.swing.JTextField txtTelefono;
     private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables
+
+    private void actualizarPersona() {
+        JOptionPane.showMessageDialog(this, idPersona);
+        String n = txtNombre.getText(),
+                a = txtApellido.getText(),
+                ci = txtCedula.getText(),
+                co = txtCorreo.getText(),
+                tl = txtTelefono.getText(),
+                dir = txtDireccion.getText(),
+                est = comboEstado.getSelectedItem().toString(); 
+        String sql="UPDATE `baseddmecanica`.`persona` SET `nombre` = '"+n+"', `apellido` = '"+a+"', `cedula` = '"+ci+"', `correo` = '"+co+"',"
+                + " `telefono` = '"+tl+"', `direccion` = '"+dir+"', `estado` = '"+est+"' WHERE (`idpersona` = '"+idPersona+"');";
+        try {
+            PreparedStatement ps = (PreparedStatement) ConexionBDD.conexion().prepareStatement(sql);
+            ps.executeUpdate();
+            actualizarLista();
+            limpiarReg();
+            JOptionPane.showMessageDialog(this, "Se actualizaron los datos correctamente");
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this, "Error al actualizar los datos en la base de datos","Error",JOptionPane.ERROR_MESSAGE);
+            System.out.println("No se actualizaron los datos - error:" + ex);
+        }
+    }
+
 }

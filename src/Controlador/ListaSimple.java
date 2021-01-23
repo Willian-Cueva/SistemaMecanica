@@ -5,8 +5,6 @@
  */
 package Controlador;
 
-import Modelo.Nodo;
-
 /**
  *
  * @author Willian
