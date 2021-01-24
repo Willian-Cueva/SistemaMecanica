@@ -270,10 +270,13 @@ public class Frm_Vehiculo extends javax.swing.JFrame {
 
     private void Tabla1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Tabla1MousePressed
         try {
-            String a = Tabla1.getValueAt(Tabla1.getSelectedRow() + 1, 0).toString();
+            if ((Tabla1.getSelectedRow() + 1)<Tabla1.getRowCount()) {
+                String a = Tabla1.getValueAt(Tabla1.getSelectedRow() + 1, 0).toString();
             txtPropietario.setText(ctr.BuscarCedula(Long.parseLong(a)).getNombre() + " " + ctr.BuscarCedula(Long.parseLong(a)).getApellido());
             
             txtCedula.setText(ctr.BuscarCedula(Long.parseLong(a)).getId().toString());
+            }
+            
         } catch (NumberFormatException e) {
         }
         // TODO add your handling code here:
