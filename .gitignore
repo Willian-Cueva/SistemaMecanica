@@ -1,3 +1,8 @@
+
+/build/
+/dist/
+=======
+/build/
 ./src/Controlador/Conexion
 src/Vista/MainPruebas.java
 src/Vista/MainPruebas.form
