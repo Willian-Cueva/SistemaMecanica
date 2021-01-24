@@ -93,7 +93,7 @@ public class Utiles {
      */
     public static ListaSimpleAvanzada listaPersonas() {
         ListaSimpleAvanzada persona = new ListaSimpleAvanzada();
-        String sql = "SELECT * FROM persona";
+        String sql = "SELECT * FROM personas";
         try {
             Statement st = (Statement) ConeccionBDD.IniciarConexion().createStatement();
             ResultSet rs = st.executeQuery(sql);
@@ -101,16 +101,16 @@ public class Utiles {
             while (rs.next()) {
                 Persona m = new Persona();
                 int i = 0;
-                m.setId(Integer.valueOf(rs.getString(++i)));
+                m.setId(Long.parseLong(rs.getString(++i)));
                 m.setNombre(rs.getString(++i));
                 m.setApellido(rs.getString(++i));
                 m.setCedula(rs.getString(++i));
                 m.setCorreo(rs.getString(++i));
                 m.setTelefono(rs.getString(++i));
                 m.setDireccion(rs.getString(++i));
-                m.setEstado(rs.getString(++i).equalsIgnoreCase("activo"));
-                m.setExternal_id_persona(rs.getString(++i));
-                m.setIdRol(Integer.parseInt(rs.getString(++i)));
+                m.setEstado(rs.getString(++i).equalsIgnoreCase("1"));
+                m.setExternal_id(rs.getString(++i));
+                m.setIdRol(Long.parseLong(rs.getString(++i)));
                 persona.insertar(m);
             }
         } catch (SQLException ex) {
@@ -136,8 +136,8 @@ public class Utiles {
                 while (rs.next() && j <= 3) {
                     int i = 0;
                     Rol r = new Rol();
-                    r.setId(Integer.valueOf(rs.getString(++i)));
-                    r.setNombre(rs.getString(++i));
+                    r.setId(Long.parseLong(rs.getString(++i)));
+                    r.setNombreRol(rs.getString(++i));
                     arr[j++] = r;
                 }
             } else {
@@ -157,7 +157,7 @@ public class Utiles {
      * @param r JComboBox.getSelectedItem();
      * @return
      */
-    public static int rolSelect(Object r) {
+    public static long rolSelect(Object r) {
         Rol rol = (Rol) r;
         return rol.getId();
     }

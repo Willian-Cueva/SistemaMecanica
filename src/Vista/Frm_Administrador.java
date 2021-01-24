@@ -9,7 +9,6 @@ import Controlador.AdministradorControlador;
 import Controlador.Conexion.ConeccionBDD;
 import Controlador.Utiles.Utiles;
 import Controlador.Utiles.UtilesComponentes;
-import Modelo.Rol;
 import Vista.Modelo.TablaPersonas;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -52,7 +51,7 @@ public class Frm_Administrador extends javax.swing.JFrame {
         try {
 
 //            String sqlAlt = "INSERT INTO `baseddmecanica`.`persona` (`nombre`, `apellido`, `cedula`, `correo`, `telefono`, `direccion`, `estado`, `external_idPersona`) VALUES (?,?,?,?,?,?,?,?);";
-            String sql = "INSERT INTO `baseddmecanica`.`persona` (`nombre`, `apellido`, `cedula`, `correo`, `telefono`, `direccion`, `estado`, `external_idPersona`, `idRol`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);";
+            String sql = "INSERT INTO `baseddmecanica`.`personas` (`nombre`, `apellido`, `cedula`, `correo`, `telefono`, `direccion`, `estado`, `external_idPersona`, `idRol`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);";
 //            PreparedStatement ps = (PreparedStatement) ConexionBDD.conexion().prepareCall("INSERT INTO persona(nombre,apellido,cedula,correo,telefono,direccion,estado,external_idPersona) VALUES(?,?,?,?,?,?,?,?);");
             PreparedStatement ps = (PreparedStatement) ConeccionBDD.IniciarConexion().prepareCall(sql);
             ps.setString(1, txtNombre.getText());
@@ -61,19 +60,19 @@ public class Frm_Administrador extends javax.swing.JFrame {
             ps.setString(4, txtCorreo.getText());
             ps.setString(5, txtTelefono.getText());
             ps.setString(6, txtDireccion.getText());
-            ps.setString(7, comboEstado.getSelectedItem().toString());
+            ps.setBoolean(7, comboEstado.getSelectedItem().toString().equalsIgnoreCase("activo"));
             ps.setString(8, "exter" + txtCedula.getText());
             ps.setString(9, String.valueOf(Utiles.rolSelect(comboTipo.getSelectedItem())));
             ps.executeUpdate();
 //            limpiarRegistroMecanicos();
             actualizarLista();
             if (Utiles.rolSelect(comboTipo.getSelectedItem()) > 1) {
-                String sql2 = "INSERT INTO `baseddmecanica`.`cuenta` (`usuario`, `clave`, `estado`, `external_idCuenta`, `idPersona`) VALUES (?,?,?,?,?);";
+                String sql2 = "INSERT INTO `baseddmecanica`.`cuentas` (`usuario`, `clave`, `estado`, `external_idCuenta`, `idPersona`) VALUES (?,?,?,?,?);";
 
                 PreparedStatement ps2 = (PreparedStatement) ConeccionBDD.IniciarConexion().prepareCall(sql2);
                 ps2.setString(1, txtUsuario.getText());
                 ps2.setString(2, txtClave.getText());
-                ps2.setString(3, "Activo");
+                ps2.setString(3, "1");
                 ps2.setString(4, "external" + txtUsuario.getText());
                 ps2.setString(5, String.valueOf(ac.obtenerIdPersona()));
                 ps2.executeUpdate();
@@ -126,6 +125,7 @@ public class Frm_Administrador extends javax.swing.JFrame {
         }
 
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -1270,15 +1270,14 @@ public class Frm_Administrador extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void actualizarPersona() {
-        JOptionPane.showMessageDialog(this, idPersona);
         String n = txtNombre.getText(),
                 a = txtApellido.getText(),
                 ci = txtCedula.getText(),
                 co = txtCorreo.getText(),
                 tl = txtTelefono.getText(),
                 dir = txtDireccion.getText(),
-                est = comboEstado.getSelectedItem().toString(); 
-        String sql="UPDATE `baseddmecanica`.`persona` SET `nombre` = '"+n+"', `apellido` = '"+a+"', `cedula` = '"+ci+"', `correo` = '"+co+"',"
+                est = comboEstado.getSelectedItem().toString().equalsIgnoreCase("activo")?"1":"0"; 
+        String sql="UPDATE `baseddmecanica`.`personas` SET `nombre` = '"+n+"', `apellido` = '"+a+"', `cedula` = '"+ci+"', `correo` = '"+co+"',"
                 + " `telefono` = '"+tl+"', `direccion` = '"+dir+"', `estado` = '"+est+"' WHERE (`idpersona` = '"+idPersona+"');";
         try {
             PreparedStatement ps = (PreparedStatement) ConeccionBDD.IniciarConexion().prepareStatement(sql);

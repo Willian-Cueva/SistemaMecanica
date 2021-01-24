@@ -1,69 +1,84 @@
+package Modelo;
+
+import java.io.File;
+import java.sql.Blob;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Modelo;
 
 /**
  *
- * @author Willian
+ * @author Cris2
  */
-public class Cuenta {
-    private int id;
-    private String usuario;
-    private String clave;
-    private int idPersona;
-    private Boolean estado;
-    private String external_id_cuenta;
+public class Cuenta{
+    private Long id;
+    private String Usuario;
+    private String contraseña;
+    private Boolean Estado;
+    private String External_id;
+    private Long idPersona;
 
-    public int getIdPersona() {
-        return idPersona;
-    }
-
-    public void setIdPersona(int idPersona) {
+    public Cuenta(Long id, String Usuario, String contraseña,Boolean Estado , String External_id, Long idPersona) {
+        this.id = id;
+        this.Usuario = Usuario;
+        this.contraseña = contraseña;
+        this.Estado=Estado;
+        this.External_id = External_id;
         this.idPersona = idPersona;
     }
 
     public Boolean getEstado() {
-        return estado;
+        return Estado;
     }
 
-    public void setEstado(Boolean estado) {
-        this.estado = estado;
-    }
-
-    public String getExternal_id_cuenta() {
-        return external_id_cuenta;
-    }
-
-    public void setExternal_id_cuenta(String external_id_cuenta) {
-        this.external_id_cuenta = external_id_cuenta;
+    public void setEstado(Boolean Estado) {
+        this.Estado = Estado;
     }
     
-
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
     public String getUsuario() {
-        return usuario;
+        return Usuario;
     }
 
-    public void setUsuario(String usuario) {
-        this.usuario = usuario;
+    public void setUsuario(String Usuario) {
+        this.Usuario = Usuario;
     }
 
-    public String getClave() {
-        return clave;
+    public String getContraseña() {
+        return contraseña;
     }
 
-    public void setClave(String clave) {
-        this.clave = clave;
+    public void setContraseña(String contraseña) {
+        this.contraseña = contraseña;
     }
+
+    public String getExternal_id() {
+        return External_id;
+    }
+
+    public void setExternal_id(String External_id) {
+        this.External_id = External_id;
+    }
+
+    public Long getIdPersona() {
+        return idPersona;
+    }
+
+    public void setIdPersona(Long idPersona) {
+        this.idPersona = idPersona;
+    }
+
+    
+    
     
 }

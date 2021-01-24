@@ -7,31 +7,42 @@ package Modelo;
 
 /**
  *
- * @author Willian
+ * @author Cris2
  */
-public class Rol {
-    private int id;
-    private String nombre;
+public class Rol{
+    Long id;
+    String nombreRol;
 
-    public int getId() {
+    public Rol() {
+    }
+    
+    public Rol(Long id, String nombreRol) {
+        this.id = id;
+        this.nombreRol = nombreRol;
+    }
+
+    
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getNombreRol() {
+        return nombreRol;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
+    public void setNombreRol(String nombreRol) {
+        this.nombreRol = nombreRol;
+    }   
 
     @Override
     public String toString() {
-        return nombre;
+        return nombreRol;
     }
+    
     
 }

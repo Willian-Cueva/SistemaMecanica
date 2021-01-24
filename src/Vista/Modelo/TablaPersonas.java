@@ -46,7 +46,7 @@ public class TablaPersonas extends AbstractTableModel{
             case 5 -> m.getTelefono();
             case 6 -> m.getDireccion();
             case 7 -> m.getEstado();
-            case 8 -> m.getExternal_id_persona();
+            case 8 -> m.getExternal_id();
             case 9 -> m.getIdRol();
             default -> null;
         };
