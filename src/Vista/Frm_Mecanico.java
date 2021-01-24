@@ -41,6 +41,8 @@ public class Frm_Mecanico extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(594, 363));
+        setPreferredSize(new java.awt.Dimension(594, 363));
         getContentPane().setLayout(null);
 
         jPanel1.setBackground(new java.awt.Color(255, 102, 0));
