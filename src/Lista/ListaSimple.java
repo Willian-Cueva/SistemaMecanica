@@ -50,7 +50,7 @@ public class ListaSimple<T> {
         T dato = null;
 
         if (!estaVacio()) {
-            dato = (T)cabecera.getDato();
+            dato = cabecera.getDato();
             cabecera = cabecera.getSig();
         }
         return dato;
@@ -68,7 +68,7 @@ public class ListaSimple<T> {
             }
             //System.out.println(tmp.getDato());
             if (tmp != null) {
-                r = (T)tmp.getDato();
+                r = tmp.getDato();
             }
         }
         return r;

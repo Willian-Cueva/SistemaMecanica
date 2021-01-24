@@ -173,12 +173,12 @@ public class Frm_Vehiculo extends javax.swing.JFrame {
         jCheckBox1.setSelected(true);
         jCheckBox1.setText("Cedula");
         getContentPane().add(jCheckBox1);
-        jCheckBox1.setBounds(420, 30, 68, 24);
+        jCheckBox1.setBounds(420, 30, 59, 23);
 
         buttonGroup1.add(jCheckBox2);
         jCheckBox2.setText("Apellido");
         getContentPane().add(jCheckBox2);
-        jCheckBox2.setBounds(510, 30, 72, 24);
+        jCheckBox2.setBounds(510, 30, 63, 23);
 
         jComboBox2.setBackground(new java.awt.Color(255, 102, 0));
         jComboBox2.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -270,10 +270,13 @@ public class Frm_Vehiculo extends javax.swing.JFrame {
 
     private void Tabla1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Tabla1MousePressed
         try {
-            String a = Tabla1.getValueAt(Tabla1.getSelectedRow() + 1, 0).toString();
+            if ((Tabla1.getSelectedRow()+1)<Tabla1.getRowCount()) {
+                 String a = Tabla1.getValueAt(Tabla1.getSelectedRow()+1, 0).toString();
             txtPropietario.setText(ctr.BuscarCedula(Long.parseLong(a)).getNombre() + " " + ctr.BuscarCedula(Long.parseLong(a)).getApellido());
             
             txtCedula.setText(ctr.BuscarCedula(Long.parseLong(a)).getId().toString());
+            }
+           
         } catch (NumberFormatException e) {
         }
         // TODO add your handling code here:
@@ -326,8 +329,12 @@ public class Frm_Vehiculo extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBox2MousePressed
 
     private void formMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseEntered
-         idModelo=ctr.idModelo(jComboBox2.getSelectedItem().toString());
-         txtMarca.setText(ctr.buscarMarca());        // TODO add your handling code here:
+        if (jCheckBox2.isSelected()) {
+            idModelo=ctr.idModelo(jComboBox2.getSelectedItem().toString());
+            txtMarca.setText(ctr.buscarMarca());
+        }
+ 
+                // TODO add your handling code here:
     }//GEN-LAST:event_formMouseEntered
 
     private void jLabel7MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MousePressed

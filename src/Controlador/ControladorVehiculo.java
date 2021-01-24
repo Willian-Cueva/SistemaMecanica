@@ -47,7 +47,7 @@ public class ControladorVehiculo {
             FileInputStream archivofoto;
             archivofoto = new FileInputStream(vehiculo.getArchivo());
             String insertar = "INSERT INTO vehiculo(idvehiculo,placa,idModelovehiculo,color,observacion,estado,external_idVehiculo,idPersona,imagen) VALUES (?,?,?,?,?,?,?,?,?)";
-            PreparedStatement stmt = (PreparedStatement) uti.IniciarConexion().prepareStatement(insertar);
+            PreparedStatement stmt = uti.IniciarConexion().prepareStatement(insertar);
             stmt.setLong(1, vehiculo.getId());
             stmt.setString(2, vehiculo.getPlaca());
             stmt.setLong(3, vehiculo.getIdModeloVehiculo());
@@ -136,12 +136,19 @@ public class ControladorVehiculo {
     public Persona BuscarCedula(Long Cedula) {
         ListaSimple<Persona> lAux = ctr.getLiPersona();
         Persona aux;
-        if (busquedaBinaria(shell(lAux), Cedula) != null) {
+        try {
+            if (busquedaBinaria(shell(lAux), Cedula) != null) {
             aux = busquedaBinaria(shell(lAux), Cedula);
             return aux;
         } else {
             return null;
         }
+        } catch (NullPointerException ex) {
+            System.out.println("Error: "+ex.getMessage());
+            return null;
+        }
+        
+        
 
     }
 
@@ -194,7 +201,7 @@ public class ControladorVehiculo {
 
     public void recuperarDatosMod() {
         try {
-            Statement stmt = (Statement) uti.IniciarConexion().createStatement();
+            Statement stmt = uti.IniciarConexion().createStatement();
             //Cargar la lista de Modelos
             ResultSet rsModelo = stmt.executeQuery("SELECT * FROM modelovehiculo");
             if (rsModelo.next()) {

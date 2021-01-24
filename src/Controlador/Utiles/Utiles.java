@@ -95,7 +95,7 @@ public class Utiles {
         ListaSimpleAvanzada persona = new ListaSimpleAvanzada();
         String sql = "SELECT * FROM personas";
         try {
-            Statement st = (Statement) ConeccionBDD.IniciarConexion().createStatement();
+            Statement st = ConeccionBDD.IniciarConexion().createStatement();
             ResultSet rs = st.executeQuery(sql);
 //            int cont = 1;
             while (rs.next()) {
@@ -131,7 +131,7 @@ public class Utiles {
         String sql = "SELECT * FROM rol";
         try {
             if (ConeccionBDD.IniciarConexion() != null) {
-                Statement st = (Statement) ConeccionBDD.IniciarConexion().createStatement();
+                Statement st = ConeccionBDD.IniciarConexion().createStatement();
                 ResultSet rs = st.executeQuery(sql);
                 while (rs.next() && j <= 3) {
                     int i = 0;

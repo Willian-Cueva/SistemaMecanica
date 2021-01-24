@@ -6,7 +6,6 @@
 package Controlador;
 
 import Controlador.UtilesMecanico.UtilesMecanico;
-import Lista.ListaSimple;
 import Modelo.Cuenta;
 import Modelo.Persona;
 import Modelo.Rol;
@@ -62,7 +61,7 @@ public class ControladorMecanico {
             FileInputStream archivofoto;
             archivofoto = new FileInputStream(persona.getArchivoImagen());
             String insertar = "INSERT INTO personas(idPersona,nombre,apellido,cedula,correo,telefono,direccion,estado,external_idPersona,imagen,idRol) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
-            PreparedStatement stmt = (PreparedStatement) uti.IniciarConexion().prepareStatement(insertar);
+            PreparedStatement stmt = uti.IniciarConexion().prepareStatement(insertar);
             stmt.setString(1, persona.getId().toString());
             stmt.setString(2, persona.getNombre());
             stmt.setString(3, persona.getApellido());
@@ -86,7 +85,7 @@ public class ControladorMecanico {
         try {
             int i = 0;
             String insertar = "INSERT INTO cuentas(idCuenta,usuario,clave,estado,external_idCuenta,idPersona) VALUES (?,?,?,?,?,?)";
-            PreparedStatement stmt = (PreparedStatement) uti.IniciarConexion().prepareStatement(insertar);
+            PreparedStatement stmt = uti.IniciarConexion().prepareStatement(insertar);
             stmt.setString(1, cuenta.getId().toString());
             stmt.setString(2, cuenta.getUsuario());
             stmt.setString(3, cuenta.getContraseña());
@@ -103,23 +102,34 @@ public class ControladorMecanico {
     }
 
     public void llenarboxRoles(JComboBox cb) {
-        ctr.RecuperarData();
+        try {
+           ctr.RecuperarData();
         arr = new Rol[ctr.getLiRol().tamano()];
         for (int i = 0; i < ctr.getLiRol().tamano(); i++) {
             cb.addItem(ctr.getLiRol().obtenerPorPosicion(i).getNombreRol());
             arr[i] = ctr.getLiRol().obtenerPorPosicion(i);
             
+        } 
+        } catch (NullPointerException ex) {
+            System.out.println("Error: "+ex.getMessage());
         }
+        
         
     }
 
     public Long idRol(String item) {
         long lg = 0;
+        try {
+            
         for (int i = 0; i < arr.length; i++) {
             if (arr[i].getNombreRol().equals(item)) {
                 lg = arr[i].getId();
             }
         }
+        } catch (NullPointerException ex) {
+            System.out.println("Error: "+ex.getMessage());
+        }
+        
         return lg;
     }
 }
