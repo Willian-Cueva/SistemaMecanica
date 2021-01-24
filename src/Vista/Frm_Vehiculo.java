@@ -6,7 +6,7 @@
 package Vista;
 
 import Controlador.ControladorVehiculo;
-import Controlador.Utiles;
+import Controlador.UtilesCVM;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Image;
@@ -26,7 +26,7 @@ public class Frm_Vehiculo extends javax.swing.JFrame {
      */
     DefaultTableModel modelo;
     ControladorVehiculo ctr = new ControladorVehiculo();
-    Utiles uti=new Utiles();
+    UtilesCVM uti=new UtilesCVM();
     Long idModelo;
     String ColorRGB;
     File file;

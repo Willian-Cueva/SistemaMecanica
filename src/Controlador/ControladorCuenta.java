@@ -24,7 +24,7 @@ import java.util.logging.Logger;
  */
 public class ControladorCuenta {
     
-    Utiles uti = new Utiles();
+    UtilesCVM uti = new UtilesCVM();
     ListaSimple<Cuenta> liCuenta = new ListaSimple<>();
     ListaSimple<Persona> liPersona = new ListaSimple<>();
     ListaSimple<Rol> liRol = new ListaSimple<>();

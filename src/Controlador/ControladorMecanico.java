@@ -27,7 +27,7 @@ public class ControladorMecanico {
     
     Persona persona;
     Cuenta cuenta;
-    Utiles uti = new Utiles();
+    UtilesCVM uti = new UtilesCVM();
     ControladorCuenta ctr = new ControladorCuenta();
     Rol[] arr;
 
@@ -62,7 +62,7 @@ public class ControladorMecanico {
             archivofoto = new FileInputStream(persona.getArchivoImagen());
             String insertar = "INSERT INTO personas(idPersona,nombre,apellido,cedula,correo,telefono,direccion,estado,external_idPersona,imagen,idRol) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
             PreparedStatement stmt = (PreparedStatement) uti.IniciarConexion().prepareStatement(insertar);
-            stmt.setString(1, persona.getId().toString());
+            stmt.setLong(1, persona.getId());
             stmt.setString(2, persona.getNombre());
             stmt.setString(3, persona.getApellido());
             stmt.setString(4, persona.getCedula());
@@ -72,7 +72,7 @@ public class ControladorMecanico {
             stmt.setBoolean(8, persona.getEstado());
             stmt.setString(9, persona.getExternal_id());
             stmt.setBinaryStream(10, archivofoto);
-            stmt.setString(11, persona.getIdRol().toString());
+            stmt.setLong(11, persona.getIdRol());
             i = stmt.executeUpdate();
             if (i > 0) {
                 JOptionPane.showMessageDialog(null, "Se guardo correctamente");

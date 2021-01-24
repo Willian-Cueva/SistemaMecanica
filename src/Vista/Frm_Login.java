@@ -6,7 +6,7 @@
 package Vista;
 
 import Controlador.ControladorCuenta;
-import Controlador.Utiles;
+import Controlador.UtilesCVM;
 import ControladorDao.MantenerCesion;
 import Modelo.Cuenta;
 import Modelo.Persona;
@@ -29,7 +29,7 @@ public class Frm_Login extends javax.swing.JFrame {
      * Creates new form Frm_Login
      */
     RecuperarClave rec = new RecuperarClave(new eventoCerrar());
-    Utiles uti = new Utiles();
+    UtilesCVM uti = new UtilesCVM();
     ControladorCuenta ctr = new ControladorCuenta();
     Frm_Mecanico mec = new Frm_Mecanico();
     Frm_Administrador adm=new Frm_Administrador();

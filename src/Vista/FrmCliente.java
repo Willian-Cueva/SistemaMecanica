@@ -7,7 +7,7 @@ package Vista;
 
 import Controlador.ControladorCuenta;
 import Controlador.ControladorMecanico;
-import Controlador.Utiles;
+import Controlador.UtilesCVM;
 import ControladorDao.MantenerCesion;
 import Modelo.Rol;
 import java.awt.Color;
@@ -27,7 +27,7 @@ public class FrmCliente extends javax.swing.JFrame {
      * Creates new form FrmCliente
      */
     ControladorMecanico ctr = new ControladorMecanico();
-    Utiles uti = new Utiles();
+    UtilesCVM uti = new UtilesCVM();
     ControladorCuenta ctrc = new ControladorCuenta();
     File file;
 

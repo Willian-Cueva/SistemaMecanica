@@ -36,7 +36,7 @@ public class ControladorVehiculo {
     ListaSimple<Vehiculo> live = new ListaSimple<>();
     ListaSimple<ModeloVehiculo> limo = new ListaSimple<>();
     ListaSimple<Marca> lima = new ListaSimple<>();
-    Utiles uti = new Utiles();
+    UtilesCVM uti = new UtilesCVM();
     Vehiculo vehiculo;
 
     public void RegistrarVehiculo(String placa, Long Modelo, String color, String observacion, File imagen, Long Propietario) {

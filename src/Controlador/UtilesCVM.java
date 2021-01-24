@@ -20,7 +20,7 @@ import javax.swing.JColorChooser;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-public class Utiles {
+public class UtilesCVM {
 
     /**
      *
