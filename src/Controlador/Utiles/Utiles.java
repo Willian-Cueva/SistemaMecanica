@@ -5,11 +5,11 @@
  */
 package Controlador.Utiles;
 
-import Controlador.Conexion.ConexionBDD;
+import Controlador.Conexion.ConeccionBDD;
 import Controlador.ListaSimpleAvanzada;
 import Modelo.Persona;
 import Modelo.Rol;
-import com.mysql.jdbc.Statement;
+import java.sql.Statement;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.sql.ResultSet;
@@ -20,7 +20,7 @@ import java.sql.SQLException;
  * @author Willian
  */
 public class Utiles {
-    
+
     public static String[] idPersona(ListaSimpleAvanzada lsa, int dato, String atributoClase) {
         String[] persona = new String[8];
         Persona p = (Persona) busquedaBinaria(lsa, dato, atributoClase);
@@ -95,7 +95,7 @@ public class Utiles {
         ListaSimpleAvanzada persona = new ListaSimpleAvanzada();
         String sql = "SELECT * FROM persona";
         try {
-            Statement st = (Statement) ConexionBDD.conexion().createStatement();
+            Statement st = (Statement) ConeccionBDD.IniciarConexion().createStatement();
             ResultSet rs = st.executeQuery(sql);
 //            int cont = 1;
             while (rs.next()) {
@@ -130,14 +130,18 @@ public class Utiles {
         int j = 0;
         String sql = "SELECT * FROM rol";
         try {
-            Statement st = (Statement) ConexionBDD.conexion().createStatement();
-            ResultSet rs = st.executeQuery(sql);
-            while (rs.next() && j <= 3) {
-                int i = 0;
-                Rol r = new Rol();
-                r.setId(Integer.valueOf(rs.getString(++i)));
-                r.setNombre(rs.getString(++i));
-                arr[j++] = r;
+            if (ConeccionBDD.IniciarConexion() != null) {
+                Statement st = (Statement) ConeccionBDD.IniciarConexion().createStatement();
+                ResultSet rs = st.executeQuery(sql);
+                while (rs.next() && j <= 3) {
+                    int i = 0;
+                    Rol r = new Rol();
+                    r.setId(Integer.valueOf(rs.getString(++i)));
+                    r.setNombre(rs.getString(++i));
+                    arr[j++] = r;
+                }
+            } else {
+                System.err.println("Fallo la coneccion a la base de datos");
             }
             return arr;
         } catch (SQLException ex) {
