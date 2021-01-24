@@ -164,7 +164,8 @@ public class Frm_Login extends javax.swing.JFrame {
             } else {
 
             }
-        }
+        } 
+        //Comentando
 // TODO add your handling code here:
     }//GEN-LAST:event_btnContinuarMousePressed
 
