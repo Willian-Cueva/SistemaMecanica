@@ -53,7 +53,7 @@ public class Frm_Administrador extends javax.swing.JFrame {
 //            String sqlAlt = "INSERT INTO `baseddmecanica`.`persona` (`nombre`, `apellido`, `cedula`, `correo`, `telefono`, `direccion`, `estado`, `external_idPersona`) VALUES (?,?,?,?,?,?,?,?);";
             String sql = "INSERT INTO `baseddmecanica`.`personas` (`nombre`, `apellido`, `cedula`, `correo`, `telefono`, `direccion`, `estado`, `external_idPersona`, `idRol`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);";
 //            PreparedStatement ps = (PreparedStatement) ConexionBDD.conexion().prepareCall("INSERT INTO persona(nombre,apellido,cedula,correo,telefono,direccion,estado,external_idPersona) VALUES(?,?,?,?,?,?,?,?);");
-            PreparedStatement ps = ConeccionBDD.IniciarConexion().prepareCall(sql);
+            PreparedStatement ps = (PreparedStatement) ConeccionBDD.IniciarConexion().prepareCall(sql);
             ps.setString(1, txtNombre.getText());
             ps.setString(2, txtApellido.getText());
             ps.setString(3, txtCedula.getText());
@@ -69,7 +69,7 @@ public class Frm_Administrador extends javax.swing.JFrame {
             if (Utiles.rolSelect(comboTipo.getSelectedItem()) > 1) {
                 String sql2 = "INSERT INTO `baseddmecanica`.`cuentas` (`usuario`, `clave`, `estado`, `external_idCuenta`, `idPersona`) VALUES (?,?,?,?,?);";
 
-                PreparedStatement ps2 = ConeccionBDD.IniciarConexion().prepareCall(sql2);
+                PreparedStatement ps2 = (PreparedStatement) ConeccionBDD.IniciarConexion().prepareCall(sql2);
                 ps2.setString(1, txtUsuario.getText());
                 ps2.setString(2, txtClave.getText());
                 ps2.setString(3, "1");
@@ -1280,7 +1280,7 @@ public class Frm_Administrador extends javax.swing.JFrame {
         String sql="UPDATE `baseddmecanica`.`personas` SET `nombre` = '"+n+"', `apellido` = '"+a+"', `cedula` = '"+ci+"', `correo` = '"+co+"',"
                 + " `telefono` = '"+tl+"', `direccion` = '"+dir+"', `estado` = '"+est+"' WHERE (`idpersona` = '"+idPersona+"');";
         try {
-            PreparedStatement ps = ConeccionBDD.IniciarConexion().prepareStatement(sql);
+            PreparedStatement ps = (PreparedStatement) ConeccionBDD.IniciarConexion().prepareStatement(sql);
             ps.executeUpdate();
             actualizarLista();
             limpiarReg();
