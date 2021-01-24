@@ -6,6 +6,5 @@
 ./src/Controlador/Conexion
 src/Vista/MainPruebas.java
 src/Vista/MainPruebas.form
-lib/
 build/
 dist/
