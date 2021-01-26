@@ -5,27 +5,35 @@
  */
 package Vista;
 
+import Controlador.ControladorCuenta;
 import Controlador.ControladorMecanico;
-import Controlador.Utiles;
+import Controlador.UtilesMecanico.UtilesMecanico;
+import ControladorDao.MantenerCesion;
+import Modelo.Rol;
 import java.awt.Color;
 import java.awt.Image;
 import java.io.File;
 import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
 
 /**
  *
  * @author Cris2
  */
-public class FrmCliente extends javax.swing.JFrame {
+public class Frm_Cliente extends javax.swing.JFrame {
 
     /**
      * Creates new form FrmCliente
      */
-    ControladorMecanico ctr=new ControladorMecanico();
-    Utiles uti=new Utiles();
+    ControladorMecanico ctr = new ControladorMecanico();
+    UtilesMecanico uti = new UtilesMecanico();
+    ControladorCuenta ctrc = new ControladorCuenta();
     File file;
-    public FrmCliente() {
+
+    public Frm_Cliente() {
         initComponents();
+        
     }
 
     /**
@@ -51,35 +59,48 @@ public class FrmCliente extends javax.swing.JFrame {
         VisatFoto = new javax.swing.JLabel();
         btnGuardar = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
+        txtApellido = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        txtDireccion = new javax.swing.JTextField();
+        cmbRol = new javax.swing.JComboBox<>();
+        jLabel10 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(255, 204, 51));
         jPanel1.setLayout(null);
         jPanel1.add(txtNombre);
         txtNombre.setBounds(90, 90, 230, 30);
         jPanel1.add(txtCedula);
-        txtCedula.setBounds(90, 130, 230, 30);
+        txtCedula.setBounds(90, 170, 230, 30);
         jPanel1.add(txtCorreo);
-        txtCorreo.setBounds(90, 170, 230, 30);
+        txtCorreo.setBounds(90, 210, 230, 30);
 
         jLabel1.setText("Nombre");
         jPanel1.add(jLabel1);
-        jLabel1.setBounds(30, 90, 50, 30);
+        jLabel1.setBounds(10, 90, 70, 30);
 
         jLabel2.setText("Cedula");
         jPanel1.add(jLabel2);
-        jLabel2.setBounds(30, 130, 50, 30);
+        jLabel2.setBounds(10, 170, 70, 30);
 
         jLabel3.setText("Correo");
         jPanel1.add(jLabel3);
-        jLabel3.setBounds(30, 170, 50, 30);
+        jLabel3.setBounds(10, 210, 70, 30);
         jPanel1.add(txtTelefono);
-        txtTelefono.setBounds(90, 210, 230, 30);
+        txtTelefono.setBounds(90, 250, 230, 30);
 
         jLabel4.setText("Telefono");
         jPanel1.add(jLabel4);
-        jLabel4.setBounds(30, 210, 50, 30);
+        jLabel4.setBounds(10, 250, 70, 30);
 
         jPanel2.setBorder(new javax.swing.border.MatteBorder(null));
         jPanel2.setLayout(new java.awt.BorderLayout());
@@ -124,7 +145,7 @@ public class FrmCliente extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btnGuardar);
-        btnGuardar.setBounds(90, 280, 80, 30);
+        btnGuardar.setBounds(380, 350, 80, 30);
 
         jLabel8.setBackground(new java.awt.Color(255, 153, 0));
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -134,6 +155,21 @@ public class FrmCliente extends javax.swing.JFrame {
         jLabel8.setOpaque(true);
         jPanel1.add(jLabel8);
         jLabel8.setBounds(150, 20, 260, 30);
+        jPanel1.add(txtApellido);
+        txtApellido.setBounds(90, 130, 230, 30);
+
+        jLabel5.setText("Apellido");
+        jPanel1.add(jLabel5);
+        jLabel5.setBounds(10, 130, 70, 30);
+        jPanel1.add(txtDireccion);
+        txtDireccion.setBounds(90, 290, 230, 30);
+
+        jPanel1.add(cmbRol);
+        cmbRol.setBounds(340, 270, 120, 30);
+
+        jLabel10.setText("Direccion");
+        jPanel1.add(jLabel10);
+        jLabel10.setBounds(10, 290, 70, 30);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -145,44 +181,87 @@ public class FrmCliente extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 436, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGuardarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuardarMousePressed
-        btnGuardar.setBackground(new Color(255,204,51));
+        btnGuardar.setBackground(new Color(255, 204, 51));
         btnGuardar.setForeground(Color.WHITE);
-        ctr.RegistrarCliente(txtCedula.getText(), txtNombre.getText(), txtCorreo.getText(), txtTelefono.getText(), file);        // TODO add your handling code here:
+        if (cmbRol.getSelectedItem().toString().equals("Cliente")) {
+            ctr.RegistrarCliente(txtCedula.getText(), txtNombre.getText(), txtApellido.getText(), txtCorreo.getText(), txtTelefono.getText(), txtDireccion.getText(), file, ctr.idRol(cmbRol.getSelectedItem().toString()),null);        // TODO add your handling code here:
+
+        }else{
+            ctr.RegistrarCliente(txtCedula.getText(), txtNombre.getText(), txtApellido.getText(), txtCorreo.getText(), txtTelefono.getText(), txtDireccion.getText(), file, ctr.idRol(cmbRol.getSelectedItem().toString()), txtContraseña.getText());        // TODO add your handling code here:
+
+        }
+        this.dispose();
     }//GEN-LAST:event_btnGuardarMousePressed
 
     private void btnGuardarMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuardarMouseReleased
-        btnGuardar.setBackground(new Color(255,153,0));
+        btnGuardar.setBackground(new Color(255, 153, 0));
         btnGuardar.setForeground(Color.BLACK);
-        ctr.GuardarCliente(ctr.getPersona());// TODO add your handling code here:
+        ctr.GuardarPersona(ctr.getPersona());
+        if (!cmbRol.getSelectedItem().toString().equals("Cliente")) {
+            ctr.GuardarCuenta();
+        }
+        // TODO add your handling code here:
     }//GEN-LAST:event_btnGuardarMouseReleased
 
     private void btnBuscarImagenMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarImagenMousePressed
-        
-        btnBuscarImagen.setBackground(new Color(255,204,51));
+
+        btnBuscarImagen.setBackground(new Color(255, 204, 51));
         btnBuscarImagen.setForeground(Color.WHITE);
-        file=uti.BuscarImagen();
-        System.out.println("ruta"+String.valueOf(file) );
+        file = uti.BuscarImagen();
+        System.out.println("ruta" + String.valueOf(file));
         Image foto = getToolkit().getImage(String.valueOf(file));
         foto = foto.getScaledInstance(108, 139, Image.SCALE_DEFAULT);
-        VisatFoto.setIcon(new ImageIcon(foto)); 
+        VisatFoto.setIcon(new ImageIcon(foto));
+
         // TODO add your handling code here:
     }//GEN-LAST:event_btnBuscarImagenMousePressed
 
     private void btnBuscarImagenMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarImagenMouseReleased
-                // TODO add your handling code here:
+        // TODO add your handling code here:
     }//GEN-LAST:event_btnBuscarImagenMouseReleased
 
     private void btnBuscarImagenMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarImagenMouseExited
-        btnBuscarImagen.setBackground(new Color(255,153,0));
+        btnBuscarImagen.setBackground(new Color(255, 153, 0));
         btnBuscarImagen.setForeground(Color.BLACK);        // TODO add your handling code here:
     }//GEN-LAST:event_btnBuscarImagenMouseExited
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+         
+               // TODO add your handling code here:
+    }//GEN-LAST:event_formWindowActivated
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+       ctrc.RecuperarData();
+        ctr.llenarboxRoles(cmbRol);  
+        MantenerCesion<Rol> cs = new MantenerCesion();
+        System.out.println("Rol de quien entro: "+cs.listar("Rol").getNombreRol());
+        if (cs.listar("Rol").getNombreRol().equals("Mecanico")) {
+            cmbRol.removeItem("Administrador");
+            cmbRol.removeItem("Mecanico");
+        } else {
+            txtContraseña = new JTextField();
+            jLabel9 = new JLabel("Contraseña");
+            jPanel1.add(txtContraseña);
+            jPanel1.add(jLabel9);
+            txtContraseña.setBounds(90, 330, 230, 30);
+            jLabel9.setBounds(10, 330, 70, 30);
+            txtContraseña.setVisible(true);
+            jLabel9.setVisible(true);
+        } // TODO add your handling code here:
+    }//GEN-LAST:event_formWindowOpened
+
+    private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
+               // TODO add your handling code here:
+    }//GEN-LAST:event_formWindowGainedFocus
 
     /**
      * @param args the command line arguments
@@ -201,37 +280,44 @@ public class FrmCliente extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrmCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Frm_Cliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrmCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Frm_Cliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrmCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Frm_Cliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrmCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Frm_Cliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FrmCliente().setVisible(true);
+                new Frm_Cliente().setVisible(true);
             }
         });
     }
-
+    private javax.swing.JTextField txtContraseña;
+    private javax.swing.JLabel jLabel9;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel VisatFoto;
     private javax.swing.JLabel btnBuscarImagen;
     private javax.swing.JLabel btnGuardar;
+    private javax.swing.JComboBox<String> cmbRol;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JTextField txtApellido;
     private javax.swing.JTextField txtCedula;
     private javax.swing.JTextField txtCorreo;
+    private javax.swing.JTextField txtDireccion;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtTelefono;
     // End of variables declaration//GEN-END:variables

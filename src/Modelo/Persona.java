@@ -13,127 +13,147 @@ import java.io.File;
 import java.sql.Blob;
 
 public class Persona{
-    String nombre;
-    String cedula;
-    String correo;
-    String telefono;
-    Blob imagenObtenida;
-    File archivoImagen;
-    /**
-     * 
-     * @param nombre
-     * @param cedula
-     * @param correo
-     * @param telefono
-     * @param imagenObtenida 
-     */
-    public Persona(String cedula, String nombre, String correo, String telefono, Blob imagenObtenida) {
+    private Long id;
+    private String nombre;
+    private String apellido;
+    private String cedula;
+    private String correo;
+    private String telefono;
+    private String direccion;
+    private Boolean estado;
+    private String external_id;
+    private Long idRol;
+    private Blob imagenObtenida;
+    private File archivoImagen;
+
+    public Persona() {
+    }
+   
+    public Persona(Long id) {
+        this.id = id;
+    }
+    
+    
+    public Persona(Long id, String nombre, String apellido, String cedula, String correo, String telefono, String direccion,Boolean estado , String external_id, Long idRol, Blob imagenObtenida) {
+        this.id = id;
         this.nombre = nombre;
+        this.apellido = apellido;
         this.cedula = cedula;
         this.correo = correo;
         this.telefono = telefono;
+        this.direccion = direccion;
+        this.estado=estado;
+        this.external_id = external_id;
+        this.idRol = idRol;
         this.imagenObtenida = imagenObtenida;
     }
-    /**
-     * 
-     * @param nombre
-     * @param cedula
-     * @param correo
-     * @param telefono
-     * @param archivoImagen 
-     */
-    public Persona(String cedula, String nombre, String correo, String telefono, File archivoImagen) {
+
+    public Persona(Long id, String nombre, String apellido, String cedula, String correo, String telefono, String direccion,Boolean estado, String external_id, Long idRol, File archivoImagen) {
+        this.id = id;
         this.nombre = nombre;
+        this.apellido = apellido;
         this.cedula = cedula;
         this.correo = correo;
         this.telefono = telefono;
+        this.direccion = direccion;
+        this.estado= estado;
+        this.external_id = external_id;
+        this.idRol = idRol;
         this.archivoImagen = archivoImagen;
     }
-    /**
-     * 
-     * @return 
-     */
-    public Blob getImagenObtenida() {
-        return imagenObtenida;
+
+    public Long getIdRol() {
+        return idRol;
     }
-    /**
-     * 
-     * @param imagenObtenida 
-     */
-    public void setImagenObtenida(Blob imagenObtenida) {
-        this.imagenObtenida = imagenObtenida;
+
+    public void setIdRol(Long idRol) {
+        this.idRol = idRol;
     }
-    /**
-     * 
-     * @return 
-     */
-    public File getArchivoImagen() {
-        return archivoImagen;
+
+    public Boolean getEstado() {
+        return estado;
     }
-    /**
-     * 
-     * @param archivoImagen 
-     */
-    public void setArchivoImagen(File archivoImagen) {
-        this.archivoImagen = archivoImagen;
+
+    public void setEstado(Boolean estado) {
+        this.estado = estado;
     }
-    /**
-     * 
-     * @return 
-     */
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public String getNombre() {
         return nombre;
     }
-    /**
-     * 
-     * @param nombre 
-     */
+
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-    /**
-     * 
-     * @return 
-     */
+
+    public String getApellido() {
+        return apellido;
+    }
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
+
     public String getCedula() {
         return cedula;
     }
-    /**
-     * 
-     * @param cedula 
-     */
+
     public void setCedula(String cedula) {
         this.cedula = cedula;
     }
-    /**
-     * 
-     * @return 
-     */
+
     public String getCorreo() {
         return correo;
     }
-    /**
-     * 
-     * @param correo 
-     */
+
     public void setCorreo(String correo) {
         this.correo = correo;
     }
-    /**
-     * 
-     * @return 
-     */
+
     public String getTelefono() {
         return telefono;
     }
-    /**
-     * 
-     * @param telefono 
-     */
+
     public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
 
-   
-    
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+
+    public String getExternal_id() {
+        return external_id;
+    }
+
+    public void setExternal_id(String external_id) {
+        this.external_id = external_id;
+    }
+
+    public Blob getImagenObtenida() {
+        return imagenObtenida;
+    }
+
+    public void setImagenObtenida(Blob imagenObtenida) {
+        this.imagenObtenida = imagenObtenida;
+    }
+
+    public File getArchivoImagen() {
+        return archivoImagen;
+    }
+
+    public void setArchivoImagen(File archivoImagen) {
+        this.archivoImagen = archivoImagen;
+    }  
 }

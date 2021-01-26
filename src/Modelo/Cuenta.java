@@ -13,177 +13,71 @@ import java.sql.Blob;
  *
  * @author Cris2
  */
-public class Cuenta extends Rol {
+public class Cuenta{
+    private Long id;
     private String Usuario;
     private String contraseña;
-    /**
-     * 
-     * @param cedula
-     * @param nombre
-     * @param correo
-     * @param contraseña
-     * @param telefono
-     * @param tipoRol
-     * @param imagenObtenida 
-     */
-    public Cuenta(String cedula, String nombre, String correo, String contraseña, String telefono, String tipoRol, Blob imagenObtenida) {
-        super(cedula, nombre, correo, telefono, tipoRol, imagenObtenida);
-        this.Usuario = correo;
+    private Boolean Estado;
+    private String External_id;
+    private Long idPersona;
+
+    public Cuenta(Long id, String Usuario, String contraseña,Boolean Estado , String External_id, Long idPersona) {
+        this.id = id;
+        this.Usuario = Usuario;
         this.contraseña = contraseña;
+        this.Estado=Estado;
+        this.External_id = External_id;
+        this.idPersona = idPersona;
     }
-    /**
-     * 
-     * @param cedula
-     * @param nombre
-     * @param correo
-     * @param contraseña
-     * @param telefono
-     * @param tipoRol
-     * @param archivoImagen 
-     */
-    public Cuenta(String cedula, String nombre, String correo, String contraseña, String telefono, String tipoRol, File archivoImagen) {
-        super(tipoRol, nombre, cedula, correo, telefono, archivoImagen);
-        this.Usuario = correo;
-        this.contraseña = contraseña;
+
+    public Boolean getEstado() {
+        return Estado;
     }
-    /**
-     * 
-     * @return 
-     */
+
+    public void setEstado(Boolean Estado) {
+        this.Estado = Estado;
+    }
+    
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public String getUsuario() {
         return Usuario;
     }
-    /**
-     * 
-     * @param Usuario 
-     */
+
     public void setUsuario(String Usuario) {
         this.Usuario = Usuario;
     }
-    /**
-     * 
-     * @return 
-     */
+
     public String getContraseña() {
         return contraseña;
     }
-    /**
-     * 
-     * @param contraseña 
-     */
+
     public void setContraseña(String contraseña) {
         this.contraseña = contraseña;
     }
-    /**
-     * 
-     * @return 
-     */
-    public String getTipoRol() {
-        return tipoRol;
+
+    public String getExternal_id() {
+        return External_id;
     }
-    /**
-     * 
-     * @param tipoRol 
-     */
-    public void setTipoRol(String tipoRol) {
-        this.tipoRol = tipoRol;
+
+    public void setExternal_id(String External_id) {
+        this.External_id = External_id;
     }
-    /**
-     * 
-     * @return 
-     */
-    @Override
-    public String getNombre() {
-        return nombre;
+
+    public Long getIdPersona() {
+        return idPersona;
     }
-    /**
-     * 
-     * @param nombre 
-     */
-    @Override
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+
+    public void setIdPersona(Long idPersona) {
+        this.idPersona = idPersona;
     }
-    /**
-     * 
-     * @return 
-     */
-    @Override
-    public String getCedula() {
-        return cedula;
-    }
-    /**
-     * 
-     * @param cedula 
-     */
-    @Override
-    public void setCedula(String cedula) {
-        this.cedula = cedula;
-    }
-    /**
-     * 
-     * @return 
-     */
-    @Override
-    public String getCorreo() {
-        return correo;
-    }
-    /**
-     * 
-     * @param correo 
-     */
-    @Override
-    public void setCorreo(String correo) {
-        this.correo = correo;
-    }
-    /**
-     * 
-     * @return 
-     */
-    @Override
-    public String getTelefono() {
-        return telefono;
-    }
-    /**
-     * 
-     * @param telefono 
-     */
-    @Override
-    public void setTelefono(String telefono) {
-        this.telefono = telefono;
-    }
-    /**
-     * 
-     * @return 
-     */
-    @Override
-    public Blob getImagenObtenida() {
-        return imagenObtenida;
-    }
-    /**
-     * 
-     * @param imagenObtenida 
-     */
-    @Override
-    public void setImagenObtenida(Blob imagenObtenida) {
-        this.imagenObtenida = imagenObtenida;
-    }
-    /**
-     * 
-     * @return 
-     */
-    @Override
-    public File getArchivoImagen() {
-        return archivoImagen;
-    }
-    /**
-     * 
-     * @param archivoImagen 
-     */
-    @Override
-    public void setArchivoImagen(File archivoImagen) {
-        this.archivoImagen = archivoImagen;
-    }
+
     
     
     
