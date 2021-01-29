@@ -230,18 +230,43 @@ public class Frm_Administrador extends javax.swing.JFrame {
 
         jButton1.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         jButton1.setText("Registrar Cliente");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton14.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         jButton14.setText("Administrar Almacen");
+        jButton14.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton14ActionPerformed(evt);
+            }
+        });
 
         jButton2.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         jButton2.setText("Ver Vehiculos");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         jButton3.setText("Modificar Cliente");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         jButton4.setText("Ver Facturas");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel20Layout = new javax.swing.GroupLayout(jPanel20);
         jPanel20.setLayout(jPanel20Layout);
@@ -575,6 +600,11 @@ public class Frm_Administrador extends javax.swing.JFrame {
         txtBuscar3.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
 
         btnBuscar3.setText("Buscar");
+        btnBuscar3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscar3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel26Layout = new javax.swing.GroupLayout(jPanel26);
         jPanel26.setLayout(jPanel26Layout);
@@ -1151,6 +1181,36 @@ public class Frm_Administrador extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnInf2ActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        new Frm_Cliente().setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
+        // TODO add your handling code here:
+        new Frm_Almacen().setVisible(true);
+    }//GEN-LAST:event_jButton14ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        new Frm_VerVehiculo().setVisible(true);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        new Frm_VerClientes().setVisible(true);
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        new Frm_VerFactura().setVisible(true);
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void btnBuscar3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscar3ActionPerformed
+        // TODO add your handling code here:
+        buscar();
+    }//GEN-LAST:event_btnBuscar3ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1289,6 +1349,22 @@ public class Frm_Administrador extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Error al actualizar los datos en la base de datos","Error",JOptionPane.ERROR_MESSAGE);
             System.out.println("No se actualizaron los datos - error:" + ex);
         }
+    }
+
+    private void buscar() {
+        String atributo = "";
+        if (rdNombre3.isSelected()) {
+            atributo="Nombre";
+        } else if(rdApellido3.isSelected()){
+            atributo="Apellido";
+        }else if (rdCedula3.isSelected()) {
+            atributo="Cedula";
+        }else if (rdTelefono3.isSelected()) {
+            atributo="Telefono";
+        }
+        tp.setLsa(Utiles.busquedaSecuencial(ac.getPersonas(), txtBuscar3.getText(), atributo));
+        tablaPersonas.setModel(tp);
+        tablaPersonas.updateUI();
     }
 
 }

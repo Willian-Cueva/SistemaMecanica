@@ -155,5 +155,12 @@ public class Persona{
 
     public void setArchivoImagen(File archivoImagen) {
         this.archivoImagen = archivoImagen;
-    }  
+    } 
+
+    @Override
+    public String toString() {
+        return "id:"+id+" "+nombre+ " "+ apellido;
+    }
+    
+    
 }

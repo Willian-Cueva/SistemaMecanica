@@ -6,6 +6,7 @@
 package Controlador;
 
 import Modelo.Persona;
+import javax.swing.JRadioButton;
 
 /**
  *
@@ -19,7 +20,9 @@ public class AdministradorControlador {
         return String.valueOf(m.getId());
     }
 
-    
+//    public ListaSimpleAvanzada busqueda(JRadioButton jb){
+//                
+//    }
     
     public ListaSimpleAvanzada getPersonas() {
         if(personas==null)personas=new ListaSimpleAvanzada();

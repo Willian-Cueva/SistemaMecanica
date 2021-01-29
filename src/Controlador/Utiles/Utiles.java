@@ -44,13 +44,22 @@ public class Utiles {
         return (uno != null && dos != null) ? uno.equals(dos) : false;
     }
 
+    public static ListaSimpleAvanzada busquedaSecuencial(ListaSimpleAvanzada lsa, Object dato, String atributoClase){
+        ListaSimpleAvanzada encontrados = new ListaSimpleAvanzada();
+        for (int i = 0; i < lsa.tamano(); i++) {
+            String uno = extraccionDato(lsa.obtenerObjetopp(i), atributoClase);
+            if (uno.replace(" ", "").compareToIgnoreCase(String.valueOf(dato))==0) {
+                encontrados.insertar(lsa.obtenerObjetopp(i));
+            }
+        }
+        return encontrados;
+    }
+    
     public static Object busquedaBinaria(ListaSimpleAvanzada lsa, Object dato, String atributoClase) {
         int n = lsa.tamano();
         int centro, inf = 0, sup = n - 1;
         while (inf <= sup) {
             centro = (sup + inf) / 2;
-//            if (Utiles.equals(lsa.obtenerObjetopp(centro), dato)) {
-//} else if (Utiles.compareTo(dato, lsa.obtenerObjetopp(centro))) {
             if (comparar(lsa.obtenerObjetopp(centro), dato, atributoClase)) {
                 return lsa.obtenerObjetopp(centro);
             } else if (compareTo(dato, lsa.obtenerObjetopp(centro), atributoClase)) {
