@@ -37,6 +37,15 @@ public class ControladorVehiculo {
     UtilesMecanico uti = new UtilesMecanico();
     Vehiculo vehiculo;
 
+    public ListaSimple<Vehiculo> getLive() {
+        return live;
+    }
+
+    public void setLive(ListaSimple<Vehiculo> live) {
+        this.live = live;
+    }
+    
+
     public void RegistrarVehiculo(String placa, Long Modelo, String color, String observacion, File imagen, Long Propietario) {
         vehiculo = new Vehiculo(Long.parseLong("0"), placa, Modelo, color, observacion, true, observacion, imagen, Propietario);
     }
@@ -111,15 +120,15 @@ public class ControladorVehiculo {
         boolean band;
         inta = arreglo.tamano();
         while (inta > 0) {
-            System.out.println("prueba 1");
+//            System.out.println("prueba 1");
             inta = inta / 2;
             band = true;
             while (band) {
-                System.out.println("prueba 2");
+//                System.out.println("prueba 2");
                 band = false;
                 i = 0;
                 while ((i + inta) <= arreglo.tamano() - 1) {//2.1.1
-                    System.out.println("prueba 3");
+//                    System.out.println("prueba 3");
                     if (arreglo.obtenerPorPosicion(i).getId() > arreglo.obtenerPorPosicion(i + inta).getId()) {
                         aux = arreglo.obtenerPorPosicion(i);
                         arreglo.editar(i, arreglo.obtenerPorPosicion(i + inta));
@@ -134,6 +143,7 @@ public class ControladorVehiculo {
     }
 
     public Persona BuscarCedula(Long Cedula) {
+        ctr.RecuperarData();
         ListaSimple<Persona> lAux = ctr.getLiPersona();
         Persona aux;
         if (busquedaBinaria(shell(lAux), Cedula) != null) {

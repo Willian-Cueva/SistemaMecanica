@@ -21,21 +21,40 @@ import javax.swing.JTextField;
  *
  * @author Cris2
  */
-public class Frm_Cliente extends javax.swing.JFrame {
+public class Panel_RegistroCliente extends javax.swing.JPanel {
 
     /**
-     * Creates new form FrmCliente
+     * Creates new form Panel_RegistroCliente
      */
     ControladorMecanico ctr = new ControladorMecanico();
     UtilesMecanico uti = new UtilesMecanico();
     ControladorCuenta ctrc = new ControladorCuenta();
     File file;
-
-    public Frm_Cliente() {
+    public Panel_RegistroCliente() {
         initComponents();
-        
+        if (this.isVisible()) {
+            iniciarDatos();
+        }
     }
-
+    private void iniciarDatos(){
+        ctrc.RecuperarData();
+        ctr.llenarboxRoles(cmbRol);  
+        MantenerCesion<Rol> cs = new MantenerCesion();
+        System.out.println("Rol de quien entro: "+cs.listar("Rol").getNombreRol());
+        if (cs.listar("Rol").getNombreRol().equals("Mecanico")) {
+            cmbRol.removeItem("Administrador");
+            cmbRol.removeItem("Mecanico");
+        } else {
+            txtContraseña = new JTextField();
+            jLabel9 = new JLabel("Contraseña");
+            jPanel1.add(txtContraseña);
+            jPanel1.add(jLabel9);
+            txtContraseña.setBounds(90, 330, 230, 30);
+            jLabel9.setBounds(10, 330, 70, 30);
+            txtContraseña.setVisible(true);
+            jLabel9.setVisible(true);
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -64,16 +83,6 @@ public class Frm_Cliente extends javax.swing.JFrame {
         txtDireccion = new javax.swing.JTextField();
         cmbRol = new javax.swing.JComboBox<>();
         jLabel10 = new javax.swing.JLabel();
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowActivated(java.awt.event.WindowEvent evt) {
-                formWindowActivated(evt);
-            }
-            public void windowOpened(java.awt.event.WindowEvent evt) {
-                formWindowOpened(evt);
-            }
-        });
 
         jPanel1.setBackground(new java.awt.Color(255, 204, 51));
         jPanel1.setLayout(null);
@@ -171,46 +180,24 @@ public class Frm_Cliente extends javax.swing.JFrame {
         jPanel1.add(jLabel10);
         jLabel10.setBounds(10, 290, 70, 30);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 551, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 551, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 436, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
-
-        pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnGuardarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuardarMousePressed
-        btnGuardar.setBackground(new Color(255, 204, 51));
-        btnGuardar.setForeground(Color.WHITE);
-        if (cmbRol.getSelectedItem().toString().equals("Cliente")) {
-            ctr.RegistrarCliente(txtCedula.getText(), txtNombre.getText(), txtApellido.getText(), txtCorreo.getText(), txtTelefono.getText(), txtDireccion.getText(), file, ctr.idRol(cmbRol.getSelectedItem().toString()),null);        // TODO add your handling code here:
-
-        }else{
-            ctr.RegistrarCliente(txtCedula.getText(), txtNombre.getText(), txtApellido.getText(), txtCorreo.getText(), txtTelefono.getText(), txtDireccion.getText(), file, ctr.idRol(cmbRol.getSelectedItem().toString()), txtContraseña.getText());        // TODO add your handling code here:
-
-        }
-        this.dispose();
-    }//GEN-LAST:event_btnGuardarMousePressed
-
-    private void btnGuardarMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuardarMouseReleased
-        btnGuardar.setBackground(new Color(255, 153, 0));
-        btnGuardar.setForeground(Color.BLACK);
-        ctr.GuardarPersona(ctr.getPersona());
-        if (!cmbRol.getSelectedItem().toString().equals("Cliente")) {
-            ctr.GuardarCuenta();
-        }
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnGuardarMouseReleased
+    private void btnBuscarImagenMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarImagenMouseExited
+        btnBuscarImagen.setBackground(new Color(255, 153, 0));
+        btnBuscarImagen.setForeground(Color.BLACK);        // TODO add your handling code here:
+    }//GEN-LAST:event_btnBuscarImagenMouseExited
 
     private void btnBuscarImagenMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarImagenMousePressed
 
@@ -229,75 +216,28 @@ public class Frm_Cliente extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnBuscarImagenMouseReleased
 
-    private void btnBuscarImagenMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarImagenMouseExited
-        btnBuscarImagen.setBackground(new Color(255, 153, 0));
-        btnBuscarImagen.setForeground(Color.BLACK);        // TODO add your handling code here:
-    }//GEN-LAST:event_btnBuscarImagenMouseExited
+    private void btnGuardarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuardarMousePressed
+        btnGuardar.setBackground(new Color(255, 204, 51));
+        btnGuardar.setForeground(Color.WHITE);
+        if (cmbRol.getSelectedItem().toString().equals("Cliente")) {
+            ctr.RegistrarCliente(txtCedula.getText(), txtNombre.getText(), txtApellido.getText(), txtCorreo.getText(), txtTelefono.getText(), txtDireccion.getText(), file, ctr.idRol(cmbRol.getSelectedItem().toString()),null);        // TODO add your handling code here:
 
-    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-         
-               // TODO add your handling code here:
-    }//GEN-LAST:event_formWindowActivated
+        }else{
+            ctr.RegistrarCliente(txtCedula.getText(), txtNombre.getText(), txtApellido.getText(), txtCorreo.getText(), txtTelefono.getText(), txtDireccion.getText(), file, ctr.idRol(cmbRol.getSelectedItem().toString()), txtContraseña.getText());        // TODO add your handling code here:
 
-    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-       ctrc.RecuperarData();
-        ctr.llenarboxRoles(cmbRol);  
-        MantenerCesion<Rol> cs = new MantenerCesion();
-        System.out.println("Rol de quien entro: "+cs.listar("Rol").getNombreRol());
-        if (cs.listar("Rol").getNombreRol().equals("Mecanico")) {
-            cmbRol.removeItem("Administrador");
-            cmbRol.removeItem("Mecanico");
-        } else {
-            txtContraseña = new JTextField();
-            jLabel9 = new JLabel("Contraseña");
-            jPanel1.add(txtContraseña);
-            jPanel1.add(jLabel9);
-            txtContraseña.setBounds(90, 330, 230, 30);
-            jLabel9.setBounds(10, 330, 70, 30);
-            txtContraseña.setVisible(true);
-            jLabel9.setVisible(true);
-        } // TODO add your handling code here:
-    }//GEN-LAST:event_formWindowOpened
-
-    private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
-               // TODO add your handling code here:
-    }//GEN-LAST:event_formWindowGainedFocus
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Frm_Cliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Frm_Cliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Frm_Cliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Frm_Cliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-        //</editor-fold>
+    }//GEN-LAST:event_btnGuardarMousePressed
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Frm_Cliente().setVisible(true);
-            }
-        });
-    }
+    private void btnGuardarMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuardarMouseReleased
+        btnGuardar.setBackground(new Color(255, 153, 0));
+        btnGuardar.setForeground(Color.BLACK);
+        ctr.GuardarPersona(ctr.getPersona());
+        if (!cmbRol.getSelectedItem().toString().equals("Cliente")) {
+            ctr.GuardarCuenta();
+        }
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnGuardarMouseReleased
+
     private javax.swing.JTextField txtContraseña;
     private javax.swing.JLabel jLabel9;
     // Variables declaration - do not modify//GEN-BEGIN:variables

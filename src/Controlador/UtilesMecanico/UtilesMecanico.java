@@ -12,10 +12,17 @@ package Controlador.UtilesMecanico;
 import Modelo.Cuenta;
 import Modelo.Rol;
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Image;
 import java.io.File;
+import java.io.IOException;
+import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.JColorChooser;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -66,6 +73,23 @@ public class UtilesMecanico {
             file = archivo.getSelectedFile();
         }
         return file;
+    }
+    public ImageIcon img(Blob imagen, Dimension d){
+        
+        Image rpta = null;
+        try {
+            rpta = javax.imageio.ImageIO.read(imagen.getBinaryStream());
+            rpta = rpta.getScaledInstance(d.width, d.height, Image.SCALE_DEFAULT);
+            //rpta.getGraphics().dra;
+            ImageIcon image = new ImageIcon(rpta);
+            return image;
+        } catch (SQLException ex) {
+            System.out.println("Error: "+ ex.getMessage());
+            return null;
+        } catch (IOException ex) {
+            System.out.println("Error: "+ ex.getMessage());
+            return null;
+        }
     }
 
 }

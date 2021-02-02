@@ -18,22 +18,27 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Cris2
  */
-public class Frm_Vehiculo extends javax.swing.JFrame {
+public class Panel_RegistroVehiculo extends javax.swing.JPanel {
 
     /**
-     * Creates new form Frm_Vehiculo
+     * Creates new form Panel_RegistroVehiculo
      */
     DefaultTableModel modelo;
     ControladorVehiculo ctr = new ControladorVehiculo();
-    UtilesMecanico uti=new UtilesMecanico();
+    UtilesMecanico uti = new UtilesMecanico();
     Long idModelo;
     String ColorRGB;
     File file;
-    public Frm_Vehiculo() {
+
+    public Panel_RegistroVehiculo() {
         initComponents();
         modelo = (DefaultTableModel) Tabla1.getModel();
         Tabla1.setModel(modelo);
-
+        if (this.isVisible()) {
+            ctr.llenarTabla(modelo);
+            ctr.llenarboxRoles(jComboBox2);
+            Tabla1.updateUI();
+        }
     }
 
     /**
@@ -46,6 +51,7 @@ public class Frm_Vehiculo extends javax.swing.JFrame {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
+        jPanel1 = new javax.swing.JPanel();
         txtPlaca = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -74,37 +80,22 @@ public class Frm_Vehiculo extends javax.swing.JFrame {
         txtMarca = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMinimumSize(new java.awt.Dimension(672, 472));
-        setPreferredSize(new java.awt.Dimension(672, 472));
-        addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                formMouseEntered(evt);
+        jPanel1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                jPanel1MouseMoved(evt);
             }
         });
-        addWindowFocusListener(new java.awt.event.WindowFocusListener() {
-            public void windowGainedFocus(java.awt.event.WindowEvent evt) {
-                formWindowGainedFocus(evt);
-            }
-            public void windowLostFocus(java.awt.event.WindowEvent evt) {
-            }
-        });
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowOpened(java.awt.event.WindowEvent evt) {
-                formWindowOpened(evt);
-            }
-        });
-        getContentPane().setLayout(null);
-        getContentPane().add(txtPlaca);
-        txtPlaca.setBounds(120, 60, 110, 33);
+        jPanel1.setLayout(null);
+        jPanel1.add(txtPlaca);
+        txtPlaca.setBounds(100, 60, 110, 33);
 
         jLabel1.setText("Placa");
-        getContentPane().add(jLabel1);
-        jLabel1.setBounds(28, 62, 74, 33);
+        jPanel1.add(jLabel1);
+        jLabel1.setBounds(10, 60, 74, 33);
 
         jLabel2.setText("Modelo");
-        getContentPane().add(jLabel2);
-        jLabel2.setBounds(28, 101, 74, 33);
+        jPanel1.add(jLabel2);
+        jLabel2.setBounds(10, 100, 74, 33);
 
         jButton1.setText("Guardar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -112,24 +103,24 @@ public class Frm_Vehiculo extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1);
-        jButton1.setBounds(290, 410, 100, 30);
+        jPanel1.add(jButton1);
+        jButton1.setBounds(270, 410, 100, 30);
 
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText("Nuevo vehiculo");
-        getContentPane().add(jLabel5);
-        jLabel5.setBounds(160, 11, 180, 33);
+        jPanel1.add(jLabel5);
+        jLabel5.setBounds(140, 10, 180, 33);
 
         jLabel6.setText("Color");
-        getContentPane().add(jLabel6);
-        jLabel6.setBounds(30, 180, 70, 30);
+        jPanel1.add(jLabel6);
+        jLabel6.setBounds(10, 180, 70, 30);
 
         txtObservacion.setColumns(20);
         txtObservacion.setRows(5);
         jScrollPane1.setViewportView(txtObservacion);
 
-        getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(120, 300, 270, 100);
+        jPanel1.add(jScrollPane1);
+        jScrollPane1.setBounds(100, 300, 270, 100);
 
         Tabla1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -143,19 +134,22 @@ public class Frm_Vehiculo extends javax.swing.JFrame {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 Tabla1MousePressed(evt);
             }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                Tabla1MouseReleased(evt);
+            }
         });
         jScrollPane2.setViewportView(Tabla1);
 
-        getContentPane().add(jScrollPane2);
-        jScrollPane2.setBounds(420, 90, 230, 250);
+        jPanel1.add(jScrollPane2);
+        jScrollPane2.setBounds(400, 90, 230, 250);
 
         txtBuscar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 txtBuscarMousePressed(evt);
             }
         });
-        getContentPane().add(txtBuscar);
-        txtBuscar.setBounds(420, 60, 180, 30);
+        jPanel1.add(txtBuscar);
+        txtBuscar.setBounds(400, 60, 180, 30);
 
         jLabel4.setBackground(new java.awt.Color(255, 153, 0));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -166,19 +160,19 @@ public class Frm_Vehiculo extends javax.swing.JFrame {
                 jLabel4MousePressed(evt);
             }
         });
-        getContentPane().add(jLabel4);
-        jLabel4.setBounds(600, 60, 50, 30);
+        jPanel1.add(jLabel4);
+        jLabel4.setBounds(580, 60, 50, 30);
 
         buttonGroup1.add(jCheckBox1);
         jCheckBox1.setSelected(true);
         jCheckBox1.setText("Cedula");
-        getContentPane().add(jCheckBox1);
-        jCheckBox1.setBounds(420, 30, 68, 24);
+        jPanel1.add(jCheckBox1);
+        jCheckBox1.setBounds(400, 30, 59, 23);
 
         buttonGroup1.add(jCheckBox2);
         jCheckBox2.setText("Apellido");
-        getContentPane().add(jCheckBox2);
-        jCheckBox2.setBounds(510, 30, 72, 24);
+        jPanel1.add(jCheckBox2);
+        jCheckBox2.setBounds(490, 30, 63, 23);
 
         jComboBox2.setBackground(new java.awt.Color(255, 102, 0));
         jComboBox2.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -189,8 +183,8 @@ public class Frm_Vehiculo extends javax.swing.JFrame {
                 jComboBox2MousePressed(evt);
             }
         });
-        getContentPane().add(jComboBox2);
-        jComboBox2.setBounds(120, 100, 130, 30);
+        jPanel1.add(jComboBox2);
+        jComboBox2.setBounds(100, 100, 130, 30);
 
         jLabel7.setBackground(new java.awt.Color(255, 153, 0));
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -201,16 +195,16 @@ public class Frm_Vehiculo extends javax.swing.JFrame {
                 jLabel7MousePressed(evt);
             }
         });
-        getContentPane().add(jLabel7);
-        jLabel7.setBounds(290, 170, 100, 20);
+        jPanel1.add(jLabel7);
+        jLabel7.setBounds(270, 170, 100, 20);
 
         jLabel8.setText("Observacion");
-        getContentPane().add(jLabel8);
-        jLabel8.setBounds(30, 300, 80, 100);
+        jPanel1.add(jLabel8);
+        jLabel8.setBounds(10, 300, 80, 100);
 
         vistaImagen.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        getContentPane().add(vistaImagen);
-        vistaImagen.setBounds(290, 50, 100, 120);
+        jPanel1.add(vistaImagen);
+        vistaImagen.setBounds(270, 50, 100, 120);
 
         jLabel11.setBackground(new java.awt.Color(255, 153, 0));
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -221,30 +215,30 @@ public class Frm_Vehiculo extends javax.swing.JFrame {
                 jLabel11MousePressed(evt);
             }
         });
-        getContentPane().add(jLabel11);
-        jLabel11.setBounds(120, 180, 70, 30);
+        jPanel1.add(jLabel11);
+        jLabel11.setBounds(100, 180, 70, 30);
 
         txtPropietario.setBackground(new java.awt.Color(255, 255, 255));
         txtPropietario.setOpaque(true);
-        getContentPane().add(txtPropietario);
-        txtPropietario.setBounds(120, 220, 270, 30);
+        jPanel1.add(txtPropietario);
+        txtPropietario.setBounds(100, 220, 270, 30);
 
         jLabel10.setText("Propietario");
-        getContentPane().add(jLabel10);
-        jLabel10.setBounds(30, 220, 80, 30);
+        jPanel1.add(jLabel10);
+        jLabel10.setBounds(10, 220, 80, 30);
 
         txtCedula.setBackground(new java.awt.Color(255, 255, 255));
         txtCedula.setOpaque(true);
-        getContentPane().add(txtCedula);
-        txtCedula.setBounds(120, 260, 270, 30);
+        jPanel1.add(txtCedula);
+        txtCedula.setBounds(100, 260, 270, 30);
 
         jLabel12.setText("CI.");
-        getContentPane().add(jLabel12);
-        jLabel12.setBounds(30, 260, 80, 30);
+        jPanel1.add(jLabel12);
+        jLabel12.setBounds(10, 260, 80, 30);
 
         vColor.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        getContentPane().add(vColor);
-        vColor.setBounds(200, 180, 60, 30);
+        jPanel1.add(vColor);
+        vColor.setBounds(180, 180, 60, 30);
 
         jLabel3.setBackground(new java.awt.Color(255, 102, 0));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -253,42 +247,52 @@ public class Frm_Vehiculo extends javax.swing.JFrame {
         jLabel3.setMinimumSize(new java.awt.Dimension(30, 30));
         jLabel3.setOpaque(true);
         jLabel3.setPreferredSize(new java.awt.Dimension(30, 30));
-        getContentPane().add(jLabel3);
-        jLabel3.setBounds(250, 100, 30, 30);
+        jPanel1.add(jLabel3);
+        jLabel3.setBounds(230, 100, 30, 30);
 
         txtMarca.setBackground(new java.awt.Color(255, 255, 255));
         txtMarca.setOpaque(true);
-        getContentPane().add(txtMarca);
-        txtMarca.setBounds(120, 140, 130, 30);
+        jPanel1.add(txtMarca);
+        txtMarca.setBounds(100, 140, 130, 30);
 
         jLabel13.setText("Marca");
-        getContentPane().add(jLabel13);
-        jLabel13.setBounds(30, 140, 70, 30);
+        jPanel1.add(jLabel13);
+        jLabel13.setBounds(10, 140, 70, 30);
 
-        pack();
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 740, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 740, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 470, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 470, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        ctr.RegistrarVehiculo(txtPlaca.getText(), idModelo, ColorRGB, txtObservacion.getText(), file, Long.parseLong(txtCedula.getText()));
+        ctr.GuardarVehiculo();// TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     private void Tabla1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Tabla1MousePressed
-        try {
-            if ((Tabla1.getSelectedRow() + 1)<Tabla1.getRowCount()) {
-                String a = Tabla1.getValueAt(Tabla1.getSelectedRow() + 1, 0).toString();
-            txtPropietario.setText(ctr.BuscarCedula(Long.parseLong(a)).getNombre() + " " + ctr.BuscarCedula(Long.parseLong(a)).getApellido());
-            
-            txtCedula.setText(ctr.BuscarCedula(Long.parseLong(a)).getId().toString());
-            }
-            
-        } catch (NumberFormatException e) {
-        }
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_Tabla1MousePressed
 
     private void txtBuscarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtBuscarMousePressed
-// TODO add your handling code here:
-    }//GEN-LAST:event_txtBuscarMousePressed
-
-    private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
         // TODO add your handling code here:
-    }//GEN-LAST:event_formWindowGainedFocus
+    }//GEN-LAST:event_txtBuscarMousePressed
 
     private void jLabel4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MousePressed
         try {
@@ -305,33 +309,13 @@ public class Frm_Vehiculo extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jLabel4MousePressed
 
-    private void jLabel11MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel11MousePressed
-        Color color=JColorChooser.showDialog(null, "Elige un color", Color.BLACK);
-        ColorRGB=String.valueOf(color.getRGB());
-        Color co=new Color(color.getRGB());
-        vColor.setBackground(co);
-        vColor.updateUI();// TODO add your handling code here:
-    }//GEN-LAST:event_jLabel11MousePressed
-
-    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        ctr.llenarTabla(modelo);
-        ctr.llenarboxRoles(jComboBox2);
-        Tabla1.updateUI();
-                // TODO add your handling code here:
-    }//GEN-LAST:event_formWindowOpened
-
     private void jComboBox2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBox2MouseExited
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox2MouseExited
 
     private void jComboBox2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBox2MousePressed
-               // TODO add your handling code here:
+        // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox2MousePressed
-
-    private void formMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseEntered
-         idModelo=ctr.idModelo(jComboBox2.getSelectedItem().toString());
-         txtMarca.setText(ctr.buscarMarca());        // TODO add your handling code here:
-    }//GEN-LAST:event_formMouseEntered
 
     private void jLabel7MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MousePressed
         file = uti.BuscarImagen();
@@ -341,46 +325,31 @@ public class Frm_Vehiculo extends javax.swing.JFrame {
         vistaImagen.setIcon(new ImageIcon(foto));              // TODO add your handling code here:
     }//GEN-LAST:event_jLabel7MousePressed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        ctr.RegistrarVehiculo(txtPlaca.getText(), idModelo, ColorRGB, txtObservacion.getText(), file, Long.parseLong(txtCedula.getText()));
-        ctr.GuardarVehiculo(); 
-        this.dispose();// TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void jLabel11MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel11MousePressed
+        Color color = JColorChooser.showDialog(null, "Elige un color", Color.BLACK);
+        ColorRGB = String.valueOf(color.getRGB());
+        Color co = new Color(color.getRGB());
+        vColor.setBackground(co);
+        vColor.updateUI();// TODO add your handling code here:
+    }//GEN-LAST:event_jLabel11MousePressed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
+    private void jPanel1MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseMoved
+        idModelo=ctr.idModelo(jComboBox2.getSelectedItem().toString());
+        txtMarca.setText(ctr.buscarMarca());          // TODO add your handling code here:
+    }//GEN-LAST:event_jPanel1MouseMoved
+
+    private void Tabla1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Tabla1MouseReleased
+        System.out.println("Selecciono: "+(Tabla1.getSelectedRow())+ "Tamaño: "+Tabla1.getRowCount());
         try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Frm_Vehiculo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Frm_Vehiculo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Frm_Vehiculo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Frm_Vehiculo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+                String a = Tabla1.getValueAt(Tabla1.getSelectedRow(), 0).toString();
+                txtPropietario.setText(ctr.BuscarCedula(Long.parseLong(a)).getNombre() + " " + ctr.BuscarCedula(Long.parseLong(a)).getApellido());
+                txtCedula.setText(ctr.BuscarCedula(Long.parseLong(a)).getId().toString());
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Frm_Vehiculo().setVisible(true);
-            }
-        });
-    }
+        } catch (NumberFormatException e) {
+        }
+        // TODO add your handling code here:       // TODO add your handling code here:
+    }//GEN-LAST:event_Tabla1MouseReleased
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable Tabla1;
@@ -401,6 +370,7 @@ public class Frm_Vehiculo extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField txtBuscar;
