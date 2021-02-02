@@ -6,7 +6,6 @@
 package Controlador;
 
 import Modelo.Persona;
-import javax.swing.JRadioButton;
 
 /**
  *
@@ -14,6 +13,17 @@ import javax.swing.JRadioButton;
  */
 public class AdministradorControlador {
     private ListaSimpleAvanzada personas = new ListaSimpleAvanzada();
+    private ListaSimpleAvanzada vehiculos = new ListaSimpleAvanzada();
+
+    public ListaSimpleAvanzada getVehiculos() {
+        if(vehiculos==null)vehiculos = new ListaSimpleAvanzada();
+        return vehiculos;
+    }
+
+    public void setVehiculos(ListaSimpleAvanzada vehiculos) {
+        this.vehiculos = new ListaSimpleAvanzada();
+        this.vehiculos = vehiculos;
+    }
     
     public String obtenerIdPersona(){
         Persona m = (Persona) personas.obtenerObjetopp(personas.tamano()-1);
@@ -33,6 +43,5 @@ public class AdministradorControlador {
         this.personas = new ListaSimpleAvanzada();
         this.personas = personas;
     }
-
-    
+   
 }

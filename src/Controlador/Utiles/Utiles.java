@@ -9,6 +9,8 @@ import Controlador.Conexion.ConeccionBDD;
 import Controlador.ListaSimpleAvanzada;
 import Modelo.Persona;
 import Modelo.Rol;
+import Modelo.Vehiculo;
+import com.mysql.cj.jdbc.Blob;
 import java.sql.Statement;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -127,6 +129,34 @@ public class Utiles {
             System.err.println("Error al ejecutar la consulta en la base de datos - listaMecanicos() Utiles\n" + ex);
         }
         return persona;
+    }
+    
+    public static ListaSimpleAvanzada listaVehiculos(){
+        ListaSimpleAvanzada vehiculos = new ListaSimpleAvanzada();
+        String sql = "SELECT * FROM vehiculo";
+        try {
+            Statement st = (Statement) ConeccionBDD.IniciarConexion().createStatement();
+            ResultSet rs = st.executeQuery(sql);
+//            int cont = 1;
+            while (rs.next()) {
+                Vehiculo m = new Vehiculo();
+                int i = 0;
+                m.setId(Long.parseLong(rs.getString(++i)));
+                m.setPlaca(rs.getString(++i));
+                m.setIdModeloVehiculo(Long.parseLong(rs.getString(++i)));
+                m.setColor(rs.getString(++i));
+                m.setObservacion(rs.getString(++i));
+                m.setEstado(rs.getString(++i).equalsIgnoreCase("1"));
+                m.setExternalidVehiculo(rs.getString(++i));
+                m.setIdPersona(Long.parseLong(rs.getString(++i)));
+//                m.setImagen((Blob)rs.getString(++i));
+                vehiculos.insertar(m);
+            }
+        } catch (SQLException ex) {
+//            Logger.getLogger(Utiles.class.getName()).log(Level.SEVERE, null, ex);
+            System.err.println("Error al ejecutar la consulta en la base de datos - listaMecanicos() Utiles\n" + ex);
+        }
+        return vehiculos;
     }
 
     /**

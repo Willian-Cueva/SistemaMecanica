@@ -24,6 +24,9 @@ public class Vehiculo {
     File archivo;
     Long idPersona;
 
+    public Vehiculo() {
+    }
+
     public Vehiculo(Long id, String placa, Long idModeloVehiculo, String Color, String observacion, Boolean Estado, String ExternalidVehiculo, File archivo, Long idPersona) {
         this.id = id;
         this.placa = placa;
