@@ -32,6 +32,7 @@ public class Panel_RegistroCliente extends javax.swing.JPanel {
     File file;
     public Panel_RegistroCliente() {
         initComponents();
+        uti.IniciarConexion();
         if (this.isVisible()) {
             iniciarDatos();
         }
@@ -73,48 +74,78 @@ public class Panel_RegistroCliente extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         txtTelefono = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
-        btnBuscarImagen = new javax.swing.JLabel();
-        VisatFoto = new javax.swing.JLabel();
         btnGuardar = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
         txtApellido = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         txtDireccion = new javax.swing.JTextField();
         cmbRol = new javax.swing.JComboBox<>();
         jLabel10 = new javax.swing.JLabel();
+        btnBuscarImagen = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        VisatFoto = new javax.swing.JLabel();
 
-        jPanel1.setBackground(new java.awt.Color(255, 204, 51));
+        setMinimumSize(new java.awt.Dimension(727, 415));
+        setPreferredSize(new java.awt.Dimension(727, 415));
+
+        jPanel1.setBackground(new java.awt.Color(61, 61, 61));
+        jPanel1.setMinimumSize(new java.awt.Dimension(727, 415));
         jPanel1.setLayout(null);
         jPanel1.add(txtNombre);
-        txtNombre.setBounds(90, 90, 230, 30);
+        txtNombre.setBounds(150, 80, 230, 30);
         jPanel1.add(txtCedula);
-        txtCedula.setBounds(90, 170, 230, 30);
+        txtCedula.setBounds(150, 160, 230, 30);
         jPanel1.add(txtCorreo);
-        txtCorreo.setBounds(90, 210, 230, 30);
+        txtCorreo.setBounds(150, 200, 230, 30);
 
         jLabel1.setText("Nombre");
         jPanel1.add(jLabel1);
-        jLabel1.setBounds(10, 90, 70, 30);
+        jLabel1.setBounds(70, 80, 70, 30);
 
         jLabel2.setText("Cedula");
         jPanel1.add(jLabel2);
-        jLabel2.setBounds(10, 170, 70, 30);
+        jLabel2.setBounds(70, 160, 70, 30);
 
         jLabel3.setText("Correo");
         jPanel1.add(jLabel3);
-        jLabel3.setBounds(10, 210, 70, 30);
+        jLabel3.setBounds(70, 200, 70, 30);
         jPanel1.add(txtTelefono);
-        txtTelefono.setBounds(90, 250, 230, 30);
+        txtTelefono.setBounds(150, 240, 230, 30);
 
         jLabel4.setText("Telefono");
         jPanel1.add(jLabel4);
-        jLabel4.setBounds(10, 250, 70, 30);
+        jLabel4.setBounds(70, 240, 70, 30);
 
-        jPanel2.setBorder(new javax.swing.border.MatteBorder(null));
-        jPanel2.setLayout(new java.awt.BorderLayout());
+        btnGuardar.setBackground(new java.awt.Color(255, 102, 0));
+        btnGuardar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnGuardar.setText("Guardar");
+        btnGuardar.setOpaque(true);
+        btnGuardar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btnGuardarMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                btnGuardarMouseReleased(evt);
+            }
+        });
+        jPanel1.add(btnGuardar);
+        btnGuardar.setBounds(470, 330, 80, 30);
+        jPanel1.add(txtApellido);
+        txtApellido.setBounds(150, 120, 230, 30);
 
-        btnBuscarImagen.setBackground(new java.awt.Color(255, 153, 0));
+        jLabel5.setText("Apellido");
+        jPanel1.add(jLabel5);
+        jLabel5.setBounds(70, 120, 70, 30);
+        jPanel1.add(txtDireccion);
+        txtDireccion.setBounds(150, 280, 230, 30);
+
+        jPanel1.add(cmbRol);
+        cmbRol.setBounds(430, 280, 120, 30);
+
+        jLabel10.setText("Direccion");
+        jPanel1.add(jLabel10);
+        jLabel10.setBounds(70, 280, 70, 30);
+
+        btnBuscarImagen.setBackground(new java.awt.Color(255, 102, 0));
         btnBuscarImagen.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         btnBuscarImagen.setText("Buscar Imagen");
         btnBuscarImagen.setOpaque(true);
@@ -129,67 +160,38 @@ public class Panel_RegistroCliente extends javax.swing.JPanel {
                 btnBuscarImagenMouseReleased(evt);
             }
         });
-        jPanel2.add(btnBuscarImagen, java.awt.BorderLayout.PAGE_END);
+        jPanel1.add(btnBuscarImagen);
+        btnBuscarImagen.setBounds(430, 230, 120, 30);
+
+        jLabel6.setBackground(new java.awt.Color(255, 102, 0));
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel6.setText("Registrar Clientes");
+        jLabel6.setOpaque(true);
+        jPanel1.add(jLabel6);
+        jLabel6.setBounds(0, 0, 740, 30);
 
         VisatFoto.setBackground(new java.awt.Color(255, 255, 255));
         VisatFoto.setMaximumSize(new java.awt.Dimension(108, 139));
         VisatFoto.setMinimumSize(new java.awt.Dimension(108, 139));
         VisatFoto.setOpaque(true);
         VisatFoto.setPreferredSize(new java.awt.Dimension(108, 139));
-        jPanel2.add(VisatFoto, java.awt.BorderLayout.CENTER);
-
-        jPanel1.add(jPanel2);
-        jPanel2.setBounds(340, 90, 120, 170);
-
-        btnGuardar.setBackground(new java.awt.Color(255, 153, 0));
-        btnGuardar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        btnGuardar.setText("Guardar");
-        btnGuardar.setOpaque(true);
-        btnGuardar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                btnGuardarMousePressed(evt);
-            }
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                btnGuardarMouseReleased(evt);
-            }
-        });
-        jPanel1.add(btnGuardar);
-        btnGuardar.setBounds(380, 350, 80, 30);
-
-        jLabel8.setBackground(new java.awt.Color(255, 153, 0));
-        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel8.setText("Registrar Clientes");
-        jLabel8.setOpaque(true);
-        jPanel1.add(jLabel8);
-        jLabel8.setBounds(150, 20, 260, 30);
-        jPanel1.add(txtApellido);
-        txtApellido.setBounds(90, 130, 230, 30);
-
-        jLabel5.setText("Apellido");
-        jPanel1.add(jLabel5);
-        jLabel5.setBounds(10, 130, 70, 30);
-        jPanel1.add(txtDireccion);
-        txtDireccion.setBounds(90, 290, 230, 30);
-
-        jPanel1.add(cmbRol);
-        cmbRol.setBounds(340, 270, 120, 30);
-
-        jLabel10.setText("Direccion");
-        jPanel1.add(jLabel10);
-        jLabel10.setBounds(10, 290, 70, 30);
+        jPanel1.add(VisatFoto);
+        VisatFoto.setBounds(430, 80, 118, 150);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 551, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 727, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 436, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 415, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -251,9 +253,8 @@ public class Panel_RegistroCliente extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JTextField txtApellido;
     private javax.swing.JTextField txtCedula;
     private javax.swing.JTextField txtCorreo;

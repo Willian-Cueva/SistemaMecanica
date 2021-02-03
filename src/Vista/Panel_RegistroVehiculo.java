@@ -5,10 +5,13 @@
  */
 package Vista;
 
+import Controlador.ControladorCliente;
 import Controlador.ControladorVehiculo;
 import Controlador.UtilesMecanico.UtilesMecanico;
 import java.awt.Color;
 import java.awt.Image;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.File;
 import javax.swing.ImageIcon;
 import javax.swing.JColorChooser;
@@ -25,18 +28,24 @@ public class Panel_RegistroVehiculo extends javax.swing.JPanel {
      */
     DefaultTableModel modelo;
     ControladorVehiculo ctr = new ControladorVehiculo();
+    ControladorCliente ctr1 = new ControladorCliente();
     UtilesMecanico uti = new UtilesMecanico();
     Long idModelo;
     String ColorRGB;
     File file;
+    Panel_RegistrarModelos mv = new Panel_RegistrarModelos(new eventoCerrar());
 
     public Panel_RegistroVehiculo() {
+        emerge = new javax.swing.JPanel();
+        emerge.setLayout(new java.awt.BorderLayout());
         initComponents();
+
+        uti.IniciarConexion();
         modelo = (DefaultTableModel) Tabla1.getModel();
         Tabla1.setModel(modelo);
         if (this.isVisible()) {
             ctr.llenarTabla(modelo);
-            ctr.llenarboxRoles(jComboBox2);
+            ctr.llenarboxModelos(jComboBox2);
             Tabla1.updateUI();
         }
     }
@@ -52,18 +61,18 @@ public class Panel_RegistroVehiculo extends javax.swing.JPanel {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
-        txtPlaca = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
+        txtPlaca = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        jLabel5 = new javax.swing.JLabel();
+        title = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtObservacion = new javax.swing.JTextArea();
+        txtBuscar = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
         Tabla1 = new javax.swing.JTable();
-        txtBuscar = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
+        btnBuscar = new javax.swing.JLabel();
         jCheckBox1 = new javax.swing.JCheckBox();
         jCheckBox2 = new javax.swing.JCheckBox();
         jComboBox2 = new javax.swing.JComboBox<>();
@@ -77,21 +86,28 @@ public class Panel_RegistroVehiculo extends javax.swing.JPanel {
         jLabel12 = new javax.swing.JLabel();
         vColor = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        txtMarca = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
+        jCheckBox3 = new javax.swing.JCheckBox();
+        txtMarca = new javax.swing.JLabel();
 
+        setMinimumSize(new java.awt.Dimension(727, 415));
+        setPreferredSize(new java.awt.Dimension(727, 415));
+        setLayout(null);
+
+        jPanel1.setBackground(new java.awt.Color(61, 61, 61));
+        jPanel1.setMinimumSize(new java.awt.Dimension(727, 415));
         jPanel1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
                 jPanel1MouseMoved(evt);
             }
         });
         jPanel1.setLayout(null);
-        jPanel1.add(txtPlaca);
-        txtPlaca.setBounds(100, 60, 110, 33);
 
         jLabel1.setText("Placa");
         jPanel1.add(jLabel1);
         jLabel1.setBounds(10, 60, 74, 33);
+        jPanel1.add(txtPlaca);
+        txtPlaca.setBounds(100, 60, 160, 33);
 
         jLabel2.setText("Modelo");
         jPanel1.add(jLabel2);
@@ -104,12 +120,16 @@ public class Panel_RegistroVehiculo extends javax.swing.JPanel {
             }
         });
         jPanel1.add(jButton1);
-        jButton1.setBounds(270, 410, 100, 30);
+        jButton1.setBounds(610, 360, 100, 30);
 
-        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setText("Nuevo vehiculo");
-        jPanel1.add(jLabel5);
-        jLabel5.setBounds(140, 10, 180, 33);
+        title.setBackground(new java.awt.Color(255, 102, 0));
+        title.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        title.setForeground(new java.awt.Color(255, 255, 255));
+        title.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        title.setText("Nuevo vehiculo");
+        title.setOpaque(true);
+        jPanel1.add(title);
+        title.setBounds(0, 0, 730, 30);
 
         jLabel6.setText("Color");
         jPanel1.add(jLabel6);
@@ -121,6 +141,14 @@ public class Panel_RegistroVehiculo extends javax.swing.JPanel {
 
         jPanel1.add(jScrollPane1);
         jScrollPane1.setBounds(100, 300, 270, 100);
+
+        txtBuscar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                txtBuscarMousePressed(evt);
+            }
+        });
+        jPanel1.add(txtBuscar);
+        txtBuscar.setBounds(400, 60, 260, 30);
 
         Tabla1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -141,38 +169,32 @@ public class Panel_RegistroVehiculo extends javax.swing.JPanel {
         jScrollPane2.setViewportView(Tabla1);
 
         jPanel1.add(jScrollPane2);
-        jScrollPane2.setBounds(400, 90, 230, 250);
+        jScrollPane2.setBounds(400, 90, 310, 260);
 
-        txtBuscar.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnBuscar.setBackground(new java.awt.Color(255, 102, 0));
+        btnBuscar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnBuscar.setText("Buscar");
+        btnBuscar.setOpaque(true);
+        btnBuscar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                txtBuscarMousePressed(evt);
+                btnBuscarMousePressed(evt);
             }
         });
-        jPanel1.add(txtBuscar);
-        txtBuscar.setBounds(400, 60, 180, 30);
-
-        jLabel4.setBackground(new java.awt.Color(255, 153, 0));
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("Buscar");
-        jLabel4.setOpaque(true);
-        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jLabel4MousePressed(evt);
-            }
-        });
-        jPanel1.add(jLabel4);
-        jLabel4.setBounds(580, 60, 50, 30);
+        jPanel1.add(btnBuscar);
+        btnBuscar.setBounds(660, 60, 50, 30);
 
         buttonGroup1.add(jCheckBox1);
         jCheckBox1.setSelected(true);
         jCheckBox1.setText("Cedula");
+        jCheckBox1.setOpaque(false);
         jPanel1.add(jCheckBox1);
-        jCheckBox1.setBounds(400, 30, 59, 23);
+        jCheckBox1.setBounds(430, 30, 70, 23);
 
         buttonGroup1.add(jCheckBox2);
         jCheckBox2.setText("Apellido");
+        jCheckBox2.setOpaque(false);
         jPanel1.add(jCheckBox2);
-        jCheckBox2.setBounds(490, 30, 63, 23);
+        jCheckBox2.setBounds(520, 30, 80, 23);
 
         jComboBox2.setBackground(new java.awt.Color(255, 102, 0));
         jComboBox2.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -186,7 +208,7 @@ public class Panel_RegistroVehiculo extends javax.swing.JPanel {
         jPanel1.add(jComboBox2);
         jComboBox2.setBounds(100, 100, 130, 30);
 
-        jLabel7.setBackground(new java.awt.Color(255, 153, 0));
+        jLabel7.setBackground(new java.awt.Color(255, 102, 0));
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setText("Buscar imagen");
         jLabel7.setOpaque(true);
@@ -196,7 +218,7 @@ public class Panel_RegistroVehiculo extends javax.swing.JPanel {
             }
         });
         jPanel1.add(jLabel7);
-        jLabel7.setBounds(270, 170, 100, 20);
+        jLabel7.setBounds(270, 180, 100, 30);
 
         jLabel8.setText("Observacion");
         jPanel1.add(jLabel8);
@@ -204,9 +226,9 @@ public class Panel_RegistroVehiculo extends javax.swing.JPanel {
 
         vistaImagen.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel1.add(vistaImagen);
-        vistaImagen.setBounds(270, 50, 100, 120);
+        vistaImagen.setBounds(270, 60, 100, 120);
 
-        jLabel11.setBackground(new java.awt.Color(255, 153, 0));
+        jLabel11.setBackground(new java.awt.Color(255, 102, 0));
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel11.setText("Color");
         jLabel11.setOpaque(true);
@@ -238,7 +260,7 @@ public class Panel_RegistroVehiculo extends javax.swing.JPanel {
 
         vColor.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel1.add(vColor);
-        vColor.setBounds(180, 180, 60, 30);
+        vColor.setBounds(180, 180, 80, 30);
 
         jLabel3.setBackground(new java.awt.Color(255, 102, 0));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -247,43 +269,44 @@ public class Panel_RegistroVehiculo extends javax.swing.JPanel {
         jLabel3.setMinimumSize(new java.awt.Dimension(30, 30));
         jLabel3.setOpaque(true);
         jLabel3.setPreferredSize(new java.awt.Dimension(30, 30));
+        jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabel3MousePressed(evt);
+            }
+        });
         jPanel1.add(jLabel3);
         jLabel3.setBounds(230, 100, 30, 30);
-
-        txtMarca.setBackground(new java.awt.Color(255, 255, 255));
-        txtMarca.setOpaque(true);
-        jPanel1.add(txtMarca);
-        txtMarca.setBounds(100, 140, 130, 30);
 
         jLabel13.setText("Marca");
         jPanel1.add(jLabel13);
         jLabel13.setBounds(10, 140, 70, 30);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 740, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 740, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 470, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 470, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
-        );
+        buttonGroup1.add(jCheckBox3);
+        jCheckBox3.setText("Todo");
+        jCheckBox3.setOpaque(false);
+        jCheckBox3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jCheckBox3MouseReleased(evt);
+            }
+        });
+        jPanel1.add(jCheckBox3);
+        jCheckBox3.setBounds(600, 30, 70, 23);
+
+        txtMarca.setBackground(new java.awt.Color(255, 255, 255));
+        txtMarca.setOpaque(true);
+        jPanel1.add(txtMarca);
+        txtMarca.setBounds(100, 140, 160, 30);
+
+        add(jPanel1);
+        jPanel1.setBounds(0, 0, 727, 415);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        ctr.RegistrarVehiculo(txtPlaca.getText(), idModelo, ColorRGB, txtObservacion.getText(), file, Long.parseLong(txtCedula.getText()));
-        ctr.GuardarVehiculo();// TODO add your handling code here:
+        if (estadoBoton) {
+            ctr.RegistrarVehiculo(txtPlaca.getText(), idModelo, ColorRGB, txtObservacion.getText(), file, Long.parseLong(txtCedula.getText()));
+            ctr.GuardarVehiculo();
+        }
+        // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void Tabla1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Tabla1MousePressed
@@ -294,20 +317,25 @@ public class Panel_RegistroVehiculo extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtBuscarMousePressed
 
-    private void jLabel4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MousePressed
-        try {
-            if (jCheckBox1.isSelected() && ctr.BuscarCedula(Long.parseLong(txtBuscar.getText())) != null) {
-                ctr.llenarTablaBusqueda(modelo, ctr.BuscarCedula(Long.parseLong(txtBuscar.getText())));
-                Tabla1.updateUI();
-            } else {
-                ctr.llenarTablaBusqueda(modelo, ctr.Buscar(txtBuscar.getText()));
-                Tabla1.updateUI();
+    private void btnBuscarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarMousePressed
+        if (estadoBoton) {
+            try {
+                if (jCheckBox1.isSelected()) {
+                    ctr1.Encuentracliente(txtBuscar.getText());
+                    if (ctr1.getPersona() != null) {
+                        ctr.llenarTablaBusqueda(modelo, ctr1.getPersona());
+                        Tabla1.updateUI();
+                    }
+                } else {
+                    ctr.llenarTablaFiltrarApellido(ctr.BuscarApellido(txtBuscar.getText()), modelo);
+                    Tabla1.updateUI();
+                }
+            } catch (NumberFormatException e) {
             }
-        } catch (NumberFormatException e) {
         }
 
         // TODO add your handling code here:
-    }//GEN-LAST:event_jLabel4MousePressed
+    }//GEN-LAST:event_btnBuscarMousePressed
 
     private void jComboBox2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBox2MouseExited
         // TODO add your handling code here:
@@ -318,45 +346,142 @@ public class Panel_RegistroVehiculo extends javax.swing.JPanel {
     }//GEN-LAST:event_jComboBox2MousePressed
 
     private void jLabel7MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MousePressed
-        file = uti.BuscarImagen();
-        System.out.println("ruta" + String.valueOf(file));
-        Image foto = getToolkit().getImage(String.valueOf(file));
-        foto = foto.getScaledInstance(108, 139, Image.SCALE_DEFAULT);
-        vistaImagen.setIcon(new ImageIcon(foto));              // TODO add your handling code here:
+        if (estadoBoton) {
+            file = uti.BuscarImagen();
+            System.out.println("ruta" + String.valueOf(file));
+            Image foto = getToolkit().getImage(String.valueOf(file));
+            foto = foto.getScaledInstance(108, 139, Image.SCALE_DEFAULT);
+            vistaImagen.setIcon(new ImageIcon(foto));
+        }
+        // TODO add your handling code here:
     }//GEN-LAST:event_jLabel7MousePressed
 
     private void jLabel11MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel11MousePressed
-        Color color = JColorChooser.showDialog(null, "Elige un color", Color.BLACK);
-        ColorRGB = String.valueOf(color.getRGB());
-        Color co = new Color(color.getRGB());
-        vColor.setBackground(co);
-        vColor.updateUI();// TODO add your handling code here:
+        if (estadoBoton) {
+            Color color=new Color(240,240,240);
+            color = JColorChooser.showDialog(null, "Elige un color", Color.BLACK);
+            ColorRGB = String.valueOf(color.getRGB());
+            Color co = new Color(color.getRGB());
+            vColor.setBackground(co);
+            vColor.updateUI();
+        }
+        // TODO add your handling code here:
     }//GEN-LAST:event_jLabel11MousePressed
 
     private void jPanel1MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseMoved
-        idModelo=ctr.idModelo(jComboBox2.getSelectedItem().toString());
-        txtMarca.setText(ctr.buscarMarca());          // TODO add your handling code here:
+        if (estadoBoton) {
+            idModelo = ctr.idModelo(jComboBox2.getSelectedItem().toString());
+            txtMarca.setText(ctr.buscarMarca());
+        }
+
+// TODO add your handling code here:
     }//GEN-LAST:event_jPanel1MouseMoved
 
     private void Tabla1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Tabla1MouseReleased
-        System.out.println("Selecciono: "+(Tabla1.getSelectedRow())+ "Tamaño: "+Tabla1.getRowCount());
-        try {
-                String a = Tabla1.getValueAt(Tabla1.getSelectedRow(), 0).toString();
-                txtPropietario.setText(ctr.BuscarCedula(Long.parseLong(a)).getNombre() + " " + ctr.BuscarCedula(Long.parseLong(a)).getApellido());
-                txtCedula.setText(ctr.BuscarCedula(Long.parseLong(a)).getId().toString());
+        if (estadoBoton) {
+            System.out.println("Selecciono: " + (Tabla1.getSelectedRow()) + "Tamaño: " + Tabla1.getRowCount());
+            try {
 
-        } catch (NumberFormatException e) {
+                String a = Tabla1.getValueAt(Tabla1.getSelectedRow(), 0).toString();
+                ctr1.Encuentracliente(a);
+                txtPropietario.setText(ctr1.getPersona().getNombre() + " " + ctr1.getPersona().getApellido());
+                txtCedula.setText(ctr1.getPersona().getId().toString());
+
+            } catch (NumberFormatException e) {
+            }
         }
+
         // TODO add your handling code here:       // TODO add your handling code here:
     }//GEN-LAST:event_Tabla1MouseReleased
 
+    private void jCheckBox3MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCheckBox3MouseReleased
+        if (jCheckBox3.isSelected()) {
+            ctr.llenarTabla(modelo);
+            Tabla1.updateUI();
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_jCheckBox3MouseReleased
+    boolean estadoBoton = true;
+    private void jLabel3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MousePressed
+        if (estadoBoton) {
+            for (int i = 1; i < jPanel1.getComponentCount(); i++) {
+                jPanel1.getComponents()[i].setEnabled(false);
+                Tabla1.setEnabled(false);
+                txtObservacion.setEnabled(false);
+                title.setEnabled(true);
+                jLabel3.setEnabled(true);
+            }
+            jPanel1.add(emerge, 0);
+            emerge.setBounds(230, 130, 301, 169);
+            //emerge.setVisible(true);
+            emerge.add(mv);
+            jPanel1.updateUI();
+            estadoBoton = false;
+        } else {
+            for (int i = 0; i < jPanel1.getComponentCount(); i++) {
+                jPanel1.getComponents()[i].setEnabled(true);
+                Tabla1.setEnabled(true);
+                txtObservacion.setEnabled(true);
+                title.setEnabled(true);
+                jLabel3.setEnabled(true);
+            }
+            jPanel1.remove(emerge);
+            jPanel1.updateUI();
+            estadoBoton = true;
+        }
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel3MousePressed
+    class eventoCerrar implements MouseListener {
 
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            //To change body of generated methods, choose Tools | Templates.
+        }
+
+        @Override
+        public void mousePressed(MouseEvent e) {
+            //To change body of generated methods, choose Tools | Templates.
+        }
+
+        @Override
+        public void mouseReleased(MouseEvent e) {
+            System.out.println("datos: " + mv.txtNombreModelo.getText() + " " + mv.bxMarca.getSelectedItem().toString());
+            Long Marca=ctr.buscarMNombre(mv.bxMarca.getSelectedItem().toString());
+            String nombre=mv.txtNombreModelo.getText();
+            ctr.RegistrarModelo(nombre, Marca);
+            ctr.GuardarModelo();
+            jComboBox2.removeAllItems();
+            ctr.llenarboxModelos(jComboBox2);
+            //emerge.setVisible(false);
+            for (int i = 0; i < jPanel1.getComponentCount(); i++) {
+                jPanel1.getComponents()[i].setEnabled(true);
+                Tabla1.setEnabled(true);
+                txtObservacion.setEnabled(true);
+                jLabel3.setEnabled(true);
+            }
+            estadoBoton = true;
+            jPanel1.remove(emerge);
+            jPanel1.updateUI();//To change body of generated methods, choose Tools | Templates.
+        }
+
+        @Override
+        public void mouseEntered(MouseEvent e) {
+            //To change body of generated methods, choose Tools | Templates.
+        }
+
+        @Override
+        public void mouseExited(MouseEvent e) {
+            //To change body of generated methods, choose Tools | Templates.
+        }
+    }
+    private javax.swing.JPanel emerge;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable Tabla1;
+    private javax.swing.JLabel btnBuscar;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton1;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JCheckBox jCheckBox2;
+    private javax.swing.JCheckBox jCheckBox3;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -365,14 +490,13 @@ public class Panel_RegistroVehiculo extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel title;
     private javax.swing.JTextField txtBuscar;
     private javax.swing.JLabel txtCedula;
     private javax.swing.JLabel txtMarca;

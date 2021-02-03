@@ -9,7 +9,12 @@ import Controlador.ControladorCliente;
 import Controlador.ControladorCuenta;
 import Controlador.ControladorVehiculo;
 import Controlador.UtilesMecanico.UtilesMecanico;
+import Lista.ListaSimple;
+import Modelo.Persona;
 import java.awt.Color;
+import java.awt.Image;
+import java.io.File;
+import javax.swing.ImageIcon;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -24,8 +29,10 @@ public class Panel_EditarCliente extends javax.swing.JPanel {
     DefaultTableModel modelo;
     ControladorCliente ctr=new ControladorCliente();
     UtilesMecanico uti=new UtilesMecanico();
+    File file=null;
     public Panel_EditarCliente() {
         initComponents();
+        uti.IniciarConexion();
         modelo = (DefaultTableModel) Tabla1.getModel();
         Tabla1.setModel(modelo);
         Noeditar();
@@ -64,7 +71,12 @@ public class Panel_EditarCliente extends javax.swing.JPanel {
         btnCancelar = new javax.swing.JLabel();
         btnBuscarImagen = new javax.swing.JLabel();
         txtBuscar = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jCheckBox3 = new javax.swing.JCheckBox();
+        jLabel6 = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(61, 61, 61));
+        setMinimumSize(new java.awt.Dimension(727, 415));
         setLayout(null);
 
         Tabla1.setModel(new javax.swing.table.DefaultTableModel(
@@ -83,45 +95,48 @@ public class Panel_EditarCliente extends javax.swing.JPanel {
         jScrollPane1.setViewportView(Tabla1);
 
         add(jScrollPane1);
-        jScrollPane1.setBounds(10, 66, 380, 343);
+        jScrollPane1.setBounds(10, 120, 380, 280);
 
         buttonGroup1.add(jCheckBox1);
+        jCheckBox1.setSelected(true);
         jCheckBox1.setText("Cedula");
+        jCheckBox1.setOpaque(false);
         add(jCheckBox1);
-        jCheckBox1.setBounds(10, 18, 59, 30);
+        jCheckBox1.setBounds(10, 40, 80, 30);
 
         buttonGroup1.add(jCheckBox2);
         jCheckBox2.setText("Apellido");
+        jCheckBox2.setOpaque(false);
         add(jCheckBox2);
-        jCheckBox2.setBounds(87, 18, 63, 30);
+        jCheckBox2.setBounds(90, 40, 80, 30);
 
-        jPanel1.setBackground(new java.awt.Color(255, 153, 0));
+        jPanel1.setBackground(new java.awt.Color(51, 51, 51));
         jPanel1.setLayout(null);
 
-        txtNombre.setBackground(new java.awt.Color(255, 175, 0));
+        txtNombre.setBackground(new java.awt.Color(66, 65, 65));
         txtNombre.setOpaque(true);
         jPanel1.add(txtNombre);
-        txtNombre.setBounds(115, 11, 183, 29);
+        txtNombre.setBounds(110, 20, 183, 29);
 
-        txtCedula.setBackground(new java.awt.Color(255, 175, 0));
+        txtCedula.setBackground(new java.awt.Color(66, 65, 65));
         txtCedula.setOpaque(true);
         jPanel1.add(txtCedula);
-        txtCedula.setBounds(115, 46, 183, 29);
+        txtCedula.setBounds(110, 60, 183, 29);
 
         txtCorreo.setEditable(false);
-        txtCorreo.setBackground(new java.awt.Color(255, 175, 0));
+        txtCorreo.setBackground(new java.awt.Color(66, 65, 65));
         txtCorreo.setBorder(null);
         jPanel1.add(txtCorreo);
         txtCorreo.setBounds(50, 150, 250, 28);
 
         txtTelefono.setEditable(false);
-        txtTelefono.setBackground(new java.awt.Color(255, 175, 0));
+        txtTelefono.setBackground(new java.awt.Color(66, 65, 65));
         txtTelefono.setBorder(null);
         jPanel1.add(txtTelefono);
         txtTelefono.setBounds(50, 190, 250, 28);
 
         txtDireccion.setEditable(false);
-        txtDireccion.setBackground(new java.awt.Color(255, 175, 0));
+        txtDireccion.setBackground(new java.awt.Color(66, 65, 65));
         txtDireccion.setBorder(null);
         jPanel1.add(txtDireccion);
         txtDireccion.setBounds(50, 230, 250, 28);
@@ -130,7 +145,7 @@ public class Panel_EditarCliente extends javax.swing.JPanel {
         jPanel1.add(imagen);
         imagen.setBounds(10, 11, 87, 107);
 
-        btnEditar.setBackground(new java.awt.Color(255, 204, 0));
+        btnEditar.setBackground(new java.awt.Color(255, 153, 0));
         btnEditar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         btnEditar.setText("Editar");
         btnEditar.setOpaque(true);
@@ -146,7 +161,7 @@ public class Panel_EditarCliente extends javax.swing.JPanel {
         bxActivo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Activo", "Inactivo" }));
         bxActivo.setEnabled(false);
         jPanel1.add(bxActivo);
-        bxActivo.setBounds(210, 270, 90, 30);
+        bxActivo.setBounds(50, 270, 250, 30);
 
         btnGuardar.setBackground(new java.awt.Color(255, 204, 0));
         btnGuardar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -160,7 +175,7 @@ public class Panel_EditarCliente extends javax.swing.JPanel {
         jPanel1.add(btnGuardar);
         btnGuardar.setBounds(240, 310, 60, 20);
 
-        btnCancelar.setBackground(new java.awt.Color(255, 204, 0));
+        btnCancelar.setBackground(new java.awt.Color(255, 153, 0));
         btnCancelar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         btnCancelar.setText("Cancelar");
         btnCancelar.setOpaque(true);
@@ -172,7 +187,7 @@ public class Panel_EditarCliente extends javax.swing.JPanel {
         jPanel1.add(btnCancelar);
         btnCancelar.setBounds(160, 310, 60, 20);
 
-        btnBuscarImagen.setBackground(new java.awt.Color(255, 204, 0));
+        btnBuscarImagen.setBackground(new java.awt.Color(255, 153, 0));
         btnBuscarImagen.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         btnBuscarImagen.setText("Buscar");
         btnBuscarImagen.setOpaque(true);
@@ -187,7 +202,39 @@ public class Panel_EditarCliente extends javax.swing.JPanel {
         add(jPanel1);
         jPanel1.setBounds(408, 66, 310, 340);
         add(txtBuscar);
-        txtBuscar.setBounds(160, 20, 230, 30);
+        txtBuscar.setBounds(10, 80, 230, 30);
+
+        jLabel1.setBackground(new java.awt.Color(255, 153, 0));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Buscar");
+        jLabel1.setOpaque(true);
+        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabel1MousePressed(evt);
+            }
+        });
+        add(jLabel1);
+        jLabel1.setBounds(240, 80, 70, 30);
+
+        buttonGroup1.add(jCheckBox3);
+        jCheckBox3.setText("Todo");
+        jCheckBox3.setOpaque(false);
+        jCheckBox3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jCheckBox3MouseReleased(evt);
+            }
+        });
+        add(jCheckBox3);
+        jCheckBox3.setBounds(180, 40, 80, 30);
+
+        jLabel6.setBackground(new java.awt.Color(255, 102, 0));
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel6.setText("Administrar Clientes");
+        jLabel6.setOpaque(true);
+        add(jLabel6);
+        jLabel6.setBounds(0, 0, 740, 30);
     }// </editor-fold>//GEN-END:initComponents
 
     private void Tabla1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Tabla1MouseReleased
@@ -200,9 +247,9 @@ public class Panel_EditarCliente extends javax.swing.JPanel {
 // TODO add your handling code here:
     }//GEN-LAST:event_Tabla1MouseReleased
     private void RefrescarDatos(String cedula){
-        ctr.cliente(cedula);
+        ctr.Encuentracliente(cedula);
         txtNombre.setText(ctr.getPersona().getNombre()+" "+ctr.getPersona().getApellido());
-        txtCedula.setText(ctr.getPersona().getCedula()); 
+        txtCedula.setText("CI. "+ctr.getPersona().getCedula()); 
         txtCorreo.setText(ctr.getPersona().getCorreo());
         txtTelefono.setText(ctr.getPersona().getTelefono());
         txtDireccion.setText(ctr.getPersona().getDireccion());
@@ -219,19 +266,51 @@ public class Panel_EditarCliente extends javax.swing.JPanel {
     }//GEN-LAST:event_btnEditarMousePressed
 
     private void btnGuardarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuardarMousePressed
-        ctr.Editar(txtCorreo.getText(), txtTelefono.getText(), txtDireccion.getText(), txtCedula.getText());
+        ctr.Editar(txtCorreo.getText(), txtTelefono.getText(), txtDireccion.getText(), txtCedula.getText(),bxActivo.getSelectedItem().toString(),file);
         Noeditar();
         // TODO add your handling code here:
     }//GEN-LAST:event_btnGuardarMousePressed
 
     private void btnCancelarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarMousePressed
         Noeditar();
-        RefrescarDatos(txtCedula.getText());// TODO add your handling code here:
+        file=null;
+        RefrescarDatos(txtCedula.getText().substring(4));// TODO add your handling code here:
     }//GEN-LAST:event_btnCancelarMousePressed
 
     private void btnBuscarImagenMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarImagenMousePressed
-        // TODO add your handling code here:
+        file = uti.BuscarImagen();
+        System.out.println("ruta" + String.valueOf(file));
+        Image foto = getToolkit().getImage(String.valueOf(file));
+        foto = foto.getScaledInstance(87, 107, Image.SCALE_DEFAULT);
+        imagen.setIcon(new ImageIcon(foto));// TODO add your handling code here:
     }//GEN-LAST:event_btnBuscarImagenMousePressed
+
+    private void jLabel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MousePressed
+        try {
+            if (jCheckBox1.isSelected()) {
+                ctr.Encuentracliente(txtBuscar.getText());
+                if (ctr.getPersona() != null) {
+                    ctr.llenarTablaBusqueda(modelo, ctr.getPersona());
+                    Tabla1.updateUI();
+                }
+            } else {
+                ctr.llenarTablaFiltrarApellido(ctr.BuscarApellido(txtBuscar.getText()),modelo);
+                Tabla1.updateUI();
+            }
+        } catch (NumberFormatException e) {
+        }
+
+            // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel1MousePressed
+
+    private void jCheckBox3MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCheckBox3MouseReleased
+        if (jCheckBox3.isSelected()) {
+            ctr.llenarTabla(modelo);
+            Tabla1.updateUI();
+            
+        }
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCheckBox3MouseReleased
     public void editar(){
         btnGuardar.setVisible(true);
         btnCancelar.setVisible(true);
@@ -256,9 +335,9 @@ public class Panel_EditarCliente extends javax.swing.JPanel {
         txtTelefono.setEditable(false);
         txtDireccion.setEditable(false);
         bxActivo.setEnabled(false);
-        txtCorreo.setBackground(new Color(255,175,0));
-        txtTelefono.setBackground(new Color(255,175,0));
-        txtDireccion.setBackground(new Color(255,175,0));
+        txtCorreo.setBackground(new Color(66,65,65));
+        txtTelefono.setBackground(new Color(66,65,65));
+        txtDireccion.setBackground(new Color(66,65,65));
                 
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -273,6 +352,9 @@ public class Panel_EditarCliente extends javax.swing.JPanel {
     private javax.swing.JLabel imagen;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JCheckBox jCheckBox2;
+    private javax.swing.JCheckBox jCheckBox3;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField txtBuscar;

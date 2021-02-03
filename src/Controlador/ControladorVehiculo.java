@@ -31,11 +31,12 @@ import javax.swing.table.DefaultTableModel;
 public class ControladorVehiculo {
 
     ControladorCuenta ctr = new ControladorCuenta();
-    ListaSimple<Vehiculo> live = new ListaSimple<>();
-    ListaSimple<ModeloVehiculo> limo = new ListaSimple<>();
-    ListaSimple<Marca> lima = new ListaSimple<>();
+    ListaSimple<Vehiculo> live ;
+    ListaSimple<ModeloVehiculo> limo;
+    ListaSimple<Marca> lima;
     UtilesMecanico uti = new UtilesMecanico();
     Vehiculo vehiculo;
+    ModeloVehiculo modelo;
 
     public ListaSimple<Vehiculo> getLive() {
         return live;
@@ -44,10 +45,21 @@ public class ControladorVehiculo {
     public void setLive(ListaSimple<Vehiculo> live) {
         this.live = live;
     }
+
+    public ListaSimple<Marca> getLima() {
+        return lima;
+    }
+
+    public void setLima(ListaSimple<Marca> lima) {
+        this.lima = lima;
+    }
     
 
     public void RegistrarVehiculo(String placa, Long Modelo, String color, String observacion, File imagen, Long Propietario) {
         vehiculo = new Vehiculo(Long.parseLong("0"), placa, Modelo, color, observacion, true, observacion, imagen, Propietario);
+    }
+    public void RegistrarModelo(String Nombre,Long Marca){
+        modelo=new ModeloVehiculo(Long.parseLong("0"), Nombre, Marca);
     }
 
     public void GuardarVehiculo() {
@@ -56,7 +68,7 @@ public class ControladorVehiculo {
             FileInputStream archivofoto;
             archivofoto = new FileInputStream(vehiculo.getArchivo());
             String insertar = "INSERT INTO vehiculo(idvehiculo,placa,idModelovehiculo,color,observacion,estado,external_idVehiculo,idPersona,imagen) VALUES (?,?,?,?,?,?,?,?,?)";
-            PreparedStatement stmt = (PreparedStatement) uti.IniciarConexion().prepareStatement(insertar);
+            PreparedStatement stmt = (PreparedStatement) uti.getConexion().prepareStatement(insertar);
             stmt.setLong(1, vehiculo.getId());
             stmt.setString(2, vehiculo.getPlaca());
             stmt.setLong(3, vehiculo.getIdModeloVehiculo());
@@ -74,6 +86,22 @@ public class ControladorVehiculo {
             System.out.println("Error: " + ex.getMessage());
         }
     }
+    public void GuardarModelo() {
+        try {
+            int i = 0;
+            String insertar = "INSERT INTO modelovehiculo(idModeloVehiculo,NombreModelo,idMarca) VALUES (?,?,?)";
+            PreparedStatement stmt = (PreparedStatement) uti.getConexion().prepareStatement(insertar);
+            stmt.setLong(1, modelo.getIdModeloVehiculo());
+            stmt.setString(2, modelo.getNombreModelo());
+            stmt.setLong(3, modelo.getIdMarca());
+            i = stmt.executeUpdate();
+            if (i > 0) {
+                JOptionPane.showMessageDialog(null, "Se guardo correctamente");
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error: " + ex.getMessage());
+        }
+    }
 
     public void llenarTabla(DefaultTableModel modelo) {
         ctr.RecuperarData();
@@ -83,6 +111,18 @@ public class ControladorVehiculo {
             obj[0] = ctr.getLiPersona().obtenerPorPosicion(i).getId();
             obj[1] = ctr.getLiPersona().obtenerPorPosicion(i).getNombre();
             obj[2] = ctr.getLiPersona().obtenerPorPosicion(i).getApellido();
+            modelo.addRow(obj);
+        }
+
+    }
+    public void llenarTablaFiltrarApellido(ListaSimple<Persona> li,DefaultTableModel modelo) {
+        ctr.RecuperarData();
+        Object obj[] = new Object[3];
+        modelo.setRowCount(0);
+        for (int i = 0; i < li.tamano(); i++) {
+            obj[0] = li.obtenerPorPosicion(i).getId();
+            obj[1] = li.obtenerPorPosicion(i).getNombre();
+            obj[2] = li.obtenerPorPosicion(i).getApellido();
             modelo.addRow(obj);
         }
 
@@ -155,11 +195,11 @@ public class ControladorVehiculo {
 
     }
 
-    public Persona Buscar(String apellido) {
-        Persona aux;
+    public ListaSimple<Persona> BuscarApellido(String apellido) {
+        ListaSimple<Persona> aux=new ListaSimple<>();
         for (int i = 0; i < ctr.getLiPersona().tamano(); i++) {
             if (ctr.getLiPersona().obtenerPorPosicion(i).getApellido().equals(apellido)) {
-                aux = ctr.getLiPersona().obtenerPorPosicion(i);
+                aux.insertar(ctr.getLiPersona().obtenerPorPosicion(i));
                 return aux;
             }
         }
@@ -169,7 +209,8 @@ public class ControladorVehiculo {
     ModeloVehiculo[] mo;
     Long idMarca;
 
-    public void llenarboxRoles(JComboBox cb) {
+    public void llenarboxModelos(JComboBox cb) {
+        
         recuperarDatosMod();
         mo = new ModeloVehiculo[limo.tamano()];
         for (int i = 0; i < limo.tamano(); i++) {
@@ -178,6 +219,16 @@ public class ControladorVehiculo {
 
         }//importante
 
+    }
+    Marca[] ma;
+    public void llenarboxMarcas(JComboBox cb){
+       recuperarDatosMod();
+        ma = new Marca[lima.tamano()];
+        for (int i = 0; i < lima.tamano(); i++) {
+            cb.addItem(lima.obtenerPorPosicion(i).getNombre());
+            ma[i] = lima.obtenerPorPosicion(i);
+
+        } 
     }
     //igual muy importante para la vistas
     public Long idModelo(String item) {
@@ -203,8 +254,12 @@ public class ControladorVehiculo {
     }
 
     public void recuperarDatosMod() {
+        live=new ListaSimple<>();
+        limo=new ListaSimple<>();
+        lima=new ListaSimple<>();
+        
         try {
-            Statement stmt = (Statement) uti.IniciarConexion().createStatement();
+            Statement stmt = (Statement) uti.getConexion().createStatement();
             //Cargar la lista de Modelos
             ResultSet rsModelo = stmt.executeQuery("SELECT * FROM modelovehiculo");
             if (rsModelo.next()) {
@@ -225,5 +280,13 @@ public class ControladorVehiculo {
             Logger.getLogger(ControladorVehiculo.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//cargo la lista con los datos de la BD
-
+    public Long buscarMNombre(String Nombre){
+        Long id = null;
+        for (int i = 0; i < lima.tamano(); i++) {
+            if (lima.obtenerPorPosicion(i).getNombre().equals(Nombre)) {
+                id=lima.obtenerPorPosicion(i).getId();
+            }
+        }
+        return id;
+    }
 }

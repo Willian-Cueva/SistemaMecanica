@@ -26,9 +26,9 @@ import java.util.logging.Logger;
 public class ControladorCuenta {
     
     UtilesMecanico uti = new UtilesMecanico();
-    ListaSimple<Cuenta> liCuenta = new ListaSimple<>();
-    ListaSimple<Persona> liPersona = new ListaSimple<>();
-    ListaSimple<Rol> liRol = new ListaSimple<>();
+    ListaSimple<Cuenta> liCuenta;
+    ListaSimple<Persona> liPersona;
+    ListaSimple<Rol> liRol;
     Persona persona;
     Rol rol;
     Cuenta cuenta;
@@ -82,12 +82,15 @@ public class ControladorCuenta {
     }
     
     public void RecuperarData() {
+        liPersona=new ListaSimple<>();
+        liCuenta=new ListaSimple<>();
+        liRol=new ListaSimple<>();
         int CantCuentas = 0;
         int CantPersonas = 0;
         int CantRoles = 0;
         
         try {
-            Statement stmt = (Statement) uti.IniciarConexion().createStatement();
+            Statement stmt = (Statement) uti.getConexion().createStatement();
             //Cargar la lista de cuentas
             ResultSet rsCuentas = stmt.executeQuery("SELECT * FROM cuentas");
             if (rsCuentas.next()) {

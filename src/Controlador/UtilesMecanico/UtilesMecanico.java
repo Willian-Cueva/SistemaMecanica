@@ -33,7 +33,13 @@ public class UtilesMecanico {
      *
      * @return
      */
-    public Connection IniciarConexion() {
+    static Connection conexion;
+
+    public Connection getConexion() {
+        return conexion;
+    }
+    
+    public void IniciarConexion() {
         Connection con = null;
         String Driver = "com.mysql.cj.jdbc.Driver";
         String Usuario = "root";
@@ -51,7 +57,7 @@ public class UtilesMecanico {
             System.out.println("Error estableciendo conexion con la base de datos: " + NombreDB
                     + "\nDetalles del error: \n" + e.getMessage());
         }
-        return con;
+        conexion=con;
 
     }
 
