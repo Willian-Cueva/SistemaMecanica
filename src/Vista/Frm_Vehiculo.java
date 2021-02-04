@@ -173,12 +173,12 @@ public class Frm_Vehiculo extends javax.swing.JFrame {
         jCheckBox1.setSelected(true);
         jCheckBox1.setText("Cedula");
         getContentPane().add(jCheckBox1);
-        jCheckBox1.setBounds(420, 30, 68, 24);
+        jCheckBox1.setBounds(420, 30, 62, 28);
 
         buttonGroup1.add(jCheckBox2);
         jCheckBox2.setText("Apellido");
         getContentPane().add(jCheckBox2);
-        jCheckBox2.setBounds(510, 30, 72, 24);
+        jCheckBox2.setBounds(510, 30, 65, 28);
 
         jComboBox2.setBackground(new java.awt.Color(255, 102, 0));
         jComboBox2.addMouseListener(new java.awt.event.MouseAdapter() {
