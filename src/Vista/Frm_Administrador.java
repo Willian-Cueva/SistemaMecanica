@@ -36,8 +36,13 @@ public class Frm_Administrador extends javax.swing.JFrame {
         cargarVentana();
         initComponents();
         this.setLocationRelativeTo(null);
+        try {
         actualizarLista();
-        UtilesComponentes.cargarComboTipoRol(comboTipo);
+        UtilesComponentes.cargarComboTipoRol(comboTipo);            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "No se pudo conectar con la base de datos","Error de coneccion",JOptionPane.WARNING_MESSAGE);
+            this.dispose();
+        }
     }
 
     private void cargarVentana() {
