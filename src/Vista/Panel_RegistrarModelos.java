@@ -64,7 +64,7 @@ public class Panel_RegistrarModelos extends javax.swing.JPanel {
         jPanel1.add(jLabel2);
         jLabel2.setBounds(40, 40, 50, 30);
 
-        btnGuardar.setBackground(new java.awt.Color(255, 102, 0));
+        btnGuardar.setBackground(new java.awt.Color(255, 175, 0));
         btnGuardar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         btnGuardar.setText("Guardar");
         btnGuardar.setOpaque(true);

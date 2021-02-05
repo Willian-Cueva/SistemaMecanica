@@ -17,11 +17,15 @@ public class Frm_Mecanico extends javax.swing.JFrame {
     Panel_RegistroVehiculo PRVehiculo = new Panel_RegistroVehiculo();
     Panel_RegistroCliente PRCliente = new Panel_RegistroCliente();
     Panel_EditarCliente PRECliente=new Panel_EditarCliente();
+    Panel_EditarVehiculo PREVehiculo=new Panel_EditarVehiculo();
+    Panel_OrdenReparacion POrden=new Panel_OrdenReparacion();
     public Frm_Mecanico() {
         initComponents();
         PRVehiculo.setVisible(true);
         PRCliente.setVisible(false);
         PRECliente.setVisible(false);
+        PREVehiculo.setVisible(false);
+        POrden.setVisible(false);
         PanelContenedor.add(PRVehiculo);
     }
 
@@ -48,7 +52,6 @@ public class Frm_Mecanico extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(735, 485));
-        setPreferredSize(new java.awt.Dimension(735, 485));
         setResizable(false);
 
         PanelContenedor.setMinimumSize(new java.awt.Dimension(735, 485));
@@ -84,6 +87,11 @@ public class Frm_Mecanico extends javax.swing.JFrame {
         jButton5.setFocusable(false);
         jButton5.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton5.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jButton5MousePressed(evt);
+            }
+        });
         jToolBar1.add(jButton5);
 
         jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icon.png"))); // NOI18N
@@ -93,6 +101,11 @@ public class Frm_Mecanico extends javax.swing.JFrame {
         jButton6.setFocusable(false);
         jButton6.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton6.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
         jToolBar1.add(jButton6);
 
         jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/20699.png"))); // NOI18N
@@ -170,6 +183,8 @@ public class Frm_Mecanico extends javax.swing.JFrame {
         PRCliente.setVisible(true);
         PRVehiculo.setVisible(false);
         PRECliente.setVisible(false);
+        PREVehiculo.setVisible(false);
+        POrden.setVisible(false);
         PanelContenedor.add(PRCliente);
         PRCliente.validate();    // TODO add your handling code here:
     }//GEN-LAST:event_btnAgregarClienteActionPerformed
@@ -178,6 +193,8 @@ public class Frm_Mecanico extends javax.swing.JFrame {
         PRCliente.setVisible(false);
         PRVehiculo.setVisible(true);
         PRECliente.setVisible(false);
+        PREVehiculo.setVisible(false);
+        POrden.setVisible(false);
         PanelContenedor.add(PRVehiculo);
         PRVehiculo.validate();// TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -186,9 +203,31 @@ public class Frm_Mecanico extends javax.swing.JFrame {
         PRCliente.setVisible(false);
         PRVehiculo.setVisible(false);
         PRECliente.setVisible(true);
+        PREVehiculo.setVisible(false);
+        POrden.setVisible(false);
         PanelContenedor.add(PRECliente);
         PRECliente.validate();        // TODO add your handling code here:
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton5MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton5MousePressed
+        PRCliente.setVisible(false);
+        PRVehiculo.setVisible(false);
+        PRECliente.setVisible(false);
+        PREVehiculo.setVisible(true);
+        POrden.setVisible(false);
+        PanelContenedor.add(PREVehiculo);
+        PREVehiculo.validate();        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton5MousePressed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        PRCliente.setVisible(false);
+        PRVehiculo.setVisible(false);
+        PRECliente.setVisible(false);
+        PREVehiculo.setVisible(false);
+        POrden.setVisible(true);
+        PanelContenedor.add(POrden);
+        POrden.validate();        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton6ActionPerformed
 
     /**
      * @param args the command line arguments

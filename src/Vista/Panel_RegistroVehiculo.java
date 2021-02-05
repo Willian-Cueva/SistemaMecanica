@@ -61,34 +61,37 @@ public class Panel_RegistroVehiculo extends javax.swing.JPanel {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        txtPlaca = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         title = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
+        txtBuscar = new javax.swing.JTextField();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtObservacion = new javax.swing.JTextArea();
-        txtBuscar = new javax.swing.JTextField();
+        txtCedula = new javax.swing.JLabel();
+        txtPropietario = new javax.swing.JLabel();
+        vColor = new javax.swing.JPanel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        vistaImagen = new javax.swing.JLabel();
+        txtMarca = new javax.swing.JLabel();
+        jComboBox2 = new javax.swing.JComboBox<>();
+        txtPlaca = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         Tabla1 = new javax.swing.JTable();
         btnBuscar = new javax.swing.JLabel();
         jCheckBox1 = new javax.swing.JCheckBox();
         jCheckBox2 = new javax.swing.JCheckBox();
-        jComboBox2 = new javax.swing.JComboBox<>();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        vistaImagen = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        txtPropietario = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        txtCedula = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
-        vColor = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
         jCheckBox3 = new javax.swing.JCheckBox();
-        txtMarca = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
 
         setMinimumSize(new java.awt.Dimension(727, 415));
         setPreferredSize(new java.awt.Dimension(727, 415));
@@ -103,15 +106,16 @@ public class Panel_RegistroVehiculo extends javax.swing.JPanel {
         });
         jPanel1.setLayout(null);
 
-        jLabel1.setText("Placa");
-        jPanel1.add(jLabel1);
-        jLabel1.setBounds(10, 60, 74, 33);
-        jPanel1.add(txtPlaca);
-        txtPlaca.setBounds(100, 60, 160, 33);
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel4.setText("Nuevo vehiculo");
+        jPanel1.add(jLabel4);
+        jLabel4.setBounds(200, 0, 280, 30);
 
-        jLabel2.setText("Modelo");
-        jPanel1.add(jLabel2);
-        jLabel2.setBounds(10, 100, 74, 33);
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/fondoRayas.jpg"))); // NOI18N
+        jPanel1.add(jLabel6);
+        jLabel6.setBounds(620, 0, 110, 30);
 
         jButton1.setText("Guardar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -122,25 +126,14 @@ public class Panel_RegistroVehiculo extends javax.swing.JPanel {
         jPanel1.add(jButton1);
         jButton1.setBounds(610, 360, 100, 30);
 
-        title.setBackground(new java.awt.Color(255, 102, 0));
+        title.setBackground(new java.awt.Color(255, 204, 0));
         title.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         title.setForeground(new java.awt.Color(255, 255, 255));
         title.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        title.setText("Nuevo vehiculo");
+        title.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/fondoRayas.jpg"))); // NOI18N
         title.setOpaque(true);
         jPanel1.add(title);
-        title.setBounds(0, 0, 730, 30);
-
-        jLabel6.setText("Color");
-        jPanel1.add(jLabel6);
-        jLabel6.setBounds(10, 180, 70, 30);
-
-        txtObservacion.setColumns(20);
-        txtObservacion.setRows(5);
-        jScrollPane1.setViewportView(txtObservacion);
-
-        jPanel1.add(jScrollPane1);
-        jScrollPane1.setBounds(100, 300, 270, 100);
+        title.setBounds(0, 0, 623, 30);
 
         txtBuscar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -149,6 +142,132 @@ public class Panel_RegistroVehiculo extends javax.swing.JPanel {
         });
         jPanel1.add(txtBuscar);
         txtBuscar.setBounds(400, 60, 260, 30);
+
+        jPanel2.setBackground(new java.awt.Color(51, 51, 51));
+        jPanel2.setLayout(null);
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 153, 0));
+        jLabel1.setText("Placa");
+        jPanel2.add(jLabel1);
+        jLabel1.setBounds(10, 10, 74, 33);
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 153, 0));
+        jLabel2.setText("Modelo");
+        jPanel2.add(jLabel2);
+        jLabel2.setBounds(10, 50, 74, 33);
+
+        jLabel13.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(255, 153, 0));
+        jLabel13.setText("Marca");
+        jPanel2.add(jLabel13);
+        jLabel13.setBounds(10, 90, 70, 30);
+
+        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(255, 153, 0));
+        jLabel10.setText("Propietario");
+        jPanel2.add(jLabel10);
+        jLabel10.setBounds(10, 170, 70, 30);
+
+        jLabel12.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(255, 153, 0));
+        jLabel12.setText("CI.");
+        jPanel2.add(jLabel12);
+        jLabel12.setBounds(10, 210, 70, 30);
+
+        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 153, 0));
+        jLabel8.setText("Observacion");
+        jPanel2.add(jLabel8);
+        jLabel8.setBounds(10, 250, 70, 100);
+
+        txtObservacion.setColumns(20);
+        txtObservacion.setRows(5);
+        jScrollPane1.setViewportView(txtObservacion);
+
+        jPanel2.add(jScrollPane1);
+        jScrollPane1.setBounds(80, 250, 270, 100);
+
+        txtCedula.setBackground(new java.awt.Color(66, 65, 65));
+        txtCedula.setOpaque(true);
+        jPanel2.add(txtCedula);
+        txtCedula.setBounds(80, 210, 270, 30);
+
+        txtPropietario.setBackground(new java.awt.Color(66, 65, 65));
+        txtPropietario.setOpaque(true);
+        jPanel2.add(txtPropietario);
+        txtPropietario.setBounds(80, 170, 270, 30);
+
+        vColor.setBackground(new java.awt.Color(66, 65, 65));
+        vColor.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel2.add(vColor);
+        vColor.setBounds(160, 130, 80, 30);
+
+        jLabel11.setBackground(new java.awt.Color(255, 175, 0));
+        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel11.setText("Color");
+        jLabel11.setOpaque(true);
+        jLabel11.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabel11MousePressed(evt);
+            }
+        });
+        jPanel2.add(jLabel11);
+        jLabel11.setBounds(80, 130, 70, 30);
+
+        jLabel7.setBackground(new java.awt.Color(255, 175, 0));
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel7.setText("Buscar imagen");
+        jLabel7.setOpaque(true);
+        jLabel7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabel7MousePressed(evt);
+            }
+        });
+        jPanel2.add(jLabel7);
+        jLabel7.setBounds(250, 130, 100, 30);
+
+        vistaImagen.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel2.add(vistaImagen);
+        vistaImagen.setBounds(250, 10, 100, 120);
+
+        txtMarca.setBackground(new java.awt.Color(66, 65, 65));
+        txtMarca.setOpaque(true);
+        jPanel2.add(txtMarca);
+        txtMarca.setBounds(80, 90, 160, 30);
+
+        jComboBox2.setBackground(new java.awt.Color(255, 102, 0));
+        jComboBox2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jComboBox2MouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jComboBox2MousePressed(evt);
+            }
+        });
+        jPanel2.add(jComboBox2);
+        jComboBox2.setBounds(80, 50, 130, 30);
+        jPanel2.add(txtPlaca);
+        txtPlaca.setBounds(80, 10, 160, 33);
+
+        jLabel3.setBackground(new java.awt.Color(255, 175, 0));
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setText("+");
+        jLabel3.setMaximumSize(new java.awt.Dimension(30, 30));
+        jLabel3.setMinimumSize(new java.awt.Dimension(30, 30));
+        jLabel3.setOpaque(true);
+        jLabel3.setPreferredSize(new java.awt.Dimension(30, 30));
+        jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabel3MousePressed(evt);
+            }
+        });
+        jPanel2.add(jLabel3);
+        jLabel3.setBounds(210, 50, 30, 30);
+
+        jPanel1.add(jPanel2);
+        jPanel2.setBounds(20, 40, 360, 360);
 
         Tabla1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -171,7 +290,7 @@ public class Panel_RegistroVehiculo extends javax.swing.JPanel {
         jPanel1.add(jScrollPane2);
         jScrollPane2.setBounds(400, 90, 310, 260);
 
-        btnBuscar.setBackground(new java.awt.Color(255, 102, 0));
+        btnBuscar.setBackground(new java.awt.Color(255, 175, 0));
         btnBuscar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         btnBuscar.setText("Buscar");
         btnBuscar.setOpaque(true);
@@ -184,6 +303,8 @@ public class Panel_RegistroVehiculo extends javax.swing.JPanel {
         btnBuscar.setBounds(660, 60, 50, 30);
 
         buttonGroup1.add(jCheckBox1);
+        jCheckBox1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jCheckBox1.setForeground(new java.awt.Color(255, 153, 0));
         jCheckBox1.setSelected(true);
         jCheckBox1.setText("Cedula");
         jCheckBox1.setOpaque(false);
@@ -191,97 +312,16 @@ public class Panel_RegistroVehiculo extends javax.swing.JPanel {
         jCheckBox1.setBounds(430, 30, 70, 23);
 
         buttonGroup1.add(jCheckBox2);
+        jCheckBox2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jCheckBox2.setForeground(new java.awt.Color(255, 153, 0));
         jCheckBox2.setText("Apellido");
         jCheckBox2.setOpaque(false);
         jPanel1.add(jCheckBox2);
         jCheckBox2.setBounds(520, 30, 80, 23);
 
-        jComboBox2.setBackground(new java.awt.Color(255, 102, 0));
-        jComboBox2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                jComboBox2MouseExited(evt);
-            }
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jComboBox2MousePressed(evt);
-            }
-        });
-        jPanel1.add(jComboBox2);
-        jComboBox2.setBounds(100, 100, 130, 30);
-
-        jLabel7.setBackground(new java.awt.Color(255, 102, 0));
-        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel7.setText("Buscar imagen");
-        jLabel7.setOpaque(true);
-        jLabel7.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jLabel7MousePressed(evt);
-            }
-        });
-        jPanel1.add(jLabel7);
-        jLabel7.setBounds(270, 180, 100, 30);
-
-        jLabel8.setText("Observacion");
-        jPanel1.add(jLabel8);
-        jLabel8.setBounds(10, 300, 80, 100);
-
-        vistaImagen.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel1.add(vistaImagen);
-        vistaImagen.setBounds(270, 60, 100, 120);
-
-        jLabel11.setBackground(new java.awt.Color(255, 102, 0));
-        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel11.setText("Color");
-        jLabel11.setOpaque(true);
-        jLabel11.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jLabel11MousePressed(evt);
-            }
-        });
-        jPanel1.add(jLabel11);
-        jLabel11.setBounds(100, 180, 70, 30);
-
-        txtPropietario.setBackground(new java.awt.Color(255, 255, 255));
-        txtPropietario.setOpaque(true);
-        jPanel1.add(txtPropietario);
-        txtPropietario.setBounds(100, 220, 270, 30);
-
-        jLabel10.setText("Propietario");
-        jPanel1.add(jLabel10);
-        jLabel10.setBounds(10, 220, 80, 30);
-
-        txtCedula.setBackground(new java.awt.Color(255, 255, 255));
-        txtCedula.setOpaque(true);
-        jPanel1.add(txtCedula);
-        txtCedula.setBounds(100, 260, 270, 30);
-
-        jLabel12.setText("CI.");
-        jPanel1.add(jLabel12);
-        jLabel12.setBounds(10, 260, 80, 30);
-
-        vColor.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel1.add(vColor);
-        vColor.setBounds(180, 180, 80, 30);
-
-        jLabel3.setBackground(new java.awt.Color(255, 102, 0));
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("+");
-        jLabel3.setMaximumSize(new java.awt.Dimension(30, 30));
-        jLabel3.setMinimumSize(new java.awt.Dimension(30, 30));
-        jLabel3.setOpaque(true);
-        jLabel3.setPreferredSize(new java.awt.Dimension(30, 30));
-        jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jLabel3MousePressed(evt);
-            }
-        });
-        jPanel1.add(jLabel3);
-        jLabel3.setBounds(230, 100, 30, 30);
-
-        jLabel13.setText("Marca");
-        jPanel1.add(jLabel13);
-        jLabel13.setBounds(10, 140, 70, 30);
-
         buttonGroup1.add(jCheckBox3);
+        jCheckBox3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jCheckBox3.setForeground(new java.awt.Color(255, 153, 0));
         jCheckBox3.setText("Todo");
         jCheckBox3.setOpaque(false);
         jCheckBox3.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -292,10 +332,10 @@ public class Panel_RegistroVehiculo extends javax.swing.JPanel {
         jPanel1.add(jCheckBox3);
         jCheckBox3.setBounds(600, 30, 70, 23);
 
-        txtMarca.setBackground(new java.awt.Color(255, 255, 255));
-        txtMarca.setOpaque(true);
-        jPanel1.add(txtMarca);
-        txtMarca.setBounds(100, 140, 160, 30);
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/FondoMetalico.jpg"))); // NOI18N
+        jLabel5.setText("jLabel5");
+        jPanel1.add(jLabel5);
+        jLabel5.setBounds(0, 0, 730, 420);
 
         add(jPanel1);
         jPanel1.setBounds(0, 0, 727, 415);
@@ -490,10 +530,13 @@ public class Panel_RegistroVehiculo extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel title;

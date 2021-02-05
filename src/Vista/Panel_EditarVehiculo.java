@@ -12,6 +12,7 @@ import java.awt.Color;
 import java.awt.Image;
 import java.io.File;
 import javax.swing.ImageIcon;
+import javax.swing.JColorChooser;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -24,9 +25,12 @@ public class Panel_EditarVehiculo extends javax.swing.JPanel {
      * Creates new form Panel_EditarVehiculo
      */
     DefaultTableModel modelo;
-    ControladorVehiculo ctr=new ControladorVehiculo();
-    UtilesMecanico uti=new UtilesMecanico();
-    File file=null;
+    ControladorVehiculo ctr = new ControladorVehiculo();
+    UtilesMecanico uti = new UtilesMecanico();
+    File file = null;
+    String ColorRGB;
+    Long idLong = null;
+    
     public Panel_EditarVehiculo() {
         initComponents();
         uti.IniciarConexion();
@@ -48,6 +52,7 @@ public class Panel_EditarVehiculo extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -59,7 +64,6 @@ public class Panel_EditarVehiculo extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         txtModelo = new javax.swing.JLabel();
         txtPlaca = new javax.swing.JLabel();
-        txtDireccion = new javax.swing.JTextField();
         imagen = new javax.swing.JLabel();
         btnEditar = new javax.swing.JLabel();
         bxActivo = new javax.swing.JComboBox<>();
@@ -69,11 +73,12 @@ public class Panel_EditarVehiculo extends javax.swing.JPanel {
         jScrollPane2 = new javax.swing.JScrollPane();
         txtObservacion = new javax.swing.JTextArea();
         btnColor = new javax.swing.JLabel();
-        color = new javax.swing.JPanel();
+        vColor = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         Tabla1 = new javax.swing.JTable();
         Fondo = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(61, 61, 61));
         setLayout(null);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -85,7 +90,7 @@ public class Panel_EditarVehiculo extends javax.swing.JPanel {
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/fondoRayas.jpg"))); // NOI18N
         add(jLabel4);
-        jLabel4.setBounds(620, 0, 110, 30);
+        jLabel4.setBounds(620, 0, 120, 30);
 
         jLabel6.setBackground(new java.awt.Color(255, 102, 0));
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -95,6 +100,7 @@ public class Panel_EditarVehiculo extends javax.swing.JPanel {
         add(jLabel6);
         jLabel6.setBounds(0, 0, 620, 30);
 
+        buttonGroup1.add(jCheckBox1);
         jCheckBox1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jCheckBox1.setForeground(new java.awt.Color(255, 153, 0));
         jCheckBox1.setSelected(true);
@@ -103,13 +109,15 @@ public class Panel_EditarVehiculo extends javax.swing.JPanel {
         add(jCheckBox1);
         jCheckBox1.setBounds(10, 40, 80, 30);
 
+        buttonGroup1.add(jCheckBox2);
         jCheckBox2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jCheckBox2.setForeground(new java.awt.Color(255, 153, 0));
-        jCheckBox2.setText("Apellido");
+        jCheckBox2.setText("Placa");
         jCheckBox2.setOpaque(false);
         add(jCheckBox2);
         jCheckBox2.setBounds(90, 40, 80, 30);
 
+        buttonGroup1.add(jCheckBox3);
         jCheckBox3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jCheckBox3.setForeground(new java.awt.Color(255, 153, 0));
         jCheckBox3.setText("Todo");
@@ -150,12 +158,6 @@ public class Panel_EditarVehiculo extends javax.swing.JPanel {
         txtPlaca.setOpaque(true);
         jPanel1.add(txtPlaca);
         txtPlaca.setBounds(110, 60, 183, 29);
-
-        txtDireccion.setEditable(false);
-        txtDireccion.setBackground(new java.awt.Color(66, 65, 65));
-        txtDireccion.setBorder(null);
-        jPanel1.add(txtDireccion);
-        txtDireccion.setBounds(50, 230, 250, 28);
 
         imagen.setOpaque(true);
         jPanel1.add(imagen);
@@ -221,28 +223,33 @@ public class Panel_EditarVehiculo extends javax.swing.JPanel {
         jScrollPane2.setViewportView(txtObservacion);
 
         jPanel1.add(jScrollPane2);
-        jScrollPane2.setBounds(50, 150, 250, 70);
+        jScrollPane2.setBounds(50, 150, 250, 100);
 
         btnColor.setBackground(new java.awt.Color(255, 175, 0));
         btnColor.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         btnColor.setText("Color");
         btnColor.setOpaque(true);
+        btnColor.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btnColorMousePressed(evt);
+            }
+        });
         jPanel1.add(btnColor);
         btnColor.setBounds(110, 100, 60, 30);
 
-        javax.swing.GroupLayout colorLayout = new javax.swing.GroupLayout(color);
-        color.setLayout(colorLayout);
-        colorLayout.setHorizontalGroup(
-            colorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout vColorLayout = new javax.swing.GroupLayout(vColor);
+        vColor.setLayout(vColorLayout);
+        vColorLayout.setHorizontalGroup(
+            vColorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 70, Short.MAX_VALUE)
         );
-        colorLayout.setVerticalGroup(
-            colorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        vColorLayout.setVerticalGroup(
+            vColorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 30, Short.MAX_VALUE)
         );
 
-        jPanel1.add(color);
-        color.setBounds(170, 100, 70, 30);
+        jPanel1.add(vColor);
+        vColor.setBounds(170, 100, 70, 30);
 
         add(jPanel1);
         jPanel1.setBounds(400, 70, 310, 340);
@@ -267,7 +274,7 @@ public class Panel_EditarVehiculo extends javax.swing.JPanel {
 
         Fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/FondoMetalico.jpg"))); // NOI18N
         add(Fondo);
-        Fondo.setBounds(0, 0, 730, 420);
+        Fondo.setBounds(0, 0, 730, 450);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEditarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditarMousePressed
@@ -276,30 +283,40 @@ public class Panel_EditarVehiculo extends javax.swing.JPanel {
     }//GEN-LAST:event_btnEditarMousePressed
 
     private void btnGuardarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuardarMousePressed
-        ctr.Editar(TOOL_TIP_TEXT_KEY, TOOL_TIP_TEXT_KEY, TOOL_TIP_TEXT_KEY, file, TOOL_TIP_TEXT_KEY);
+        ColorRGB = String.valueOf(vColor.getBackground().getRGB());
+        ctr.Editar(ColorRGB, txtObservacion.getText(), bxActivo.getSelectedItem().toString(), file, String.valueOf(ctr.getVaux().getId()));
         Noeditar();
         // TODO add your handling code here:
     }//GEN-LAST:event_btnGuardarMousePressed
 
     private void btnCancelarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarMousePressed
         Noeditar();
-        file=null;
-        RefrescarDatos(txtPlaca.getText().substring(4));// TODO add your handling code here:
+        file = null;
+        if (estado) {
+            if (txtPlaca.getText().length() > 0) {
+                RefrescarDatos(txtPlaca.getText().substring(4));
+            }
+        }
+
+        // TODO add your handling code here:
     }//GEN-LAST:event_btnCancelarMousePressed
 
     private void btnBuscarImagenMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarImagenMousePressed
-        file = uti.BuscarImagen();
-        System.out.println("ruta" + String.valueOf(file));
-        Image foto = getToolkit().getImage(String.valueOf(file));
-        foto = foto.getScaledInstance(87, 107, Image.SCALE_DEFAULT);
-        imagen.setIcon(new ImageIcon(foto));// TODO add your handling code here:
+        if (estado) {
+            file = uti.BuscarImagen();
+            System.out.println("ruta" + String.valueOf(file));
+            Image foto = getToolkit().getImage(String.valueOf(file));
+            foto = foto.getScaledInstance(87, 107, Image.SCALE_DEFAULT);
+            imagen.setIcon(new ImageIcon(foto));
+        }
+        // TODO add your handling code here:
     }//GEN-LAST:event_btnBuscarImagenMousePressed
 
     private void jCheckBox3MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCheckBox3MouseReleased
         if (jCheckBox3.isSelected()) {
-            ctr.llenarTabla(modelo);
+            ctr.llenarTablaVehiculo(modelo);
             Tabla1.updateUI();
-
+            
         }
         // TODO add your handling code here:
     }//GEN-LAST:event_jCheckBox3MouseReleased
@@ -307,13 +324,13 @@ public class Panel_EditarVehiculo extends javax.swing.JPanel {
     private void jLabel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MousePressed
         try {
             if (jCheckBox1.isSelected()) {
-                ctr.Encuentracliente(txtBuscar.getText());
-                if (ctr.getPersona() != null) {
-                    ctr.llenarTablaBusqueda(modelo, ctr.getPersona());
+                ctr.buscarPersona(String.valueOf(txtBuscar.getText()));
+                if (ctr.getPaux() != null) {
+                    ctr.llenarTablaBusquedaVehiculo(modelo, ctr.getPaux());
                     Tabla1.updateUI();
                 }
             } else {
-                ctr.llenarTablaFiltrarApellido(ctr.BuscarApellido(txtBuscar.getText()),modelo);
+                ctr.llenarTablaFiltrarPlaca(ctr.BuscarPlaca(txtBuscar.getText()), modelo);
                 Tabla1.updateUI();
             }
         } catch (NumberFormatException e) {
@@ -323,54 +340,63 @@ public class Panel_EditarVehiculo extends javax.swing.JPanel {
     }//GEN-LAST:event_jLabel1MousePressed
 
     private void Tabla1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Tabla1MouseReleased
-        System.out.println("Selecciono: "+(Tabla1.getSelectedRow())+ "Tamaño: "+Tabla1.getRowCount());
+        System.out.println("Selecciono: " + (Tabla1.getSelectedRow()) + "Tamaño: " + Tabla1.getRowCount());
         Noeditar();
-        String a = Tabla1.getValueAt(Tabla1.getSelectedRow(), 2).toString();
-        System.out.println("a: "+a);
+        String a = Tabla1.getValueAt(Tabla1.getSelectedRow(), 0).toString();
+        System.out.println("a: " + a);
         RefrescarDatos(a);        // TODO add your handling code here:
     }//GEN-LAST:event_Tabla1MouseReleased
-    private void RefrescarDatos(String cedula){
-        ctr.Encuentracliente(cedula);
-        txtModelo.setText(ctr.getPersona().getNombre()+" "+ctr.getPersona().getApellido());
-        txtPlaca.setText("CI. "+ctr.getPersona().getCedula()); 
-        txtCorreo.setText(ctr.getPersona().getCorreo());
-        txtTelefono.setText(ctr.getPersona().getTelefono());
-        txtDireccion.setText(ctr.getPersona().getDireccion());
-        imagen.setIcon(uti.img(ctr.getPersona().getImagenObtenida(),imagen.getSize()));
-        if (ctr.getPersona().getEstado().booleanValue()) {
+
+    private void btnColorMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnColorMousePressed
+        if (estado) {
+            Color color = new Color(240, 240, 240);
+            color = JColorChooser.showDialog(null, "Elige un color", Color.BLACK);
+            Color co = new Color(color.getRGB());
+            vColor.setBackground(co);
+            vColor.updateUI();
+        }
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnColorMousePressed
+    private void RefrescarDatos(String placa) {
+        ctr.recuperarDatosMod();
+        ctr.llenartxt(placa);
+        ctr.buscarModeloVehiculo(String.valueOf(ctr.getVaux().getIdModeloVehiculo()));
+        ctr.buscarPersona(String.valueOf(ctr.getVaux().getIdPersona()));
+        txtModelo.setText(ctr.getMaux().getNombreModelo());
+        vColor.setBackground(new Color(Integer.parseInt(ctr.getVaux().getColor())));
+        txtPlaca.setText(ctr.getVaux().getPlaca());
+        txtObservacion.setText(ctr.getVaux().getObservacion());
+        imagen.setIcon(uti.img(ctr.getVaux().getImagen(), imagen.getSize()));
+        if (ctr.getVaux().getEstado().booleanValue()) {
             bxActivo.setSelectedItem("Activo");
-        }else{
+        } else {
             bxActivo.setSelectedItem("Inactivo");
         }
     }
-    public void editar(){
+    boolean estado = true;
+    
+    public void editar() {
+        estado = true;
         btnGuardar.setVisible(true);
         btnCancelar.setVisible(true);
         btnEditar.setVisible(false);
         btnBuscarImagen.setVisible(true);
-        txtCorreo.setEditable(true);
-        txtTelefono.setEditable(true);
-        txtDireccion.setEditable(true);
+        txtObservacion.setEditable(true);
         bxActivo.setEnabled(true);
-        txtCorreo.setBackground(Color.white);
-        txtTelefono.setBackground(Color.white);
-        txtDireccion.setBackground(Color.white);
+        txtObservacion.setBackground(Color.white);
         
-                
     }
-    public void Noeditar(){
+    
+    public void Noeditar() {
+        estado = false;
         btnEditar.setVisible(true);
         btnGuardar.setVisible(false);
         btnCancelar.setVisible(false);
         btnBuscarImagen.setVisible(false);
-        txtCorreo.setEditable(false);
-        txtTelefono.setEditable(false);
-        txtDireccion.setEditable(false);
+        txtObservacion.setEditable(false);
         bxActivo.setEnabled(false);
-        txtCorreo.setBackground(new Color(66,65,65));
-        txtTelefono.setBackground(new Color(66,65,65));
-        txtDireccion.setBackground(new Color(66,65,65));
-                
+        txtObservacion.setBackground(new Color(66, 65, 65));
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -381,8 +407,8 @@ public class Panel_EditarVehiculo extends javax.swing.JPanel {
     private javax.swing.JLabel btnColor;
     private javax.swing.JLabel btnEditar;
     private javax.swing.JLabel btnGuardar;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> bxActivo;
-    private javax.swing.JPanel color;
     private javax.swing.JLabel imagen;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JCheckBox jCheckBox2;
@@ -395,9 +421,9 @@ public class Panel_EditarVehiculo extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField txtBuscar;
-    private javax.swing.JTextField txtDireccion;
     private javax.swing.JLabel txtModelo;
     private javax.swing.JTextArea txtObservacion;
     private javax.swing.JLabel txtPlaca;
+    private javax.swing.JPanel vColor;
     // End of variables declaration//GEN-END:variables
 }
