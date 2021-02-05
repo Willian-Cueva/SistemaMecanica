@@ -3,14 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/william/Documents/NetBeansProjects/SistemaMecanica/src/Controlador/Conexion/ConeccionBDD.java</file>
-            <file>file:/C:/Users/william/Documents/NetBeansProjects/SistemaMecanica/src/Controlador/AdministradorControlador.java</file>
             <file>file:/C:/Users/william/Documents/NetBeansProjects/SistemaMecanica/src/Controlador/Utiles/Utiles.java</file>
-            <file>file:/C:/Users/william/Documents/NetBeansProjects/SistemaMecanica/src/Controlador/ControladorVehiculo.java</file>
             <file>file:/C:/Users/william/Documents/NetBeansProjects/SistemaMecanica/src/Vista/Frm_Administrador.java</file>
-            <file>file:/C:/Users/william/Documents/NetBeansProjects/SistemaMecanica/src/Vista/Modelo/TablaPersonas.java</file>
-            <file>file:/C:/Users/william/Documents/NetBeansProjects/SistemaMecanica/src/Modelo/Vehiculo.java</file>
-            <file>file:/C:/Users/william/Documents/NetBeansProjects/SistemaMecanica/src/Vista/Modelo/TablaVehiculos.java</file>
+            <file>file:/C:/Users/william/Documents/NetBeansProjects/SistemaMecanica/src/Vista/Frm_Almacen.java</file>
+            <file>file:/C:/Users/william/Documents/NetBeansProjects/SistemaMecanica/src/Vista/Frm_VerClientes.java</file>
+            <file>file:/C:/Users/william/Documents/NetBeansProjects/SistemaMecanica/src/Vista/Frm_Login.java</file>
         </group>
     </open-files>
 </project-private>

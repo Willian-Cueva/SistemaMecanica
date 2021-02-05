@@ -5,15 +5,16 @@
  */
 package Vista;
 
+import Vista.Modelo.TablaVehiculo;
+
 /**
  *
  * @author LENOVO LEGION
  */
 public class Frm_VerVehiculo extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Frm_VerVehiculo
-     */
+    private TablaVehiculo tv = new TablaVehiculo();
+    
     public Frm_VerVehiculo() {
         initComponents();
     }
