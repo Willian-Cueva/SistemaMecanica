@@ -48,12 +48,6 @@ public class Frm_Administrador extends javax.swing.JFrame {
     private void cargarVentana() {
         try {
             this.setUndecorated(true);
-//            this.addComponentListener(new ComponentAdapter() {
-//                @Override
-//                public void componentResized(ComponentEvent e) {
-//                    setShape(new RoundRectangle2D.Double(0, 0, getWidth(), getHeight(), 80, 80));
-//                }
-//            });
         } catch (Exception e) {
             System.out.println("Fallo cargar modelo redondeado");
         }
@@ -122,7 +116,7 @@ public class Frm_Administrador extends javax.swing.JFrame {
     }
 
     private void actualizarLista() {
-        ac.setPersonas(Utiles.listaPersonas());
+        ac.setPersonas(Utiles.listaPersonas(Utiles.PERSONAS));
         ac.setVehiculos(Utiles.listaVehiculos());
         cargarTablaPersonas(tablaPersonas);
         cargarTablaPersonas(tablaEliminarPersonas);
@@ -1475,6 +1469,8 @@ public class Frm_Administrador extends javax.swing.JFrame {
             atributo = "Cedula";
         } else if (rdTelefono3.isSelected()) {
             atributo = "Telefono";
+        } else{
+            JOptionPane.showMessageDialog(this, "Debe selecionar un atributo de busqueda", "Seleccione", JOptionPane.INFORMATION_MESSAGE);
         }
         tp.setLsa(Utiles.busquedaSecuencial(ac.getPersonas(), txtBuscar3.getText(), atributo));
         tabla.setModel(tp);

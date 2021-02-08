@@ -22,6 +22,9 @@ import java.sql.SQLException;
  */
 public class Utiles {
 
+    public static final int CLIENTES = 1;
+    public static final int PERSONAS = 0;
+
     public static String[] idPersona(ListaSimpleAvanzada lsa, int dato, String atributoClase) {
         String[] persona = new String[8];
         Persona p = (Persona) busquedaBinaria(lsa, dato, atributoClase);
@@ -101,9 +104,9 @@ public class Utiles {
      * Retorna una lista de macanicos consultada directamente de la base de
      * datos
      *
-     * @return litsa de persona
+     * @return lista de persona
      */
-    public static ListaSimpleAvanzada listaPersonas() {
+    public static ListaSimpleAvanzada listaPersonas(int seleccion) {
         ListaSimpleAvanzada persona = new ListaSimpleAvanzada();
         String sql = "SELECT * FROM personas";
         try {
@@ -123,7 +126,13 @@ public class Utiles {
                 m.setEstado(rs.getString(++i).equalsIgnoreCase("1"));
                 m.setExternal_id(rs.getString(++i));
                 m.setIdRol(Long.parseLong(rs.getString(++i)));
-                persona.insertar(m);
+                if (seleccion == 0) {
+                    persona.insertar(m);
+                } else if(seleccion==1){
+                    if (1==Integer.parseInt(String.valueOf(m.getIdRol()))) {
+                        persona.insertar(m);
+                    }
+                }
             }
         } catch (SQLException ex) {
 //            Logger.getLogger(Utiles.class.getName()).log(Level.SEVERE, null, ex);

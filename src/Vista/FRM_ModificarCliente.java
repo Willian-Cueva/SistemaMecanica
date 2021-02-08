@@ -5,9 +5,13 @@
  */
 package Vista;
 
+import Controlador.Conexion.ConeccionBDD;
 import Controlador.Utiles.Utiles;
 import Vista.Modelo.TablaPersonas;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 
 /**
  *
@@ -22,6 +26,7 @@ public class FRM_ModificarCliente extends javax.swing.JFrame {
      * Creates new form ModificarCliente
      */
     public FRM_ModificarCliente() {
+        this.setUndecorated(true);
         initComponents();
         this.setLocationRelativeTo(null);
         idPersona = -1;
@@ -29,7 +34,7 @@ public class FRM_ModificarCliente extends javax.swing.JFrame {
     }
 
     private void cargarTablaClientes() {
-        tp.setLsa(Utiles.busquedaSecuencial(Utiles.listaPersonas(), "1", "IdRol"));
+        tp.setLsa(Utiles.listaPersonas(Utiles.CLIENTES));
         tablaClientes.setModel(tp);
         tablaClientes.updateUI();
     }
@@ -43,6 +48,7 @@ public class FRM_ModificarCliente extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel5 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -75,6 +81,7 @@ public class FRM_ModificarCliente extends javax.swing.JFrame {
         jPanel14 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tablaClientes = new javax.swing.JTable();
+        jButton5 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -219,9 +226,9 @@ public class FRM_ModificarCliente extends javax.swing.JFrame {
                 .addComponent(btnInf2)
                 .addGap(26, 26, 26)
                 .addComponent(btnLimpiar1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
                 .addComponent(btnActualizar1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(btnModificar)
                 .addGap(18, 18, 18))
         );
@@ -239,8 +246,10 @@ public class FRM_ModificarCliente extends javax.swing.JFrame {
 
         jPanel26.setBorder(javax.swing.BorderFactory.createTitledBorder("Buscar"));
 
+        buttonGroup1.add(rdNombre3);
         rdNombre3.setText("Nombre");
 
+        buttonGroup1.add(rdApellido3);
         rdApellido3.setText("Apellido");
         rdApellido3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -248,8 +257,10 @@ public class FRM_ModificarCliente extends javax.swing.JFrame {
             }
         });
 
+        buttonGroup1.add(rdCedula3);
         rdCedula3.setText("Cedula");
 
+        buttonGroup1.add(rdTelefono3);
         rdTelefono3.setText("Telefono");
 
         jLabel15.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
@@ -327,7 +338,7 @@ public class FRM_ModificarCliente extends javax.swing.JFrame {
             jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel14Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 646, Short.MAX_VALUE)
+                .addComponent(jScrollPane3)
                 .addContainerGap())
         );
         jPanel14Layout.setVerticalGroup(
@@ -337,6 +348,14 @@ public class FRM_ModificarCliente extends javax.swing.JFrame {
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 348, Short.MAX_VALUE)
                 .addContainerGap())
         );
+
+        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/logout (1).png"))); // NOI18N
+        jButton5.setText("Salir");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -349,11 +368,12 @@ public class FRM_ModificarCliente extends javax.swing.JFrame {
                     .addComponent(jPanel7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(jPanel26, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 164, Short.MAX_VALUE)
+                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
+                    .addComponent(jPanel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -364,7 +384,11 @@ public class FRM_ModificarCliente extends javax.swing.JFrame {
                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addComponent(jPanel26, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel26, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jButton5)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
@@ -396,16 +420,23 @@ public class FRM_ModificarCliente extends javax.swing.JFrame {
 
     private void btnLimpiar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiar1ActionPerformed
         // TODO add your handling code here:
-//        limpiarReg();
+        limpiarReg();
     }//GEN-LAST:event_btnLimpiar1ActionPerformed
 
     private void btnInf2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInf2ActionPerformed
         // TODO add your handling code here:
+        String inf="Esta ventana permite buscar clientes\n"
+                + "sea por su (Nombre, Apellido, Cedula\n"
+                + "o Teléfono). Además permite modificar\n"
+                + "cualquier dato de un cliente, así \n"
+                + "como tambien eliminar (Lógicamente)\n"
+                + "un cliente del sistema"; 
+        JOptionPane.showMessageDialog(this, inf, "Información", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_btnInf2ActionPerformed
 
     private void btnActualizar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizar1ActionPerformed
         // TODO add your handling code here:
-//        actualizarPersona(ACTUALIZAR);
+        actualizarPersona();
         btnModificar.setEnabled(true);
         btnLimpiar1.setEnabled(true);
         btnActualizar1.setEnabled(false);
@@ -422,8 +453,13 @@ public class FRM_ModificarCliente extends javax.swing.JFrame {
 
     private void btnBuscar3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscar3ActionPerformed
         // TODO add your handling code here:
-//        buscar(tablaPersonas);
+        buscar(tablaClientes);
     }//GEN-LAST:event_btnBuscar3ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_jButton5ActionPerformed
     private void llenarCampos(int s) {
         idPersona = Integer.parseInt(String.valueOf(tablaClientes.getValueAt(s, 0)));
         txtNombre.setText(String.valueOf(tablaClientes.getValueAt(s, 1)));
@@ -490,7 +526,9 @@ public class FRM_ModificarCliente extends javax.swing.JFrame {
     private javax.swing.JButton btnInf2;
     private javax.swing.JButton btnLimpiar1;
     private javax.swing.JButton btnModificar;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> comboEstado;
+    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel13;
@@ -518,4 +556,54 @@ public class FRM_ModificarCliente extends javax.swing.JFrame {
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtTelefono;
     // End of variables declaration//GEN-END:variables
+
+    private void actualizarPersona() {
+        String n = "", a = "", ci = "", co = "", tl = "", dir = "", est = "";
+        n = txtNombre.getText();
+        a = txtApellido.getText();
+        ci = txtCedula.getText();
+        co = txtCorreo.getText();
+        tl = txtTelefono.getText();
+        dir = txtDireccion.getText();
+        est = comboEstado.getSelectedItem().toString().equalsIgnoreCase("activo") ? "1" : "0";
+        String sql = "UPDATE `baseddmecanica`.`personas` SET `nombre` = '" + n + "', `apellido` = '" + a + "', `cedula` = '" + ci + "', `correo` = '" + co + "',"
+                + " `telefono` = '" + tl + "', `direccion` = '" + dir + "', `estado` = '" + est + "' WHERE (`idpersona` = '" + idPersona + "');";
+        try {
+            PreparedStatement ps = (PreparedStatement) ConeccionBDD.IniciarConexion().prepareStatement(sql);
+            ps.executeUpdate();
+            limpiarReg();
+            JOptionPane.showMessageDialog(this, "Se actualizaron los datos correctamente");
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this, "Error al actualizar los datos en la base de datos", "Error", JOptionPane.ERROR_MESSAGE);
+            System.out.println("No se actualizaron los datos - error:" + ex);
+        }
+    }
+
+    private void limpiarReg() {
+        txtNombre.setText("");
+        txtApellido.setText("");
+        txtCedula.setText("");
+        txtCorreo.setText("");
+        txtTelefono.setText("");
+        txtDireccion.setText("");
+        cargarTablaClientes();
+    }
+
+    private void buscar(JTable tablaClientes) {
+         String atributo = "";
+        if (rdNombre3.isSelected()) {
+            atributo = "Nombre";
+        } else if (rdApellido3.isSelected()) {
+            atributo = "Apellido";
+        } else if (rdCedula3.isSelected()) {
+            atributo = "Cedula";
+        } else if (rdTelefono3.isSelected()) {
+            atributo = "Telefono";
+        } else{
+            JOptionPane.showMessageDialog(this, "Debe selecionar un atributo de busqueda", "Seleccione", JOptionPane.INFORMATION_MESSAGE);
+        }
+        tp.setLsa(Utiles.busquedaSecuencial(Utiles.listaPersonas(Utiles.CLIENTES), txtBuscar3.getText(), atributo));
+        tablaClientes.setModel(tp);
+        tablaClientes.updateUI();
+    }
 }
