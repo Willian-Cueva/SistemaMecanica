@@ -37,10 +37,10 @@ public class Frm_Administrador extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         try {
-        actualizarLista();
-        UtilesComponentes.cargarComboTipoRol(comboTipo);            
+            actualizarLista();
+            UtilesComponentes.cargarComboTipoRol(comboTipo);
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "No se pudo conectar con la base de datos","Error de coneccion",JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, "No se pudo conectar con la base de datos", "Error de coneccion", JOptionPane.WARNING_MESSAGE);
             this.dispose();
         }
     }
@@ -165,15 +165,7 @@ public class Frm_Administrador extends javax.swing.JFrame {
 
         grupo1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
-        jPanel2 = new javax.swing.JPanel();
-        jPanel20 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton14 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
@@ -234,8 +226,6 @@ public class Frm_Administrador extends javax.swing.JFrame {
         btnBuscar4 = new javax.swing.JButton();
         jPanel15 = new javax.swing.JPanel();
         jPanel16 = new javax.swing.JPanel();
-        jPanel17 = new javax.swing.JPanel();
-        rdPlaca = new javax.swing.JRadioButton();
         txtBuscarVehiculo = new javax.swing.JTextField();
         jButton11 = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
@@ -247,106 +237,14 @@ public class Frm_Administrador extends javax.swing.JFrame {
         jButton16 = new javax.swing.JButton();
         btnLimpiar3 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jButton14 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
-        jLabel1.setFont(new java.awt.Font("Dialog", 0, 48)); // NOI18N
-        jLabel1.setText("Administrador");
-
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Administrador"));
-
-        jPanel20.setBorder(javax.swing.BorderFactory.createTitledBorder("Menu"));
-
-        jButton1.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
-        jButton1.setText("Registrar Cliente");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
-        jButton14.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
-        jButton14.setText("Administrar Almacen");
-        jButton14.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton14ActionPerformed(evt);
-            }
-        });
-
-        jButton2.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
-        jButton2.setText("Ver Vehiculos");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-
-        jButton3.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
-        jButton3.setText("Modificar Cliente");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-
-        jButton4.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
-        jButton4.setText("Ver Facturas");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel20Layout = new javax.swing.GroupLayout(jPanel20);
-        jPanel20.setLayout(jPanel20Layout);
-        jPanel20Layout.setHorizontalGroup(
-            jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel20Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1)
-                    .addComponent(jButton14)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3)
-                    .addComponent(jButton4))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel20Layout.setVerticalGroup(
-            jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel20Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jButton1)
-                .addGap(18, 18, 18)
-                .addComponent(jButton14)
-                .addGap(18, 18, 18)
-                .addComponent(jButton2)
-                .addGap(18, 18, 18)
-                .addComponent(jButton3)
-                .addGap(18, 18, 18)
-                .addComponent(jButton4)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(776, Short.MAX_VALUE))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(178, Short.MAX_VALUE))
-        );
-
-        jTabbedPane1.addTab("Administrador", jPanel2);
 
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder("Registro de Mecanicos"));
 
@@ -380,7 +278,6 @@ public class Frm_Administrador extends javax.swing.JFrame {
         jLabel12.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel12.setText("Rol:");
 
-        comboTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2" }));
         comboTipo.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 comboTipoItemStateChanged(evt);
@@ -761,7 +658,7 @@ public class Frm_Administrador extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jTabbedPane1.addTab("Registrar Mecanico", jPanel4);
+        jTabbedPane1.addTab("Registrar Persona", jPanel4);
 
         jPanel9.setBorder(javax.swing.BorderFactory.createTitledBorder("Eliminar"));
 
@@ -798,6 +695,11 @@ public class Frm_Administrador extends javax.swing.JFrame {
 
         jButton9.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jButton9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/008-informacion.png"))); // NOI18N
+        jButton9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton9ActionPerformed(evt);
+            }
+        });
 
         jButton10.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jButton10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/004-eliminar.png"))); // NOI18N
@@ -960,27 +862,7 @@ public class Frm_Administrador extends javax.swing.JFrame {
 
         jPanel15.setBorder(javax.swing.BorderFactory.createTitledBorder("Eliminar un Vehiculo"));
 
-        jPanel16.setBorder(javax.swing.BorderFactory.createTitledBorder("Buscar Por"));
-
-        grupo1.add(rdPlaca);
-        rdPlaca.setText("Placa");
-
-        javax.swing.GroupLayout jPanel17Layout = new javax.swing.GroupLayout(jPanel17);
-        jPanel17.setLayout(jPanel17Layout);
-        jPanel17Layout.setHorizontalGroup(
-            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel17Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(rdPlaca)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel17Layout.setVerticalGroup(
-            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel17Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(rdPlaca)
-                .addContainerGap(12, Short.MAX_VALUE))
-        );
+        jPanel16.setBorder(javax.swing.BorderFactory.createTitledBorder("Busqueda Por Placa"));
 
         jButton11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/006-lupa.png"))); // NOI18N
         jButton11.setText("Buscar");
@@ -1000,11 +882,10 @@ public class Frm_Administrador extends javax.swing.JFrame {
             .addGroup(jPanel16Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel16Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                    .addGroup(jPanel16Layout.createSequentialGroup()
+                        .addGap(0, 178, Short.MAX_VALUE)
                         .addComponent(jButton11))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel16Layout.createSequentialGroup()
+                    .addGroup(jPanel16Layout.createSequentialGroup()
                         .addComponent(jLabel8)
                         .addGap(18, 18, 18)
                         .addComponent(txtBuscarVehiculo, javax.swing.GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE)))
@@ -1013,15 +894,13 @@ public class Frm_Administrador extends javax.swing.JFrame {
         jPanel16Layout.setVerticalGroup(
             jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel16Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(14, 14, 14)
                 .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtBuscarVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                    .addComponent(jLabel8)
+                    .addComponent(txtBuscarVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton11)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel18.setBorder(javax.swing.BorderFactory.createTitledBorder("Tabla de Vehiculos"));
@@ -1060,6 +939,11 @@ public class Frm_Administrador extends javax.swing.JFrame {
 
         jButton15.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jButton15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/008-informacion.png"))); // NOI18N
+        jButton15.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton15ActionPerformed(evt);
+            }
+        });
 
         jButton16.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jButton16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/004-eliminar.png"))); // NOI18N
@@ -1128,7 +1012,7 @@ public class Frm_Administrador extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jTabbedPane1.addTab("Eliminar Vehiculo", jPanel15);
+        jTabbedPane1.addTab("Ver/Eliminar Vehiculo", jPanel15);
 
         jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/logout (1).png"))); // NOI18N
         jButton5.setText("Salir");
@@ -1138,19 +1022,66 @@ public class Frm_Administrador extends javax.swing.JFrame {
             }
         });
 
+        jPanel2.setBorder(new javax.swing.border.MatteBorder(null));
+
+        jLabel1.setFont(new java.awt.Font("Dialog", 0, 36)); // NOI18N
+        jLabel1.setText("Administrador");
+
+        jButton14.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
+        jButton14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/001-admin.png"))); // NOI18N
+        jButton14.setText("Administrar Almacen");
+        jButton14.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton14ActionPerformed(evt);
+            }
+        });
+
+        jButton4.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
+        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/002-cuenta.png"))); // NOI18N
+        jButton4.setText("Ver Facturas");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addGap(37, 37, 37)
+                .addComponent(jButton14)
+                .addGap(18, 18, 18)
+                .addComponent(jButton4)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jButton14)
+                        .addComponent(jButton4))
+                    .addComponent(jLabel1))
+                .addContainerGap(7, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(41, 41, 41)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(15, 15, 15))
-            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane1)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTabbedPane1))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -1158,12 +1089,13 @@ public class Frm_Administrador extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(19, 19, 19)
-                        .addComponent(jLabel1))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jButton5)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton5)
+                        .addGap(49, 49, 49))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(7, 7, 7)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)))
                 .addComponent(jTabbedPane1)
                 .addContainerGap())
         );
@@ -1209,7 +1141,8 @@ public class Frm_Administrador extends javax.swing.JFrame {
 
     private void comboTipoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboTipoItemStateChanged
         // TODO add your handling code here:
-        //        habilitarCuenta();
+
+        habilitarCuenta();
     }//GEN-LAST:event_comboTipoItemStateChanged
 
     private void comboTipoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_comboTipoFocusLost
@@ -1219,12 +1152,12 @@ public class Frm_Administrador extends javax.swing.JFrame {
 
     private void comboTipoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_comboTipoMousePressed
         // TODO add your handling code here:
-        //        habilitarCuenta();
+//        habilitarCuenta();
     }//GEN-LAST:event_comboTipoMousePressed
 
     private void comboTipoMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_comboTipoMouseReleased
         // TODO add your handling code here:
-        //        habilitarCuenta();
+//        habilitarCuenta();
     }//GEN-LAST:event_comboTipoMouseReleased
 
     private void comboTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboTipoActionPerformed
@@ -1276,32 +1209,14 @@ public class Frm_Administrador extends javax.swing.JFrame {
 
     private void btnInf2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInf2ActionPerformed
         // TODO add your handling code here:
+        String inf = "Este panel permite registrar personas en el sistema,\n"
+                + "sea un cliente , un administrador o un mecánico, estos\n"
+                + "ultimos se les asignará un Usuario y contraseña.\n"
+                + "Permite buscar una persona de acuerdo sea a su \n"
+                + "Nombre, Apellido, Cedula, Telefono. Además perimte \n"
+                + "modificar los datos de cuelquier persona asi como tambien";
+        JOptionPane.showMessageDialog(this, inf, "Información", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_btnInf2ActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-//        new Frm_Cliente().setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
-        // TODO add your handling code here:
-        new Frm_Almacen().setVisible(true);
-    }//GEN-LAST:event_jButton14ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-        new Frm_VerVehiculo().setVisible(true);
-    }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-        new Frm_VerClientes().setVisible(true);
-    }//GEN-LAST:event_jButton3ActionPerformed
-
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
-        new Frm_VerFactura().setVisible(true);
-    }//GEN-LAST:event_jButton4ActionPerformed
 
     private void btnBuscar3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscar3ActionPerformed
         // TODO add your handling code here:
@@ -1349,6 +1264,32 @@ public class Frm_Administrador extends javax.swing.JFrame {
         // TODO add your handling code here:
         bucarVehiculo();
     }//GEN-LAST:event_jButton11ActionPerformed
+
+    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+        // TODO add your handling code here:
+        String inf = "Este panel permite Buscar una persona (Administrador, Mecánico o Cliente)\n"
+                + "registrados en el sistema y Emilinarlos de forma 'Lógica del sistema'\n";
+        JOptionPane.showMessageDialog(this, inf, "Informacion", JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_jButton9ActionPerformed
+
+    private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton15ActionPerformed
+        // TODO add your handling code here:
+        String inf = "Este panel permite  al usuario administrador \n"
+                + "buscar un vehiculo por placa registrado en el\n"
+                + "sistema y eliminarlo de forma lógica de la\n"
+                + "base de datos";
+        JOptionPane.showMessageDialog(this, inf, "Información", JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_jButton15ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        new Frm_VerFactura().setVisible(true);
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
+        // TODO add your handling code here:
+        new Frm_Almacen().setVisible(true);
+    }//GEN-LAST:event_jButton14ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1398,14 +1339,11 @@ public class Frm_Administrador extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> comboEstado;
     private javax.swing.JComboBox<String> comboTipo;
     private javax.swing.ButtonGroup grupo1;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton14;
     private javax.swing.JButton jButton15;
     private javax.swing.JButton jButton16;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton9;
@@ -1429,10 +1367,8 @@ public class Frm_Administrador extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel16;
-    private javax.swing.JPanel jPanel17;
     private javax.swing.JPanel jPanel18;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel20;
     private javax.swing.JPanel jPanel21;
     private javax.swing.JPanel jPanel26;
     private javax.swing.JPanel jPanel27;
@@ -1453,7 +1389,6 @@ public class Frm_Administrador extends javax.swing.JFrame {
     private javax.swing.JRadioButton rdCedula4;
     private javax.swing.JRadioButton rdNombre3;
     private javax.swing.JRadioButton rdNombre4;
-    private javax.swing.JRadioButton rdPlaca;
     private javax.swing.JRadioButton rdTelefono3;
     private javax.swing.JRadioButton rdTelefono4;
     private javax.swing.JTable tablaEliminarPersonas;
@@ -1507,16 +1442,9 @@ public class Frm_Administrador extends javax.swing.JFrame {
             System.out.println("No se actualizaron los datos - error:" + ex);
         }
     }
-    
-    private void bucarVehiculo(){
-        String atributo = "";
-        if (rdPlaca.isSelected()) {
-            atributo = "Placa";
-        } else {
-            JOptionPane.showMessageDialog(this, "Debe escojer un atributo para buscar");
-            return;
-        }
-        tv.setLsa(Utiles.busquedaSecuencial(ac.getVehiculos(), txtBuscarVehiculo.getText(), atributo));
+
+    private void bucarVehiculo() {
+        tv.setLsa(Utiles.busquedaSecuencial(ac.getVehiculos(), txtBuscarVehiculo.getText(), "Placa"));
         tablaVehiculos.setModel(tv);
         tablaVehiculos.updateUI();
     }
@@ -1562,7 +1490,7 @@ public class Frm_Administrador extends javax.swing.JFrame {
 
     private void eliminarVehiculo(int s) {
         int idVehiculo = Integer.parseInt(String.valueOf(tablaVehiculos.getValueAt(s, 0)));
-   
+
         String sql = "UPDATE `baseddmecanica`.`vehiculo` SET `estado` = '0' WHERE (`idpersona` = '" + idVehiculo + "');";
         try {
             PreparedStatement ps = (PreparedStatement) ConeccionBDD.IniciarConexion().prepareStatement(sql);
@@ -1573,6 +1501,16 @@ public class Frm_Administrador extends javax.swing.JFrame {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(this, "Error al actualizar los datos en la base de datos", "Error", JOptionPane.ERROR_MESSAGE);
             System.out.println("No se actualizaron los datos - error:" + ex);
+        }
+    }
+
+    private void habilitarCuenta() {
+        if (comboTipo.getSelectedItem().toString().equalsIgnoreCase("cliente")) {
+            txtUsuario.setEnabled(false);
+            txtClave.setEnabled(false);
+        } else {
+            txtUsuario.setEnabled(true);
+            txtClave.setEnabled(true);
         }
     }
 }

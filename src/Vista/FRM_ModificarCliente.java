@@ -5,6 +5,8 @@
  */
 package Vista;
 
+import Controlador.Utiles.Utiles;
+import Vista.Modelo.TablaPersonas;
 import javax.swing.JOptionPane;
 
 /**
@@ -12,13 +14,24 @@ import javax.swing.JOptionPane;
  * @author Willian
  */
 public class FRM_ModificarCliente extends javax.swing.JFrame {
+
     private int idPersona;
+    private TablaPersonas tp = new TablaPersonas();
+
     /**
      * Creates new form ModificarCliente
      */
     public FRM_ModificarCliente() {
         initComponents();
-        idPersona=-1;
+        this.setLocationRelativeTo(null);
+        idPersona = -1;
+        cargarTablaClientes();
+    }
+
+    private void cargarTablaClientes() {
+        tp.setLsa(Utiles.busquedaSecuencial(Utiles.listaPersonas(), "1", "IdRol"));
+        tablaClientes.setModel(tp);
+        tablaClientes.updateUI();
     }
 
     /**
@@ -44,21 +57,13 @@ public class FRM_ModificarCliente extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         comboEstado = new javax.swing.JComboBox<>();
-        jLabel12 = new javax.swing.JLabel();
-        comboTipo = new javax.swing.JComboBox<>();
         jLabel13 = new javax.swing.JLabel();
         txtTelefono = new javax.swing.JTextField();
-        jPanel6 = new javax.swing.JPanel();
-        txtUsuario = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        txtClave = new javax.swing.JTextField();
         jPanel7 = new javax.swing.JPanel();
         btnLimpiar1 = new javax.swing.JButton();
         btnInf2 = new javax.swing.JButton();
         btnActualizar1 = new javax.swing.JButton();
         btnModificar = new javax.swing.JButton();
-        btnGuardar = new javax.swing.JButton();
         jPanel26 = new javax.swing.JPanel();
         rdNombre3 = new javax.swing.JRadioButton();
         rdApellido3 = new javax.swing.JRadioButton();
@@ -69,7 +74,7 @@ public class FRM_ModificarCliente extends javax.swing.JFrame {
         btnBuscar3 = new javax.swing.JButton();
         jPanel14 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        tablaPersonas = new javax.swing.JTable();
+        tablaClientes = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -102,39 +107,6 @@ public class FRM_ModificarCliente extends javax.swing.JFrame {
             }
         });
 
-        jLabel12.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jLabel12.setText("Rol:");
-
-        comboTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2" }));
-        comboTipo.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                comboTipoItemStateChanged(evt);
-            }
-        });
-        comboTipo.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                comboTipoFocusLost(evt);
-            }
-        });
-        comboTipo.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                comboTipoMousePressed(evt);
-            }
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                comboTipoMouseReleased(evt);
-            }
-        });
-        comboTipo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                comboTipoActionPerformed(evt);
-            }
-        });
-        comboTipo.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-            public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                comboTipoPropertyChange(evt);
-            }
-        });
-
         jLabel13.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel13.setText("Telefono:");
 
@@ -161,10 +133,6 @@ public class FRM_ModificarCliente extends javax.swing.JFrame {
                         .addComponent(jLabel11)
                         .addGap(18, 18, Short.MAX_VALUE)
                         .addComponent(comboEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel12)
-                        .addGap(18, 18, Short.MAX_VALUE)
-                        .addComponent(comboTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel5)
@@ -208,55 +176,6 @@ public class FRM_ModificarCliente extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(comboEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel11))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(comboTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel12))
-                .addContainerGap(8, Short.MAX_VALUE))
-        );
-
-        jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder("Cuenta"));
-
-        txtUsuario.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-
-        jLabel6.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        jLabel6.setText("Usuario:");
-
-        jLabel7.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        jLabel7.setText("Contraseña:");
-
-        txtClave.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        txtClave.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtClaveActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
-        jPanel6.setLayout(jPanel6Layout);
-        jPanel6Layout.setHorizontalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel7)
-                    .addComponent(jLabel6))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtUsuario)
-                    .addComponent(txtClave))
-                .addContainerGap())
-        );
-        jPanel6Layout.setVerticalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtClave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -291,14 +210,6 @@ public class FRM_ModificarCliente extends javax.swing.JFrame {
             }
         });
 
-        btnGuardar.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        btnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/002-disquete.png"))); // NOI18N
-        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGuardarActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
@@ -306,15 +217,13 @@ public class FRM_ModificarCliente extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(btnInf2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(26, 26, 26)
                 .addComponent(btnLimpiar1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
                 .addComponent(btnActualizar1)
-                .addGap(11, 11, 11)
-                .addComponent(btnGuardar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnModificar)
-                .addContainerGap())
+                .addGap(18, 18, 18))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -323,7 +232,6 @@ public class FRM_ModificarCliente extends javax.swing.JFrame {
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnLimpiar1)
                     .addComponent(btnInf2)
-                    .addComponent(btnGuardar)
                     .addComponent(btnModificar)
                     .addComponent(btnActualizar1))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -400,7 +308,7 @@ public class FRM_ModificarCliente extends javax.swing.JFrame {
 
         jPanel14.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        tablaPersonas.setModel(new javax.swing.table.DefaultTableModel(
+        tablaClientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -411,7 +319,7 @@ public class FRM_ModificarCliente extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane3.setViewportView(tablaPersonas);
+        jScrollPane3.setViewportView(tablaClientes);
 
         javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
         jPanel14.setLayout(jPanel14Layout);
@@ -437,7 +345,6 @@ public class FRM_ModificarCliente extends javax.swing.JFrame {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jPanel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
@@ -453,8 +360,6 @@ public class FRM_ModificarCliente extends javax.swing.JFrame {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -489,39 +394,6 @@ public class FRM_ModificarCliente extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_comboEstadoActionPerformed
 
-    private void comboTipoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboTipoItemStateChanged
-        // TODO add your handling code here:
-        //        habilitarCuenta();
-    }//GEN-LAST:event_comboTipoItemStateChanged
-
-    private void comboTipoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_comboTipoFocusLost
-        // TODO add your handling code here:
-        //        habilitarCuenta();
-    }//GEN-LAST:event_comboTipoFocusLost
-
-    private void comboTipoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_comboTipoMousePressed
-        // TODO add your handling code here:
-        //        habilitarCuenta();
-    }//GEN-LAST:event_comboTipoMousePressed
-
-    private void comboTipoMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_comboTipoMouseReleased
-        // TODO add your handling code here:
-        //        habilitarCuenta();
-    }//GEN-LAST:event_comboTipoMouseReleased
-
-    private void comboTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboTipoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_comboTipoActionPerformed
-
-    private void comboTipoPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_comboTipoPropertyChange
-        // TODO add your handling code here:
-        //        habilitarCuenta();
-    }//GEN-LAST:event_comboTipoPropertyChange
-
-    private void txtClaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtClaveActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtClaveActionPerformed
-
     private void btnLimpiar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiar1ActionPerformed
         // TODO add your handling code here:
 //        limpiarReg();
@@ -534,21 +406,15 @@ public class FRM_ModificarCliente extends javax.swing.JFrame {
     private void btnActualizar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizar1ActionPerformed
         // TODO add your handling code here:
 //        actualizarPersona(ACTUALIZAR);
-        btnGuardar.setEnabled(true);
         btnModificar.setEnabled(true);
         btnLimpiar1.setEnabled(true);
         btnActualizar1.setEnabled(false);
-        tablaPersonas.setEnabled(true);
+        tablaClientes.setEnabled(true);
     }//GEN-LAST:event_btnActualizar1ActionPerformed
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
         modificarPersona();
     }//GEN-LAST:event_btnModificarActionPerformed
-
-    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        // TODO add your handling code here:
-//        guardarPersona();
-    }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void rdApellido3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdApellido3ActionPerformed
         // TODO add your handling code here:
@@ -558,23 +424,22 @@ public class FRM_ModificarCliente extends javax.swing.JFrame {
         // TODO add your handling code here:
 //        buscar(tablaPersonas);
     }//GEN-LAST:event_btnBuscar3ActionPerformed
-private void llenarCampos(int s) {
-        idPersona = Integer.parseInt(String.valueOf(tablaPersonas.getValueAt(s, 0)));
-        txtNombre.setText(String.valueOf(tablaPersonas.getValueAt(s, 1)));
-        txtApellido.setText(String.valueOf(tablaPersonas.getValueAt(s, 2)));
-        txtCedula.setText(String.valueOf(tablaPersonas.getValueAt(s, 3)));
-        txtCorreo.setText(String.valueOf(tablaPersonas.getValueAt(s, 4)));
-        txtTelefono.setText(String.valueOf(tablaPersonas.getValueAt(s, 5)));
-        txtDireccion.setText(String.valueOf(tablaPersonas.getValueAt(s, 6)));
-        btnGuardar.setEnabled(false);
+    private void llenarCampos(int s) {
+        idPersona = Integer.parseInt(String.valueOf(tablaClientes.getValueAt(s, 0)));
+        txtNombre.setText(String.valueOf(tablaClientes.getValueAt(s, 1)));
+        txtApellido.setText(String.valueOf(tablaClientes.getValueAt(s, 2)));
+        txtCedula.setText(String.valueOf(tablaClientes.getValueAt(s, 3)));
+        txtCorreo.setText(String.valueOf(tablaClientes.getValueAt(s, 4)));
+        txtTelefono.setText(String.valueOf(tablaClientes.getValueAt(s, 5)));
+        txtDireccion.setText(String.valueOf(tablaClientes.getValueAt(s, 6)));
         btnModificar.setEnabled(false);
         btnLimpiar1.setEnabled(false);
         btnActualizar1.setEnabled(true);
-        tablaPersonas.setEnabled(false);
+        tablaClientes.setEnabled(false);
     }
 
     private void modificarPersona() {
-        int s = tablaPersonas.getSelectedRow();
+        int s = tablaClientes.getSelectedRow();
         if (s > -1) {
             llenarCampos(s);
         } else {
@@ -582,6 +447,7 @@ private void llenarCampos(int s) {
         }
 
     }
+
     /**
      * @param args the command line arguments
      */
@@ -621,43 +487,35 @@ private void llenarCampos(int s) {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnActualizar1;
     private javax.swing.JButton btnBuscar3;
-    private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnInf2;
     private javax.swing.JButton btnLimpiar1;
     private javax.swing.JButton btnModificar;
     private javax.swing.JComboBox<String> comboEstado;
-    private javax.swing.JComboBox<String> comboTipo;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel26;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JRadioButton rdApellido3;
     private javax.swing.JRadioButton rdCedula3;
     private javax.swing.JRadioButton rdNombre3;
     private javax.swing.JRadioButton rdTelefono3;
-    private javax.swing.JTable tablaPersonas;
+    private javax.swing.JTable tablaClientes;
     private javax.swing.JTextField txtApellido;
     private javax.swing.JTextField txtBuscar3;
     private javax.swing.JTextField txtCedula;
-    private javax.swing.JTextField txtClave;
     private javax.swing.JTextField txtCorreo;
     private javax.swing.JTextField txtDireccion;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtTelefono;
-    private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables
 }

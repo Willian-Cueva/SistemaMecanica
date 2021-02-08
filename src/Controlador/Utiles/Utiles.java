@@ -45,17 +45,19 @@ public class Utiles {
         return (uno != null && dos != null) ? uno.equals(dos) : false;
     }
 
-    public static ListaSimpleAvanzada busquedaSecuencial(ListaSimpleAvanzada lsa, Object dato, String atributoClase){
+    public static ListaSimpleAvanzada busquedaSecuencial(ListaSimpleAvanzada lsa, Object dato, String atributoClase) {
         ListaSimpleAvanzada encontrados = new ListaSimpleAvanzada();
         for (int i = 0; i < lsa.tamano(); i++) {
             String uno = extraccionDato(lsa.obtenerObjetopp(i), atributoClase);
-            if (uno.replace(" ", "").compareToIgnoreCase(String.valueOf(dato))==0) {
-                encontrados.insertar(lsa.obtenerObjetopp(i));
+            if (uno != null) {
+                if (uno.replace(" ", "").compareToIgnoreCase(String.valueOf(dato)) == 0) {
+                    encontrados.insertar(lsa.obtenerObjetopp(i));
+                }
             }
         }
         return encontrados;
     }
-    
+
     public static Object busquedaBinaria(ListaSimpleAvanzada lsa, Object dato, String atributoClase) {
         int n = lsa.tamano();
         int centro, inf = 0, sup = n - 1;
@@ -129,8 +131,8 @@ public class Utiles {
         }
         return persona;
     }
-    
-    public static ListaSimpleAvanzada listaVehiculos(){
+
+    public static ListaSimpleAvanzada listaVehiculos() {
         ListaSimpleAvanzada vehiculos = new ListaSimpleAvanzada();
         String sql = "SELECT * FROM vehiculo";
         try {

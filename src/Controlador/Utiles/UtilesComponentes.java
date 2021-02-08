@@ -13,10 +13,9 @@ import javax.swing.JComboBox;
  */
 public class UtilesComponentes {
     public static void cargarComboTipoRol(JComboBox cbx){
-        cbx.removeAllItems();
+//        cbx.removeAllItems();
         for (int i = 0; i < Utiles.roles().length; i++) {
             cbx.addItem(Utiles.roles()[i]);
-            
         }
     }
 }
