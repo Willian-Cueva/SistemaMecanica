@@ -10,6 +10,7 @@ import Controlador.ListaSimpleAvanzada;
 import Modelo.Persona;
 import Modelo.Rol;
 import Modelo.Vehiculo;
+import java.io.File;
 import java.sql.Statement;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -115,17 +116,17 @@ public class Utiles {
 //            int cont = 1;
             while (rs.next()) {
                 Persona m = new Persona();
-                int i = 0;
-                m.setId(Long.parseLong(rs.getString(++i)));
-                m.setNombre(rs.getString(++i));
-                m.setApellido(rs.getString(++i));
-                m.setCedula(rs.getString(++i));
-                m.setCorreo(rs.getString(++i));
-                m.setTelefono(rs.getString(++i));
-                m.setDireccion(rs.getString(++i));
-                m.setEstado(rs.getString(++i).equalsIgnoreCase("1"));
-                m.setExternal_id(rs.getString(++i));
-                m.setIdRol(Long.parseLong(rs.getString(++i)));
+                m.setId(Long.parseLong(rs.getString(1)));
+                m.setNombre(rs.getString(2));
+                m.setApellido(rs.getString(3));
+                m.setCedula(rs.getString(4));
+                m.setCorreo(rs.getString(5));
+                m.setTelefono(rs.getString(6));
+                m.setDireccion(rs.getString(7));
+                m.setEstado(rs.getString(8).equalsIgnoreCase("1"));
+                m.setExternal_id(rs.getString(9));
+                m.setIdRol(Long.parseLong(rs.getString(10)));
+                m.setImagenObtenida(rs.getBlob(11));
                 if (seleccion == 0) {
                     persona.insertar(m);
                 } else if(seleccion==1){
