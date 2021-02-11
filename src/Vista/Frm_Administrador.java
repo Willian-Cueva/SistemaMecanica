@@ -17,6 +17,8 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -140,6 +142,13 @@ public class Frm_Administrador extends javax.swing.JFrame {
     }
 
     private void llenarCampos(int s) {
+        btnGuardar.setEnabled(false);
+        btnModificar.setEnabled(false);
+        btnLimpiar1.setEnabled(false);
+        btnActualizar1.setEnabled(true);
+        tablaPersonas.setEnabled(false);
+        txtUsuario.setEnabled(false);
+        txtClave.setEnabled(false);
         idPersona = Integer.parseInt(String.valueOf(tablaPersonas.getValueAt(s, 0)));
         txtNombre.setText(String.valueOf(tablaPersonas.getValueAt(s, 1)));
         txtApellido.setText(String.valueOf(tablaPersonas.getValueAt(s, 2)));
@@ -147,12 +156,10 @@ public class Frm_Administrador extends javax.swing.JFrame {
         txtCorreo.setText(String.valueOf(tablaPersonas.getValueAt(s, 4)));
         txtTelefono.setText(String.valueOf(tablaPersonas.getValueAt(s, 5)));
         txtDireccion.setText(String.valueOf(tablaPersonas.getValueAt(s, 6)));
-        VisatFoto.setIcon(UtilesComponentes.imageIcon(Utiles.busquedaSecuencial(ac.getPersonas(), tablaPersonas.getValueAt(s, 0), "Id").obtenerObjetopp(0), VisatFoto.getSize()));
-        btnGuardar.setEnabled(false);
-        btnModificar.setEnabled(false);
-        btnLimpiar1.setEnabled(false);
-        btnActualizar1.setEnabled(true);
-        tablaPersonas.setEnabled(false);
+        try {
+            VisatFoto.setIcon(UtilesComponentes.imageIcon(Utiles.busquedaSecuencial(ac.getPersonas(), tablaPersonas.getValueAt(s, 0), "Id").obtenerObjetopp(0), VisatFoto.getSize()));
+        } catch (Exception e) {
+        }
     }
 
     private void modificarPersona() {
@@ -1242,6 +1249,8 @@ public class Frm_Administrador extends javax.swing.JFrame {
         btnLimpiar1.setEnabled(true);
         btnActualizar1.setEnabled(false);
         tablaPersonas.setEnabled(true);
+        txtUsuario.setEnabled(true);
+        txtClave.setEnabled(true);
     }//GEN-LAST:event_btnActualizar1ActionPerformed
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
@@ -1498,8 +1507,22 @@ public class Frm_Administrador extends javax.swing.JFrame {
             dir = String.valueOf(tablaEliminarPersonas.getValueAt(s, 6));
             est = "0";
         }
-        String sql = "UPDATE `baseddmecanica`.`personas` SET `nombre` = '" + n + "', `apellido` = '" + a + "', `cedula` = '" + ci + "', `correo` = '" + co + "',"
-                + " `telefono` = '" + tl + "', `direccion` = '" + dir + "', `estado` = '" + est + "' WHERE (`idpersona` = '" + idPersona + "');";
+        String sql = "";
+        if (file != null) {
+            if (file != null) {
+                try {
+                    FileInputStream fis = new FileInputStream(file);
+                    sql = "UPDATE `baseddmecanica`.`personas` SET `nombre` = '" + n + "', `apellido` = '" + a + "', `cedula` = '" + ci + "', `correo` = '" + co + "',"
+                            + " `telefono` = '" + tl + "', `direccion` = '" + dir + "', `estado` = '" + est + "', `imagen` = '" + fis + "' WHERE (`idpersona` = '" + idPersona + "');";
+                } catch (FileNotFoundException ex) {
+                    //Logger.getLogger(Frm_Administrador.class.getName()).log(Level.SEVERE, null, ex);
+                    System.err.println("Error al cargar archivo al actualizar la modificación");
+                }
+            }
+        } else {
+            sql = "UPDATE `baseddmecanica`.`personas` SET `nombre` = '" + n + "', `apellido` = '" + a + "', `cedula` = '" + ci + "', `correo` = '" + co + "',"
+                    + " `telefono` = '" + tl + "', `direccion` = '" + dir + "', `estado` = '" + est + "' WHERE (`idpersona` = '" + idPersona + "');";
+        }
         try {
             PreparedStatement ps = (PreparedStatement) ConeccionBDD.IniciarConexion().prepareStatement(sql);
             ps.executeUpdate();

@@ -64,6 +64,7 @@ public class Panel_OrdenReparacion extends javax.swing.JPanel {
         txtCedula = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         txtRequerimiento = new javax.swing.JTextArea();
+        jButton2 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(61, 61, 61));
@@ -185,7 +186,11 @@ public class Panel_OrdenReparacion extends javax.swing.JPanel {
         jScrollPane2.setViewportView(txtRequerimiento);
 
         add(jScrollPane2);
-        jScrollPane2.setBounds(30, 260, 300, 96);
+        jScrollPane2.setBounds(30, 260, 300, 83);
+
+        jButton2.setText("Detalle de Reparacion");
+        add(jButton2);
+        jButton2.setBounds(50, 370, 150, 24);
 
         jLabel2.setBackground(new java.awt.Color(61, 61, 61));
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/FondoMetalico.jpg"))); // NOI18N
@@ -247,6 +252,7 @@ public class Panel_OrdenReparacion extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable Tabla1;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JCheckBox jCheckBox3;
