@@ -10,7 +10,6 @@ import Controlador.ListaSimpleAvanzada;
 import Modelo.Persona;
 import Modelo.Rol;
 import Modelo.Vehiculo;
-import java.io.File;
 import java.sql.Statement;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
