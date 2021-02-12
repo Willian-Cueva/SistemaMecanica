@@ -225,7 +225,7 @@ public class Utiles {
         return (i == 1);
     }
 
-    private static String extraccionDato(Object o, String atributoClase) {
+    public static String extraccionDato(Object o, String atributoClase) {
         Class clase = o.getClass();
         Field atributo = null;
         Object informacion = null;

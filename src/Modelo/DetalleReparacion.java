@@ -5,23 +5,21 @@
  */
 package Modelo;
 
+import Controlador.ListaSimpleAvanzada;
+
 /**
  *
  * @author Cris2
  */
 public class DetalleReparacion {
-    Long idDetalle;
-    Long idOrden;
-    Long idProducto;
-    Long idServicios;
+    private Long idDetalle;
+    private Long idOrden;
+    private ListaSimpleAvanzada listaServivios = new ListaSimpleAvanzada();
+    private ListaSimpleAvanzada listaProductos = new ListaSimpleAvanzada();
 
-    public DetalleReparacion(Long idDetalle, Long idOrden, Long idProducto, Long idServicios) {
-        this.idDetalle = idDetalle;
-        this.idOrden = idOrden;
-        this.idProducto = idProducto;
-        this.idServicios = idServicios;
+    public DetalleReparacion() {
     }
-
+    
     public Long getIdDetalle() {
         return idDetalle;
     }
@@ -38,20 +36,19 @@ public class DetalleReparacion {
         this.idOrden = idOrden;
     }
 
-    public Long getIdProducto() {
-        return idProducto;
+    public ListaSimpleAvanzada getListaServivios() {
+        return listaServivios;
     }
 
-    public void setIdProducto(Long idProducto) {
-        this.idProducto = idProducto;
+    public void setListaServivios(ListaSimpleAvanzada listaServivios) {
+        this.listaServivios = listaServivios;
     }
 
-    public Long getIdServicios() {
-        return idServicios;
+    public ListaSimpleAvanzada getListaProductos() {
+        return listaProductos;
     }
 
-    public void setIdServicios(Long idServicios) {
-        this.idServicios = idServicios;
+    public void setListaProductos(ListaSimpleAvanzada listaProductos) {
+        this.listaProductos = listaProductos;
     }
-    
 }

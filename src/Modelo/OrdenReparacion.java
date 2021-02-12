@@ -12,6 +12,7 @@ package Modelo;
 public class OrdenReparacion {
     private Long idOrden;
     private String fecha;
+    private String hora;
     private double subtotal;
     private double total;
     private double descuent;
@@ -19,9 +20,10 @@ public class OrdenReparacion {
     private Long idVehiculo;
     private boolean estado;
 
-    public OrdenReparacion(Long idOrden, String fecha, double subtotal, double total, double descuent, String observacion, Long idVehiculo, boolean estado) {
+    public OrdenReparacion(Long idOrden, String fecha, String hora, double subtotal, double total, double descuent, String observacion, Long idVehiculo, boolean estado) {
         this.idOrden = idOrden;
         this.fecha = fecha;
+        this.hora = hora;
         this.subtotal = subtotal;
         this.total = total;
         this.descuent = descuent;
@@ -31,7 +33,17 @@ public class OrdenReparacion {
     }
     
     
+    public String getHora() {
+        return hora;
+    }
 
+    public void setHora(String hora) {
+        this.hora = hora;
+    }
+
+    public OrdenReparacion() {
+    }  
+    
     public Long getIdOrden() {
         return idOrden;
     }
@@ -96,5 +108,12 @@ public class OrdenReparacion {
         this.estado = estado;
     }
 
+    @Override
+    public String toString() {
+        return idOrden+" "+fecha+ " "+hora+" "+subtotal+" "+total+" "+descuent
+                +" "+observacion+" "+idVehiculo+" "+estado;
+    }
+
+    
     
 }

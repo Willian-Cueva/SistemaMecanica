@@ -44,7 +44,7 @@ public class ListaSimpleAvanzada extends ListaSimple{
     }
     public Object obtenerObjetopp(int posicion){
         if (estaVacia()) {
-            throw new NullPointerException("la lista esta vacia");
+            return null;
         } else if(posicion<0 || posicion>tamano()){
             throw new NullPointerException("la posicion ingresada esta fuera del rango");
         }else if(posicion==0){
