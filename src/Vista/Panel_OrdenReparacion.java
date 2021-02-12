@@ -175,28 +175,28 @@ public class Panel_OrdenReparacion extends javax.swing.JPanel {
         txtSubtotal.setOpaque(true);
         jPanel1.add(txtSubtotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 100, 180, 30));
 
-        jLabel5.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setText("Hora: ");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 0, -1, 30));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 20, -1, 20));
 
         txtDescuento.setBackground(new java.awt.Color(102, 102, 102));
         txtDescuento.setForeground(new java.awt.Color(255, 255, 255));
         txtDescuento.setOpaque(true);
         jPanel1.add(txtDescuento, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 180, 170, 29));
 
-        labelFecha.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        labelFecha.setText("jLabel8");
-        jPanel1.add(labelFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 0, 100, 30));
+        labelFecha.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        labelFecha.setText("-");
+        jPanel1.add(labelFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 20, 100, 20));
 
-        labelHora.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        labelHora.setText("jLabel9");
-        jPanel1.add(labelHora, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 0, 80, 30));
+        labelHora.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        labelHora.setText("-");
+        jPanel1.add(labelHora, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 20, 80, 20));
 
-        jLabel10.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
+        jLabel10.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(0, 0, 0));
         jLabel10.setText("Fecha: ");
-        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 90, -1));
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 60, -1));
 
         jLabel11.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(0, 0, 0));
