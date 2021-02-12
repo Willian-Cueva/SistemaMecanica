@@ -159,7 +159,7 @@ public class Persona{
 
     @Override
     public String toString() {
-        return "id:"+id+" "+nombre+ " "+ apellido;
+        return "id:"+id+" "+nombre+ " "+ apellido+" "+idRol;
     }
     
     

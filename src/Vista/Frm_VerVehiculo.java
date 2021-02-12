@@ -5,7 +5,7 @@
  */
 package Vista;
 
-import Vista.Modelo.TablaVehiculo;
+import Vista.Modelo.TablaVehiculos;
 
 /**
  *
@@ -13,7 +13,7 @@ import Vista.Modelo.TablaVehiculo;
  */
 public class Frm_VerVehiculo extends javax.swing.JFrame {
 
-    private TablaVehiculo tv = new TablaVehiculo();
+    private TablaVehiculos tv = new TablaVehiculos();
     
     public Frm_VerVehiculo() {
         initComponents();

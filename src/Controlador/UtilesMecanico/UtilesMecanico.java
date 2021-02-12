@@ -12,10 +12,19 @@ package Controlador.UtilesMecanico;
 import Modelo.Cuenta;
 import Modelo.Rol;
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Image;
 import java.io.File;
+import java.io.IOException;
+import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.JColorChooser;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -26,7 +35,13 @@ public class UtilesMecanico {
      *
      * @return
      */
-    public Connection IniciarConexion() {
+    static Connection conexion;
+
+    public Connection getConexion() {
+        return conexion;
+    }
+    
+    public void IniciarConexion() {
         Connection con = null;
         String Driver = "com.mysql.cj.jdbc.Driver";
         String Usuario = "root";
@@ -44,7 +59,7 @@ public class UtilesMecanico {
             System.out.println("Error estableciendo conexion con la base de datos: " + NombreDB
                     + "\nDetalles del error: \n" + e.getMessage());
         }
-        return con;
+        conexion=con;
 
     }
 
@@ -66,6 +81,37 @@ public class UtilesMecanico {
             file = archivo.getSelectedFile();
         }
         return file;
+    }
+    public ImageIcon img(Blob imagen, Dimension d){
+        
+        Image rpta = null;
+        try {
+            rpta = javax.imageio.ImageIO.read(imagen.getBinaryStream());
+            rpta = rpta.getScaledInstance(d.width, d.height, Image.SCALE_DEFAULT);
+            //rpta.getGraphics().dra;
+            ImageIcon image = new ImageIcon(rpta);
+            return image;
+        } catch (SQLException ex) {
+            System.out.println("Error: "+ ex.getMessage());
+            return null;
+        } catch (IOException ex) {
+            System.out.println("Error: "+ ex.getMessage());
+            return null;
+        }
+    }
+        public String fechaActual(){
+        String fechaHora="";
+        Calendar fecha = new GregorianCalendar();                                                   
+        int año = fecha.get(Calendar.YEAR);
+        int mes = fecha.get(Calendar.MONTH);
+        int dia = fecha.get(Calendar.DAY_OF_MONTH);
+        int hora = fecha.get(Calendar.HOUR_OF_DAY);
+        int minuto = fecha.get(Calendar.MINUTE);
+        int segundo = fecha.get(Calendar.SECOND);
+        System.out.println("Fecha Actual: " + dia + "/" + (mes+1) + "/" + año);
+        System.out.printf("Hora Actual: %02d:%02d:%02d %n", hora, minuto, segundo);  
+        fechaHora=String.valueOf(año)+"-"+String.valueOf(mes+1)+"-"+String.valueOf(dia)+" "+String.valueOf(hora)+":"+String.valueOf(minuto)+":"+String.valueOf(segundo);
+        return fechaHora;
     }
 
 }

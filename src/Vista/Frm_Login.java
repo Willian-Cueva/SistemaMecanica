@@ -34,6 +34,7 @@ public class Frm_Login extends javax.swing.JFrame {
     public Frm_Login() {
         initComponents();
         ctr.RecuperarData();
+        uti.IniciarConexion();
     }
 
     /**

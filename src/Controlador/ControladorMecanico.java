@@ -62,7 +62,7 @@ public class ControladorMecanico {
             FileInputStream archivofoto;
             archivofoto = new FileInputStream(persona.getArchivoImagen());
             String insertar = "INSERT INTO personas(idPersona,nombre,apellido,cedula,correo,telefono,direccion,estado,external_idPersona,imagen,idRol) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
-            PreparedStatement stmt = (PreparedStatement) uti.IniciarConexion().prepareStatement(insertar);
+            PreparedStatement stmt = (PreparedStatement) uti.getConexion().prepareStatement(insertar);
             stmt.setString(1, persona.getId().toString());
             stmt.setString(2, persona.getNombre());
             stmt.setString(3, persona.getApellido());
@@ -86,7 +86,7 @@ public class ControladorMecanico {
         try {
             int i = 0;
             String insertar = "INSERT INTO cuentas(idCuenta,usuario,clave,estado,external_idCuenta,idPersona) VALUES (?,?,?,?,?,?)";
-            PreparedStatement stmt = (PreparedStatement) uti.IniciarConexion().prepareStatement(insertar);
+            PreparedStatement stmt = (PreparedStatement) uti.getConexion().prepareStatement(insertar);
             stmt.setString(1, cuenta.getId().toString());
             stmt.setString(2, cuenta.getUsuario());
             stmt.setString(3, cuenta.getContraseña());

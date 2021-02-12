@@ -22,6 +22,9 @@ import java.sql.SQLException;
  */
 public class Utiles {
 
+    public static final int CLIENTES = 1;
+    public static final int PERSONAS = 0;
+
     public static String[] idPersona(ListaSimpleAvanzada lsa, int dato, String atributoClase) {
         String[] persona = new String[8];
         Persona p = (Persona) busquedaBinaria(lsa, dato, atributoClase);
@@ -45,17 +48,19 @@ public class Utiles {
         return (uno != null && dos != null) ? uno.equals(dos) : false;
     }
 
-    public static ListaSimpleAvanzada busquedaSecuencial(ListaSimpleAvanzada lsa, Object dato, String atributoClase){
+    public static ListaSimpleAvanzada busquedaSecuencial(ListaSimpleAvanzada lsa, Object dato, String atributoClase) {
         ListaSimpleAvanzada encontrados = new ListaSimpleAvanzada();
         for (int i = 0; i < lsa.tamano(); i++) {
             String uno = extraccionDato(lsa.obtenerObjetopp(i), atributoClase);
-            if (uno.replace(" ", "").compareToIgnoreCase(String.valueOf(dato))==0) {
-                encontrados.insertar(lsa.obtenerObjetopp(i));
+            if (uno != null) {
+                if (uno.replace(" ", "").compareToIgnoreCase(String.valueOf(dato)) == 0) {
+                    encontrados.insertar(lsa.obtenerObjetopp(i));
+                }
             }
         }
         return encontrados;
     }
-    
+
     public static Object busquedaBinaria(ListaSimpleAvanzada lsa, Object dato, String atributoClase) {
         int n = lsa.tamano();
         int centro, inf = 0, sup = n - 1;
@@ -99,9 +104,9 @@ public class Utiles {
      * Retorna una lista de macanicos consultada directamente de la base de
      * datos
      *
-     * @return litsa de persona
+     * @return lista de persona
      */
-    public static ListaSimpleAvanzada listaPersonas() {
+    public static ListaSimpleAvanzada listaPersonas(int seleccion) {
         ListaSimpleAvanzada persona = new ListaSimpleAvanzada();
         String sql = "SELECT * FROM personas";
         try {
@@ -110,18 +115,24 @@ public class Utiles {
 //            int cont = 1;
             while (rs.next()) {
                 Persona m = new Persona();
-                int i = 0;
-                m.setId(Long.parseLong(rs.getString(++i)));
-                m.setNombre(rs.getString(++i));
-                m.setApellido(rs.getString(++i));
-                m.setCedula(rs.getString(++i));
-                m.setCorreo(rs.getString(++i));
-                m.setTelefono(rs.getString(++i));
-                m.setDireccion(rs.getString(++i));
-                m.setEstado(rs.getString(++i).equalsIgnoreCase("1"));
-                m.setExternal_id(rs.getString(++i));
-                m.setIdRol(Long.parseLong(rs.getString(++i)));
-                persona.insertar(m);
+                m.setId(Long.parseLong(rs.getString(1)));
+                m.setNombre(rs.getString(2));
+                m.setApellido(rs.getString(3));
+                m.setCedula(rs.getString(4));
+                m.setCorreo(rs.getString(5));
+                m.setTelefono(rs.getString(6));
+                m.setDireccion(rs.getString(7));
+                m.setEstado(rs.getString(8).equalsIgnoreCase("1"));
+                m.setExternal_id(rs.getString(9));
+                m.setIdRol(Long.parseLong(rs.getString(10)));
+                m.setImagenObtenida(rs.getBlob(11));
+                if (seleccion == 0) {
+                    persona.insertar(m);
+                } else if(seleccion==1){
+                    if (1==Integer.parseInt(String.valueOf(m.getIdRol()))) {
+                        persona.insertar(m);
+                    }
+                }
             }
         } catch (SQLException ex) {
 //            Logger.getLogger(Utiles.class.getName()).log(Level.SEVERE, null, ex);
@@ -129,8 +140,8 @@ public class Utiles {
         }
         return persona;
     }
-    
-    public static ListaSimpleAvanzada listaVehiculos(){
+
+    public static ListaSimpleAvanzada listaVehiculos() {
         ListaSimpleAvanzada vehiculos = new ListaSimpleAvanzada();
         String sql = "SELECT * FROM vehiculo";
         try {

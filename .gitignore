@@ -1,5 +1,5 @@
 src/Vista/MainPruebas.java
-/build/
+/build/*.*
 /dist/
 dist/
-[bB]uild/
+[bB]uild/*.*
