@@ -3,8 +3,25 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/william/Documents/NetBeansProjects/SistemaMecanica/src/Vista/FRM_ModificarCliente.java</file>
-            <file>file:/C:/Users/william/Documents/NetBeansProjects/SistemaMecanica/src/Vista/Frm_Administrador.java</file>
+            <file>file:/C:/Users/Cris2/Documents/NetBeansProjects/ProyectoFinal/SistemaMecanica/src/Vista/Panel_EditarVehiculo.java</file>
+            <file>file:/C:/Users/Cris2/Documents/NetBeansProjects/ProyectoFinal/SistemaMecanica/src/Controlador/UtilesMecanico/UtilesMecanico.java</file>
+            <file>file:/C:/Users/Cris2/Documents/NetBeansProjects/ProyectoFinal/SistemaMecanica/src/Controlador/Utiles/UtilesComponentes.java</file>
+            <file>file:/C:/Users/Cris2/Documents/NetBeansProjects/ProyectoFinal/SistemaMecanica/src/Controlador/Nodo.java</file>
+            <file>file:/C:/Users/Cris2/Documents/NetBeansProjects/ProyectoFinal/SistemaMecanica/src/Vista/Frm_VerFactura.java</file>
+            <file>file:/C:/Users/Cris2/Documents/NetBeansProjects/ProyectoFinal/SistemaMecanica/src/Vista/Frm_VerClientes.java</file>
+            <file>file:/C:/Users/Cris2/Documents/NetBeansProjects/ProyectoFinal/SistemaMecanica/src/Vista/Panel_RegistrarModelos.java</file>
+            <file>file:/C:/Users/Cris2/Documents/NetBeansProjects/ProyectoFinal/SistemaMecanica/src/Controlador/ControladorMecanico.java</file>
+            <file>file:/C:/Users/Cris2/Documents/NetBeansProjects/ProyectoFinal/SistemaMecanica/src/Controlador/ControladorCuenta.java</file>
+            <file>file:/C:/Users/Cris2/Documents/NetBeansProjects/ProyectoFinal/SistemaMecanica/src/Vista/Frm_Login.java</file>
+            <file>file:/C:/Users/Cris2/Documents/NetBeansProjects/ProyectoFinal/SistemaMecanica/src/Controlador/Utiles/Utiles.java</file>
+            <file>file:/C:/Users/Cris2/Documents/NetBeansProjects/ProyectoFinal/SistemaMecanica/src/Vista/Frm_VerVehiculo.java</file>
+            <file>file:/C:/Users/Cris2/Documents/NetBeansProjects/ProyectoFinal/SistemaMecanica/src/Vista/Frm_Mecanico.java</file>
+            <file>file:/C:/Users/Cris2/Documents/NetBeansProjects/ProyectoFinal/SistemaMecanica/src/Vista/Panel_EditarCliente.java</file>
+            <file>file:/C:/Users/Cris2/Documents/NetBeansProjects/ProyectoFinal/SistemaMecanica/src/Vista/Panel_RegistroCliente.java</file>
+            <file>file:/C:/Users/Cris2/Documents/NetBeansProjects/ProyectoFinal/SistemaMecanica/src/Modelo/Persona.java</file>
+            <file>file:/C:/Users/Cris2/Documents/NetBeansProjects/ProyectoFinal/SistemaMecanica/src/Controlador/ControladorCliente.java</file>
+            <file>file:/C:/Users/Cris2/Documents/NetBeansProjects/ProyectoFinal/SistemaMecanica/src/Vista/Panel_RegistroVehiculo.java</file>
+            <file>file:/C:/Users/Cris2/Documents/NetBeansProjects/ProyectoFinal/SistemaMecanica/src/Controlador/ControladorVehiculo.java</file>
         </group>
     </open-files>
 </project-private>

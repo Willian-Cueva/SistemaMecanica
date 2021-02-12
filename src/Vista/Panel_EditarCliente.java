@@ -32,6 +32,7 @@ public class Panel_EditarCliente extends javax.swing.JPanel {
     File file=null;
     public Panel_EditarCliente() {
         initComponents();
+        jScrollPane1.getViewport().setBackground(new Color(51,51,51));
         uti.IniciarConexion();
         modelo = (DefaultTableModel) Tabla1.getModel();
         Tabla1.setModel(modelo);
@@ -114,7 +115,7 @@ public class Panel_EditarCliente extends javax.swing.JPanel {
 
         buttonGroup1.add(jCheckBox1);
         jCheckBox1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jCheckBox1.setForeground(new java.awt.Color(255, 153, 0));
+        jCheckBox1.setForeground(new java.awt.Color(255, 51, 0));
         jCheckBox1.setSelected(true);
         jCheckBox1.setText("Cedula");
         jCheckBox1.setOpaque(false);
@@ -123,7 +124,7 @@ public class Panel_EditarCliente extends javax.swing.JPanel {
 
         buttonGroup1.add(jCheckBox2);
         jCheckBox2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jCheckBox2.setForeground(new java.awt.Color(255, 153, 0));
+        jCheckBox2.setForeground(new java.awt.Color(255, 51, 0));
         jCheckBox2.setText("Apellido");
         jCheckBox2.setOpaque(false);
         add(jCheckBox2);
@@ -239,8 +240,8 @@ public class Panel_EditarCliente extends javax.swing.JPanel {
 
         buttonGroup1.add(jCheckBox3);
         jCheckBox3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jCheckBox3.setForeground(new java.awt.Color(255, 153, 0));
-        jCheckBox3.setText("Todo");
+        jCheckBox3.setForeground(new java.awt.Color(255, 51, 0));
+        jCheckBox3.setText("Actualizar");
         jCheckBox3.setOpaque(false);
         jCheckBox3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {

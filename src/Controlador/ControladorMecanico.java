@@ -49,7 +49,7 @@ public class ControladorMecanico {
     }
     
     public void RegistrarCliente(String cedula, String nombre, String apellido, String correo, String telefono, String direccion, File file, Long idRol, String contraseña) {
-        persona = new Persona(Long.parseLong(cedula), nombre, apellido, cedula, correo, telefono, direccion,false, "f57c756c6fj6", idRol, file);
+        persona = new Persona(Long.parseLong("0"), nombre, apellido, cedula, correo, telefono, direccion,false, "f57c756c6fj6", idRol, file);
         if (contraseña!=null) {
           cuenta = new Cuenta(Long.parseLong("0"), correo, contraseña,true, "fg56dh7d8", persona.getId());  
         }

@@ -32,14 +32,14 @@ public class Panel_RegistroVehiculo extends javax.swing.JPanel {
     UtilesMecanico uti = new UtilesMecanico();
     Long idModelo;
     String ColorRGB;
-    File file;
+    File file=null;
     Panel_RegistrarModelos mv = new Panel_RegistrarModelos(new eventoCerrar());
 
     public Panel_RegistroVehiculo() {
         emerge = new javax.swing.JPanel();
         emerge.setLayout(new java.awt.BorderLayout());
         initComponents();
-
+        jScrollPane2.getViewport().setBackground(new Color(51,51,51));
         uti.IniciarConexion();
         modelo = (DefaultTableModel) Tabla1.getModel();
         Tabla1.setModel(modelo);
@@ -343,7 +343,8 @@ public class Panel_RegistroVehiculo extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         if (estadoBoton) {
-            ctr.RegistrarVehiculo(txtPlaca.getText(), idModelo, ColorRGB, txtObservacion.getText(), file, Long.parseLong(txtCedula.getText()));
+            ctr1.Encuentracliente(txtCedula.getText());
+            ctr.RegistrarVehiculo(txtPlaca.getText(), idModelo, ColorRGB, txtObservacion.getText(), file, ctr1.getPersona().getId());
             ctr.GuardarVehiculo();
         }
         // TODO add your handling code here:
@@ -410,6 +411,7 @@ public class Panel_RegistroVehiculo extends javax.swing.JPanel {
 
     private void jPanel1MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseMoved
         if (estadoBoton) {
+            System.out.println("Modelo: "+idModelo);
             idModelo = ctr.idModelo(jComboBox2.getSelectedItem().toString());
             txtMarca.setText(ctr.buscarMarca());
         }
@@ -425,7 +427,7 @@ public class Panel_RegistroVehiculo extends javax.swing.JPanel {
                 String a = Tabla1.getValueAt(Tabla1.getSelectedRow(), 0).toString();
                 ctr1.Encuentracliente(a);
                 txtPropietario.setText(ctr1.getPersona().getNombre() + " " + ctr1.getPersona().getApellido());
-                txtCedula.setText(ctr1.getPersona().getId().toString());
+                txtCedula.setText(ctr1.getPersona().getCedula().toString());
 
             } catch (NumberFormatException e) {
             }
