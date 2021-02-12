@@ -10,23 +10,27 @@ package Modelo;
  * @author Cris2
  */
 public class OrdenReparacion {
-    Long idOrden;
-    String fecha;
-    double subtotal;
-    double total;
-    double descuent;
-    String requerimiento;
-    Long idVehiculo;
+    private Long idOrden;
+    private String fecha;
+    private double subtotal;
+    private double total;
+    private double descuent;
+    private String observacion;
+    private Long idVehiculo;
+    private boolean estado;
 
-    public OrdenReparacion(Long idOrden, String fecha, double subtotal, double total, double descuent, String requerimiento, Long idVehiculo) {
+    public OrdenReparacion(Long idOrden, String fecha, double subtotal, double total, double descuent, String observacion, Long idVehiculo, boolean estado) {
         this.idOrden = idOrden;
         this.fecha = fecha;
         this.subtotal = subtotal;
         this.total = total;
         this.descuent = descuent;
-        this.requerimiento = requerimiento;
+        this.observacion = observacion;
         this.idVehiculo = idVehiculo;
+        this.estado = estado;
     }
+    
+    
 
     public Long getIdOrden() {
         return idOrden;
@@ -68,12 +72,12 @@ public class OrdenReparacion {
         this.descuent = descuent;
     }
 
-    public String getRequerimiento() {
-        return requerimiento;
+    public String getObservacion() {
+        return observacion;
     }
 
-    public void setRequerimiento(String requerimiento) {
-        this.requerimiento = requerimiento;
+    public void setObservacion(String observacion) {
+        this.observacion = observacion;
     }
 
     public Long getIdVehiculo() {
@@ -83,6 +87,14 @@ public class OrdenReparacion {
     public void setIdVehiculo(Long idVehiculo) {
         this.idVehiculo = idVehiculo;
     }
-    
+
+    public boolean isEstado() {
+        return estado;
+    }
+
+    public void setEstado(boolean estado) {
+        this.estado = estado;
+    }
+
     
 }

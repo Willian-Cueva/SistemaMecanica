@@ -130,6 +130,11 @@ public class Vehiculo {
     public void setIdPersona(Long idPersona) {
         this.idPersona = idPersona;
     }
+
+    @Override
+    public String toString() {
+        return id+ "  "+placa;
+    }
     
     
 }

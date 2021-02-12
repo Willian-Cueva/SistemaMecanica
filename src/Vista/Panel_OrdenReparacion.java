@@ -6,11 +6,12 @@
 
 package Vista;
 
-import Controlador.ControladorOrdenReparacion;
+import Controlador.ControladorOrdenDetalleDeReparacion;
 import Controlador.ControladorVehiculo;
+import Controlador.Utiles.Utiles;
 import Controlador.UtilesMecanico.UtilesMecanico;
-import java.awt.Color;
 import java.io.File;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -22,16 +23,17 @@ public class Panel_OrdenReparacion extends javax.swing.JPanel {
     /** Creates new form Panel_OrdenReparacion */
     DefaultTableModel modelo;
     ControladorVehiculo ctr = new ControladorVehiculo();
-    ControladorOrdenReparacion ctr1=new ControladorOrdenReparacion();
     UtilesMecanico uti = new UtilesMecanico();
     File file = null;
     String ColorRGB;
     Long idLong = null;
+    private ControladorOrdenDetalleDeReparacion coddr;
     public Panel_OrdenReparacion() {
         initComponents();
         uti.IniciarConexion();
         modelo = (DefaultTableModel) Tabla1.getModel();
         Tabla1.setModel(modelo);
+        coddr = new ControladorOrdenDetalleDeReparacion();
         if (this.isVisible()) {
             ctr.llenarTablaVehiculo(modelo);
             Tabla1.updateUI();
@@ -57,19 +59,28 @@ public class Panel_OrdenReparacion extends javax.swing.JPanel {
         jCheckBox3 = new javax.swing.JCheckBox();
         jCheckBox2 = new javax.swing.JCheckBox();
         jCheckBox1 = new javax.swing.JCheckBox();
-        jButton1 = new javax.swing.JButton();
-        txtPlaca = new javax.swing.JLabel();
+        txtTotal = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
+        txtSubtotal = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
         txtModelo = new javax.swing.JLabel();
-        txtNombre = new javax.swing.JLabel();
-        txtCedula = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        txtRequerimiento = new javax.swing.JTextArea();
-        jButton2 = new javax.swing.JButton();
+        txtDescuento = new javax.swing.JLabel();
+        labelFecha = new javax.swing.JLabel();
+        labelHora = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        txtPlaca = new javax.swing.JLabel();
+        btnDetalle = new javax.swing.JButton();
+        btnGuardarOrden = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(61, 61, 61));
         setLayout(null);
 
+        Tabla1.setForeground(new java.awt.Color(60, 63, 65));
         Tabla1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -148,49 +159,85 @@ public class Panel_OrdenReparacion extends javax.swing.JPanel {
         add(jCheckBox1);
         jCheckBox1.setBounds(360, 50, 80, 30);
 
-        jButton1.setText("Guardar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        add(jButton1);
-        jButton1.setBounds(241, 370, 90, 30);
+        txtTotal.setBackground(new java.awt.Color(102, 102, 102));
+        txtTotal.setForeground(new java.awt.Color(255, 255, 255));
+        txtTotal.setOpaque(true);
+        add(txtTotal);
+        txtTotal.setBounds(153, 220, 180, 29);
 
-        txtPlaca.setBackground(new java.awt.Color(102, 102, 102));
-        txtPlaca.setForeground(new java.awt.Color(255, 255, 255));
-        txtPlaca.setOpaque(true);
-        add(txtPlaca);
-        txtPlaca.setBounds(30, 100, 303, 30);
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel7.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel7.setText("Descuento:");
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, 130, -1));
+
+        txtSubtotal.setBackground(new java.awt.Color(102, 102, 102));
+        txtSubtotal.setForeground(new java.awt.Color(255, 255, 255));
+        txtSubtotal.setOpaque(true);
+        jPanel1.add(txtSubtotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 100, 180, 30));
+
+        jLabel5.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel5.setText("Hora: ");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 0, -1, 30));
 
         txtModelo.setBackground(new java.awt.Color(102, 102, 102));
         txtModelo.setForeground(new java.awt.Color(255, 255, 255));
         txtModelo.setOpaque(true);
-        add(txtModelo);
-        txtModelo.setBounds(30, 140, 303, 29);
+        jPanel1.add(txtModelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 140, 180, 29));
 
-        txtNombre.setBackground(new java.awt.Color(102, 102, 102));
-        txtNombre.setForeground(new java.awt.Color(255, 255, 255));
-        txtNombre.setOpaque(true);
-        add(txtNombre);
-        txtNombre.setBounds(30, 180, 303, 29);
+        txtDescuento.setBackground(new java.awt.Color(102, 102, 102));
+        txtDescuento.setForeground(new java.awt.Color(255, 255, 255));
+        txtDescuento.setOpaque(true);
+        jPanel1.add(txtDescuento, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 180, 130, 29));
 
-        txtCedula.setBackground(new java.awt.Color(102, 102, 102));
-        txtCedula.setForeground(new java.awt.Color(255, 255, 255));
-        txtCedula.setOpaque(true);
-        add(txtCedula);
-        txtCedula.setBounds(30, 220, 303, 29);
+        labelFecha.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        labelFecha.setText("jLabel8");
+        jPanel1.add(labelFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 0, 70, 30));
 
-        txtRequerimiento.setColumns(20);
-        txtRequerimiento.setRows(5);
-        jScrollPane2.setViewportView(txtRequerimiento);
+        labelHora.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        labelHora.setText("jLabel9");
+        jPanel1.add(labelHora, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 0, 80, 30));
 
-        add(jScrollPane2);
-        jScrollPane2.setBounds(30, 260, 300, 83);
+        jLabel10.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel10.setText("Fecha: ");
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 90, -1));
 
-        jButton2.setText("Detalle de Reparacion");
-        add(jButton2);
-        jButton2.setBounds(50, 370, 150, 24);
+        jLabel11.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel11.setText("Subtotal:");
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 110, -1));
+
+        jLabel12.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel12.setText("Total:");
+        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 110, -1));
+
+        jLabel13.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel13.setText("Placa:");
+        jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 80, -1));
+
+        txtPlaca.setBackground(new java.awt.Color(102, 102, 102));
+        txtPlaca.setForeground(new java.awt.Color(255, 255, 255));
+        txtPlaca.setOpaque(true);
+        jPanel1.add(txtPlaca, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 60, 180, 30));
+
+        btnDetalle.setText("Detalle de Reparacion");
+        jPanel1.add(btnDetalle, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, 190, -1));
+
+        btnGuardarOrden.setText("Guardar");
+        btnGuardarOrden.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarOrdenActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnGuardarOrden, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 260, 90, 20));
+
+        add(jPanel1);
+        jPanel1.setBounds(20, 80, 320, 330);
 
         jLabel2.setBackground(new java.awt.Color(61, 61, 61));
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/FondoMetalico.jpg"))); // NOI18N
@@ -199,10 +246,9 @@ public class Panel_OrdenReparacion extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void Tabla1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Tabla1MouseReleased
-        System.out.println("Selecciono: " + (Tabla1.getSelectedRow()) + "Tamaño: " + Tabla1.getRowCount());
-        String a = Tabla1.getValueAt(Tabla1.getSelectedRow(), 0).toString();
-        System.out.println("a: " + a);
-        RefrescarDatos(a);        // TODO add your handling code here:
+        int s = Tabla1.getSelectedRow();
+        String placa = Tabla1.getValueAt(s, 0).toString();
+        JOptionPane.showMessageDialog(this, Utiles.busquedaSecuencial(Utiles.listaVehiculos(), placa, "Placa").obtenerObjetopp(0));
     }//GEN-LAST:event_Tabla1MouseReleased
 
     private void jLabel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MousePressed
@@ -232,43 +278,50 @@ public class Panel_OrdenReparacion extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jCheckBox3MouseReleased
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        ctr1.Registrar(txtRequerimiento.getText(), ctr.getVaux().getId());
-        ctr1.GuardarOrden();        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void btnGuardarOrdenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarOrdenActionPerformed
+        
+    }//GEN-LAST:event_btnGuardarOrdenActionPerformed
     private void RefrescarDatos(String placa) {
         ctr.recuperarDatosMod();
         ctr.llenartxt(placa);
         ctr.buscarModeloVehiculo(String.valueOf(ctr.getVaux().getIdModeloVehiculo()));
         ctr.buscarPersona(String.valueOf(ctr.getVaux().getIdPersona()));
         txtModelo.setText(ctr.getMaux().getNombreModelo());
-        txtPlaca.setText(ctr.getVaux().getPlaca());
-        txtNombre.setText(ctr.getPaux().getNombre()+" "+ctr.getPaux().getApellido());
-        txtCedula.setText(ctr.getPaux().getCedula());
+        txtSubtotal.setText(ctr.getVaux().getPlaca());
+        txtDescuento.setText(ctr.getPaux().getNombre()+" "+ctr.getPaux().getApellido());
+        txtTotal.setText(ctr.getPaux().getCedula());
     }
 
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable Tabla1;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton btnDetalle;
+    private javax.swing.JButton btnGuardarOrden;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JCheckBox jCheckBox3;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel labelFecha;
+    private javax.swing.JLabel labelHora;
     private javax.swing.JTextField txtBuscar;
-    private javax.swing.JLabel txtCedula;
+    private javax.swing.JLabel txtDescuento;
     private javax.swing.JLabel txtModelo;
-    private javax.swing.JLabel txtNombre;
     private javax.swing.JLabel txtPlaca;
-    private javax.swing.JTextArea txtRequerimiento;
+    private javax.swing.JLabel txtSubtotal;
+    private javax.swing.JLabel txtTotal;
     // End of variables declaration//GEN-END:variables
 
 }
