@@ -36,6 +36,7 @@ public class Panel_EditarVehiculo extends javax.swing.JPanel {
         uti.IniciarConexion();
         modelo = (DefaultTableModel) Tabla1.getModel();
         Tabla1.setModel(modelo);
+        jScrollPane1.getViewport().setBackground(new Color(51,51,51)); 
         Noeditar();
         if (this.isVisible()) {
             ctr.llenarTablaVehiculo(modelo);
@@ -102,7 +103,7 @@ public class Panel_EditarVehiculo extends javax.swing.JPanel {
 
         buttonGroup1.add(jCheckBox1);
         jCheckBox1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jCheckBox1.setForeground(new java.awt.Color(255, 153, 0));
+        jCheckBox1.setForeground(new java.awt.Color(255, 51, 0));
         jCheckBox1.setSelected(true);
         jCheckBox1.setText("Cedula");
         jCheckBox1.setOpaque(false);
@@ -111,7 +112,7 @@ public class Panel_EditarVehiculo extends javax.swing.JPanel {
 
         buttonGroup1.add(jCheckBox2);
         jCheckBox2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jCheckBox2.setForeground(new java.awt.Color(255, 153, 0));
+        jCheckBox2.setForeground(new java.awt.Color(255, 51, 0));
         jCheckBox2.setText("Placa");
         jCheckBox2.setOpaque(false);
         add(jCheckBox2);
@@ -119,8 +120,8 @@ public class Panel_EditarVehiculo extends javax.swing.JPanel {
 
         buttonGroup1.add(jCheckBox3);
         jCheckBox3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jCheckBox3.setForeground(new java.awt.Color(255, 153, 0));
-        jCheckBox3.setText("Todo");
+        jCheckBox3.setForeground(new java.awt.Color(255, 51, 0));
+        jCheckBox3.setText("Actualizar");
         jCheckBox3.setOpaque(false);
         jCheckBox3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
@@ -128,7 +129,7 @@ public class Panel_EditarVehiculo extends javax.swing.JPanel {
             }
         });
         add(jCheckBox3);
-        jCheckBox3.setBounds(180, 40, 80, 30);
+        jCheckBox3.setBounds(180, 40, 100, 30);
 
         jLabel1.setBackground(new java.awt.Color(255, 175, 0));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -366,7 +367,10 @@ public class Panel_EditarVehiculo extends javax.swing.JPanel {
         vColor.setBackground(new Color(Integer.parseInt(ctr.getVaux().getColor())));
         txtPlaca.setText(ctr.getVaux().getPlaca());
         txtObservacion.setText(ctr.getVaux().getObservacion());
-        imagen.setIcon(uti.img(ctr.getVaux().getImagen(), imagen.getSize()));
+        if (ctr.getVaux().getImagen()!=null) {
+            imagen.setIcon(uti.img(ctr.getVaux().getImagen(), imagen.getSize()));
+        }
+        
         if (ctr.getVaux().getEstado().booleanValue()) {
             bxActivo.setSelectedItem("Activo");
         } else {

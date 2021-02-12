@@ -95,10 +95,13 @@ public class ControladorVehiculo {
 
     public void GuardarVehiculo() {
         try {
+            FileInputStream archivofoto=null;
             int i = 0;
-            FileInputStream archivofoto;
-            archivofoto = new FileInputStream(vehiculo.getArchivo());
-            String insertar = "INSERT INTO vehiculo(idvehiculo,placa,idModelovehiculo,color,observacion,estado,external_idVehiculo,idPersona,imagen) VALUES (?,?,?,?,?,?,?,?,?)";
+            if (vehiculo.getImagen()!=null) {
+                archivofoto = new FileInputStream(vehiculo.getArchivo());
+            }
+            System.out.println("Persona dueña: "+ vehiculo.getIdPersona());
+            String insertar = "INSERT INTO vehiculo(idvehiculo,placa,idModelo,color,observacion,estado,external_idVehiculo,idPersona,imagen) VALUES (?,?,?,?,?,?,?,?,?)";
             PreparedStatement stmt = (PreparedStatement) uti.getConexion().prepareStatement(insertar);
             stmt.setLong(1, vehiculo.getId());
             stmt.setString(2, vehiculo.getPlaca());
@@ -139,7 +142,7 @@ public class ControladorVehiculo {
         Object obj[] = new Object[3];
         modelo.setRowCount(0);
         for (int i = 0; i < ctr.getLiPersona().tamano(); i++) {
-            obj[0] = ctr.getLiPersona().obtenerPorPosicion(i).getId();
+            obj[0] = ctr.getLiPersona().obtenerPorPosicion(i).getCedula();
             obj[1] = ctr.getLiPersona().obtenerPorPosicion(i).getNombre();
             obj[2] = ctr.getLiPersona().obtenerPorPosicion(i).getApellido();
             modelo.addRow(obj);
@@ -161,7 +164,12 @@ public class ControladorVehiculo {
                 }
             }
             obj[1] = modi;
-            aux=BuscarCedula(live.obtenerPorPosicion(i).getIdPersona());
+            live.verDatos();
+            
+            aux=BuscarIDPersona(live.obtenerPorPosicion(i).getIdPersona());
+            if (aux==null) {
+                System.out.println("Aqui da nulo");
+            }
             obj[2] = aux.getNombre()+" "+aux.getApellido();
             obj[3] = aux.getCedula();
             modelo.addRow(obj);
@@ -195,9 +203,9 @@ public class ControladorVehiculo {
         int centro, inf = 0, sup = n;
         while (inf <= sup) {
             centro = (sup + inf) / 2;
-            if (lista.obtenerPorPosicion(centro).getId().equals(codigo)) {
+            if (Long.parseLong(lista.obtenerPorPosicion(centro).getCedula())==codigo) {
                 return lista.obtenerPorPosicion(centro);
-            } else if (codigo < lista.obtenerPorPosicion(centro).getId()) {
+            } else if (codigo < Long.parseLong(lista.obtenerPorPosicion(centro).getCedula())) {
                 sup = centro - 1;
             } else {
                 inf = centro + 1;
@@ -222,7 +230,52 @@ public class ControladorVehiculo {
                 i = 0;
                 while ((i + inta) <= arreglo.tamano() - 1) {//2.1.1
 //                    System.out.println("prueba 3");
-                    if (arreglo.obtenerPorPosicion(i).getId() > arreglo.obtenerPorPosicion(i + inta).getId()) {
+                    if (Long.parseLong(arreglo.obtenerPorPosicion(i).getCedula()) > Long.parseLong(arreglo.obtenerPorPosicion(i + inta).getCedula())) {
+                        aux = arreglo.obtenerPorPosicion(i);
+                        arreglo.editar(i, arreglo.obtenerPorPosicion(i + inta));
+                        arreglo.editar(i + inta, aux);
+                        band = true;
+                    }
+                    i = i + 1;
+                }
+            }
+        }
+        return arreglo;
+    }
+    
+     public Persona busquedaBinariaID(Lista.ListaSimple<Persona> lista, Long codigo) {
+        int n = lista.tamano();
+        int centro, inf = 0, sup = n;
+        while (inf <= sup) {
+            centro = (sup + inf) / 2;
+            if (lista.obtenerPorPosicion(centro).getId().equals(codigo)) {
+                return lista.obtenerPorPosicion(centro);
+            } else if (codigo < lista.obtenerPorPosicion(centro).getId()) {
+                sup = centro - 1;
+            } else {
+                inf = centro + 1;
+            }
+        }
+        lista.verDatos();
+        return null;
+    }
+
+    public ListaSimple<Persona> shellID(ListaSimple<Persona> arreglo) {
+        int inta, i;
+        Persona aux;
+        boolean band;
+        inta = arreglo.tamano();
+        while (inta > 0) {
+//            System.out.println("prueba 1");
+            inta = inta / 2;
+            band = true;
+            while (band) {
+//                System.out.println("prueba 2");
+                band = false;
+                i = 0;
+                while ((i + inta) <= arreglo.tamano() - 1) {//2.1.1
+//                    System.out.println("prueba 3");
+                    if (arreglo.obtenerPorPosicion(i).getId()> arreglo.obtenerPorPosicion(i + inta).getId()) {
                         aux = arreglo.obtenerPorPosicion(i);
                         arreglo.editar(i, arreglo.obtenerPorPosicion(i + inta));
                         arreglo.editar(i + inta, aux);
@@ -329,6 +382,20 @@ public class ControladorVehiculo {
         Persona aux;
         if (busquedaBinaria(shell(lAux), Cedula) != null) {
             aux = busquedaBinaria(shell(lAux), Cedula);
+            return aux;
+        } else {
+            return null;
+        }
+
+    }
+    public Persona BuscarIDPersona(Long id) {
+        ctr.RecuperarData();
+        System.out.println("Por aqui nulo");
+        ListaSimple<Persona> lAux = ctr.getLiPersona();
+        lAux.verDatos();
+        Persona aux;
+        if (busquedaBinariaID(shellID(lAux), id) != null) {
+            aux = busquedaBinariaID(shellID(lAux), id);
             return aux;
         } else {
             return null;

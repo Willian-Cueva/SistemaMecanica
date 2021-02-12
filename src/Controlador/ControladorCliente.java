@@ -7,14 +7,11 @@ package Controlador;
 
 import Controlador.UtilesMecanico.UtilesMecanico;
 import Modelo.Persona;
-import com.mysql.cj.jdbc.Blob;
-import com.mysql.cj.xdevapi.UpdateStatement;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
