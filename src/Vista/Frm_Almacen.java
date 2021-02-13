@@ -11,6 +11,7 @@ import Vista.Modelo.TablaProducto;
 import java.sql.PreparedStatement;
 import javax.swing.JOptionPane;
 import Controlador.Utiles.Producto.Utiles;
+import Modelo.DetalleReparacion;
 import java.awt.Image;
 import java.sql.SQLException;
 import javax.swing.Icon;
@@ -28,6 +29,20 @@ public class Frm_Almacen extends javax.swing.JFrame {
     private int idProducto = -1;
     private ImageIcon wallpp = new ImageIcon ("src\\Imagenes\\FondoMetalico.jpg");
     private ImageIcon wallpp1 = new ImageIcon ("src\\Imagenes\\fondoRayas.jpg");
+    private DetalleReparacion detalleReparacion = new DetalleReparacion();
+    
+    public Frm_Almacen(DetalleReparacion detalleReparacion) {
+        initComponents();
+        this.setLocationRelativeTo(null);
+        setResizable(false);
+        //ConeccionBDD.IniciarConexion();
+        escalar(Fondo,wallpp);
+        escalar(FondoR,wallpp1);
+        cargarTablaProducto();
+        this.detalleReparacion=detalleReparacion;
+        llenarTabla();
+        
+    }
     public Frm_Almacen() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -680,6 +695,7 @@ public class Frm_Almacen extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        detalleReparacion.getListaProductos();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnGuardarProducto1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarProducto1ActionPerformed

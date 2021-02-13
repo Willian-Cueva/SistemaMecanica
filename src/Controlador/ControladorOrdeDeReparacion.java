@@ -123,10 +123,12 @@ public class ControladorOrdeDeReparacion {
                         d.setIdOrden(rs.getLong(2));
                     } 
                     System.out.println("==================\nd->" + d);
-                    JOptionPane.showMessageDialog(null, d.getIdOrden()==null);
+//                    JOptionPane.showMessageDialog(null, d.getIdOrden()==null);
+
                     if (d.getIdOrden()!=null) {
                         JOptionPane.showMessageDialog(null, "Si existe un detalle para esta orden");
                         detalle = d;
+                        cargarListasDeDetalle();
                     } else {
                         JOptionPane.showMessageDialog(null, "No existe ningun detalle, se creará un detalle");
                         crearDetalle(orden.getIdOrden());
@@ -141,6 +143,10 @@ public class ControladorOrdeDeReparacion {
             System.err.println("No se encontro el vehiculo en cargardetalle()");
         }
 
+    }
+    
+    private void cargarListasDeDetalle(){
+        
     }
 
     private void crearDetalle(long idOrden) {
