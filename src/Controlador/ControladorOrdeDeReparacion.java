@@ -14,6 +14,8 @@ import java.sql.Statement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Objects;
+import java.sql.PreparedStatement;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -82,6 +84,29 @@ public class ControladorOrdeDeReparacion {
         
     }
 
+    public void guardarOrden(String fecha, String hora,String descuento,String observacion,String placa){
+        Vehiculo v = (Vehiculo) Utiles.busquedaSecuencial(Utiles.listaVehiculos(), placa, "Placa").obtenerObjetopp(0);
+        orden = new OrdenReparacion(fecha, hora, Double.parseDouble(descuento), observacion, v.getId(), true);
+        String sql = "insert into ordenreparacion (fecha,hora,descuento,observacion,idVehiculo,estado) values(?,?,?,?,?,?);";
+        try {
+            PreparedStatement ps =(PreparedStatement) ConeccionBDD.IniciarConexion().prepareCall(sql);
+            ps.setString(1, fecha);
+            ps.setString(2, hora);
+            ps.setString(3, descuento);
+            ps.setDouble(4, Double.parseDouble(descuento));
+            ps.setString(5, v.getId().toString());
+            ps.setString(6, "1");
+            ps.executeUpdate();
+            System.out.println("Se creo la orden de reparacion con exito");
+            cargarOrdenes();
+            JOptionPane.showMessageDialog(null, "Se creo la orden de reparacion con exito");
+        } catch (SQLException ex) {
+//            Logger.getLogger(ControladorOrdeDeReparacion.class.getName()).log(Level.SEVERE, null, ex);
+            System.err.println("Error al guardar la orden de reparacion en la base de datos");
+        }
+    }
+    
+    
     public boolean tieneOrdenActiva(Object vehiculo) {
         boolean chis = false;
         

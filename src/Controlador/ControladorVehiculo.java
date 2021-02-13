@@ -181,7 +181,7 @@ public class ControladorVehiculo {
         Object obj[] = new Object[3];
         modelo.setRowCount(0);
         for (int i = 0; i < li.tamano(); i++) {
-            obj[0] = li.obtenerPorPosicion(i).getId();
+            obj[0] = li.obtenerPorPosicion(i).getCedula();
             obj[1] = li.obtenerPorPosicion(i).getNombre();
             obj[2] = li.obtenerPorPosicion(i).getApellido();
             modelo.addRow(obj);
@@ -192,7 +192,7 @@ public class ControladorVehiculo {
     public void llenarTablaBusqueda(DefaultTableModel modelo, Persona persona) {
         Object obj[] = new Object[3];
         modelo.setRowCount(0);
-        obj[0] = persona.getId();
+        obj[0] = persona.getCedula();
         obj[1] = persona.getNombre();
         obj[2] = persona.getApellido();
         modelo.addRow(obj);
