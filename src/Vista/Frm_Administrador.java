@@ -58,7 +58,7 @@ public class Frm_Administrador extends javax.swing.JFrame {
         try {
             this.setUndecorated(true);
         } catch (Exception e) {
-            System.out.println("Fallo cargar modelo redondeado");
+            System.out.println("Fallo cargar ventana sin botones principales");
         }
     }
 
