@@ -46,6 +46,8 @@ public class Frm_Detalle extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jPanel1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Servicios"));
 
         tablaServicios.setModel(new javax.swing.table.DefaultTableModel(
