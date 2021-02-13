@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 {"Modelo.Persona":{"id":3,"nombre":"Jimmy","apellido":"Rivera","cedula":1103457812,"correo":"jimmy@gmail.com","telefono":"0994567812","direccion":"Loja","estado":false,"external_id":"exter1103457812","idRol":2,"imagenObtenida":{"@class":"com.mysql.cj.jdbc.Blob","binaryData":["Y29tLm15c3FsLmNqLmpkYmMuQmxvYkAzNjBjNmY2Ng=="],"isClosed":false}}}
+=======
+{"Modelo.Persona":{"id":2,"nombre":"Jimmy","apellido":"Rivera","cedula":1123589564,"correo":"jimmy@gmail.com","telefono":"0991745621","direccion":"Loja","estado":true,"external_id":"exter1123589564","idRol":2}}
+>>>>>>> willian

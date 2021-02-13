@@ -101,7 +101,7 @@ public class ControladorVehiculo {
                 archivofoto = new FileInputStream(vehiculo.getArchivo());
             }
             System.out.println("Persona dueña: "+ vehiculo.getIdPersona());
-            String insertar = "INSERT INTO vehiculo(idvehiculo,placa,idModelo,color,observacion,estado,external_idVehiculo,idPersona,imagen) VALUES (?,?,?,?,?,?,?,?,?)";
+            String insertar = "INSERT INTO vehiculo(idvehiculo,placa,idModeloVehiculo,color,observacion,estado,external_idVehiculo,idPersona,imagen) VALUES (?,?,?,?,?,?,?,?,?)";
             PreparedStatement stmt = (PreparedStatement) uti.getConexion().prepareStatement(insertar);
             stmt.setLong(1, vehiculo.getId());
             stmt.setString(2, vehiculo.getPlaca());
