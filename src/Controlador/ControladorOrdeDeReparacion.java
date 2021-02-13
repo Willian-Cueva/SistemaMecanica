@@ -10,11 +10,15 @@ import Controlador.Utiles.Utiles;
 import Modelo.DetalleReparacion;
 import Modelo.OrdenReparacion;
 import Modelo.Vehiculo;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.sql.Statement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Objects;
 import java.sql.PreparedStatement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -26,7 +30,7 @@ public class ControladorOrdeDeReparacion {
     private ListaSimpleAvanzada ordenes = new ListaSimpleAvanzada();
     private OrdenReparacion orden;
     private DetalleReparacion detalle = new DetalleReparacion();
-    private String placa="";
+    private String placa = "";
 
     public String getPlaca() {
         return placa;
@@ -64,8 +68,6 @@ public class ControladorOrdeDeReparacion {
         this.detalle = detalle;
     }
 
-   
-
     private void cargarOrdenes() {
         this.ordenes = new ListaSimpleAvanzada();
         String sql = "Select * from ordenreparacion where estado = '1';";
@@ -73,23 +75,23 @@ public class ControladorOrdeDeReparacion {
             Statement st = (Statement) ConeccionBDD.IniciarConexion().createStatement();
             ResultSet rs = st.executeQuery(sql);
             while (rs.next()) {
-                OrdenReparacion op = new OrdenReparacion(rs.getLong(1), rs.getString(2), rs.getString(3), rs.getDouble(4), rs.getDouble(5),  
-                        rs.getDouble(6), rs.getString(7), rs.getLong(8),rs.getString(9).equalsIgnoreCase("1"));
+                OrdenReparacion op = new OrdenReparacion(rs.getLong(1), rs.getString(2), rs.getString(3), rs.getDouble(4), rs.getDouble(5),
+                        rs.getDouble(6), rs.getString(7), rs.getLong(8), rs.getString(9).equalsIgnoreCase("1"));
                 ordenes.insertar(op);
             }
         } catch (SQLException ex) {
 //            Logger.getLogger(ControladorOrdenOrdenDeReparacion.class.getName()).log(Level.SEVERE, null, ex);
             System.err.println("Error al cargar las ordenes de reparacion de la base de datos");
         }
-        
+
     }
 
-    public void guardarOrden(String fecha, String hora,String descuento,String observacion,String placa){
+    public void guardarOrden(String fecha, String hora, String descuento, String observacion, String placa) {
         Vehiculo v = (Vehiculo) Utiles.busquedaSecuencial(Utiles.listaVehiculos(), placa, "Placa").obtenerObjetopp(0);
         orden = new OrdenReparacion(fecha, hora, Double.parseDouble(descuento), observacion, v.getId(), true);
         String sql = "insert into ordenreparacion (fecha,hora,descuento,observacion,idVehiculo,estado) values(?,?,?,?,?,?);";
         try {
-            PreparedStatement ps =(PreparedStatement) ConeccionBDD.IniciarConexion().prepareCall(sql);
+            PreparedStatement ps = (PreparedStatement) ConeccionBDD.IniciarConexion().prepareCall(sql);
             ps.setString(1, fecha);
             ps.setString(2, hora);
             ps.setString(3, descuento);
@@ -105,20 +107,57 @@ public class ControladorOrdeDeReparacion {
             System.err.println("Error al guardar la orden de reparacion en la base de datos");
         }
     }
-    
-    
+
+    public void cargarDetalle() {
+//        DetalleReparacion d = (DetalleReparacion) Utiles.busquedaSecuencial(Utiles.listaDetalles(), orden.getIdOrden().toString(), "IdOrden").obtenerObjetopp(0);
+        String sql = "select * from detallereparacion where idOrden='"+orden.getIdOrden().toString()+"';";
+        DetalleReparacion d = new DetalleReparacion();
+        try {
+            Statement st = ConeccionBDD.IniciarConexion().createStatement();
+            ResultSet rs= st.executeQuery(sql);
+            if (rs.next()) {
+                d.setIdDetalle(rs.getLong(1));
+                d.setIdOrden(rs.getLong(2));
+            } else {
+                d=null;
+            }
+            System.out.println("d->" + d);
+            if (d != null) {
+                detalle = d;
+            } else {
+                crearDetalle(orden.getIdOrden());
+            }
+        } catch (SQLException ex) {
+            System.err.println("Error al ejecutar la sentencia sql del metodo cargarDetalle()");
+        }        
+    }
+
+    private void crearDetalle(long idOrden) {
+        String sql = "insert into detallereparacion(idOrden) values(?)";
+        try {
+            PreparedStatement ps = (PreparedStatement) ConeccionBDD.IniciarConexion().prepareCall(sql);
+            ps.setString(1, String.valueOf(idOrden));
+            ps.executeUpdate();
+            System.out.println("Se creo el detalle con exito");
+            cargarDetalle();
+        } catch (java.sql.SQLException ex) {
+            System.err.println("Error al insertar datos de mecanico en la tabla mecanicos - guardarMecanicos() - Frm_Administrador");
+            JOptionPane.showMessageDialog(null, "No se pudo  insertar");
+        } 
+    }
+
     public boolean tieneOrdenActiva(Object vehiculo) {
         boolean chis = false;
-        
-        if (vehiculo!=null) {
+
+        if (vehiculo != null) {
             Vehiculo v = (Vehiculo) vehiculo;
             for (int i = 0; i < ordenes.tamano(); i++) {
                 OrdenReparacion or = (OrdenReparacion) ordenes.obtenerObjetopp(i);
                 if (Objects.equals(or.getIdVehiculo(), v.getId())) {
                     System.out.println("Si existe una orden activa para dicho vehiculo");
                     chis = true;
-                    this.placa=v.getPlaca();
-                    this.orden=or;
+                    this.placa = v.getPlaca();
+                    this.orden = or;
                     break;
                 }
             }

@@ -208,12 +208,18 @@ public class Panel_OrdenReparacion extends javax.swing.JPanel {
         jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 110, -1));
 
         labelTotal.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
-        labelTotal.setForeground(new java.awt.Color(255, 255, 255));
+        labelTotal.setForeground(new java.awt.Color(51, 51, 51));
         labelTotal.setText("-");
         jPanel1.add(labelTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 140, 150, -1));
 
         btnDetalle.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         btnDetalle.setText("Detalle de Reparacion");
+        btnDetalle.setEnabled(false);
+        btnDetalle.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDetalleActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnDetalle, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 340, 190, -1));
 
         btnGuardarOrden.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
@@ -243,12 +249,12 @@ public class Panel_OrdenReparacion extends javax.swing.JPanel {
         jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 80, -1));
 
         labelPlaca.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
-        labelPlaca.setForeground(new java.awt.Color(255, 255, 255));
+        labelPlaca.setForeground(new java.awt.Color(51, 51, 51));
         labelPlaca.setText("-");
         jPanel1.add(labelPlaca, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 60, 150, -1));
 
         labelSubtotal.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
-        labelSubtotal.setForeground(new java.awt.Color(255, 255, 255));
+        labelSubtotal.setForeground(new java.awt.Color(51, 51, 51));
         labelSubtotal.setText("-");
         jPanel1.add(labelSubtotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 100, 150, -1));
 
@@ -267,10 +273,12 @@ public class Panel_OrdenReparacion extends javax.swing.JPanel {
         if (coddr.tieneOrdenActiva(Utiles.busquedaSecuencial(Utiles.listaVehiculos(), placa, "Placa").obtenerObjetopp(0))) {
             cargarCampos(ENCONTRADO);
             btnGuardarOrden.setEnabled(false);
+            btnDetalle.setEnabled(true);
             JOptionPane.showMessageDialog(this, "Orden Activa", "Activo", JOptionPane.INFORMATION_MESSAGE);
         } else {
             System.out.println("No existen ordennes de reparacion activas pero si funciona xd");
             cargarCampos(PRECARGA);
+            btnDetalle.setEnabled(false);
             btnGuardarOrden.setEnabled(true);
             JOptionPane.showMessageDialog(this, "No existe una orden de reparacion para este vehiculo", "Orden de Reparación", JOptionPane.INFORMATION_MESSAGE);
         }
@@ -333,7 +341,13 @@ public class Panel_OrdenReparacion extends javax.swing.JPanel {
     private void btnGuardarOrdenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarOrdenActionPerformed
         coddr.guardarOrden(labelFecha.getText(), labelHora.getText(), txtDescuento.getText(), cajaTexto.getText(), labelPlaca.getText());
         btnGuardarOrden.setEnabled(false);
+        btnDetalle.setEnabled(true);
     }//GEN-LAST:event_btnGuardarOrdenActionPerformed
+
+    private void btnDetalleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetalleActionPerformed
+        // TODO add your handling code here:
+        new Frm_Detalle(coddr).setVisible(true);
+    }//GEN-LAST:event_btnDetalleActionPerformed
 //    private void RefrescarDatos(String placa) {
 //        ctr.recuperarDatosMod();
 //        ctr.llenartxt(placa);

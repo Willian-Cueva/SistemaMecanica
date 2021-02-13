@@ -7,6 +7,7 @@ package Controlador.Utiles;
 
 import Controlador.Conexion.ConeccionBDD;
 import Controlador.ListaSimpleAvanzada;
+import Modelo.DetalleReparacion;
 import Modelo.Persona;
 import Modelo.Rol;
 import Modelo.Vehiculo;
@@ -128,8 +129,8 @@ public class Utiles {
                 m.setImagenObtenida(rs.getBlob(11));
                 if (seleccion == 0) {
                     persona.insertar(m);
-                } else if(seleccion==1){
-                    if (1==Integer.parseInt(String.valueOf(m.getIdRol()))) {
+                } else if (seleccion == 1) {
+                    if (1 == Integer.parseInt(String.valueOf(m.getIdRol()))) {
                         persona.insertar(m);
                     }
                 }
@@ -139,6 +140,25 @@ public class Utiles {
             System.err.println("Error al ejecutar la consulta en la base de datos - listaMecanicos() Utiles\n" + ex);
         }
         return persona;
+    }
+
+    public static ListaSimpleAvanzada listaDetalles() {
+        ListaSimpleAvanzada detalles = new ListaSimpleAvanzada();
+        String sql = "SELECT * FROM detallereparacion";
+        try {
+            Statement st = (Statement) ConeccionBDD.IniciarConexion().createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            while (rs.next()) {                
+                DetalleReparacion d = new DetalleReparacion();
+                d.setIdDetalle(rs.getLong(1));
+                d.setIdOrden(rs.getLong(2));
+                detalles.insertar(d);
+            }
+        } catch (SQLException ex) {
+//            Logger.getLogger(Utiles.class.getName()).log(Level.SEVERE, null, ex);
+            System.err.println("Error al cargar la base de datos, la tabla detallereparacion");
+        }
+        return detalles;
     }
 
     public static ListaSimpleAvanzada listaVehiculos() {

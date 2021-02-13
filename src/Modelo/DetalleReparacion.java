@@ -51,4 +51,10 @@ public class DetalleReparacion {
     public void setListaProductos(ListaSimpleAvanzada listaProductos) {
         this.listaProductos = listaProductos;
     }
+
+    @Override
+    public String toString() {
+        return idDetalle+" "+idOrden;
+    }
+    
 }
