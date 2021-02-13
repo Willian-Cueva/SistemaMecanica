@@ -89,8 +89,9 @@ public class Producto {
     public void setExternal_id(String External_id) {
         this.External_id = External_id;
     }
-    
-    
-    
-    
+
+    @Override
+    public String toString() {
+        return id+" "+nombre+" "+cantidad+" "+marca+" "+precio;
+    }
 }

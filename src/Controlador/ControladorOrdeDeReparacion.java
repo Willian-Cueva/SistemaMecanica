@@ -9,9 +9,8 @@ import Controlador.Conexion.ConeccionBDD;
 import Controlador.Utiles.Utiles;
 import Modelo.DetalleReparacion;
 import Modelo.OrdenReparacion;
+import Modelo.Producto;
 import Modelo.Vehiculo;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.sql.Statement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -67,6 +66,56 @@ public class ControladorOrdeDeReparacion {
     public void setDetalle(DetalleReparacion detalle) {
         this.detalle = detalle;
     }
+    
+    public void calcularValores(){
+        double subtotal=0.0;
+        
+        for (int i = 0; i < detalle.getListaProductos().tamano(); i++) {
+            Producto p = (Producto) detalle.getListaProductos().obtenerObjetopp(i);
+            subtotal += p.getPrecio();
+        }
+        
+        orden.setSubtotal(subtotal);
+        
+        double total = subtotal - subtotal*orden.getDescuent();
+        
+        orden.setTotal(total);
+        actualizarOrden();
+    }
+    
+    private void actualizarOrden(){
+        System.out.println(orden);
+        String sql = "UPDATE `baseddmecanica`.`ordenreparacion` SET `subtotal` = '"+orden.getSubtotal()+"', `total` = '"+orden.getTotal()+
+                "', `descuento` = '"+orden.getDescuent()+"', `Observacion` = '"+orden.getObservacion()+"' WHERE (`idordenReparacion` = '"+orden.getIdOrden()+"');";
+        try {
+            PreparedStatement ps = (PreparedStatement) ConeccionBDD.IniciarConexion().prepareStatement(sql);
+            ps.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Se actualizo la orden de reparacion correctamente");
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al actualizar la orden de reparacion", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
+    public void cargarListaProductos(){
+        String sql ="SELECT idProducto,cantidad FROM salidaproducto where idDetalle='"+detalle.getIdDetalle().toString()+"'";
+        ListaSimpleAvanzada productos = new ListaSimpleAvanzada();       
+        try {
+            Statement st = ConeccionBDD.IniciarConexion().createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            while (rs.next()) {                
+                Producto p = (Producto) Utiles.busquedaSecuencial(Utiles.listaProductos(), rs.getString(1), "Id").obtenerObjetopp(0);
+                p.setCantidad(rs.getInt(2));
+                double precio = p.getPrecio()*p.getCantidad();
+                p.setPrecio(precio);
+                productos.insertar(p);
+                System.out.println(p);
+            }
+        } catch (SQLException ex) {
+            System.err.println("Error al consultar la tabla salida producto");;
+        }
+        detalle.setListaProductos(productos);
+        
+    }
 
     private void cargarOrdenes() {
         this.ordenes = new ListaSimpleAvanzada();
@@ -95,7 +144,7 @@ public class ControladorOrdeDeReparacion {
             ps.setString(1, fecha);
             ps.setString(2, hora);
             ps.setString(3, descuento);
-            ps.setDouble(4, Double.parseDouble(descuento));
+            ps.setDouble(4, Double.parseDouble(observacion));
             ps.setString(5, v.getId().toString());
             ps.setString(6, "1");
             ps.executeUpdate();

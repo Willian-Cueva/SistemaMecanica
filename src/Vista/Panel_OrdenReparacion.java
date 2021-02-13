@@ -68,7 +68,6 @@ public class Panel_OrdenReparacion extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        txtDescuento = new javax.swing.JLabel();
         labelFecha = new javax.swing.JLabel();
         labelHora = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
@@ -83,6 +82,7 @@ public class Panel_OrdenReparacion extends javax.swing.JPanel {
         jLabel14 = new javax.swing.JLabel();
         labelPlaca = new javax.swing.JLabel();
         labelSubtotal = new javax.swing.JLabel();
+        txtDescuento = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(61, 61, 61));
@@ -179,11 +179,6 @@ public class Panel_OrdenReparacion extends javax.swing.JPanel {
         jLabel5.setText("Hora: ");
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 20, -1, 20));
 
-        txtDescuento.setBackground(new java.awt.Color(102, 102, 102));
-        txtDescuento.setForeground(new java.awt.Color(255, 255, 255));
-        txtDescuento.setOpaque(true);
-        jPanel1.add(txtDescuento, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 180, 170, 29));
-
         labelFecha.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         labelFecha.setText("-");
         jPanel1.add(labelFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 20, 100, 20));
@@ -257,6 +252,7 @@ public class Panel_OrdenReparacion extends javax.swing.JPanel {
         labelSubtotal.setForeground(new java.awt.Color(51, 51, 51));
         labelSubtotal.setText("-");
         jPanel1.add(labelSubtotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 100, 150, -1));
+        jPanel1.add(txtDescuento, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 180, 160, 30));
 
         add(jPanel1);
         jPanel1.setBounds(10, 40, 340, 380);
@@ -283,6 +279,7 @@ public class Panel_OrdenReparacion extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "No existe una orden de reparacion para este vehiculo", "Orden de Reparación", JOptionPane.INFORMATION_MESSAGE);
         }
         coddr.setPlaca(labelPlaca.getText());
+        txtDescuento.setEnabled(true);
     }//GEN-LAST:event_Tabla1MouseReleased
     private void cargarCampos(int s) {
         String f = "", h = "", p = "", sub = "", t = "",d="", des = "";
@@ -344,11 +341,13 @@ public class Panel_OrdenReparacion extends javax.swing.JPanel {
         coddr.guardarOrden(labelFecha.getText(), labelHora.getText(), txtDescuento.getText(), cajaTexto.getText(), labelPlaca.getText());
 //        JOptionPane.showMessageDialog(this, coddr.getOrden());
         btnGuardarOrden.setEnabled(false);
+        actualizardatos();
         btnDetalle.setEnabled(true);
     }//GEN-LAST:event_btnGuardarOrdenActionPerformed
 
     private void btnDetalleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetalleActionPerformed
         // TODO add your handling code here:
+        actualizardatos();
         new Frm_Detalle(coddr).setVisible(true);
     }//GEN-LAST:event_btnDetalleActionPerformed
 //    private void RefrescarDatos(String placa) {
@@ -392,7 +391,13 @@ public class Panel_OrdenReparacion extends javax.swing.JPanel {
     private javax.swing.JLabel labelSubtotal;
     private javax.swing.JLabel labelTotal;
     private javax.swing.JTextField txtBuscar;
-    private javax.swing.JLabel txtDescuento;
+    private javax.swing.JTextField txtDescuento;
     // End of variables declaration//GEN-END:variables
+
+    private void actualizardatos() {
+        coddr.getOrden().setDescuent(Double.parseDouble(labelTotal.getText()));
+        coddr.getOrden().setDescuent(Double.parseDouble(txtDescuento.getText()));
+        coddr.getOrden().setObservacion(cajaTexto.getText());
+    }
 
 }
