@@ -110,26 +110,37 @@ public class ControladorOrdeDeReparacion {
 
     public void cargarDetalle() {
 //        DetalleReparacion d = (DetalleReparacion) Utiles.busquedaSecuencial(Utiles.listaDetalles(), orden.getIdOrden().toString(), "IdOrden").obtenerObjetopp(0);
-        String sql = "select * from detallereparacion where idOrden='"+orden.getIdOrden().toString()+"';";
-        DetalleReparacion d = new DetalleReparacion();
-        try {
-            Statement st = ConeccionBDD.IniciarConexion().createStatement();
-            ResultSet rs= st.executeQuery(sql);
-            if (rs.next()) {
-                d.setIdDetalle(rs.getLong(1));
-                d.setIdOrden(rs.getLong(2));
+        Vehiculo v = (Vehiculo) Utiles.busquedaSecuencial(Utiles.listaVehiculos(), this.placa, "Placa").obtenerObjetopp(0);
+        if (v != null) {
+            if (tieneOrdenActiva(v)) {
+                String sql = "select * from detallereparacion where idOrden='" + orden.getIdOrden().toString() + "';";
+                DetalleReparacion d = new DetalleReparacion();
+                try {
+                    Statement st = ConeccionBDD.IniciarConexion().createStatement();
+                    ResultSet rs = st.executeQuery(sql);
+                    if (rs.next()) {
+                        d.setIdDetalle(rs.getLong(1));
+                        d.setIdOrden(rs.getLong(2));
+                    } 
+                    System.out.println("==================\nd->" + d);
+                    JOptionPane.showMessageDialog(null, d.getIdOrden()==null);
+                    if (d.getIdOrden()!=null) {
+                        JOptionPane.showMessageDialog(null, "Si existe un detalle para esta orden");
+                        detalle = d;
+                    } else {
+                        JOptionPane.showMessageDialog(null, "No existe ningun detalle, se creará un detalle");
+                        crearDetalle(orden.getIdOrden());
+                    }
+                } catch (SQLException ex) {
+                    System.err.println("Error al ejecutar la sentencia sql del metodo cargarDetalle()");
+                }
             } else {
-                d=null;
+                System.err.println("Error al crear detalle - por que no tiene una orden activa  porque placa esta vacio");
             }
-            System.out.println("d->" + d);
-            if (d != null) {
-                detalle = d;
-            } else {
-                crearDetalle(orden.getIdOrden());
-            }
-        } catch (SQLException ex) {
-            System.err.println("Error al ejecutar la sentencia sql del metodo cargarDetalle()");
-        }        
+        } else {
+            System.err.println("No se encontro el vehiculo en cargardetalle()");
+        }
+
     }
 
     private void crearDetalle(long idOrden) {
@@ -143,12 +154,11 @@ public class ControladorOrdeDeReparacion {
         } catch (java.sql.SQLException ex) {
             System.err.println("Error al insertar datos de mecanico en la tabla mecanicos - guardarMecanicos() - Frm_Administrador");
             JOptionPane.showMessageDialog(null, "No se pudo  insertar");
-        } 
+        }
     }
 
     public boolean tieneOrdenActiva(Object vehiculo) {
         boolean chis = false;
-
         if (vehiculo != null) {
             Vehiculo v = (Vehiculo) vehiculo;
             for (int i = 0; i < ordenes.tamano(); i++) {

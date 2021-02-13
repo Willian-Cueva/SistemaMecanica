@@ -282,6 +282,7 @@ public class Panel_OrdenReparacion extends javax.swing.JPanel {
             btnGuardarOrden.setEnabled(true);
             JOptionPane.showMessageDialog(this, "No existe una orden de reparacion para este vehiculo", "Orden de Reparación", JOptionPane.INFORMATION_MESSAGE);
         }
+        coddr.setPlaca(labelPlaca.getText());
     }//GEN-LAST:event_Tabla1MouseReleased
     private void cargarCampos(int s) {
         String f = "", h = "", p = "", sub = "", t = "",d="", des = "";
@@ -339,7 +340,9 @@ public class Panel_OrdenReparacion extends javax.swing.JPanel {
     }//GEN-LAST:event_jCheckBox3MouseReleased
 
     private void btnGuardarOrdenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarOrdenActionPerformed
+        coddr.setPlaca(labelPlaca.getText());
         coddr.guardarOrden(labelFecha.getText(), labelHora.getText(), txtDescuento.getText(), cajaTexto.getText(), labelPlaca.getText());
+//        JOptionPane.showMessageDialog(this, coddr.getOrden());
         btnGuardarOrden.setEnabled(false);
         btnDetalle.setEnabled(true);
     }//GEN-LAST:event_btnGuardarOrdenActionPerformed
