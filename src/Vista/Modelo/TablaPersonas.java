@@ -24,6 +24,7 @@ public class TablaPersonas extends AbstractTableModel{
         this.lsa=new ListaSimpleAvanzada();
         this.lsa = lsa;
     }
+    
     @Override
     public int getRowCount() {
         return lsa.tamano();

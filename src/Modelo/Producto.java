@@ -10,6 +10,7 @@ package Modelo;
  * @author LENOVO LEGION
  */
 public class Producto {
+
     private Long id;
     private String nombre;
     private int cantidad;
@@ -21,7 +22,6 @@ public class Producto {
     public Producto() {
     }
 
-   
     public Producto(Long id, String nombre, int cantidad, String marca, double precio, double iva, String External_id) {
         this.id = id;
         this.nombre = nombre;
@@ -31,9 +31,7 @@ public class Producto {
         this.iva = iva;
         this.External_id = External_id;
     }
-    
-    
- 
+
     public Long getId() {
         return id;
     }
@@ -89,8 +87,10 @@ public class Producto {
     public void setExternal_id(String External_id) {
         this.External_id = External_id;
     }
-    
-    
-    
-    
+
+    @Override
+    public String toString() {
+        return "\n id:  " + id+ "  Nombre: " + nombre + " Cantidad: "
+                + cantidad + "  marca: " + marca + "  Precio: " + precio+ "  Iva:" +iva+" ExternalID: " + External_id ;
+    }
 }

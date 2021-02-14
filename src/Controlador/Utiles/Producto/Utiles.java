@@ -8,9 +8,11 @@ package Controlador.Utiles.Producto;
 import Controlador.Conexion.ConeccionBDD;
 import Controlador.ListaSimpleAvanzada;
 import Modelo.Producto;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -25,7 +27,7 @@ public class Utiles {
      *
      * @return litsa de prodcuto
      */
-    public  ListaSimpleAvanzada listaProductos() {
+    public ListaSimpleAvanzada listaProductos() {
         ListaSimpleAvanzada producto = new ListaSimpleAvanzada();
         String sql = "SELECT * FROM `producto`";
         try {
@@ -48,5 +50,6 @@ public class Utiles {
         }
         return producto;
     }
+
 
 }
