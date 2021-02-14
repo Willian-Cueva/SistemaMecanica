@@ -11,6 +11,7 @@ import Controlador.Utiles.Utiles;
 import Controlador.Utiles.UtilesComponentes;
 import Vista.Modelo.TablaPersonas;
 import Vista.Modelo.TablaVehiculos;
+import com.thoughtworks.xstream.io.binary.BinaryStreamReader;
 import java.awt.Image;
 import java.io.File;
 import java.io.FileInputStream;
@@ -57,7 +58,7 @@ public class Frm_Administrador extends javax.swing.JFrame {
         try {
             this.setUndecorated(true);
         } catch (Exception e) {
-            System.out.println("Fallo cargar modelo redondeado");
+            System.out.println("Fallo cargar ventana sin botones principales");
         }
     }
 
@@ -1509,15 +1510,13 @@ public class Frm_Administrador extends javax.swing.JFrame {
         }
         String sql = "";
         if (file != null) {
-            if (file != null) {
-                try {
-                    FileInputStream fis = new FileInputStream(file);
-                    sql = "UPDATE `baseddmecanica`.`personas` SET `nombre` = '" + n + "', `apellido` = '" + a + "', `cedula` = '" + ci + "', `correo` = '" + co + "',"
-                            + " `telefono` = '" + tl + "', `direccion` = '" + dir + "', `estado` = '" + est + "', `imagen` = '" + fis + "' WHERE (`idpersona` = '" + idPersona + "');";
-                } catch (FileNotFoundException ex) {
-                    //Logger.getLogger(Frm_Administrador.class.getName()).log(Level.SEVERE, null, ex);
-                    System.err.println("Error al cargar archivo al actualizar la modificación");
-                }
+            try {
+                FileInputStream fis = new FileInputStream(file);
+                sql = "UPDATE `baseddmecanica`.`personas` SET `nombre` = '" + n + "', `apellido` = '" + a + "', `cedula` = '" + ci + "', `correo` = '" + co + "',"
+                        + " `telefono` = '" + tl + "', `direccion` = '" + dir + "', `estado` = '" + est + "', `imagen` = '" + fis+ "' WHERE (`idpersona` = '" + idPersona + "');";
+            } catch (FileNotFoundException ex) {
+                //Logger.getLogger(Frm_Administrador.class.getName()).log(Level.SEVERE, null, ex);
+                System.err.println("Error al cargar archivo al actualizar la modificación");
             }
         } else {
             sql = "UPDATE `baseddmecanica`.`personas` SET `nombre` = '" + n + "', `apellido` = '" + a + "', `cedula` = '" + ci + "', `correo` = '" + co + "',"

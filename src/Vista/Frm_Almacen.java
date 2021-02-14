@@ -11,11 +11,14 @@ import Vista.Modelo.TablaProducto;
 import java.sql.PreparedStatement;
 import javax.swing.JOptionPane;
 import Controlador.Utiles.Producto.Utiles;
+import Modelo.DetalleReparacion;
 import java.awt.Image;
 import java.sql.SQLException;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 /**
  *
@@ -24,30 +27,43 @@ import javax.swing.JLabel;
 public class Frm_Almacen extends javax.swing.JFrame {
 
     private TablaProducto tp = new TablaProducto();
+    //private TablaProductosSalientes stp =  new TablaProductosSalientes();
     private AlmacenControlador cp = new AlmacenControlador();
     private int idProducto = -1;
-    private ImageIcon wallpp = new ImageIcon ("src\\Imagenes\\FondoMetalico.jpg");
-    private ImageIcon wallpp1 = new ImageIcon ("src\\Imagenes\\fondoRayas.jpg");
-    public Frm_Almacen() {
+    private ImageIcon wallpp = new ImageIcon("src\\Imagenes\\FondoMetalico.jpg");
+    private ImageIcon wallpp1 = new ImageIcon("src\\Imagenes\\fondoRayas.jpg");
+    private DetalleReparacion detalleReparacion = new DetalleReparacion();
+
+    public Frm_Almacen(DetalleReparacion detalleReparacion) {
         initComponents();
         this.setLocationRelativeTo(null);
         setResizable(false);
-        //ConeccionBDD.IniciarConexion();
-        escalar(Fondo,wallpp);
-        escalar(FondoR,wallpp1);
+        escalar(Fondo, wallpp);
+        escalar(FondoR, wallpp1);
+        cargarTablaProducto();
+        this.detalleReparacion = detalleReparacion;
+        llenarTabla();
+    }
+
+    public Frm_Almacen() {
+        initComponents();
+        TablaPedido.updateUI();
+        this.setLocationRelativeTo(null);
+        setResizable(false);
+        escalar(Fondo, wallpp);
+        escalar(FondoR, wallpp1);
         escalar(Fondo2, wallpp);
         cargarTablaProducto();
         llenarTabla();
-        
+
     }
-    
-    public void escalar(JLabel x,ImageIcon wallpp){
-        //ImageIcon wallpp = new ImageIcon ("src\\Imagenes\\FondoMetalico.jpg");
-        Icon icono = new ImageIcon(wallpp.getImage().getScaledInstance(x.getWidth(),x.getHeight(),Image.SCALE_DEFAULT));
+
+    public void escalar(JLabel x, ImageIcon wallpp) {
+        Icon icono = new ImageIcon(wallpp.getImage().getScaledInstance(x.getWidth(), x.getHeight(), Image.SCALE_DEFAULT));
         x.setIcon(icono);
         this.repaint();
     }
-    
+
     public void LimpiarCampos() {
         txtNombre.setText("");
         txtMarca.setText("");
@@ -57,11 +73,17 @@ public class Frm_Almacen extends javax.swing.JFrame {
     }
 
     private void cargarTablaProducto() {
+
         tp.setLsp(cp.obtenerLista());
         TablaProductos.setModel(tp);
         TablaProductos.updateUI();
         TablaProductosLista.setModel(tp);
         TablaProductosLista.updateUI();
+
+    }
+
+    private void cargarModelo() {
+
     }
 
     public void llenarTabla() {
@@ -495,13 +517,10 @@ public class Frm_Almacen extends javax.swing.JFrame {
         TablaPedido.setFont(new java.awt.Font("Courier New", 0, 12)); // NOI18N
         TablaPedido.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "ID", "Nombre", "Stock", "Precio", "IVA", "ExternalId"
             }
         ));
         jScrollPane3.setViewportView(TablaPedido);
@@ -655,7 +674,7 @@ public class Frm_Almacen extends javax.swing.JFrame {
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
         // TODO add your handling code here:
         String inf = "Este panel permite buscar una persona (Administrador, Mecánico o Cliente)\n"
-        + "registrados en el sistema y eliminarlos de forma lógica del sistema\n";
+                + "registrados en el sistema y eliminarlos de forma lógica del sistema\n";
         JOptionPane.showMessageDialog(this, inf, "Informacion", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_jButton9ActionPerformed
 
@@ -665,6 +684,7 @@ public class Frm_Almacen extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        detalleReparacion.getListaProductos();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnGuardarProducto1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarProducto1ActionPerformed
@@ -673,11 +693,51 @@ public class Frm_Almacen extends javax.swing.JFrame {
     }//GEN-LAST:event_btnGuardarProducto1ActionPerformed
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-        // TODO add your handling code here:
+
+        TableModel modelo1 = TablaProductosLista.getModel();
+        int[] filas = TablaProductosLista.getSelectedRows();
+        Object[] row = new Object[7];
+        DefaultTableModel modelo2 = (DefaultTableModel) TablaPedido.getModel();
+        String CantidadVender;
+        boolean v = false;
+        do {
+            CantidadVender = JOptionPane.showInputDialog("Ingrese cantidad a vender: ");
+            if (CantidadVender.length() != 0) {
+                if (CantidadVender.matches("[0-9]*")) {
+                    JOptionPane.showMessageDialog(null, "DATO CORRECTO", "INGRESO CORRECTO", JOptionPane.INFORMATION_MESSAGE);
+                    for (int i = 0; i < filas.length; i++) {
+                        row[0] = modelo1.getValueAt(filas[i], 0);
+                        row[1] = modelo1.getValueAt(filas[i], 1);
+                        row[2] = Integer.parseInt(CantidadVender);
+                        row[3] = modelo1.getValueAt(filas[i], 3);
+                        row[4] = modelo1.getValueAt(filas[i], 4);
+                        row[5] = modelo1.getValueAt(filas[i], 5);
+                        row[6] = modelo1.getValueAt(filas[i], 6);
+                        String valorO = modelo1.getValueAt(filas[i], 2).toString();
+                        int valor = Integer.parseInt(CantidadVender);
+                        if (valor <= Integer.parseInt(valorO)) {
+                            modelo2.addRow(row);
+                            detalleReparacion.getListaProductos().insertar(cp.transformar(row));
+                            v = true;
+                        } else {
+                            JOptionPane.showMessageDialog(null, "ERROR INGRESO", "Stock Insuficiente", JOptionPane.ERROR_MESSAGE);
+                        }
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "ERROR INGRESO", "DATO NO VALIDO", JOptionPane.ERROR_MESSAGE);
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "ERROR INGRESO", "DATO VACIO", JOptionPane.ERROR_MESSAGE);
+            }
+        } while (v != true);
+
+
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        detalleReparacion.getListaProductos().present();
+        cp.guardarProducto(detalleReparacion);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
