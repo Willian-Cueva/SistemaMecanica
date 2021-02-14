@@ -16,6 +16,10 @@ import java.util.logging.Logger;
  * @author Willian
  */
 public class ConeccionBDD {
+    /**
+     * Permite establecer la coneccion de con la base de datos
+     * @return 
+     */
      public static Connection IniciarConexion() {
         Connection con = null;
         String Driver = "com.mysql.cj.jdbc.Driver";

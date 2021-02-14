@@ -8,7 +8,9 @@ package Controlador;
 import Modelo.Persona;
 
 /**
- *
+ * La clase Administrador controlador guarda una lista de personas que son todos los usuarios (Administradores,Mecanicos y clientes)
+ * constantes en el sistama.
+ * Ademas consta de una lista de vehiculos mismo que estan presentas en la base de datos.
  * @author Willian
  */
 public class AdministradorControlador {

@@ -6,7 +6,6 @@
 package Controlador;
 
 import Controlador.UtilesMecanico.UtilesMecanico;
-import Lista.ListaSimple;
 import Modelo.Cuenta;
 import Modelo.Persona;
 import Modelo.Rol;

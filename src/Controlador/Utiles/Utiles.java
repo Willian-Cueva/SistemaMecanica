@@ -26,7 +26,10 @@ public class Utiles {
 
     public static final int CLIENTES = 1;
     public static final int PERSONAS = 0;
-    
+    /**
+     * retorna una ListaSimpleAvanzada con los productos de la base de datos
+     * @return 
+     */
     public static ListaSimpleAvanzada listaProductos() {
         ListaSimpleAvanzada producto = new ListaSimpleAvanzada();
         String sql = "SELECT * FROM `producto`";
@@ -35,14 +38,13 @@ public class Utiles {
             ResultSet rs = st.executeQuery(sql);
             while (rs.next()) {
                 Producto p = new Producto();
-                int i = 0;
-                p.setId(Long.parseLong(rs.getString(++i)));
-                p.setNombre(rs.getString(++i));
-                p.setCantidad(Integer.parseInt(rs.getString(++i)));
-                p.setMarca(rs.getString(++i));
-                p.setPrecio(Double.parseDouble(rs.getString(++i)));
-                p.setIva(Double.parseDouble(rs.getString(++i)));
-                p.setExternal_id(rs.getString(++i));
+                p.setId(Long.parseLong(rs.getString(1)));
+                p.setNombre(rs.getString(2));
+                p.setCantidad(Integer.parseInt(rs.getString(3)));
+                p.setMarca(rs.getString(4));
+                p.setPrecio(Double.parseDouble(rs.getString(5)));
+                p.setIva(Double.parseDouble(rs.getString(6)));
+                p.setExternal_id(rs.getString(7));
                 producto.insertar(p);
             }
         } catch (SQLException ex) {
@@ -50,7 +52,13 @@ public class Utiles {
         }
         return producto;
     }
-
+    /**
+     * retorna arreglo de String con los valores de una persona buscados por idPersona
+     * @param lsa ListaimpleAvanzada
+     * @param dato dato a buscar. Ejemplo 12 del atributo edad de una clase
+     * @param atributoClase atrubuto de una clase
+     * @return 
+     */
     public static String[] idPersona(ListaSimpleAvanzada lsa, int dato, String atributoClase) {
         String[] persona = new String[8];
         Persona p = (Persona) busquedaBinaria(lsa, dato, atributoClase);
@@ -67,13 +75,19 @@ public class Utiles {
 
         return persona;
     }
-
-    public static Boolean comparar(Object o, Object o1, String atributoClase) {
+    
+    private static Boolean comparar(Object o, Object o1, String atributoClase) {
         String uno = extraccionDato(o, atributoClase);
         String dos = extraccionDato(o1, atributoClase);
         return (uno != null && dos != null) ? uno.equals(dos) : false;
     }
-
+    /**
+     * Este metodo retorna una ListaSimpleAvanzada con los elementos correspondientes a la busqueda
+     * @param lsa ListaSimpleAvanzada
+     * @param dato dato a buscar. Ejemplo 12 del atributo edad de una clase
+     * @param atributoClase atrubuto de una clase
+     * @return ListaSimpleAvanzada
+     */
     public static ListaSimpleAvanzada busquedaSecuencial(ListaSimpleAvanzada lsa, Object dato, String atributoClase) {
         ListaSimpleAvanzada encontrados = new ListaSimpleAvanzada();
         for (int i = 0; i < lsa.tamano(); i++) {
@@ -86,7 +100,13 @@ public class Utiles {
         }
         return encontrados;
     }
-
+    /**
+     * Retorna un objeto con el dato encontrado
+     * @param lsa ListaSimpleAvanzada
+     * @param dato dato a buscar. Ejemplo 12 del atributo edad de una clase
+     * @param atributoClase atriburo de una clase
+     * @return Objeto
+     */
     public static Object busquedaBinaria(ListaSimpleAvanzada lsa, Object dato, String atributoClase) {
         int n = lsa.tamano();
         int centro, inf = 0, sup = n - 1;
@@ -102,7 +122,11 @@ public class Utiles {
         }
         return null;
     }
-
+    /**
+     * Este metodo permite ordenar una listaSimpleAvanzada por cualquier atributo de los elementos
+     * @param lsa ListaSimpleAvanzada
+     * @param atributo atributo de una clase
+     */
     public static void shell(ListaSimpleAvanzada lsa, String atributo) {
         int salto = lsa.tamano() / 2;
         while (salto > 0) {
@@ -166,7 +190,10 @@ public class Utiles {
         }
         return persona;
     }
-
+    /**
+     * Retorna una ListaSimpleAvanzada de los detalles de las ordenes de reparacio que estan en la base de datos
+     * @return ListaSimpleAvanzada
+     */
     public static ListaSimpleAvanzada listaDetalles() {
         ListaSimpleAvanzada detalles = new ListaSimpleAvanzada();
         String sql = "SELECT * FROM detallereparacion";
@@ -185,7 +212,10 @@ public class Utiles {
         }
         return detalles;
     }
-
+    /**
+     * Retorna una ListaSimpleAvanzada de los vehiculos que estan en la base de datos
+     * @return ListaSimpleAvanzada
+     */
     public static ListaSimpleAvanzada listaVehiculos() {
         ListaSimpleAvanzada vehiculos = new ListaSimpleAvanzada();
         String sql = "SELECT * FROM vehiculo";
@@ -270,7 +300,7 @@ public class Utiles {
         return (i == 1);
     }
 
-    public static String extraccionDato(Object o, String atributoClase) {
+    private static String extraccionDato(Object o, String atributoClase) {
         Class clase = o.getClass();
         Field atributo = null;
         Object informacion = null;

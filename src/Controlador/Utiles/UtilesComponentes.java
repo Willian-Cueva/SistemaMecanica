@@ -23,14 +23,22 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  * @author Willian
  */
 public class UtilesComponentes {
-
+    /**
+     * Este metodo carga en un JComboBox los roles del sistema
+     * @param cbx JComboBox
+     */
     public static void cargarComboTipoRol(JComboBox cbx) {
 //        cbx.removeAllItems();
         for (int i = 0; i < Utiles.roles().length; i++) {
             cbx.addItem(Utiles.roles()[i]);
         }
     }
-
+    /**
+     * Permite convertir una imagen de una persona Blob a ImagenIcon para cargarlos como Icon en los Jlabel
+     * @param obj Objeto -> Persona
+     * @param d dimenciones de la imagen
+     * @return ImagenIcon
+     */
     public static ImageIcon imageIcon(Object obj, Dimension d) {
         if (obj != null) {
             Persona p = (Persona) obj;
@@ -53,7 +61,10 @@ public class UtilesComponentes {
             return null;
         }
     }
-
+    /**
+     * Este metodo permite buscar una imagen con una interfaz grafica
+     * @return File
+     */
     public static File BuscarImagen() {
         File file = null;
         JFileChooser archivo = new JFileChooser();

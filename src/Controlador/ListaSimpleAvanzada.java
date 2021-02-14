@@ -6,7 +6,7 @@
 package Controlador;
 
 /**
- *
+ * Lista Simple Avanzada hereda de la ListaSimple
  * @author Willian
  */
 public class ListaSimpleAvanzada extends ListaSimple{
@@ -14,7 +14,9 @@ public class ListaSimpleAvanzada extends ListaSimple{
     public ListaSimpleAvanzada() {
         super();
     }
-    
+    /**
+     * Permite eliminar el ultimo nodo de la lista
+     */
     public void eliminarUltimo(){
         if (estaVacia()) {
             System.out.println("La lista esta vacia - eliminarUltimo()");
@@ -28,7 +30,11 @@ public class ListaSimpleAvanzada extends ListaSimple{
             it.setSig(null);
         }
     }
-    
+    /**
+     * Devuelve un Nodo del dato que se encuentre en dicha posicion
+     * @param posicion entero de la posicion de la lista
+     * @return Nodo
+     */
     public Nodo obtenerNodopp(int posicion){
         if (estaVacia()) {
             throw new NullPointerException("la lista esta vacia");
@@ -42,6 +48,11 @@ public class ListaSimpleAvanzada extends ListaSimple{
             return it;
         }
     }
+    /**
+     * Devuelve un objeto del dato que se encuentre en dicha posicion
+     * @param posicion entero de la posicion de la lista
+     * @return objeto
+     */
     public Object obtenerObjetopp(int posicion){
         if (estaVacia()) {
             return null;
@@ -57,7 +68,11 @@ public class ListaSimpleAvanzada extends ListaSimple{
             return it.getDato();
         }
     }
-    
+    /**
+     * Permite eliminar un elemento de la lista dependiendo la posicion
+     * @param posicion entero con la posicion de la lista
+     * @return true si se elimino exitosamente, false si no elimino nada o hubo errores
+     */
     public Boolean emilinarDpp(int posicion){
         if (estaVacia()) {
             System.out.println("La lista esta vacia");
@@ -78,7 +93,11 @@ public class ListaSimpleAvanzada extends ListaSimple{
             return true;
         }
     }
-    
+    /**
+     * Este metodo permite insertar un elemento en la lista por posicion
+     * @param posicion
+     * @param dato 
+     */
     public void insertarDppE(int posicion, Object dato) {
         if (estaVacia()) {
             System.out.println("La lista esta vacia //idppE");
@@ -94,7 +113,11 @@ public class ListaSimpleAvanzada extends ListaSimple{
             it.setSig(n);
         }
     }
-    
+    /**
+     * Retorna un true si existe el objeto especificado, false si no lo encontro
+     * @param object
+     * @return 
+     */
     public Boolean existe(Object object){
         Boolean chis = false;
         for (int i = 0; i < tamano(); i++) {
@@ -105,7 +128,10 @@ public class ListaSimpleAvanzada extends ListaSimple{
         }
         return chis;
     }
-    
+    /**
+     * permite eliminar todos los elementos de la lista
+     * @return 
+     */
     public Boolean vaciar(){
         Boolean bandera=false;
         cabecera=null;

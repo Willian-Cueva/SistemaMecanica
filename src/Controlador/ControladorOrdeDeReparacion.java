@@ -16,8 +16,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Objects;
 import java.sql.PreparedStatement;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -67,6 +65,11 @@ public class ControladorOrdeDeReparacion {
         this.detalle = detalle;
     }
     
+    /**
+     * Este metodo permite actualizar el subtotal y el total 
+     * respecto a la lista de repuestos y la lista de servicios
+     * tomando en cuenta el descuento
+     */
     public void calcularValores(){
         double subtotal=0.0;
         
@@ -96,6 +99,10 @@ public class ControladorOrdeDeReparacion {
         }
     }
     
+    /**
+     * Este metodo permite actualizar los productos desde la tabla de salidaproducto de la base de datos
+     * respectivamente a la lista de productos del detalle de reparacion en tiempo de ejecucion
+     */
     public void cargarListaProductos(){
         String sql ="SELECT idProducto,cantidad FROM salidaproducto where idDetalle='"+detalle.getIdDetalle().toString()+"'";
         ListaSimpleAvanzada productos = new ListaSimpleAvanzada();       
@@ -134,7 +141,15 @@ public class ControladorOrdeDeReparacion {
         }
 
     }
-
+    /**
+     * Este metodo permite guardar una orden de reparacion siempre y cuendo esta no exista como activa en la base
+     * de datos respectivamente al vehiculo 
+     * @param fecha fecha en la que se crea la orden de reparacion
+     * @param hora hora en la que se crea la orden de reparacion
+     * @param descuento se le agrega un descuento representado en el rango de 0 a 1 porciento de descuento
+     * @param observacion observacion de la orden de reparacion
+     * @param placa Placa del vehiculo
+     */
     public void guardarOrden(String fecha, String hora, String descuento, String observacion, String placa) {
         Vehiculo v = (Vehiculo) Utiles.busquedaSecuencial(Utiles.listaVehiculos(), placa, "Placa").obtenerObjetopp(0);
         orden = new OrdenReparacion(fecha, hora, Double.parseDouble(descuento), observacion, v.getId(), true);
@@ -156,7 +171,10 @@ public class ControladorOrdeDeReparacion {
             System.err.println("Error al guardar la orden de reparacion en la base de datos");
         }
     }
-
+    /**
+     * Este metodo permite dependiendo el vehiculo cargar el detalle de la orden de reparacoin desde la base de datos,
+     * en el caso de no existir esa orden se crea una y vuelve a ejecutarce el metodo ingresando a el detalle de reparacion
+     */
     public void cargarDetalle() {
 //        DetalleReparacion d = (DetalleReparacion) Utiles.busquedaSecuencial(Utiles.listaDetalles(), orden.getIdOrden().toString(), "IdOrden").obtenerObjetopp(0);
         Vehiculo v = (Vehiculo) Utiles.busquedaSecuencial(Utiles.listaVehiculos(), this.placa, "Placa").obtenerObjetopp(0);
@@ -177,7 +195,6 @@ public class ControladorOrdeDeReparacion {
                     if (d.getIdOrden()!=null) {
                         JOptionPane.showMessageDialog(null, "Si existe un detalle para esta orden");
                         detalle = d;
-                        cargarListasDeDetalle();
                     } else {
                         JOptionPane.showMessageDialog(null, "No existe ningun detalle, se creará un detalle");
                         crearDetalle(orden.getIdOrden());
@@ -194,10 +211,6 @@ public class ControladorOrdeDeReparacion {
 
     }
     
-    private void cargarListasDeDetalle(){
-        
-    }
-
     private void crearDetalle(long idOrden) {
         String sql = "insert into detallereparacion(idOrden) values(?)";
         try {
@@ -212,6 +225,11 @@ public class ControladorOrdeDeReparacion {
         }
     }
 
+    /**
+     * Este metodo permite buscar una orden de reparacion activa en base al vehiculo ingresado
+     * @param vehiculo Vehiculo para buscar si existe una orden de reparacion activa
+     * @return retorna true si existe una orden de reparacion activa para dicho vehiculo, y retorna false en caso de no existir
+     */
     public boolean tieneOrdenActiva(Object vehiculo) {
         boolean chis = false;
         if (vehiculo != null) {

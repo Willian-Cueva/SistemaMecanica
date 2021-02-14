@@ -10,14 +10,9 @@ import Lista.ListaSimple;
 import Modelo.Cuenta;
 import Modelo.Persona;
 import Modelo.Rol;
-import java.io.FileInputStream;
 import java.sql.Statement;
-import java.sql.Blob;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
