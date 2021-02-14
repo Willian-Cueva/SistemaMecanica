@@ -77,9 +77,9 @@ public class Panel_EditarVehiculo extends javax.swing.JPanel {
         vColor = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         Tabla1 = new javax.swing.JTable();
-        Fondo = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(61, 61, 61));
+        setOpaque(false);
         setLayout(null);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -118,10 +118,10 @@ public class Panel_EditarVehiculo extends javax.swing.JPanel {
         add(jCheckBox2);
         jCheckBox2.setBounds(90, 40, 80, 30);
 
-        buttonGroup1.add(jCheckBox3);
         jCheckBox3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jCheckBox3.setForeground(new java.awt.Color(255, 51, 0));
         jCheckBox3.setText("Actualizar");
+        jCheckBox3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/actualizar.png"))); // NOI18N
         jCheckBox3.setOpaque(false);
         jCheckBox3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
@@ -129,11 +129,11 @@ public class Panel_EditarVehiculo extends javax.swing.JPanel {
             }
         });
         add(jCheckBox3);
-        jCheckBox3.setBounds(180, 40, 100, 30);
+        jCheckBox3.setBounds(290, 100, 90, 20);
 
         jLabel1.setBackground(new java.awt.Color(255, 175, 0));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Buscar");
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/lupa.png"))); // NOI18N
         jLabel1.setOpaque(true);
         jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -141,9 +141,9 @@ public class Panel_EditarVehiculo extends javax.swing.JPanel {
             }
         });
         add(jLabel1);
-        jLabel1.setBounds(240, 80, 70, 30);
+        jLabel1.setBounds(220, 80, 40, 30);
         add(txtBuscar);
-        txtBuscar.setBounds(10, 80, 230, 30);
+        txtBuscar.setBounds(10, 80, 210, 30);
 
         jPanel1.setBackground(new java.awt.Color(51, 51, 51));
         jPanel1.setLayout(null);
@@ -174,7 +174,7 @@ public class Panel_EditarVehiculo extends javax.swing.JPanel {
             }
         });
         jPanel1.add(btnEditar);
-        btnEditar.setBounds(240, 310, 60, 20);
+        btnEditar.setBounds(220, 305, 80, 25);
 
         bxActivo.setBackground(new java.awt.Color(255, 204, 0));
         bxActivo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Activo", "Inactivo" }));
@@ -182,8 +182,9 @@ public class Panel_EditarVehiculo extends javax.swing.JPanel {
         jPanel1.add(bxActivo);
         bxActivo.setBounds(50, 270, 250, 30);
 
-        btnGuardar.setBackground(new java.awt.Color(255, 204, 0));
+        btnGuardar.setBackground(new java.awt.Color(255, 175, 0));
         btnGuardar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Guardar.png"))); // NOI18N
         btnGuardar.setText("Guardar");
         btnGuardar.setOpaque(true);
         btnGuardar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -192,7 +193,7 @@ public class Panel_EditarVehiculo extends javax.swing.JPanel {
             }
         });
         jPanel1.add(btnGuardar);
-        btnGuardar.setBounds(240, 310, 60, 20);
+        btnGuardar.setBounds(220, 305, 80, 25);
 
         btnCancelar.setBackground(new java.awt.Color(255, 175, 0));
         btnCancelar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -204,7 +205,7 @@ public class Panel_EditarVehiculo extends javax.swing.JPanel {
             }
         });
         jPanel1.add(btnCancelar);
-        btnCancelar.setBounds(160, 310, 60, 20);
+        btnCancelar.setBounds(110, 305, 60, 25);
 
         btnBuscarImagen.setBackground(new java.awt.Color(255, 175, 0));
         btnBuscarImagen.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -272,10 +273,6 @@ public class Panel_EditarVehiculo extends javax.swing.JPanel {
 
         add(jScrollPane1);
         jScrollPane1.setBounds(10, 120, 370, 290);
-
-        Fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/FondoMetalico.jpg"))); // NOI18N
-        add(Fondo);
-        Fondo.setBounds(0, 0, 730, 450);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEditarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditarMousePressed
@@ -351,13 +348,19 @@ public class Panel_EditarVehiculo extends javax.swing.JPanel {
     private void btnColorMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnColorMousePressed
         if (estado) {
             Color color = new Color(240, 240, 240);
-            color = JColorChooser.showDialog(null, "Elige un color", Color.BLACK);
+            if (JColorChooser.showDialog(null, "Elige un color", Color.BLACK)!=null) {
+               color = JColorChooser.showDialog(null, "Elige un color", Color.BLACK); 
+            }
             Color co = new Color(color.getRGB());
             vColor.setBackground(co);
             vColor.updateUI();
         }
         // TODO add your handling code here:
     }//GEN-LAST:event_btnColorMousePressed
+    /**
+     * Metodo de actualizacion de los datos de los campos en la interfaz
+     * @param placa 
+     */
     private void RefrescarDatos(String placa) {
         ctr.recuperarDatosMod();
         ctr.llenartxt(placa);
@@ -378,7 +381,9 @@ public class Panel_EditarVehiculo extends javax.swing.JPanel {
         }
     }
     boolean estado = true;
-    
+    /**
+     * Metodo de alitacion de botones
+     */
     public void editar() {
         estado = true;
         btnGuardar.setVisible(true);
@@ -390,7 +395,9 @@ public class Panel_EditarVehiculo extends javax.swing.JPanel {
         txtObservacion.setBackground(Color.white);
         
     }
-    
+    /**
+     * Metodo de desabilitacion de botones en la interfaz
+     */
     public void Noeditar() {
         estado = false;
         btnEditar.setVisible(true);
@@ -404,7 +411,6 @@ public class Panel_EditarVehiculo extends javax.swing.JPanel {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel Fondo;
     private javax.swing.JTable Tabla1;
     private javax.swing.JLabel btnBuscarImagen;
     private javax.swing.JLabel btnCancelar;

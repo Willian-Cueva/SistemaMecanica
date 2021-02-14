@@ -57,6 +57,7 @@ public class Panel_EditarCliente extends javax.swing.JPanel {
         buttonGroup2 = new javax.swing.ButtonGroup();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        jCheckBox3 = new javax.swing.JCheckBox();
         jScrollPane1 = new javax.swing.JScrollPane();
         Tabla1 = new javax.swing.JTable();
         jCheckBox1 = new javax.swing.JCheckBox();
@@ -75,13 +76,12 @@ public class Panel_EditarCliente extends javax.swing.JPanel {
         btnBuscarImagen = new javax.swing.JLabel();
         txtBuscar = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        jCheckBox3 = new javax.swing.JCheckBox();
         jLabel6 = new javax.swing.JLabel();
-        Fondo = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(61, 61, 61));
         setMinimumSize(new java.awt.Dimension(727, 415));
+        setOpaque(false);
         setLayout(null);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -94,6 +94,19 @@ public class Panel_EditarCliente extends javax.swing.JPanel {
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/fondoRayas.jpg"))); // NOI18N
         add(jLabel4);
         jLabel4.setBounds(620, 0, 110, 30);
+
+        jCheckBox3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jCheckBox3.setForeground(new java.awt.Color(255, 51, 0));
+        jCheckBox3.setText("Actualizar");
+        jCheckBox3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/actualizar.png"))); // NOI18N
+        jCheckBox3.setOpaque(false);
+        jCheckBox3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jCheckBox3MouseReleased(evt);
+            }
+        });
+        add(jCheckBox3);
+        jCheckBox3.setBounds(310, 100, 90, 20);
 
         Tabla1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -177,7 +190,7 @@ public class Panel_EditarCliente extends javax.swing.JPanel {
             }
         });
         jPanel1.add(btnEditar);
-        btnEditar.setBounds(240, 310, 60, 20);
+        btnEditar.setBounds(220, 305, 80, 25);
 
         bxActivo.setBackground(new java.awt.Color(255, 204, 0));
         bxActivo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Activo", "Inactivo" }));
@@ -185,8 +198,9 @@ public class Panel_EditarCliente extends javax.swing.JPanel {
         jPanel1.add(bxActivo);
         bxActivo.setBounds(50, 270, 250, 30);
 
-        btnGuardar.setBackground(new java.awt.Color(255, 204, 0));
+        btnGuardar.setBackground(new java.awt.Color(255, 175, 0));
         btnGuardar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Guardar.png"))); // NOI18N
         btnGuardar.setText("Guardar");
         btnGuardar.setOpaque(true);
         btnGuardar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -195,7 +209,7 @@ public class Panel_EditarCliente extends javax.swing.JPanel {
             }
         });
         jPanel1.add(btnGuardar);
-        btnGuardar.setBounds(240, 310, 60, 20);
+        btnGuardar.setBounds(220, 305, 80, 25);
 
         btnCancelar.setBackground(new java.awt.Color(255, 175, 0));
         btnCancelar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -207,7 +221,7 @@ public class Panel_EditarCliente extends javax.swing.JPanel {
             }
         });
         jPanel1.add(btnCancelar);
-        btnCancelar.setBounds(160, 310, 60, 20);
+        btnCancelar.setBounds(130, 305, 60, 25);
 
         btnBuscarImagen.setBackground(new java.awt.Color(255, 175, 0));
         btnBuscarImagen.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -228,7 +242,7 @@ public class Panel_EditarCliente extends javax.swing.JPanel {
 
         jLabel1.setBackground(new java.awt.Color(255, 175, 0));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Buscar");
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/lupa.png"))); // NOI18N
         jLabel1.setOpaque(true);
         jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -236,20 +250,7 @@ public class Panel_EditarCliente extends javax.swing.JPanel {
             }
         });
         add(jLabel1);
-        jLabel1.setBounds(240, 80, 70, 30);
-
-        buttonGroup1.add(jCheckBox3);
-        jCheckBox3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jCheckBox3.setForeground(new java.awt.Color(255, 51, 0));
-        jCheckBox3.setText("Actualizar");
-        jCheckBox3.setOpaque(false);
-        jCheckBox3.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                jCheckBox3MouseReleased(evt);
-            }
-        });
-        add(jCheckBox3);
-        jCheckBox3.setBounds(180, 40, 80, 30);
+        jLabel1.setBounds(240, 80, 40, 30);
 
         jLabel6.setBackground(new java.awt.Color(255, 102, 0));
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -258,10 +259,6 @@ public class Panel_EditarCliente extends javax.swing.JPanel {
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/fondoRayas.jpg"))); // NOI18N
         add(jLabel6);
         jLabel6.setBounds(0, 0, 620, 30);
-
-        Fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/FondoMetalico.jpg"))); // NOI18N
-        add(Fondo);
-        Fondo.setBounds(0, 0, 730, 420);
 
         jLabel2.setText("jLabel2");
         add(jLabel2);
@@ -277,6 +274,10 @@ public class Panel_EditarCliente extends javax.swing.JPanel {
         
 // TODO add your handling code here:
     }//GEN-LAST:event_Tabla1MouseReleased
+    /**
+     * Metodo encargado de actualizar los datos de los campos en la interfaz
+     * @param cedula 
+     */
     private void RefrescarDatos(String cedula){
         ctr.Encuentracliente(cedula);
         txtNombre.setText(ctr.getPersona().getNombre()+" "+ctr.getPersona().getApellido());
@@ -335,13 +336,18 @@ public class Panel_EditarCliente extends javax.swing.JPanel {
     }//GEN-LAST:event_jLabel1MousePressed
 
     private void jCheckBox3MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCheckBox3MouseReleased
+        System.out.println("Probando este btn");
         if (jCheckBox3.isSelected()) {
+            System.out.println("Probando si entra este if");
             ctr.llenarTabla(modelo);
             Tabla1.updateUI();
             
         }
         // TODO add your handling code here:
     }//GEN-LAST:event_jCheckBox3MouseReleased
+    /**
+     * Metodo que permite abilitar los botones en la interfaz
+     */
     public void editar(){
         btnGuardar.setVisible(true);
         btnCancelar.setVisible(true);
@@ -357,6 +363,9 @@ public class Panel_EditarCliente extends javax.swing.JPanel {
         
                 
     }
+    /**
+     * Metdo para desabilitar los botones en la interfaz
+     */
     public void Noeditar(){
         btnEditar.setVisible(true);
         btnGuardar.setVisible(false);
@@ -372,7 +381,6 @@ public class Panel_EditarCliente extends javax.swing.JPanel {
                 
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel Fondo;
     private javax.swing.JTable Tabla1;
     private javax.swing.JLabel btnBuscarImagen;
     private javax.swing.JLabel btnCancelar;

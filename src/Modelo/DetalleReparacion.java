@@ -6,6 +6,7 @@
 package Modelo;
 
 import Controlador.ListaSimpleAvanzada;
+import Lista.ListaSimple;
 
 /**
  *
@@ -14,7 +15,7 @@ import Controlador.ListaSimpleAvanzada;
 public class DetalleReparacion {
     private Long idDetalle; 
     private Long idOrden;
-    private ListaSimpleAvanzada listaServivios = new ListaSimpleAvanzada();
+    private ListaSimple<Servicio> listaServivios= new ListaSimple();
     private ListaSimpleAvanzada listaProductos = new ListaSimpleAvanzada();
 
     public DetalleReparacion() {
@@ -36,11 +37,11 @@ public class DetalleReparacion {
         this.idOrden = idOrden;
     }
 
-    public ListaSimpleAvanzada getListaServivios() {
+    public ListaSimple<Servicio> getListaServivios() {
         return listaServivios;
     }
 
-    public void setListaServivios(ListaSimpleAvanzada listaServivios) {
+    public void setListaServivios(ListaSimple<Servicio> listaServivios) {
         this.listaServivios = listaServivios;
     }
 

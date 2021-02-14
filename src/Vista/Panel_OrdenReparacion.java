@@ -142,7 +142,7 @@ public class Panel_OrdenReparacion extends javax.swing.JPanel {
 
         jCheckBox3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jCheckBox3.setForeground(new java.awt.Color(255, 153, 0));
-        jCheckBox3.setText("Todo");
+        jCheckBox3.setText("Actualizar");
         jCheckBox3.setOpaque(false);
         jCheckBox3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
@@ -170,12 +170,10 @@ public class Panel_OrdenReparacion extends javax.swing.JPanel {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel7.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(0, 0, 0));
         jLabel7.setText("Observacion:");
         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 150, -1));
 
         jLabel5.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setText("Hora: ");
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 20, -1, 20));
 
@@ -188,17 +186,14 @@ public class Panel_OrdenReparacion extends javax.swing.JPanel {
         jPanel1.add(labelHora, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 20, 80, 20));
 
         jLabel10.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(0, 0, 0));
         jLabel10.setText("Fecha: ");
         jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 60, -1));
 
         jLabel11.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(0, 0, 0));
         jLabel11.setText("Subtotal:");
         jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 110, -1));
 
         jLabel12.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
-        jLabel12.setForeground(new java.awt.Color(0, 0, 0));
         jLabel12.setText("Total:");
         jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 110, -1));
 
@@ -228,7 +223,6 @@ public class Panel_OrdenReparacion extends javax.swing.JPanel {
         jPanel1.add(btnGuardarOrden, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 340, 90, 30));
 
         jLabel8.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(0, 0, 0));
         jLabel8.setText("Descuento:");
         jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, 130, -1));
 
@@ -239,7 +233,6 @@ public class Panel_OrdenReparacion extends javax.swing.JPanel {
         jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, 290, 70));
 
         jLabel14.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
-        jLabel14.setForeground(new java.awt.Color(0, 0, 0));
         jLabel14.setText("Placa:");
         jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 80, -1));
 
@@ -331,6 +324,8 @@ public class Panel_OrdenReparacion extends javax.swing.JPanel {
         if (jCheckBox3.isSelected()) {
             ctr.llenarTablaVehiculo(modelo);
             Tabla1.updateUI();
+            
+            
 
         }
         // TODO add your handling code here:
@@ -398,6 +393,7 @@ public class Panel_OrdenReparacion extends javax.swing.JPanel {
         coddr.getOrden().setDescuent(Double.parseDouble(labelTotal.getText()));
         coddr.getOrden().setDescuent(Double.parseDouble(txtDescuento.getText()));
         coddr.getOrden().setObservacion(cajaTexto.getText());
+        
     }
 
 }

@@ -20,7 +20,11 @@ import java.util.List;
 public class MantenerCesion<T> {
 
     private Conexion conexion=new Conexion();
-
+    /**
+     * Metodo encargado de almacenar los datos de la persona que ingreso al sistema durante el timpo que este ste activo para luego borrarse
+     * @param ruta
+     * @return 
+     */
     public T listar(String ruta) {
         conexion.setREPO(ruta);
         T rol=null;
@@ -34,7 +38,12 @@ public class MantenerCesion<T> {
         }
         return rol;
     }
-
+    /**
+     * Metodo encargado de guardar los datos del usuario que se a logueado en el sistema
+     * @param o
+     * @param ruta
+     * @throws Exception 
+     */
     public void guardar(T o,String ruta) throws Exception {
         conexion.setREPO(ruta);
         conexion.getXtrStream().toXML(o, new FileOutputStream(conexion.getREPO() + File.separatorChar + ruta + ".json"));

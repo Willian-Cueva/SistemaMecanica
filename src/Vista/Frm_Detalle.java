@@ -8,33 +8,58 @@ package Vista;
 import Controlador.ControladorOrdeDeReparacion;
 import Vista.Modelo.TablaProducto;
 import javax.swing.JOptionPane;
-
+import Controlador.ControladorServicio;
+import Controlador.UtilesMecanico.UtilesMecanico;
+import Lista.ListaSimple;
+import Modelo.Servicio;
+import java.awt.Color;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author Willian
  */
 public class Frm_Detalle extends javax.swing.JFrame {
+    DefaultTableModel modelo;
     private ControladorOrdeDeReparacion codr= new ControladorOrdeDeReparacion();
     private TablaProducto tp = new TablaProducto();
+    Frm_Servicios serv=new Frm_Servicios(new eventoCerrar());
+    UtilesMecanico utim=new UtilesMecanico();
+    ListaSimple<Servicio> lista=new ListaSimple<>();
+    ControladorServicio ctr=new ControladorServicio();
     /**
      * Creates new form Frm_Detalle
      */
     public Frm_Detalle() {
         initComponents();
+        jScrollPane1.getViewport().setBackground(new Color(51,51,51));
+        utim.IniciarConexion();
+        modelo = (DefaultTableModel) tablaServicios.getModel();
+        tablaServicios.setModel(modelo);
+        cargarTablas();
     }
     public Frm_Detalle(ControladorOrdeDeReparacion codr) {
         this.setUndecorated(true);
         initComponents();
+        jScrollPane1.getViewport().setBackground(new Color(51,51,51));
+        utim.IniciarConexion();
+        modelo = (DefaultTableModel) tablaServicios.getModel();
+        tablaServicios.setModel(modelo);
         this.setLocationRelativeTo(null);
         this.codr=codr;
         this.codr.cargarDetalle();
         cargarTablas();
     }
     private void cargarTablas(){
+        codr.cargarListaServicios();
+        ctr.llenarTablaServicio(codr.getDetalle().getListaServivios(), modelo);
+        codr.getDetalle().getListaServivios().verDatos();
         codr.cargarListaProductos();
         tp.setLsp(codr.getDetalle().getListaProductos());
         tablaRepuestos.setModel(tp);
         tablaRepuestos.updateUI();
+        tablaServicios.updateUI();
         
     }
     /**
@@ -71,13 +96,10 @@ public class Frm_Detalle extends javax.swing.JFrame {
 
         tablaServicios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Titulo", "Valor", "Descripcion"
             }
         ));
         jScrollPane1.setViewportView(tablaServicios);
@@ -233,12 +255,19 @@ public class Frm_Detalle extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        serv.setVisible(true);                // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
-
+        double subtotal=0.0;
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
         codr.calcularValores();
+        for (int i = 0; i < lista.tamano(); i++) {
+            ctr.GuardarServicio(lista.obtenerPorPosicion(i), codr.getDetalle().getIdDetalle());
+            subtotal+=lista.obtenerPorPosicion(i).getValor();
+            
+        }
+        codr.actualizarOrdenServicio(subtotal);
+        
         this.dispose();
     }//GEN-LAST:event_jButton5ActionPerformed
 
@@ -259,7 +288,35 @@ public class Frm_Detalle extends javax.swing.JFrame {
         // TODO add your handling code here:
         cargarTablas();
     }//GEN-LAST:event_jButton3ActionPerformed
+    class eventoCerrar implements MouseListener {
 
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            //To change body of generated methods, choose Tools | Templates.
+        }
+
+        @Override
+        public void mousePressed(MouseEvent e) {
+            //To change body of generated methods, choose Tools | Templates.
+        }
+
+        @Override
+        public void mouseReleased(MouseEvent e) {
+            lista.insertar(serv.pasardato());
+            ctr.llenarTablaServicio(lista, modelo);
+            //To change body of generated methods, choose Tools | Templates.
+        }
+
+        @Override
+        public void mouseEntered(MouseEvent e) {
+            //To change body of generated methods, choose Tools | Templates.
+        }
+
+        @Override
+        public void mouseExited(MouseEvent e) {
+            //To change body of generated methods, choose Tools | Templates.
+        }
+    }
     /**
      * @param args the command line arguments
      */

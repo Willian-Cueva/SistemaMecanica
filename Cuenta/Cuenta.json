@@ -1,5 +1,1 @@
-<<<<<<< HEAD
-{"Modelo.Cuenta":{"id":2,"Usuario":"jimmy","contraseña":1234,"Estado":true,"External_id":"externaljimmy","idPersona":3}}
-=======
-{"Modelo.Cuenta":{"id":2,"Usuario":"jimmy","contraseña":1234,"Estado":true,"External_id":"externaljimmy","idPersona":2}}
->>>>>>> willian
+{"Modelo.Cuenta":{"id":1,"Usuario":1,"contraseña":12345,"Estado":true,"External_id":"5d6d5s6","idPersona":1}}

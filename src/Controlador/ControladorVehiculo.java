@@ -85,14 +85,29 @@ public class ControladorVehiculo {
         this.paux = paux;
     }
     
-
+    /**
+     * Metodo que permite crear un vehiculo
+     * @param placa
+     * @param Modelo
+     * @param color
+     * @param observacion
+     * @param imagen
+     * @param Propietario 
+     */
     public void RegistrarVehiculo(String placa, Long Modelo, String color, String observacion, File imagen, Long Propietario) {
         vehiculo = new Vehiculo(Long.parseLong("0"), placa, Modelo, color, observacion, true, observacion, imagen, Propietario);
     }
+    /**
+     * Metodo que permite crear un modelode vehiculo
+     * @param Nombre
+     * @param Marca 
+     */
     public void RegistrarModelo(String Nombre,Long Marca){
         modelo=new ModeloVehiculo(Long.parseLong("0"), Nombre, Marca);
     }
-
+    /**
+     * Metodo encargado de guardar los vehiculos en la base de datos
+     */
     public void GuardarVehiculo() {
         try {
             FileInputStream archivofoto=null;
@@ -120,6 +135,9 @@ public class ControladorVehiculo {
             System.out.println("Error: " + ex.getMessage());
         }
     }
+    /**
+     * Metodo encargado de guardar los modelos de vehiculos en la base de datos
+     */
     public void GuardarModelo() {
         try {
             int i = 0;
@@ -136,7 +154,10 @@ public class ControladorVehiculo {
             System.out.println("Error: " + ex.getMessage());
         }
     }
-
+    /**
+     * Metodo encargado de rellenar la tabla de forma general
+     * @param modelo 
+     */
     public void llenarTabla(DefaultTableModel modelo) {
         ctr.RecuperarData();
         Object obj[] = new Object[3];
@@ -149,6 +170,10 @@ public class ControladorVehiculo {
         }
 
     }
+    /**
+     * Metodo encargado de rellenar la tabla de vehiculos
+     * @param modelo 
+     */
     public void llenarTablaVehiculo(DefaultTableModel modelo) {
         recuperarDatosMod();
         ctr.RecuperarData();
@@ -176,6 +201,11 @@ public class ControladorVehiculo {
         }
 
     }
+    /**
+     * Metodo encargado de rellenar los datos de clientes filtrados por apellido
+     * @param li
+     * @param modelo 
+     */
     public void llenarTablaFiltrarApellido(ListaSimple<Persona> li,DefaultTableModel modelo) {
         ctr.RecuperarData();
         Object obj[] = new Object[3];
@@ -188,7 +218,11 @@ public class ControladorVehiculo {
         }
 
     }
-
+    /**
+     * Metodo encargado de rellenar la tabla de busqueda por cedula
+     * @param modelo
+     * @param persona 
+     */
     public void llenarTablaBusqueda(DefaultTableModel modelo, Persona persona) {
         Object obj[] = new Object[3];
         modelo.setRowCount(0);
@@ -197,7 +231,12 @@ public class ControladorVehiculo {
         obj[2] = persona.getApellido();
         modelo.addRow(obj);
     }
-
+    /**
+     * Metodo de busqueda binaria
+     * @param lista
+     * @param codigo
+     * @return 
+     */
     public Persona busquedaBinaria(Lista.ListaSimple<Persona> lista, Long codigo) {
         int n = lista.tamano();
         int centro, inf = 0, sup = n;
@@ -214,7 +253,11 @@ public class ControladorVehiculo {
         lista.verDatos();
         return null;
     }
-
+    /**
+     * Metodo de ordenacio shell
+     * @param arreglo
+     * @return 
+     */
     public ListaSimple<Persona> shell(ListaSimple<Persona> arreglo) {
         int inta, i;
         Persona aux;
@@ -375,7 +418,11 @@ public class ControladorVehiculo {
         }
         return arreglo;
     }
-
+    /**
+     * Metodo de buscar personas por cedula
+     * @param Cedula
+     * @return 
+     */
     public Persona BuscarCedula(Long Cedula) {
         ctr.RecuperarData();
         ListaSimple<Persona> lAux = ctr.getLiPersona();
@@ -388,6 +435,11 @@ public class ControladorVehiculo {
         }
 
     }
+    /**
+     * Metodo para buscar personas por su id
+     * @param id
+     * @return 
+     */
     public Persona BuscarIDPersona(Long id) {
         ctr.RecuperarData();
         System.out.println("Por aqui nulo");
@@ -402,6 +454,11 @@ public class ControladorVehiculo {
         }
 
     }
+    /**
+     * Metodo de busqueda de vehiculas por id
+     * @param idVehiculo
+     * @return 
+     */
     public Vehiculo BuscarVehiculo(Long idVehiculo) {
         ctr.RecuperarData();
         ListaSimple<Vehiculo> lAux = live;
@@ -414,6 +471,11 @@ public class ControladorVehiculo {
         }
 
     }
+    /**
+     * Metodo de busqueda de modelos de vehiculos por id
+     * @param idModelo
+     * @return 
+     */
     public ModeloVehiculo BuscarModelo(Long idModelo) {
         ctr.RecuperarData();
         ListaSimple<ModeloVehiculo> lAux = limo;
@@ -426,18 +488,27 @@ public class ControladorVehiculo {
         }
 
     }
-
+    /**
+     * Metodo de filtrado de personas por apellido
+     * @param apellido
+     * @return 
+     */
     public ListaSimple<Persona> BuscarApellido(String apellido) {
+        ctr.RecuperarData();
         ListaSimple<Persona> aux=new ListaSimple<>();
         for (int i = 0; i < ctr.getLiPersona().tamano(); i++) {
             if (ctr.getLiPersona().obtenerPorPosicion(i).getApellido().equals(apellido)) {
                 aux.insertar(ctr.getLiPersona().obtenerPorPosicion(i));
-                return aux;
             }
         }
-        return null;
+        return aux;
 
     }
+    /**
+     * Metodo que permite buscar la vehiculo por placa
+     * @param placa
+     * @return 
+     */
     public ListaSimple<Vehiculo> BuscarPlaca(String placa) {
         ListaSimple<Vehiculo> aux=new ListaSimple<>();
         for (int i = 0; i < live.tamano(); i++) {
@@ -449,6 +520,10 @@ public class ControladorVehiculo {
         return null;
 
     }
+    /**
+     * Metodo que permite llenar los campos de placa
+     * @param placa 
+     */
     public void llenartxt(String placa){
         for (int i = 0; i < live.tamano(); i++) {
             if (live.obtenerPorPosicion(i).getPlaca().equals(placa)) {
@@ -456,6 +531,11 @@ public class ControladorVehiculo {
             }
         }
     }
+    /**
+     * Metodo que permite rellenar la tabla de vehiculos filtrados por placa
+     * @param li
+     * @param modelo 
+     */
      public void llenarTablaFiltrarPlaca(ListaSimple<Vehiculo> li,DefaultTableModel modelo) {
         ctr.RecuperarData();
         Object obj[] = new Object[4];
@@ -485,7 +565,10 @@ public class ControladorVehiculo {
     }
     ModeloVehiculo[] mo;
     Long idMarca;
-
+    /**
+     * Metodo que permite llenar los modelos de vehiculos en el jcombo box correspondiente
+     * @param cb 
+     */
     public void llenarboxModelos(JComboBox cb) {
         
         recuperarDatosMod();
@@ -498,6 +581,10 @@ public class ControladorVehiculo {
 
     }
     Marca[] ma;
+    /**
+     * Metodo que permite llenar las marcas de vehiculos en el jCombo box correspondiente
+     * @param cb 
+     */
     public void llenarboxMarcas(JComboBox cb){
        recuperarDatosMod();
         ma = new Marca[lima.tamano()];
@@ -508,6 +595,11 @@ public class ControladorVehiculo {
         } 
     }
     //igual muy importante para la vistas
+    /**
+     * Metodo que permite buscar el id de un modelo de vehiculo por nombre
+     * @param item
+     * @return 
+     */
     public Long idModelo(String item) {
         long lg = 0;
         for (int i = 0; i < mo.length; i++) {
@@ -518,7 +610,10 @@ public class ControladorVehiculo {
         }
         return lg;
     }
-
+    /**
+     * Metodo que permite buscar una marca de un vehiculo
+     * @return 
+     */
     public String buscarMarca() {
         String nombreMarca = "";
         for (int i = 0; i < lima.tamano(); i++) {
@@ -529,7 +624,9 @@ public class ControladorVehiculo {
         return nombreMarca;
 
     }
-
+/**
+ * Metodo encargado de llenar las listas de vehiculos, modelos, marcas con los datos obtenidos de la base de datos
+ */
     public void recuperarDatosMod() {
         live=new ListaSimple<>();
         limo=new ListaSimple<>();
@@ -573,6 +670,11 @@ public class ControladorVehiculo {
             Logger.getLogger(ControladorVehiculo.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//cargo la lista con los datos de la BD
+    /**
+     * Metodo que permite buscar marcas por su nombre i obtener su id
+     * @param Nombre
+     * @return 
+     */
     public Long buscarMNombre(String Nombre){
         Long id = null;
         for (int i = 0; i < lima.tamano(); i++) {
@@ -582,6 +684,14 @@ public class ControladorVehiculo {
         }
         return id;
     }
+    /**
+     * Metodo que permite modificar y o actualizar los datos de un vehiculo
+     * @param color
+     * @param observacion
+     * @param activo
+     * @param file
+     * @param idVehiculo 
+     */
     public void Editar(String color,String observacion,String activo,File file,String idVehiculo){
          boolean isActivo;
         if (activo.equals("Activo")) {
@@ -625,6 +735,11 @@ public class ControladorVehiculo {
 
         }
     }
+    /**
+     * Metodo que permite llenar la tabla de vehiculos dependiendo de la persona que sea propietaria
+     * @param modelo
+     * @param pe 
+     */
     public void llenarTablaBusquedaVehiculo(DefaultTableModel modelo,Persona pe){
         Object obj[] = new Object[4];
         modelo.setRowCount(0);
@@ -649,14 +764,26 @@ public class ControladorVehiculo {
         obj[3] = pe.getCedula();
         modelo.addRow(obj);
     }
+    /**
+     * Metodo para buiscar vehiculo
+     * @param id 
+     */
     public void buscarVehiculo(String id){
         Long lg=Long.parseLong(id);
         vaux=BuscarVehiculo(lg);
     }
+    /**
+     * Metodo para buscar modelo de vehiculo
+     * @param id 
+     */
     public void buscarModeloVehiculo(String id){
         Long lg=Long.parseLong(id);
         maux=BuscarModelo(lg);
     }
+    /**
+     * Metodo para buscar personas
+     * @param id 
+     */
     public void buscarPersona(String id){
         Long lg=Long.parseLong(id);
         paux=BuscarCedula(lg);

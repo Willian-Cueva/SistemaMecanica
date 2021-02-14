@@ -36,11 +36,13 @@ public class UtilesMecanico {
      * @return
      */
     static Connection conexion;
-
+    /**
+     * Metodo get estatico que permite establecer conexion con la base de datos
+     * @return 
+     */
     public Connection getConexion() {
         return conexion;
     }
-    
     public void IniciarConexion() {
         Connection con = null;
         String Driver = "com.mysql.cj.jdbc.Driver";
@@ -64,7 +66,7 @@ public class UtilesMecanico {
     }
 
     /**
-     *
+     * Metodo que permite realizar la busqueda de imagenes en el directorio de el computador 
      * @return
      */
     public File BuscarImagen() {
@@ -82,6 +84,12 @@ public class UtilesMecanico {
         }
         return file;
     }
+    /**
+     * Metodo que permite convertir imagenes de formato Blod a Icono
+     * @param imagen
+     * @param d
+     * @return 
+     */
     public ImageIcon img(Blob imagen, Dimension d){
         
         Image rpta = null;
@@ -99,6 +107,10 @@ public class UtilesMecanico {
             return null;
         }
     }
+    /**
+     * Metodo que permite obtener la fecha actual
+     * @return 
+     */
         public String fechaActual(){
         String fechaHora="";
         Calendar fecha = new GregorianCalendar();                                                   

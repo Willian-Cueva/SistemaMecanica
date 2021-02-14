@@ -19,13 +19,16 @@ import java.sql.PreparedStatement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import Controlador.UtilesMecanico.UtilesMecanico;
+import Modelo.Servicio;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author Willian
  */
 public class ControladorOrdeDeReparacion {
-
+    UtilesMecanico uti=new UtilesMecanico();
     private ListaSimpleAvanzada ordenes = new ListaSimpleAvanzada();
     private OrdenReparacion orden;
     private DetalleReparacion detalle = new DetalleReparacion();
@@ -66,6 +69,7 @@ public class ControladorOrdeDeReparacion {
     public void setDetalle(DetalleReparacion detalle) {
         this.detalle = detalle;
     }
+    OrdenReparacion aux=new OrdenReparacion();
     
     public void calcularValores(){
         double subtotal=0.0;
@@ -114,6 +118,42 @@ public class ControladorOrdeDeReparacion {
             System.err.println("Error al consultar la tabla salida producto");;
         }
         detalle.setListaProductos(productos);
+        
+    }
+    /**
+     * Este metodo permite cargar la lista de servicios que se le han relizado al vehiculo desde la base de datos a una lista Simple
+     */
+    public void cargarListaServicios(){
+        String sql ="SELECT * FROM salidaServicio where idDetalle='"+detalle.getIdDetalle().toString()+"'";
+        Lista.ListaSimple<Servicio> lservicio=new Lista.ListaSimple<>();    
+        Long idServicio=0L;
+        try {
+            
+            Statement st = (Statement) uti.getConexion().createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            while (rs.next()) { 
+                if (detalle.getIdDetalle()==rs.getLong(1)) {
+                    idServicio=rs.getLong(1);
+                    break;
+                }
+                
+                
+            }
+        } catch (SQLException ex) {
+            System.err.println("Error al consultar la tabla salida producto");;
+        }
+        String sql2 ="SELECT * FROM servicio where idSalidaServicio='"+idServicio+"'";
+        try {
+            
+            Statement st = (Statement) uti.getConexion().createStatement();
+            ResultSet rs = st.executeQuery(sql2);
+            while (rs.next()) { 
+                lservicio.insertar(new Servicio(rs.getLong(1),rs.getString(2),rs.getDouble(3), rs.getString(4)));
+            }
+        } catch (SQLException ex) {
+            System.err.println("Error al consultar la tabla salida producto");;
+        }
+        detalle.setListaServivios(lservicio);
         
     }
 
@@ -211,8 +251,8 @@ public class ControladorOrdeDeReparacion {
             JOptionPane.showMessageDialog(null, "No se pudo  insertar");
         }
     }
-
     public boolean tieneOrdenActiva(Object vehiculo) {
+        cargarOrdenes();
         boolean chis = false;
         if (vehiculo != null) {
             Vehiculo v = (Vehiculo) vehiculo;
@@ -223,6 +263,7 @@ public class ControladorOrdeDeReparacion {
                     chis = true;
                     this.placa = v.getPlaca();
                     this.orden = or;
+                    this.aux=or;
                     break;
                 }
             }
@@ -230,6 +271,31 @@ public class ControladorOrdeDeReparacion {
             System.err.println("No se encontro el vehiculo");
         }
         return chis;
+    }
+    /**
+     * Este metodo permite actualizar los servicios que se le relizan al vehiculo el cual tirne una orden de reparacion activa
+     * @param subtotal 
+     */
+     public void actualizarOrdenServicio(double subtotal){
+         try {
+             //cargarOrdenes();
+             int i=0;
+             System.out.println("Entra al metodo actualizar"+subtotal+ " "+ aux.getIdOrden());
+             // String sql = "UPDATE `baseddmecanica`.`ordenreparacion` SET `subtotal` = '"+orden.getSubtotal()+"', `total` = '"+orden.getTotal()+
+               // "', `descuento` = '"+orden.getDescuent()+"', `Observacion` = '"+orden.getObservacion()+"' WHERE (`idordenReparacion` = '"+orden.getIdOrden()+"');";
+                String insertar ="UPDATE ordenreparacion SET subtotal = ?,total=?,descuento=? WHERE (idordenReparacion = ?)";
+                PreparedStatement stmt = (PreparedStatement) uti.getConexion().prepareStatement(insertar);
+                stmt.setDouble(1, aux.getSubtotal()+subtotal);
+                stmt.setDouble(2, aux.getTotal()+subtotal-orden.getDescuent());
+                stmt.setDouble(3,aux.getDescuent());
+                stmt.setLong(4, aux.getIdOrden());
+                i = stmt.executeUpdate();
+                System.out.println("i------------ "+i);
+            } catch (SQLException ex) {
+                System.out.println("Error: "+ex);
+            }catch(Exception ex){
+                System.out.println("Error: "+ex);
+            }
     }
 
 }

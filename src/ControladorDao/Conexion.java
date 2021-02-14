@@ -15,6 +15,9 @@ import com.thoughtworks.xstream.io.json.JettisonMappedXmlDriver;
 public class Conexion {
     private  String REPO = "datos";
     private XStream xtrStream; 
+    /**
+     * Metodo para establecer conexion con Xstream
+     */
     public Conexion() {
         xtrStream = new XStream(new JettisonMappedXmlDriver());
         xtrStream.setMode(XStream.NO_REFERENCES);

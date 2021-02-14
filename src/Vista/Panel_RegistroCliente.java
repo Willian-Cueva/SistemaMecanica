@@ -37,6 +37,9 @@ public class Panel_RegistroCliente extends javax.swing.JPanel {
             iniciarDatos();
         }
     }
+    /**
+     * Metodo que permite cargar los datos y botones de la interfaz
+     */
     private void iniciarDatos(){
         ctrc.RecuperarData();
         ctr.llenarboxRoles(cmbRol);  
@@ -86,13 +89,14 @@ public class Panel_RegistroCliente extends javax.swing.JPanel {
         cmbRol = new javax.swing.JComboBox<>();
         btnGuardar = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        Fondo = new javax.swing.JLabel();
 
         setMinimumSize(new java.awt.Dimension(727, 415));
+        setOpaque(false);
         setPreferredSize(new java.awt.Dimension(727, 415));
 
         jPanel1.setBackground(new java.awt.Color(61, 61, 61));
         jPanel1.setMinimumSize(new java.awt.Dimension(727, 415));
+        jPanel1.setOpaque(false);
         jPanel1.setLayout(null);
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -187,6 +191,7 @@ public class Panel_RegistroCliente extends javax.swing.JPanel {
 
         btnGuardar.setBackground(new java.awt.Color(255, 175, 0));
         btnGuardar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Guardar.png"))); // NOI18N
         btnGuardar.setText("Guardar");
         btnGuardar.setOpaque(true);
         btnGuardar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -198,7 +203,7 @@ public class Panel_RegistroCliente extends javax.swing.JPanel {
             }
         });
         jPanel2.add(btnGuardar);
-        btnGuardar.setBounds(420, 270, 80, 30);
+        btnGuardar.setBounds(420, 275, 80, 25);
 
         jPanel1.add(jPanel2);
         jPanel2.setBounds(120, 50, 510, 350);
@@ -211,10 +216,6 @@ public class Panel_RegistroCliente extends javax.swing.JPanel {
         jLabel6.setOpaque(true);
         jPanel1.add(jLabel6);
         jLabel6.setBounds(0, 0, 624, 30);
-
-        Fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/FondoMetalico.jpg"))); // NOI18N
-        jPanel1.add(Fondo);
-        Fondo.setBounds(0, 0, 730, 420);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -279,7 +280,6 @@ public class Panel_RegistroCliente extends javax.swing.JPanel {
     private javax.swing.JTextField txtContraseña;
     private javax.swing.JLabel jLabel9;
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel Fondo;
     private javax.swing.JLabel VisatFoto;
     private javax.swing.JLabel btnBuscarImagen;
     private javax.swing.JLabel btnGuardar;
