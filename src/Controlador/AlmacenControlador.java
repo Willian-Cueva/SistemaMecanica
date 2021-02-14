@@ -10,17 +10,22 @@ import Controlador.Utiles.Producto.Utiles;
 import Modelo.DetalleReparacion;
 import Modelo.Producto;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 
 /**
  *
  * @author LENOVO LEGION
  */
 public class AlmacenControlador {
-    
+
+    private Utiles u = new Utiles();
     private ListaSimpleAvanzada productoOrden = new ListaSimpleAvanzada();
     private ListaSimpleAvanzada producto = new ListaSimpleAvanzada();
-    private Utiles u = new Utiles();
+    private ListaSimpleAvanzada productoBaseDatos = u.listaProductos();
 
     public ListaSimpleAvanzada getProducto() {
         if (producto == null) {
@@ -45,8 +50,6 @@ public class AlmacenControlador {
         this.productoOrden = new ListaSimpleAvanzada();
         this.productoOrden = productoOrden;
     }
-    
-    
 
     public ListaSimpleAvanzada obtenerLista() {
         return u.listaProductos();
@@ -59,7 +62,7 @@ public class AlmacenControlador {
      *
      * @return Un objeto Producto
      */
-    public Producto transformar(Object [] row) {
+    public Producto transformar(Object[] row) {
         Producto prdt = new Producto();
         prdt.setId((Long) row[0]);
         prdt.setNombre((String) row[1]);
@@ -72,9 +75,10 @@ public class AlmacenControlador {
     }
 
     /**
-     *  Este metodo nos permite guardar el detalle de productos de cada auto.
-     * @param detalleReparacion ingresa el detalle de reparacion de cada auto
-     * 
+     * Este metodo nos permite guardar el detalle de productos de cada auto.
+     *
+     * @param idDetalle ind del detalle de reparacion
+     *
      */
     public void guardarProducto(long idDetalle) {
         productoOrden.present();
@@ -95,9 +99,90 @@ public class AlmacenControlador {
         }
 
     }
-    
-    public ListaSimpleAvanzada Ml (Object [] row){
-           productoOrden.insertar(transformar(row));
-    return productoOrden;
+
+    /**
+     * Este metodo permite ingresar productos al detalle de reparacion
+     *
+     * @param row Objeto a ingresar a la lista
+     * @return Lista.
+     */
+    public ListaSimpleAvanzada Ml(Object[] row) {
+        productoOrden.insertar(transformar(row));
+        return productoOrden;
+    }
+
+    /**
+     * Este metodo permite verificar por los id si ya se agrego un producto
+     *
+     * @param indice id a buscas
+     * @param tabla Tabla en la que se requiere bucar
+     * @return true si existe coincidencia por lo contrario devuelve false si no
+     * se a encontrado
+     */
+    public boolean ExisteEnLaTabla(long indice, JTable tabla) {
+        boolean v = false;
+        for (int i = 0; i < tabla.getRowCount(); i++) {
+            String valorO = tabla.getValueAt(i, 0).toString();
+            long valor = Long.valueOf(valorO);
+            if (indice == valor) {
+
+                v = true;
+            }
+        }
+        return v;
+    }
+
+    /**
+     * Nos permite buscar los stock en las listas que se manejan en las tablas
+     * @param indice id del producto que se agrego a la order de reparacion
+     * @param cantidad cantidad del producto que se agrego
+     * @return Stock actualizado
+     */
+    public int BuscarStock(long indice, int cantidad) {
+        int respuesta = 0;
+        /*productoBaseDatos.present();
+        System.out.println("*****************************************************");
+        productoOrden.present();*/
+
+        for (int i = 0; i < productoBaseDatos.tamano(); i++) {
+            Producto objpro = new Producto();
+            objpro = (Producto) productoBaseDatos.obtenerObjetopp(i);
+            Long v = objpro.getId();
+            if (indice == v) {
+                respuesta = objpro.getCantidad() - cantidad;
+                break;
+            }
+        }
+        return respuesta;
+    }
+    /**
+     * Nos permite actualizar el estock de produntos een la base de datos.
+     */
+    public void ActualizaeStock() {
+
+        for (int i = 0; i < productoOrden.tamano(); i++) {
+            Producto objpro = new Producto();
+            objpro = (Producto) productoOrden.obtenerObjetopp(i);
+            int StockAtualizado = BuscarStock(objpro.getId(), objpro.getCantidad());
+            System.out.println("NOMBRE: " + objpro.getNombre() + "  STCK ACTUAL :" + StockAtualizado);
+            SentenciasSQL(objpro.getId(), StockAtualizado);
+        }
+    }
+    /**
+     * Este metodo nos permite realizar la modificacion en la base de datos 
+     * @param id Representa el id del producto que agregamos en la orden.
+     * @param stockA Representa el stock que se desee poner en la base de datos 
+     */
+    public void SentenciasSQL(long id, int stockA) {
+        String sql = "UPDATE `producto` SET `cantidad` = '"+stockA+"' WHERE (`producto`.`idProducto` = '"+id+"')";
+        try {
+            System.out.println("ACTUALIZA STOCK");
+            PreparedStatement ps = (PreparedStatement) ConeccionBDD.IniciarConexion().prepareStatement(sql);
+            ps.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Se actualizaron los datos correctamente");
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al actualizar los datos en la base de datos", "Error", JOptionPane.ERROR_MESSAGE);
+            System.out.println("No se actualizaron los datos - error:" + ex);
+        }
     }
 }
