@@ -4,19 +4,29 @@
  * and open the template in the editor.
  */
 package Vista;
+
+import Controlador.Conexion.ConeccionBDD;
 import Controlador.ControladorOrdeDeReparacion;
-import Controlador.ControladorVehiculo;
 import Vista.Modelo.TablaProducto;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.sql.Statement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+import java.sql.PreparedStatement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author LENOVO LEGION
  */
 public class Frm_Facturar extends javax.swing.JFrame {
+
     private ControladorOrdeDeReparacion codr = new ControladorOrdeDeReparacion();
-    private ControladorVehiculo controladorVehiculo = new ControladorVehiculo();
     private TablaProducto tablaProducto = new TablaProducto();
+
     /**
      * Creates new form Frm_VerVehiculo
      */
@@ -25,24 +35,59 @@ public class Frm_Facturar extends javax.swing.JFrame {
     }
 
     public Frm_Facturar(ControladorOrdeDeReparacion codr) {
+        this.setUndecorated(true);
         initComponents();
+        this.setLocationRelativeTo(null);
         this.codr = codr;
-        controladorVehiculo.setVaux(codr.getVehiculo());
+        this.codr.cargarDetalle();
         cargarDatos();
     }
-    
-     private void cargarDatos() {
-         
-        Calendar c =  new GregorianCalendar();
-        labelFecha.setText(c.get(Calendar.DAY_OF_MONTH)+"/"+c.get(Calendar.MONTH)+"/"+c.get(Calendar.YEAR));
-        labelHora.setText(c.get(Calendar.HOUR_OF_DAY)+":"+c.get(Calendar.MINUTE));
+
+    private void cargarDatos() {
+
+        Calendar c = new GregorianCalendar();
+        labelFecha.setText(c.get(Calendar.DAY_OF_MONTH) + "/" + c.get(Calendar.MONTH) + "/" + c.get(Calendar.YEAR));
+        labelHora.setText(c.get(Calendar.HOUR_OF_DAY) + ":" + c.get(Calendar.MINUTE));
         labelNombre.setText(codr.propietario().getNombre());
         labelCorreo.setText(codr.propietario().getCorreo());
         labelTelefono.setText(codr.propietario().getTelefono());
         labelCedula.setText(codr.propietario().getCedula());
         labelPlaca.setText(codr.getVehiculo().getPlaca());
+        labelSubtotal.setText(String.valueOf(codr.getOrden().getSubtotal()));
+        labelDescuento.setText(String.valueOf(codr.getOrden().getDescuent()));
+        labeTotal.setText(String.valueOf(codr.getOrden().getTotal()));
+        consultar();
+//        labelMarca.setMarca
+        cargarTablas();
     }
-    
+
+    private void consultar() {
+        String marca="No encontro marca", modelo="No encontro modelo";
+        String sql = "SELECT modelovehiculo.nombre,marca.nombre from modelovehiculo,marca "
+                + "where idmodeloVehiculo='"+codr.getVehiculo().getIdModeloVehiculo().toString()+"' and (modelovehiculo.idmarca=marca.idmarca);";
+        try {
+            Statement st = ConeccionBDD.IniciarConexion().createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            if (rs.next()) {
+                modelo = rs.getString(1);
+                marca=rs.getString(2);
+            } else {
+                System.err.println("No se obtivo los valores de la tabla");
+            }
+            labelMarca.setText(marca);
+            labelModelo.setText(modelo);
+        } catch (SQLException ex) {
+            System.err.println("Error al obtener la marca y el modelo del vehicilo en la base de datos ");
+        }
+    }
+
+    private void cargarTablas() {
+        codr.cargarListaProductos();
+        tablaProducto.setLsp(codr.getDetalle().getListaProductos());
+        tablaProductos.setModel(tablaProducto);
+        tablaProductos.updateUI();
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -82,29 +127,46 @@ public class Frm_Facturar extends javax.swing.JFrame {
         labelFecha = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         labelHora = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        labelSubtotal = new javax.swing.JLabel();
+        labelDescuento = new javax.swing.JLabel();
+        labeTotal = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Factura"));
 
+        jLabel1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel1.setText("Num. Factura:");
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Cliente"));
 
+        jLabel2.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel2.setText("Nombre:");
 
+        jLabel3.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel3.setText("CI:");
 
+        jLabel4.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel4.setText("Correo:");
 
+        jLabel5.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel5.setText("Telefono:");
 
+        labelNombre.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         labelNombre.setText("-");
 
+        labelCorreo.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         labelCorreo.setText("-");
 
+        labelTelefono.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         labelTelefono.setText("-");
 
+        labelCedula.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         labelCedula.setText("-");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -151,16 +213,22 @@ public class Frm_Facturar extends javax.swing.JFrame {
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Vehiculo"));
 
+        jLabel7.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel7.setText("Placa:");
 
+        jLabel8.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel8.setText("Modelo:");
 
+        jLabel9.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel9.setText("Marca:");
 
+        labelModelo.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         labelModelo.setText("-");
 
+        labelPlaca.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         labelPlaca.setText("-");
 
+        labelMarca.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         labelMarca.setText("-");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -172,15 +240,15 @@ public class Frm_Facturar extends javax.swing.JFrame {
                 .addComponent(jLabel7)
                 .addGap(18, 18, 18)
                 .addComponent(labelPlaca, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel8)
-                .addGap(28, 28, 28)
-                .addComponent(labelModelo, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(labelModelo, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel9)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(labelMarca, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(21, 21, 21))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(labelMarca, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -258,6 +326,8 @@ public class Frm_Facturar extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jButton1.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Atras.png"))); // NOI18N
         jButton1.setText("Atras");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -265,24 +335,62 @@ public class Frm_Facturar extends javax.swing.JFrame {
             }
         });
 
+        jLabel6.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel6.setText("Fecha:");
 
+        labelNroFactura.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         labelNroFactura.setText("-");
 
+        labelFecha.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         labelFecha.setText("-");
 
+        jLabel10.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel10.setText("Hora:");
 
+        labelHora.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         labelHora.setText("-");
+
+        jLabel11.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jLabel11.setText("Subtotal:");
+
+        jLabel12.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jLabel12.setText("Descuento:");
+
+        jLabel13.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jLabel13.setText("Total:");
+
+        labelSubtotal.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        labelSubtotal.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        labelSubtotal.setText("-");
+
+        labelDescuento.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        labelDescuento.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        labelDescuento.setText("-");
+
+        labeTotal.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        labeTotal.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        labeTotal.setText("-");
+
+        jLabel17.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jLabel17.setText("%");
+
+        jButton2.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/002-disquete.png"))); // NOI18N
+        jButton2.setText("Guardar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -300,11 +408,27 @@ public class Frm_Facturar extends javax.swing.JFrame {
                                 .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(labelHora, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(191, 191, 191)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton2)
+                        .addGap(53, 53, 53)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel12)
+                            .addComponent(jLabel13)
+                            .addComponent(jLabel11))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(labeTotal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(labelDescuento, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel17))
+                            .addComponent(labelSubtotal, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(30, 30, 30))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -326,8 +450,27 @@ public class Frm_Facturar extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel11)
+                    .addComponent(labelSubtotal))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel12)
+                            .addComponent(labelDescuento)
+                            .addComponent(jLabel17))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel13)
+                            .addComponent(labeTotal))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton1)
+                            .addComponent(jButton2))
+                        .addGap(36, 36, 36))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -341,10 +484,9 @@ public class Frm_Facturar extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -352,7 +494,40 @@ public class Frm_Facturar extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        int s = JOptionPane.showConfirmDialog(this, "¿Desea guardar emitir yá esta factura?", "Seleccione", JOptionPane.YES_NO_OPTION);
+        if (s==0) {
+            if (codr.getOrden().getTotal()==0) {
+                JOptionPane.showMessageDialog(this, "No hay nada que facturar");
+            }else{
+                emitirFactura();
+            }
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void emitirFactura() {
+        String sql = "insert into factura(hora,fecha,idOrden) values('"+labelHora.getText()+"','"+labelFecha.getText()+"','"+codr.getOrden().getIdOrden().toString()+"');";
+        try {
+            PreparedStatement ps = ConeccionBDD.IniciarConexion().prepareCall(sql);
+            ps.executeUpdate();
+            JOptionPane.showMessageDialog(this, "Se emitió la factura correctamente");
+        } catch (SQLException ex) {
+            System.err.println("Error al insertar la factura en emitir factura");
+            JOptionPane.showMessageDialog(this, "No se pudo emitir la factura");
+        }
+        sql="UPDATE ordenreparacion set estado='0' where idordenreparacion='"+codr.getOrden().getIdOrden().toString()+"';";
+         try {
+            PreparedStatement ps = ConeccionBDD.IniciarConexion().prepareCall(sql);
+            ps.executeUpdate();
+             System.out.println("Se actualizo la orden como inactiva correctamente");
+        } catch (SQLException ex) {
+            System.err.println("Error al actualizar la orden de reparacion a inactiva");
+        }
+    }
 
     /**
      * @param args the command line arguments
@@ -394,8 +569,13 @@ public class Frm_Facturar extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -411,8 +591,10 @@ public class Frm_Facturar extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel labeTotal;
     private javax.swing.JLabel labelCedula;
     private javax.swing.JLabel labelCorreo;
+    private javax.swing.JLabel labelDescuento;
     private javax.swing.JLabel labelFecha;
     private javax.swing.JLabel labelHora;
     private javax.swing.JLabel labelMarca;
@@ -420,6 +602,7 @@ public class Frm_Facturar extends javax.swing.JFrame {
     private javax.swing.JLabel labelNombre;
     private javax.swing.JLabel labelNroFactura;
     private javax.swing.JLabel labelPlaca;
+    private javax.swing.JLabel labelSubtotal;
     private javax.swing.JLabel labelTelefono;
     private javax.swing.JTable tablaProductos;
     private javax.swing.JTable tablaServicios;

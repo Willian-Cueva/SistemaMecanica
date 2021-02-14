@@ -81,7 +81,7 @@ public class Panel_OrdenReparacion extends javax.swing.JPanel {
         labelPlaca = new javax.swing.JLabel();
         labelSubtotal = new javax.swing.JLabel();
         txtDescuento = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        btnFacturar = new javax.swing.JButton();
         btnGuardarOrden = new javax.swing.JButton();
         btnDetalle = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
@@ -231,16 +231,18 @@ public class Panel_OrdenReparacion extends javax.swing.JPanel {
         add(jPanel1);
         jPanel1.setBounds(10, 40, 340, 360);
 
-        jButton1.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/002-cuenta.png"))); // NOI18N
-        jButton1.setText("Facturar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnFacturar.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        btnFacturar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/002-cuenta.png"))); // NOI18N
+        btnFacturar.setText("Facturar");
+        btnFacturar.setDefaultCapable(false);
+        btnFacturar.setEnabled(false);
+        btnFacturar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnFacturarActionPerformed(evt);
             }
         });
-        add(jButton1);
-        jButton1.setBounds(450, 370, 150, 40);
+        add(btnFacturar);
+        btnFacturar.setBounds(450, 370, 150, 40);
 
         btnGuardarOrden.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         btnGuardarOrden.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/002-disquete.png"))); // NOI18N
@@ -279,11 +281,13 @@ public class Panel_OrdenReparacion extends javax.swing.JPanel {
             cargarCampos(ENCONTRADO);
             btnGuardarOrden.setEnabled(false);
             btnDetalle.setEnabled(true);
+            btnFacturar.setEnabled(true);
             JOptionPane.showMessageDialog(this, "Orden Activa", "Activo", JOptionPane.INFORMATION_MESSAGE);
         } else {
             System.out.println("No existen ordennes de reparacion activas pero si funciona xd");
             cargarCampos(PRECARGA);
             btnDetalle.setEnabled(false);
+            btnFacturar.setEnabled(false);
             btnGuardarOrden.setEnabled(true);
             JOptionPane.showMessageDialog(this, "No existe una orden de reparacion para este vehiculo", "Orden de Reparación", JOptionPane.INFORMATION_MESSAGE);
         }
@@ -354,6 +358,7 @@ public class Panel_OrdenReparacion extends javax.swing.JPanel {
         btnGuardarOrden.setEnabled(false);
         actualizardatos();
         btnDetalle.setEnabled(true);
+        btnFacturar.setEnabled(true);
     }//GEN-LAST:event_btnGuardarOrdenActionPerformed
 
     private void btnDetalleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetalleActionPerformed
@@ -362,10 +367,11 @@ public class Panel_OrdenReparacion extends javax.swing.JPanel {
         new Frm_Detalle(coddr).setVisible(true);
     }//GEN-LAST:event_btnDetalleActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnFacturarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFacturarActionPerformed
         // TODO add your handling code here:
-        
-    }//GEN-LAST:event_jButton1ActionPerformed
+         actualizardatos();
+         new Frm_Facturar(coddr).setVisible(true);
+    }//GEN-LAST:event_btnFacturarActionPerformed
 //    private void RefrescarDatos(String placa) {
 //        ctr.recuperarDatosMod();
 //        ctr.llenartxt(placa);
@@ -381,9 +387,9 @@ public class Panel_OrdenReparacion extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable Tabla1;
     private javax.swing.JButton btnDetalle;
+    private javax.swing.JButton btnFacturar;
     private javax.swing.JButton btnGuardarOrden;
     private javax.swing.JTextArea cajaTexto;
-    private javax.swing.JButton jButton1;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JCheckBox jCheckBox3;
