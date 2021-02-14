@@ -12,7 +12,7 @@ import Controlador.ListaSimpleAvanzada;
  * @author Cris2
  */
 public class DetalleReparacion {
-    private Long idDetalle;
+    private Long idDetalle; 
     private Long idOrden;
     private ListaSimpleAvanzada listaServivios = new ListaSimpleAvanzada();
     private ListaSimpleAvanzada listaProductos = new ListaSimpleAvanzada();

@@ -144,7 +144,7 @@ public class ControladorOrdeDeReparacion {
             ps.setString(1, fecha);
             ps.setString(2, hora);
             ps.setString(3, descuento);
-            ps.setDouble(4, Double.parseDouble(observacion));
+            ps.setString(4, observacion);
             ps.setString(5, v.getId().toString());
             ps.setString(6, "1");
             ps.executeUpdate();
