@@ -74,8 +74,6 @@ public class Panel_OrdenReparacion extends javax.swing.JPanel {
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         labelTotal = new javax.swing.JLabel();
-        btnDetalle = new javax.swing.JButton();
-        btnGuardarOrden = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         cajaTexto = new javax.swing.JTextArea();
@@ -83,6 +81,9 @@ public class Panel_OrdenReparacion extends javax.swing.JPanel {
         labelPlaca = new javax.swing.JLabel();
         labelSubtotal = new javax.swing.JLabel();
         txtDescuento = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
+        btnGuardarOrden = new javax.swing.JButton();
+        btnDetalle = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(61, 61, 61));
@@ -105,9 +106,9 @@ public class Panel_OrdenReparacion extends javax.swing.JPanel {
         jScrollPane1.setViewportView(Tabla1);
 
         add(jScrollPane1);
-        jScrollPane1.setBounds(360, 130, 350, 240);
+        jScrollPane1.setBounds(360, 110, 350, 210);
         add(txtBuscar);
-        txtBuscar.setBounds(360, 90, 230, 30);
+        txtBuscar.setBounds(360, 70, 230, 30);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
@@ -138,7 +139,7 @@ public class Panel_OrdenReparacion extends javax.swing.JPanel {
             }
         });
         add(jLabel1);
-        jLabel1.setBounds(590, 90, 70, 30);
+        jLabel1.setBounds(590, 70, 70, 30);
 
         jCheckBox3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jCheckBox3.setForeground(new java.awt.Color(255, 153, 0));
@@ -150,14 +151,14 @@ public class Panel_OrdenReparacion extends javax.swing.JPanel {
             }
         });
         add(jCheckBox3);
-        jCheckBox3.setBounds(530, 50, 80, 30);
+        jCheckBox3.setBounds(530, 30, 80, 30);
 
         jCheckBox2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jCheckBox2.setForeground(new java.awt.Color(255, 153, 0));
         jCheckBox2.setText("Placa");
         jCheckBox2.setOpaque(false);
         add(jCheckBox2);
-        jCheckBox2.setBounds(440, 50, 80, 30);
+        jCheckBox2.setBounds(440, 30, 80, 30);
 
         jCheckBox1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jCheckBox1.setForeground(new java.awt.Color(255, 153, 0));
@@ -165,7 +166,7 @@ public class Panel_OrdenReparacion extends javax.swing.JPanel {
         jCheckBox1.setText("Cedula");
         jCheckBox1.setOpaque(false);
         add(jCheckBox1);
-        jCheckBox1.setBounds(360, 50, 80, 30);
+        jCheckBox1.setBounds(360, 30, 80, 30);
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -202,26 +203,6 @@ public class Panel_OrdenReparacion extends javax.swing.JPanel {
         labelTotal.setText("-");
         jPanel1.add(labelTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 140, 150, -1));
 
-        btnDetalle.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        btnDetalle.setText("Detalle de Reparacion");
-        btnDetalle.setEnabled(false);
-        btnDetalle.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDetalleActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnDetalle, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 340, 190, -1));
-
-        btnGuardarOrden.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        btnGuardarOrden.setText("Guardar");
-        btnGuardarOrden.setEnabled(false);
-        btnGuardarOrden.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGuardarOrdenActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnGuardarOrden, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 340, 90, 30));
-
         jLabel8.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         jLabel8.setText("Descuento:");
         jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, 130, -1));
@@ -248,7 +229,42 @@ public class Panel_OrdenReparacion extends javax.swing.JPanel {
         jPanel1.add(txtDescuento, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 180, 160, 30));
 
         add(jPanel1);
-        jPanel1.setBounds(10, 40, 340, 380);
+        jPanel1.setBounds(10, 40, 340, 360);
+
+        jButton1.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/002-cuenta.png"))); // NOI18N
+        jButton1.setText("Facturar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        add(jButton1);
+        jButton1.setBounds(450, 370, 150, 40);
+
+        btnGuardarOrden.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        btnGuardarOrden.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/002-disquete.png"))); // NOI18N
+        btnGuardarOrden.setText("Guardar");
+        btnGuardarOrden.setEnabled(false);
+        btnGuardarOrden.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarOrdenActionPerformed(evt);
+            }
+        });
+        add(btnGuardarOrden);
+        btnGuardarOrden.setBounds(360, 330, 120, 30);
+
+        btnDetalle.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        btnDetalle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/001-empleado.png"))); // NOI18N
+        btnDetalle.setText("Detalle de Reparacion");
+        btnDetalle.setEnabled(false);
+        btnDetalle.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDetalleActionPerformed(evt);
+            }
+        });
+        add(btnDetalle);
+        btnDetalle.setBounds(500, 330, 200, 32);
 
         jLabel2.setBackground(new java.awt.Color(61, 61, 61));
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/FondoMetalico.jpg"))); // NOI18N
@@ -271,7 +287,7 @@ public class Panel_OrdenReparacion extends javax.swing.JPanel {
             btnGuardarOrden.setEnabled(true);
             JOptionPane.showMessageDialog(this, "No existe una orden de reparacion para este vehiculo", "Orden de Reparación", JOptionPane.INFORMATION_MESSAGE);
         }
-        coddr.setPlaca(labelPlaca.getText());
+        coddr.getVehiculo().setPlaca(labelPlaca.getText());
         txtDescuento.setEnabled(true);
     }//GEN-LAST:event_Tabla1MouseReleased
     private void cargarCampos(int s) {
@@ -288,7 +304,7 @@ public class Panel_OrdenReparacion extends javax.swing.JPanel {
         } else if (s == 1) {
             f=coddr.getOrden().getFecha();
             h=coddr.getOrden().getHora();
-            p=coddr.getPlaca();
+            p=coddr.getVehiculo().getPlaca();
             sub=String.valueOf(coddr.getOrden().getSubtotal());
             t=String.valueOf(coddr.getOrden().getTotal());
             d=String.valueOf(coddr.getOrden().getDescuent());
@@ -332,7 +348,7 @@ public class Panel_OrdenReparacion extends javax.swing.JPanel {
     }//GEN-LAST:event_jCheckBox3MouseReleased
 
     private void btnGuardarOrdenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarOrdenActionPerformed
-        coddr.setPlaca(labelPlaca.getText());
+        coddr.getVehiculo().setPlaca(labelPlaca.getText());
         coddr.guardarOrden(labelFecha.getText(), labelHora.getText(), txtDescuento.getText(), cajaTexto.getText(), labelPlaca.getText());
 //        JOptionPane.showMessageDialog(this, coddr.getOrden());
         btnGuardarOrden.setEnabled(false);
@@ -345,6 +361,11 @@ public class Panel_OrdenReparacion extends javax.swing.JPanel {
         actualizardatos();
         new Frm_Detalle(coddr).setVisible(true);
     }//GEN-LAST:event_btnDetalleActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
 //    private void RefrescarDatos(String placa) {
 //        ctr.recuperarDatosMod();
 //        ctr.llenartxt(placa);
@@ -362,6 +383,7 @@ public class Panel_OrdenReparacion extends javax.swing.JPanel {
     private javax.swing.JButton btnDetalle;
     private javax.swing.JButton btnGuardarOrden;
     private javax.swing.JTextArea cajaTexto;
+    private javax.swing.JButton jButton1;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JCheckBox jCheckBox3;

@@ -260,6 +260,7 @@ public class Frm_Detalle extends javax.swing.JFrame {
         double subtotal=0.0;
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
+        cargarTablas();
         codr.calcularValores();
         for (int i = 0; i < lista.tamano(); i++) {
             ctr.GuardarServicio(lista.obtenerPorPosicion(i), codr.getDetalle().getIdDetalle());

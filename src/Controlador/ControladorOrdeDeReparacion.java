@@ -18,8 +18,8 @@ import java.util.Objects;
 import java.sql.PreparedStatement;
 import javax.swing.JOptionPane;
 import Controlador.UtilesMecanico.UtilesMecanico;
+import Modelo.Persona;
 import Modelo.Servicio;
-import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -30,14 +30,15 @@ public class ControladorOrdeDeReparacion {
     private ListaSimpleAvanzada ordenes = new ListaSimpleAvanzada();
     private OrdenReparacion orden;
     private DetalleReparacion detalle = new DetalleReparacion();
-    private String placa = "";
+//    private String placa = "";
+    private Vehiculo vehiculo = new Vehiculo();
 
-    public String getPlaca() {
-        return placa;
+    public Vehiculo getVehiculo() {
+        return vehiculo;
     }
 
-    public void setPlaca(String placa) {
-        this.placa = placa;
+    public void setVehiculo(Vehiculo vehiculo) {
+        this.vehiculo = vehiculo;
     }
 
     public ControladorOrdeDeReparacion() {
@@ -88,6 +89,11 @@ public class ControladorOrdeDeReparacion {
         
         orden.setTotal(total);
         actualizarOrden();
+    }
+    
+    public Persona propietario(){
+        Persona p = (Persona) Utiles.busquedaSecuencial(Utiles.listaPersonas(Utiles.PERSONAS), vehiculo.getIdPersona(), "Id").obtenerObjetopp(0);
+        return p;
     }
     
     private void actualizarOrden(){
@@ -217,7 +223,7 @@ public class ControladorOrdeDeReparacion {
      */
     public void cargarDetalle() {
 //        DetalleReparacion d = (DetalleReparacion) Utiles.busquedaSecuencial(Utiles.listaDetalles(), orden.getIdOrden().toString(), "IdOrden").obtenerObjetopp(0);
-        Vehiculo v = (Vehiculo) Utiles.busquedaSecuencial(Utiles.listaVehiculos(), this.placa, "Placa").obtenerObjetopp(0);
+        Vehiculo v = (Vehiculo) Utiles.busquedaSecuencial(Utiles.listaVehiculos(), this.vehiculo.getPlaca(), "Placa").obtenerObjetopp(0);
         if (v != null) {
             if (tieneOrdenActiva(v)) {
                 String sql = "select * from detallereparacion where idOrden='" + orden.getIdOrden().toString() + "';";
@@ -280,7 +286,7 @@ public class ControladorOrdeDeReparacion {
                 if (Objects.equals(or.getIdVehiculo(), v.getId())) {
                     System.out.println("Si existe una orden activa para dicho vehiculo");
                     chis = true;
-                    this.placa = v.getPlaca();
+                    this.vehiculo = v;
                     this.orden = or;
                     this.aux=or;
                     break;

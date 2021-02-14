@@ -1,1 +1,1 @@
-{"Modelo.Cuenta":{"id":1,"Usuario":1,"contraseña":12345,"Estado":true,"External_id":"5d6d5s6","idPersona":1}}
+{"Modelo.Cuenta":{"id":2,"Usuario":"jimmy","contraseña":123,"Estado":true,"External_id":"externaljimmy","idPersona":5}}
