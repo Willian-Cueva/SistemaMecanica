@@ -31,6 +31,7 @@ public class Frm_Detalle extends javax.swing.JFrame {
         cargarTablas();
     }
     private void cargarTablas(){
+//        codr.getDetalle().se;
         codr.cargarListaProductos();
         tp.setLsp(codr.getDetalle().getListaProductos());
         tablaRepuestos.setModel(tp);

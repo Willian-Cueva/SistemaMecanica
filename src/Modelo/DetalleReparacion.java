@@ -49,6 +49,7 @@ public class DetalleReparacion {
     }
 
     public void setListaProductos(ListaSimpleAvanzada listaProductos) {
+        this.listaProductos = new ListaSimpleAvanzada();
         this.listaProductos = listaProductos;
     }
 
