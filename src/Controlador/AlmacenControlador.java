@@ -17,7 +17,8 @@ import javax.swing.JOptionPane;
  * @author LENOVO LEGION
  */
 public class AlmacenControlador {
-
+    
+    private ListaSimpleAvanzada productoOrden = new ListaSimpleAvanzada();
     private ListaSimpleAvanzada producto = new ListaSimpleAvanzada();
     private Utiles u = new Utiles();
 
@@ -33,6 +34,20 @@ public class AlmacenControlador {
         this.producto = producto;
     }
 
+    public ListaSimpleAvanzada getProductoOrden() {
+        if (productoOrden == null) {
+            productoOrden = new ListaSimpleAvanzada();
+        }
+        return productoOrden;
+    }
+
+    public void setProductoOrden(ListaSimpleAvanzada productoOrden) {
+        this.productoOrden = new ListaSimpleAvanzada();
+        this.productoOrden = productoOrden;
+    }
+    
+    
+
     public ListaSimpleAvanzada obtenerLista() {
         return u.listaProductos();
     }
@@ -44,7 +59,7 @@ public class AlmacenControlador {
      *
      * @return Un objeto Producto
      */
-    public Producto transformar(Object[] row) {
+    public Producto transformar(Object [] row) {
         Producto prdt = new Producto();
         prdt.setId((Long) row[0]);
         prdt.setNombre((String) row[1]);
@@ -61,14 +76,15 @@ public class AlmacenControlador {
      * @param detalleReparacion ingresa el detalle de reparacion de cada auto
      * 
      */
-    public void guardarProducto(DetalleReparacion detalleReparacion) {
-        for (int i = 0; i < detalleReparacion.getListaProductos().tamano(); i++) {
-            Producto miPrdt = (Producto) detalleReparacion.getListaProductos().obtenerObjetopp(i);
+    public void guardarProducto(long idDetalle) {
+        productoOrden.present();
+        for (int i = 0; i < productoOrden.tamano(); i++) {
+            Producto miPrdt = (Producto) productoOrden.obtenerObjetopp(i);
             try {
                 String sql = "INSERT INTO `baseddmecanica`.`salidaproducto` (`idProducto`, `idDetalle`, `cantidad`) VALUES (?,?,?);";
                 PreparedStatement ps = (PreparedStatement) ConeccionBDD.IniciarConexion().prepareCall(sql);
                 ps.setString(1, String.valueOf(miPrdt.getId()));
-                ps.setString(2, String.valueOf(detalleReparacion.getIdDetalle()));
+                ps.setString(2, String.valueOf(idDetalle));
                 ps.setString(3, String.valueOf(miPrdt.getCantidad()));
                 ps.executeUpdate();
             } catch (java.sql.SQLException ex) {
@@ -78,5 +94,10 @@ public class AlmacenControlador {
 
         }
 
+    }
+    
+    public ListaSimpleAvanzada Ml (Object [] row){
+           productoOrden.insertar(transformar(row));
+    return productoOrden;
     }
 }

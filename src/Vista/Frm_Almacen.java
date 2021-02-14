@@ -37,9 +37,11 @@ public class Frm_Almacen extends javax.swing.JFrame {
     public Frm_Almacen(DetalleReparacion detalleReparacion) {
         initComponents();
         this.setLocationRelativeTo(null);
+        TablaPedido.updateUI();
         setResizable(false);
         escalar(Fondo, wallpp);
         escalar(FondoR, wallpp1);
+        escalar(Fondo2, wallpp);
         cargarTablaProducto();
         this.detalleReparacion = detalleReparacion;
         llenarTabla();
@@ -47,8 +49,8 @@ public class Frm_Almacen extends javax.swing.JFrame {
 
     public Frm_Almacen() {
         initComponents();
-        TablaPedido.updateUI();
         this.setLocationRelativeTo(null);
+        TablaPedido.updateUI();
         setResizable(false);
         escalar(Fondo, wallpp);
         escalar(FondoR, wallpp1);
@@ -204,7 +206,6 @@ public class Frm_Almacen extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         TablaPedido = new javax.swing.JTable();
         jButton10 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
         jButton9 = new javax.swing.JButton();
         btnAgregar = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
@@ -556,18 +557,6 @@ public class Frm_Almacen extends javax.swing.JFrame {
         jPanel2.add(jButton10);
         jButton10.setBounds(230, 270, 59, 53);
 
-        jButton1.setBackground(java.awt.Color.orange);
-        jButton1.setFont(new java.awt.Font("Courier New", 0, 12)); // NOI18N
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/002-disquete.png"))); // NOI18N
-        jButton1.setText("Guardar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        jPanel2.add(jButton1);
-        jButton1.setBounds(350, 520, 170, 50);
-
         jButton9.setBackground(java.awt.Color.orange);
         jButton9.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jButton9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/008-informacion.png"))); // NOI18N
@@ -682,11 +671,6 @@ public class Frm_Almacen extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton10ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        detalleReparacion.getListaProductos();
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     private void btnGuardarProducto1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarProducto1ActionPerformed
         // TODO add your handling code here:
         guardarProducto();
@@ -717,7 +701,7 @@ public class Frm_Almacen extends javax.swing.JFrame {
                         int valor = Integer.parseInt(CantidadVender);
                         if (valor <= Integer.parseInt(valorO)) {
                             modelo2.addRow(row);
-                            detalleReparacion.getListaProductos().insertar(cp.transformar(row));
+                            cp.Ml(row);
                             v = true;
                         } else {
                             JOptionPane.showMessageDialog(null, "ERROR INGRESO", "Stock Insuficiente", JOptionPane.ERROR_MESSAGE);
@@ -730,14 +714,15 @@ public class Frm_Almacen extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "ERROR INGRESO", "DATO VACIO", JOptionPane.ERROR_MESSAGE);
             }
         } while (v != true);
+        cp.getProductoOrden().present();
 
 
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-        detalleReparacion.getListaProductos().present();
-        cp.guardarProducto(detalleReparacion);
+       
+        cp.guardarProducto(detalleReparacion.getIdDetalle());
+         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
@@ -792,7 +777,6 @@ public class Frm_Almacen extends javax.swing.JFrame {
     private javax.swing.JButton btnModificar;
     private javax.swing.JButton btnSalir;
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton9;
