@@ -121,7 +121,9 @@ public class Frm_Almacen extends javax.swing.JFrame {
                 p = txtPrecio.getText(),
                 i = txtIva.getText(),
                 e = "Exter" + m + n;
-        String sql = "UPDATE `producto` SET `nombre` = '" + n + "', `cantidad` = '" + c + "', `marca` = '" + m + "', `precio` = '" + p + "', `IVA` = '" + i + "', `external_idProducto` = '" + e + "' WHERE (`producto`.`idProducto` = '" + idProducto + "')";
+        String sql = "UPDATE `producto` SET `nombre` = '" + n + "', `cantidad` = '" + c +
+                "', `marca` = '" + m + "', `precio` = '" + p + "', `IVA` = '" + i + 
+                "', `external_idProducto` = '" + e + "' WHERE (`producto`.`idProducto` = '" + idProducto + "')";
         try {
             PreparedStatement ps = (PreparedStatement) ConeccionBDD.IniciarConexion().prepareStatement(sql);
             ps.executeUpdate();
@@ -662,13 +664,14 @@ public class Frm_Almacen extends javax.swing.JFrame {
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
         // TODO add your handling code here:
-        String inf = "Este panel permite buscar una persona (Administrador, Mecánico o Cliente)\n"
-                + "registrados en el sistema y eliminarlos de forma lógica del sistema\n";
+        String inf = "EN ESTE PANTALA NOS PERMITE REGISTRAR \nLOS PRODUCTOS QUE DESEE ADQUIRIR\n";
         JOptionPane.showMessageDialog(this, inf, "Informacion", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
         // TODO add your handling code here:
+       
+        
     }//GEN-LAST:event_jButton10ActionPerformed
 
     private void btnGuardarProducto1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarProducto1ActionPerformed
@@ -698,13 +701,21 @@ public class Frm_Almacen extends javax.swing.JFrame {
                         row[5] = modelo1.getValueAt(filas[i], 5);
                         row[6] = modelo1.getValueAt(filas[i], 6);
                         String valorO = modelo1.getValueAt(filas[i], 2).toString();
-                        int valor = Integer.parseInt(CantidadVender);
-                        if (valor <= Integer.parseInt(valorO)) {
-                            modelo2.addRow(row);
-                            cp.Ml(row);
-                            v = true;
-                        } else {
-                            JOptionPane.showMessageDialog(null, "ERROR INGRESO", "Stock Insuficiente", JOptionPane.ERROR_MESSAGE);
+                        int valor = Integer.parseInt(CantidadVender);                             
+                        // ----
+                        String aux = row[0].toString();
+                        Long aux1 = Long.valueOf(aux);
+                        if (!cp.ExisteEnLaTabla(aux1, TablaPedido)) {
+                            if (valor <= Integer.parseInt(valorO)) {
+                                modelo2.addRow(row);
+                                cp.Ml(row);
+                                v = true;
+                            } else {
+                                JOptionPane.showMessageDialog(null, "ERROR INGRESO", "Stock Insuficiente", JOptionPane.ERROR_MESSAGE);
+                            }
+                        }else{
+                             JOptionPane.showMessageDialog(null, "INTENTO NO VALIDO", "DATO YA HA SIDO AGREGADO", JOptionPane.ERROR_MESSAGE);
+                             v = true;
                         }
                     }
                 } else {
@@ -720,9 +731,20 @@ public class Frm_Almacen extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        DefaultTableModel modelo2 = (DefaultTableModel) TablaPedido.getModel();
+       // System.out.println("Filas: " + modelo2.getRowCount());
+        if (modelo2.getRowCount() > 0) {
+            cp.guardarProducto(detalleReparacion.getIdDetalle());
+            cp.ActualizaeStock();
+            this.dispose();
+            
+        } else {
+            JOptionPane.showMessageDialog(null, "ERROR EN TABLA", "TABLA VACIA", JOptionPane.ERROR_MESSAGE);
+        }
        
-        cp.guardarProducto(detalleReparacion.getIdDetalle());
-         this.dispose();
+        
+        //cp.actualizaBaseDatos();
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
