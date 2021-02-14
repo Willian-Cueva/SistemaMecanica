@@ -3,10 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/william/Desktop/SistemaMecanica/src/Controlador/ControladorOrdeDeReparacion.java</file>
-            <file>file:/C:/Users/william/Desktop/SistemaMecanica/src/Vista/Panel_OrdenReparacion.java</file>
-            <file>file:/C:/Users/william/Desktop/SistemaMecanica/src/Modelo/DetalleReparacion.java</file>
-            <file>file:/C:/Users/william/Desktop/SistemaMecanica/src/Vista/Frm_Detalle.java</file>
+            <file>file:/C:/Users/LENOVO%20LEGION/Desktop/RamaA/SistemaMecanica/src/Controlador/Utiles/Producto/Utiles.java</file>
+            <file>file:/C:/Users/LENOVO%20LEGION/Desktop/RamaA/SistemaMecanica/src/Controlador/AlmacenControlador.java</file>
+            <file>file:/C:/Users/LENOVO%20LEGION/Desktop/RamaA/SistemaMecanica/src/Vista/Modelo/TablaProducto.java</file>
+            <file>file:/C:/Users/LENOVO%20LEGION/Desktop/RamaA/SistemaMecanica/src/Controlador/ListaSimpleAvanzada.java</file>
+            <file>file:/C:/Users/LENOVO%20LEGION/Desktop/RamaA/SistemaMecanica/src/Modelo/Producto.java</file>
+            <file>file:/C:/Users/LENOVO%20LEGION/Desktop/RamaA/SistemaMecanica/src/Controlador/ListaSimple.java</file>
+            <file>file:/C:/Users/LENOVO%20LEGION/Desktop/RamaA/SistemaMecanica/src/Vista/Frm_Almacen.java</file>
         </group>
     </open-files>
 </project-private>
