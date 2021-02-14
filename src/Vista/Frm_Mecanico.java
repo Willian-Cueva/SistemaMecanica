@@ -5,6 +5,9 @@
  */
 package Vista;
 
+import java.awt.Image;
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author Cris2
@@ -21,12 +24,25 @@ public class Frm_Mecanico extends javax.swing.JFrame {
     Panel_OrdenReparacion POrden=new Panel_OrdenReparacion();
     public Frm_Mecanico() {
         initComponents();
+        cargarFondo();
         PRVehiculo.setVisible(true);
         PRCliente.setVisible(false);
         PRECliente.setVisible(false);
         PREVehiculo.setVisible(false);
         POrden.setVisible(false);
         PanelContenedor.add(PRVehiculo);
+        
+    }
+    /**
+     * Metodo encargado de cargar la imagen de fondo del sistema
+     */
+    public void cargarFondo(){
+        int alto=this.getSize().height;
+        int ancho=this.getSize().width;
+        Image img = getToolkit().getImage(getClass().getResource("/Imagenes/FondoMetalico.jpg"));
+        img=img.getScaledInstance(ancho, alto, Image.SCALE_DEFAULT);
+        jLabel5.setIcon(new ImageIcon(img));
+                
     }
 
     /**
@@ -49,12 +65,15 @@ public class Frm_Mecanico extends javax.swing.JFrame {
         btnAgregarCliente = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(735, 485));
         setResizable(false);
+        getContentPane().setLayout(null);
 
         PanelContenedor.setMinimumSize(new java.awt.Dimension(735, 485));
+        PanelContenedor.setOpaque(false);
         PanelContenedor.setPreferredSize(new java.awt.Dimension(735, 485));
         PanelContenedor.setLayout(new java.awt.BorderLayout());
 
@@ -165,39 +184,13 @@ public class Frm_Mecanico extends javax.swing.JFrame {
 
         PanelContenedor.add(jPanel1, java.awt.BorderLayout.PAGE_START);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(PanelContenedor, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 735, javax.swing.GroupLayout.PREFERRED_SIZE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(PanelContenedor, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 485, javax.swing.GroupLayout.PREFERRED_SIZE)
-        );
+        getContentPane().add(PanelContenedor);
+        PanelContenedor.setBounds(0, 0, 735, 485);
+        getContentPane().add(jLabel5);
+        jLabel5.setBounds(0, 0, 730, 480);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnAgregarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarClienteActionPerformed
-        PRCliente.setVisible(true);
-        PRVehiculo.setVisible(false);
-        PRECliente.setVisible(false);
-        PREVehiculo.setVisible(false);
-        POrden.setVisible(false);
-        PanelContenedor.add(PRCliente);
-        PRCliente.validate();    // TODO add your handling code here:
-    }//GEN-LAST:event_btnAgregarClienteActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        PRCliente.setVisible(false);
-        PRVehiculo.setVisible(true);
-        PRECliente.setVisible(false);
-        PREVehiculo.setVisible(false);
-        POrden.setVisible(false);
-        PanelContenedor.add(PRVehiculo);
-        PRVehiculo.validate();// TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         PRCliente.setVisible(false);
@@ -209,15 +202,15 @@ public class Frm_Mecanico extends javax.swing.JFrame {
         PRECliente.validate();        // TODO add your handling code here:
     }//GEN-LAST:event_jButton4ActionPerformed
 
-    private void jButton5MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton5MousePressed
-        PRCliente.setVisible(false);
+    private void btnAgregarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarClienteActionPerformed
+        PRCliente.setVisible(true);
         PRVehiculo.setVisible(false);
         PRECliente.setVisible(false);
-        PREVehiculo.setVisible(true);
+        PREVehiculo.setVisible(false);
         POrden.setVisible(false);
-        PanelContenedor.add(PREVehiculo);
-        PREVehiculo.validate();        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton5MousePressed
+        PanelContenedor.add(PRCliente);
+        PRCliente.validate();    // TODO add your handling code here:
+    }//GEN-LAST:event_btnAgregarClienteActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         PRCliente.setVisible(false);
@@ -228,6 +221,26 @@ public class Frm_Mecanico extends javax.swing.JFrame {
         PanelContenedor.add(POrden);
         POrden.validate();        // TODO add your handling code here:
     }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton5MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton5MousePressed
+        PRCliente.setVisible(false);
+        PRVehiculo.setVisible(false);
+        PRECliente.setVisible(false);
+        PREVehiculo.setVisible(true);
+        POrden.setVisible(false);
+        PanelContenedor.add(PREVehiculo);
+        PREVehiculo.validate();        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton5MousePressed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        PRCliente.setVisible(false);
+        PRVehiculo.setVisible(true);
+        PRECliente.setVisible(false);
+        PREVehiculo.setVisible(false);
+        POrden.setVisible(false);
+        PanelContenedor.add(PRVehiculo);
+        PRVehiculo.validate();// TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -273,6 +286,7 @@ public class Frm_Mecanico extends javax.swing.JFrame {
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JToolBar jToolBar2;

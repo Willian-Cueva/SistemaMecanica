@@ -22,6 +22,10 @@ public class Servicio {
         this.nombre = nombre;
     }
 
+    public Servicio() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     public Long getIdServicio() {
         return idServicio;
     }

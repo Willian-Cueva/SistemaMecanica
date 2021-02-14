@@ -75,7 +75,9 @@ public class ControladorCuenta {
     public void setLiRol(ListaSimple<Rol> liRol) {
         this.liRol = liRol;
     }
-    
+    /**
+     * Metodo encargado de caragar las listas de persona cuenta y rol obtenidas de la base de datos dependiendo del rol de esa persona
+     */
     public void RecuperarData() {
         liPersona=new ListaSimple<>();
         liCuenta=new ListaSimple<>();
@@ -122,14 +124,24 @@ public class ControladorCuenta {
         }
         
     }
-
+    /**
+     * Metodo que permite conocer si existe una cuenta
+     * @return 
+     */
     public boolean isExisteCuenta() {
         if (cuenta!=null) {
             return true;
         }
         return false;
     }
-    
+    /**
+     * Metodo encargado de buscar la cuenta de la persona que ingresa al sitema
+     * @param lic
+     * @param lip
+     * @param lir
+     * @param Usuario
+     * @param Contraseña 
+     */
     public void buscarCuenta(ListaSimple<Cuenta> lic, ListaSimple<Persona> lip, ListaSimple<Rol> lir, String Usuario, String Contraseña) {     
         
         for (int i = 0; i < lic.tamano(); i++) {

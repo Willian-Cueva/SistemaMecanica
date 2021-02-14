@@ -46,7 +46,18 @@ public class ControladorMecanico {
     public void setCuenta(Cuenta cuenta) {
         this.cuenta = cuenta;
     }
-    
+    /**
+     * Metodo para crear un cliente
+     * @param cedula
+     * @param nombre
+     * @param apellido
+     * @param correo
+     * @param telefono
+     * @param direccion
+     * @param file
+     * @param idRol
+     * @param contraseña 
+     */
     public void RegistrarCliente(String cedula, String nombre, String apellido, String correo, String telefono, String direccion, File file, Long idRol, String contraseña) {
         persona = new Persona(Long.parseLong("0"), nombre, apellido, cedula, correo, telefono, direccion,false, "f57c756c6fj6", idRol, file);
         if (contraseña!=null) {
@@ -54,12 +65,17 @@ public class ControladorMecanico {
         }
         
     }
-
+    /**
+     * Metodo encargado de guardar los clientes en la base de datos
+     * @param persona 
+     */
     public void GuardarPersona(Persona persona) {
         try {
             int i = 0;
-            FileInputStream archivofoto;
-            archivofoto = new FileInputStream(persona.getArchivoImagen());
+            FileInputStream archivofoto=null;
+            if (persona.getArchivoImagen()!=null) {
+                archivofoto = new FileInputStream(persona.getArchivoImagen());
+            }
             String insertar = "INSERT INTO personas(idPersona,nombre,apellido,cedula,correo,telefono,direccion,estado,external_idPersona,imagen,idRol) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
             PreparedStatement stmt = (PreparedStatement) uti.getConexion().prepareStatement(insertar);
             stmt.setString(1, persona.getId().toString());
@@ -81,6 +97,9 @@ public class ControladorMecanico {
             System.out.println("Error: " + ex.getMessage());
         }
     }
+    /**
+     * Metodo encargado de guardar los datos de las personas si fuera nescesario metodo inactivo
+     */
     public void GuardarCuenta(){
         try {
             int i = 0;
@@ -100,7 +119,10 @@ public class ControladorMecanico {
             Logger.getLogger(ControladorMecanico.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    /**
+     * Metodo encargado de cargar los datos de roles en un combo box
+     * @param cb 
+     */
     public void llenarboxRoles(JComboBox cb) {
         ctr.RecuperarData();
         arr = new Rol[ctr.getLiRol().tamano()];
@@ -111,7 +133,11 @@ public class ControladorMecanico {
         }
         
     }
-
+    /**
+     * Metodo encargado de buscar el id del rol selecionado en el combo box
+     * @param item
+     * @return 
+     */
     public Long idRol(String item) {
         long lg = 0;
         for (int i = 0; i < arr.length; i++) {

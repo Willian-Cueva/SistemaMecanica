@@ -16,18 +16,18 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 import Lista.ListaSimple;
+import java.util.Objects;
 
 /**
  *
  * @author Cris2
  */
 public class ControladorCliente {
-
     ControladorCuenta ctr = new ControladorCuenta();
     ControladorVehiculo ctr1 = new ControladorVehiculo();
     UtilesMecanico uti = new UtilesMecanico();
     Persona persona;
-
+    
     public Persona getPersona() {
         return persona;
     }
@@ -36,27 +36,47 @@ public class ControladorCliente {
         this.persona = persona;
     }
     
-
+    /**
+     * Este metodo permite llenar la tabla clientes de forma general
+     * @param modelo 
+     */
     public void llenarTabla(DefaultTableModel modelo) {
         ctr.RecuperarData();
         Object obj[] = new Object[3];
         modelo.setRowCount(0);
+        Long id=0L;
+        for (int j = 0; j < ctr.getLiRol().tamano(); j++) {
+            if (ctr.getLiRol().obtenerPorPosicion(j).getNombreRol().equals("Cliente")) {
+                id=ctr.getLiRol().obtenerPorPosicion(j).getId();
+            }
+        }
         for (int i = 0; i < ctr.getLiPersona().tamano(); i++) {
-            if (ctr.getLiPersona().obtenerPorPosicion(i).getIdRol() == 3) {
+            if (Objects.equals(ctr.getLiPersona().obtenerPorPosicion(i).getIdRol(), id)) {
                 obj[0] = ctr.getLiPersona().obtenerPorPosicion(i).getNombre();
                 obj[1] = ctr.getLiPersona().obtenerPorPosicion(i).getApellido();
                 obj[2] = ctr.getLiPersona().obtenerPorPosicion(i).getCedula();
                 modelo.addRow(obj);
-            }
+            } 
         }
 
     }
-
+    /**
+     * Metodo que permite relizar busqueda de una persona por cedula
+     * @param cedula 
+     */
     public void Encuentracliente(String cedula) {
         persona = ctr1.BuscarCedula(Long.parseLong(cedula));
 
     }
-
+    /**
+     * Este metodo permite modificar y o actualizar los datos de los clintes almacenados en la base de datos
+     * @param Correo
+     * @param telefono
+     * @param Direccion
+     * @param idpersona
+     * @param activo
+     * @param file 
+     */
     public void Editar(String Correo, String telefono, String Direccion, String idpersona, String activo, File file) {
 
         boolean isActivo;
@@ -100,13 +120,23 @@ public class ControladorCliente {
 
         }
     }
+    /**
+     * Este metodo permite filtrar personas por apellido debido a las limitaciones solo hace la busqueda por apellido completo
+     * @param apellido
+     * @return 
+     */
     public ListaSimple<Persona> BuscarApellido(String apellido) {
         ListaSimple<Persona> aux=new ListaSimple<>();
         aux=ctr1.BuscarApellido(apellido);
         return aux;
     }
+    /**
+     * Metodo encargado de rellenar la tabla de personas con los datos filtrados por apellido
+     * @param li
+     * @param modelo 
+     */
     public void llenarTablaFiltrarApellido(ListaSimple<Persona> li,DefaultTableModel modelo) {
-        ctr.RecuperarData();
+        //ctr.RecuperarData();
         Object obj[] = new Object[3];
         modelo.setRowCount(0);
         for (int i = 0; i < li.tamano(); i++) {
@@ -117,12 +147,17 @@ public class ControladorCliente {
         }
 
     }
+    /**
+     * Metodo encargado de rellenar la tabla con un unico dato obtenido mediante busqueda por cedula
+     * @param modelo
+     * @param persona 
+     */
     public void llenarTablaBusqueda(DefaultTableModel modelo, Persona persona) {
         Object obj[] = new Object[3];
         modelo.setRowCount(0);
         obj[0] = persona.getNombre();
         obj[1] = persona.getApellido();
-        obj[2] = persona.getId();
+        obj[2] = persona.getCedula();
         modelo.addRow(obj);
     }
 }
