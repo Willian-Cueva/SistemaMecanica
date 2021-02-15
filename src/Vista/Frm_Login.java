@@ -57,9 +57,7 @@ public class Frm_Login extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(375, 360));
         setMinimumSize(new java.awt.Dimension(375, 360));
-        setPreferredSize(new java.awt.Dimension(375, 360));
         setResizable(false);
         getContentPane().setLayout(null);
 
