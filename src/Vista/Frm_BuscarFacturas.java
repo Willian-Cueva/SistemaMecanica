@@ -6,6 +6,7 @@
 package Vista;
 
 import Controlador.ControladorFacturas;
+import Vista.Modelo.TablaFacturas;
 
 /**
  *
@@ -14,6 +15,7 @@ import Controlador.ControladorFacturas;
 public class Frm_BuscarFacturas extends javax.swing.JFrame {
 
     private ControladorFacturas cf = new ControladorFacturas();
+    private TablaFacturas tablaModelo= new TablaFacturas();
 
     /**
      * Creates new form Frm_BuscarFacturas
@@ -28,10 +30,13 @@ public class Frm_BuscarFacturas extends javax.swing.JFrame {
         this.setUndecorated(true);
         initComponents();
         this.setLocationRelativeTo(null);
+        cf.cargarFacturas(placa);
         cargarTabla();
     }
     private void cargarTabla(){
-        
+        tablaModelo.setCf(cf);
+        Tabla1.setModel(tablaModelo);
+        Tabla1.updateUI();
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -45,7 +50,6 @@ public class Frm_BuscarFacturas extends javax.swing.JFrame {
         mainPruebas1 = new Vista.MainPruebas();
         jPanel2 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
-        jCheckBox2 = new javax.swing.JCheckBox();
         jCheckBox3 = new javax.swing.JCheckBox();
         txtBuscar = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
@@ -61,11 +65,6 @@ public class Frm_BuscarFacturas extends javax.swing.JFrame {
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jPanel1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
-        jCheckBox2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jCheckBox2.setForeground(new java.awt.Color(255, 153, 0));
-        jCheckBox2.setText("Placa");
-        jCheckBox2.setOpaque(false);
 
         jCheckBox3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jCheckBox3.setForeground(new java.awt.Color(255, 153, 0));
@@ -93,30 +92,43 @@ public class Frm_BuscarFacturas extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Placa", "Modelo", "Propietario"
+                "Placa", "Nro", "Fecha", "Hora", "Subtotal", "Total"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         Tabla1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 Tabla1MouseReleased(evt);
             }
         });
         jScrollPane1.setViewportView(Tabla1);
+        if (Tabla1.getColumnModel().getColumnCount() > 0) {
+            Tabla1.getColumnModel().getColumn(0).setResizable(false);
+            Tabla1.getColumnModel().getColumn(1).setResizable(false);
+            Tabla1.getColumnModel().getColumn(2).setResizable(false);
+            Tabla1.getColumnModel().getColumn(3).setResizable(false);
+            Tabla1.getColumnModel().getColumn(4).setResizable(false);
+            Tabla1.getColumnModel().getColumn(5).setResizable(false);
+        }
 
         jLabel3.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        jLabel3.setText("Buscar Vehiculo:");
+        jLabel3.setText("Buscar Por Fecha:");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(50, Short.MAX_VALUE)
+                .addContainerGap(184, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jCheckBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jCheckBox3))
+                    .addComponent(jCheckBox3)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addGap(18, 18, 18)
@@ -126,17 +138,15 @@ public class Frm_BuscarFacturas extends javax.swing.JFrame {
                 .addContainerGap())
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 502, Short.MAX_VALUE)
+                    .addGap(17, 17, 17)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 640, Short.MAX_VALUE)
                     .addContainerGap()))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(4, 4, 4)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jCheckBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jCheckBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jCheckBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -144,10 +154,10 @@ public class Frm_BuscarFacturas extends javax.swing.JFrame {
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(224, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addGap(0, 85, Short.MAX_VALUE)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                    .addContainerGap(86, Short.MAX_VALUE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 5, Short.MAX_VALUE)))
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
         jPanel3.setBorder(new javax.swing.border.MatteBorder(null));
@@ -158,7 +168,7 @@ public class Frm_BuscarFacturas extends javax.swing.JFrame {
 
         jButton5.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/logout (1).png"))); // NOI18N
-        jButton5.setText("Salir");
+        jButton5.setText("Regresar");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
@@ -173,7 +183,7 @@ public class Frm_BuscarFacturas extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButton5)
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -237,8 +247,9 @@ public class Frm_BuscarFacturas extends javax.swing.JFrame {
 
     private void Tabla1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Tabla1MouseReleased
         int s = Tabla1.getSelectedRow();
-        String placa = Tabla1.getValueAt(s, 0).toString();
-        
+        String nroFactura = Tabla1.getValueAt(s, 1).toString();
+        cf.cargarFacturas(String.valueOf(Tabla1.getValueAt(s, 0)));
+        cf.cargarDetalles(nroFactura);
     }//GEN-LAST:event_Tabla1MouseReleased
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
@@ -284,7 +295,6 @@ public class Frm_BuscarFacturas extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable Tabla1;
     private javax.swing.JButton jButton5;
-    private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JCheckBox jCheckBox3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
