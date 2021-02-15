@@ -226,6 +226,7 @@ public class Frm_VerFactura extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tablaServicios.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tablaServicios);
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
@@ -257,6 +258,7 @@ public class Frm_VerFactura extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tablaProductos.getTableHeader().setReorderingAllowed(false);
         jScrollPane2.setViewportView(tablaProductos);
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);

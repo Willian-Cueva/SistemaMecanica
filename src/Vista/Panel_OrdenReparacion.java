@@ -98,6 +98,7 @@ public class Panel_OrdenReparacion extends javax.swing.JPanel {
                 "Placa", "Modelo", "Propietario", "Cedula"
             }
         ));
+        Tabla1.getTableHeader().setReorderingAllowed(false);
         Tabla1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 Tabla1MouseReleased(evt);
@@ -266,7 +267,7 @@ public class Panel_OrdenReparacion extends javax.swing.JPanel {
             }
         });
         add(btnDetalle);
-        btnDetalle.setBounds(500, 330, 200, 32);
+        btnDetalle.setBounds(500, 330, 200, 44);
 
         jLabel2.setBackground(new java.awt.Color(61, 61, 61));
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/FondoMetalico.jpg"))); // NOI18N

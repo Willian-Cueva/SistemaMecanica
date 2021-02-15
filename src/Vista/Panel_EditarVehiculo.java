@@ -264,6 +264,7 @@ public class Panel_EditarVehiculo extends javax.swing.JPanel {
                 "Placa", "Modelo", "Propietario", "Cedula"
             }
         ));
+        Tabla1.getTableHeader().setReorderingAllowed(false);
         Tabla1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 Tabla1MouseReleased(evt);
