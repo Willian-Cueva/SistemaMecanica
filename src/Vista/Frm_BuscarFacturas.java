@@ -5,11 +5,7 @@
  */
 package Vista;
 
-import Controlador.ControladorOrdeDeReparacion;
-import Controlador.ControladorVehiculo;
-import Controlador.Utiles.Utiles;
-import Controlador.UtilesMecanico.UtilesMecanico;
-import javax.swing.table.DefaultTableModel;
+import Controlador.ControladorFacturas;
 
 /**
  *
@@ -17,10 +13,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Frm_BuscarFacturas extends javax.swing.JFrame {
 
-    private ControladorVehiculo ctr = new ControladorVehiculo();
-    DefaultTableModel modelo;
-    UtilesMecanico uti = new UtilesMecanico();
-    private ControladorOrdeDeReparacion coddr;
+    private ControladorFacturas cf = new ControladorFacturas();
 
     /**
      * Creates new form Frm_BuscarFacturas
@@ -29,22 +22,17 @@ public class Frm_BuscarFacturas extends javax.swing.JFrame {
         this.setUndecorated(true);
         initComponents();
         this.setLocationRelativeTo(null);
-        arrancar();
+        cargarTabla();
     }
-
-    private void arrancar() {
-        uti.IniciarConexion();
-        modelo = (DefaultTableModel) Tabla1.getModel();
-        Tabla1.setModel(modelo);
-        coddr = new ControladorOrdeDeReparacion();
-        if (this.isVisible()) {
-            ctr.llenarTablaVehiculo(modelo);
-            Tabla1.updateUI();
-        }
-        ctr.llenarTabla(modelo);
-        Tabla1.updateUI();
+    public Frm_BuscarFacturas(String placa) {
+        this.setUndecorated(true);
+        initComponents();
+        this.setLocationRelativeTo(null);
+        cargarTabla();
     }
-
+    private void cargarTabla(){
+        
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -240,34 +228,11 @@ public class Frm_BuscarFacturas extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jCheckBox3MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCheckBox3MouseReleased
-        if (jCheckBox3.isSelected()) {
-            ctr.llenarTablaVehiculo(modelo);
-            Tabla1.updateUI();
 
-        }
-        // TODO add your handling code here:
     }//GEN-LAST:event_jCheckBox3MouseReleased
 
     private void jLabel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MousePressed
-        try {
-            /*
-            if (jCheckBox1.isSelected()) {
-                ctr.buscarPersona(String.valueOf(txtBuscar.getText()));
-                if (ctr.getPaux() != null) {
-                    ctr.llenarTablaBusquedaVehiculo(modelo, ctr.getPaux());
-                    Tabla1.updateUI();
-                }
-            } else {
-                ctr.llenarTablaFiltrarPlaca(ctr.BuscarPlaca(txtBuscar.getText()), modelo);
-                Tabla1.updateUI();
-            }
-             */
-            ctr.llenarTablaFiltrarPlaca(ctr.BuscarPlaca(txtBuscar.getText()), modelo);
-            Tabla1.updateUI();
-        } catch (NumberFormatException e) {
-        }
-
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_jLabel1MousePressed
 
     private void Tabla1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Tabla1MouseReleased

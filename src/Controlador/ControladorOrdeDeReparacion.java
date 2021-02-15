@@ -90,7 +90,11 @@ public class ControladorOrdeDeReparacion {
         orden.setTotal(Math.round(total*100.0)/100.0);
         actualizarOrden();
     }
-    
+    //BuscarFactura
+    /**
+     * Retorna una persona con los atributos de dicho propietario
+     * @return Persona
+     */
     public Persona propietario(){
         Persona p = (Persona) Utiles.busquedaSecuencial(Utiles.listaPersonas(Utiles.PERSONAS), vehiculo.getIdPersona(), "Id").obtenerObjetopp(0);
         return p;
@@ -108,7 +112,7 @@ public class ControladorOrdeDeReparacion {
             JOptionPane.showMessageDialog(null, "Error al actualizar la orden de reparacion", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
-    
+    //BuscarFactura
     /**
      * Este metodo permite actualizar los productos desde la tabla de salidaproducto de la base de datos
      * respectivamente a la lista de productos del detalle de reparacion en tiempo de ejecucion
@@ -217,6 +221,7 @@ public class ControladorOrdeDeReparacion {
             System.err.println("Error al guardar la orden de reparacion en la base de datos");
         }
     }
+    //BuscarFactura
     /**
      * Este metodo permite dependiendo el vehiculo cargar el detalle de la orden de reparacoin desde la base de datos,
      * en el caso de no existir esa orden se crea una y vuelve a ejecutarce el metodo ingresando a el detalle de reparacion
