@@ -140,10 +140,6 @@ public class AlmacenControlador {
      */
     public int BuscarStock(long indice, int cantidad) {
         int respuesta = 0;
-        /*productoBaseDatos.present();
-        System.out.println("*****************************************************");
-        productoOrden.present();*/
-
         for (int i = 0; i < productoBaseDatos.tamano(); i++) {
             Producto objpro = new Producto();
             objpro = (Producto) productoBaseDatos.obtenerObjetopp(i);
@@ -159,7 +155,6 @@ public class AlmacenControlador {
      * Nos permite actualizar el estock de produntos een la base de datos.
      */
     public void ActualizaeStock() {
-
         for (int i = 0; i < productoOrden.tamano(); i++) {
             Producto objpro = new Producto();
             objpro = (Producto) productoOrden.obtenerObjetopp(i);

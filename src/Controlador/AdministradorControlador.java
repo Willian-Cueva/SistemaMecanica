@@ -31,10 +31,6 @@ public class AdministradorControlador {
         Persona m = (Persona) personas.obtenerObjetopp(personas.tamano()-1);
         return String.valueOf(m.getId());
     }
-
-//    public ListaSimpleAvanzada busqueda(JRadioButton jb){
-//                
-//    }
     
     public ListaSimpleAvanzada getPersonas() {
         if(personas==null)personas=new ListaSimpleAvanzada();
