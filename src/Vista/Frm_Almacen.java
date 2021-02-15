@@ -347,6 +347,11 @@ public class Frm_Almacen extends javax.swing.JFrame {
         jPanel5.add(jPanel3);
         jPanel3.setBounds(30, 60, 320, 230);
 
+        TablaProductos = new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIndex, int colIndex){
+                return false;
+            }
+        };
         TablaProductos.setFont(new java.awt.Font("Courier New", 0, 12)); // NOI18N
         TablaProductos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -359,6 +364,8 @@ public class Frm_Almacen extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        TablaProductos.setFocusable(false);
+        TablaProductos.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(TablaProductos);
 
         jPanel5.add(jScrollPane1);
@@ -470,6 +477,8 @@ public class Frm_Almacen extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        TablaProductosLista.setFocusable(false);
+        TablaProductosLista.getTableHeader().setReorderingAllowed(false);
         jcroopPanel.setViewportView(TablaProductosLista);
 
         buttonGroup1.add(rdNombre);
@@ -553,6 +562,8 @@ public class Frm_Almacen extends javax.swing.JFrame {
                 "ID", "Nombre", "Stock", "Precio", "IVA", "ExternalId"
             }
         ));
+        TablaPedido.setFocusable(false);
+        TablaPedido.getTableHeader().setReorderingAllowed(false);
         jScrollPane3.setViewportView(TablaPedido);
 
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);

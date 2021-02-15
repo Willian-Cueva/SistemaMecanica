@@ -108,6 +108,11 @@ public class Panel_EditarCliente extends javax.swing.JPanel {
         add(jCheckBox3);
         jCheckBox3.setBounds(310, 100, 90, 20);
 
+        Tabla1 = new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIndex, int colIndex){
+                return false;
+            }
+        };
         Tabla1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -116,6 +121,7 @@ public class Panel_EditarCliente extends javax.swing.JPanel {
                 "Nombre", "Apellido", "Cedula"
             }
         ));
+        Tabla1.getTableHeader().setReorderingAllowed(false);
         Tabla1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 Tabla1MouseReleased(evt);
@@ -262,7 +268,7 @@ public class Panel_EditarCliente extends javax.swing.JPanel {
 
         jLabel2.setText("jLabel2");
         add(jLabel2);
-        jLabel2.setBounds(180, 0, 34, 30);
+        jLabel2.setBounds(180, 0, 41, 30);
     }// </editor-fold>//GEN-END:initComponents
 
     private void Tabla1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Tabla1MouseReleased

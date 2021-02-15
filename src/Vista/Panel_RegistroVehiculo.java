@@ -291,6 +291,11 @@ public class Panel_RegistroVehiculo extends javax.swing.JPanel {
         jPanel1.add(jPanel2);
         jPanel2.setBounds(20, 40, 360, 360);
 
+        Tabla1 = new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIndex, int colIndex){
+                return false;
+            }
+        };
         Tabla1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -299,6 +304,7 @@ public class Panel_RegistroVehiculo extends javax.swing.JPanel {
                 "Cedula", "Nombre", "Apellido"
             }
         ));
+        Tabla1.getTableHeader().setReorderingAllowed(false);
         Tabla1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 Tabla1MousePressed(evt);
@@ -331,7 +337,7 @@ public class Panel_RegistroVehiculo extends javax.swing.JPanel {
         jCheckBox1.setText("Cedula");
         jCheckBox1.setOpaque(false);
         jPanel1.add(jCheckBox1);
-        jCheckBox1.setBounds(390, 50, 70, 23);
+        jCheckBox1.setBounds(390, 50, 70, 27);
 
         buttonGroup1.add(jCheckBox2);
         jCheckBox2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -339,7 +345,7 @@ public class Panel_RegistroVehiculo extends javax.swing.JPanel {
         jCheckBox2.setText("Apellido");
         jCheckBox2.setOpaque(false);
         jPanel1.add(jCheckBox2);
-        jCheckBox2.setBounds(470, 50, 80, 23);
+        jCheckBox2.setBounds(470, 50, 80, 27);
 
         jCheckBox3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jCheckBox3.setForeground(new java.awt.Color(255, 51, 0));
@@ -352,7 +358,7 @@ public class Panel_RegistroVehiculo extends javax.swing.JPanel {
             }
         });
         jPanel1.add(jCheckBox3);
-        jCheckBox3.setBounds(630, 100, 90, 23);
+        jCheckBox3.setBounds(630, 100, 90, 27);
 
         add(jPanel1);
         jPanel1.setBounds(0, 0, 727, 415);
