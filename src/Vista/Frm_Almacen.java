@@ -10,13 +10,14 @@ import Controlador.Conexion.ConeccionBDD;
 import Vista.Modelo.TablaProducto;
 import java.sql.PreparedStatement;
 import javax.swing.JOptionPane;
-import Controlador.Utiles.Producto.Utiles;
+import Controlador.Utiles.Utiles;
 import Modelo.DetalleReparacion;
 import java.awt.Image;
 import java.sql.SQLException;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
@@ -121,9 +122,9 @@ public class Frm_Almacen extends javax.swing.JFrame {
                 p = txtPrecio.getText(),
                 i = txtIva.getText(),
                 e = "Exter" + m + n;
-        String sql = "UPDATE `producto` SET `nombre` = '" + n + "', `cantidad` = '" + c +
-                "', `marca` = '" + m + "', `precio` = '" + p + "', `IVA` = '" + i + 
-                "', `external_idProducto` = '" + e + "' WHERE (`producto`.`idProducto` = '" + idProducto + "')";
+        String sql = "UPDATE `producto` SET `nombre` = '" + n + "', `cantidad` = '" + c
+                + "', `marca` = '" + m + "', `precio` = '" + p + "', `IVA` = '" + i
+                + "', `external_idProducto` = '" + e + "' WHERE (`producto`.`idProducto` = '" + idProducto + "')";
         try {
             PreparedStatement ps = (PreparedStatement) ConeccionBDD.IniciarConexion().prepareStatement(sql);
             ps.executeUpdate();
@@ -148,6 +149,7 @@ public class Frm_Almacen extends javax.swing.JFrame {
         btnLimpiar.setEnabled(false);
         TablaProductos.setEnabled(false);
         btnActualizar.setEnabled(true);
+        btnGuardarProducto1.setEnabled(false);
     }
 
     private void modificarPersona() {
@@ -158,6 +160,26 @@ public class Frm_Almacen extends javax.swing.JFrame {
             JOptionPane.showConfirmDialog(this, "Seleccione un elemento de la tabla", "No Seleccionado", JOptionPane.INFORMATION_MESSAGE);
         }
 
+    }
+
+    private void buscar(JTable tabla) {
+        String atributo = "";
+        boolean v = false;
+        if (rdNombre.isSelected()) {
+            atributo = "Nombre";
+            v = true;
+        } else if (rdExternalID.isSelected()) {
+            atributo = "External_id";
+            v = true;
+        } else {
+            JOptionPane.showMessageDialog(this, "Debe selecionar un atributo de busqueda", "Seleccione", JOptionPane.INFORMATION_MESSAGE);
+        }
+        if (v = true) {
+//            tp.setLsp(Controlador.Utiles.Utiles.busquedaSecuencial(cp.getProducto(), txtBuscar.getText(), atributo));
+            tp.setLsp(Utiles.busquedaSecuencial(Utiles.listaProductos(), txtBuscar.getText(), atributo));
+            tabla.setModel(tp);
+            tabla.updateUI();
+        }
     }
 
     /**
@@ -199,10 +221,10 @@ public class Frm_Almacen extends javax.swing.JFrame {
         jPanel9 = new javax.swing.JPanel();
         jcroopPanel = new javax.swing.JScrollPane();
         TablaProductosLista = new javax.swing.JTable();
-        rdNombre4 = new javax.swing.JRadioButton();
-        rdApellido4 = new javax.swing.JRadioButton();
+        rdNombre = new javax.swing.JRadioButton();
+        rdExternalID = new javax.swing.JRadioButton();
         jLabel16 = new javax.swing.JLabel();
-        txtBuscar4 = new javax.swing.JTextField();
+        txtBuscar = new javax.swing.JTextField();
         btnBuscar4 = new javax.swing.JButton();
         jPanel10 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -231,6 +253,7 @@ public class Frm_Almacen extends javax.swing.JFrame {
         jTabbedPane1.setBackground(java.awt.Color.black);
         jTabbedPane1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         jTabbedPane1.setForeground(java.awt.Color.orange);
+        jTabbedPane1.setAutoscrolls(true);
 
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Registro de Productos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Courier New", 0, 12))); // NOI18N
         jPanel5.setForeground(java.awt.Color.orange);
@@ -449,21 +472,25 @@ public class Frm_Almacen extends javax.swing.JFrame {
         ));
         jcroopPanel.setViewportView(TablaProductosLista);
 
-        rdNombre4.setFont(new java.awt.Font("Courier New", 0, 12)); // NOI18N
-        rdNombre4.setText("Nombre");
+        buttonGroup1.add(rdNombre);
+        rdNombre.setFont(new java.awt.Font("Courier New", 0, 12)); // NOI18N
+        rdNombre.setText("Nombre");
+        rdNombre.setBorderPainted(true);
 
-        rdApellido4.setFont(new java.awt.Font("Courier New", 0, 12)); // NOI18N
-        rdApellido4.setText("Apellido");
-        rdApellido4.addActionListener(new java.awt.event.ActionListener() {
+        buttonGroup1.add(rdExternalID);
+        rdExternalID.setFont(new java.awt.Font("Courier New", 0, 12)); // NOI18N
+        rdExternalID.setText("External_id");
+        rdExternalID.setBorderPainted(true);
+        rdExternalID.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rdApellido4ActionPerformed(evt);
+                rdExternalIDActionPerformed(evt);
             }
         });
 
         jLabel16.setFont(new java.awt.Font("Courier New", 0, 18)); // NOI18N
         jLabel16.setText("Buscar:");
 
-        txtBuscar4.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        txtBuscar.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
 
         btnBuscar4.setBackground(java.awt.Color.orange);
         btnBuscar4.setFont(new java.awt.Font("Courier New", 0, 12)); // NOI18N
@@ -481,30 +508,30 @@ public class Frm_Almacen extends javax.swing.JFrame {
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel9Layout.createSequentialGroup()
                 .addGap(49, 49, 49)
-                .addComponent(rdNombre4)
+                .addComponent(rdNombre)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(rdApellido4)
+                .addComponent(rdExternalID)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel16)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtBuscar4, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(58, 58, 58)
+                .addGap(18, 18, 18)
+                .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(btnBuscar4)
-                .addGap(91, 91, 91))
+                .addGap(35, 35, 35))
             .addGroup(jPanel9Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jcroopPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 792, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel9Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(rdNombre4)
-                    .addComponent(rdApellido4)
+                    .addComponent(rdNombre)
+                    .addComponent(rdExternalID)
                     .addComponent(jLabel16)
-                    .addComponent(txtBuscar4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnBuscar4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jcroopPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -654,12 +681,12 @@ public class Frm_Almacen extends javax.swing.JFrame {
         btnActualizar.setEnabled(false);
     }//GEN-LAST:event_btnActualizarActionPerformed
 
-    private void rdApellido4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdApellido4ActionPerformed
+    private void rdExternalIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdExternalIDActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_rdApellido4ActionPerformed
+    }//GEN-LAST:event_rdExternalIDActionPerformed
 
     private void btnBuscar4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscar4ActionPerformed
-        // TODO add your handling code here:
+        buscar(TablaProductosLista);
     }//GEN-LAST:event_btnBuscar4ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
@@ -670,8 +697,8 @@ public class Frm_Almacen extends javax.swing.JFrame {
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
         // TODO add your handling code here:
-       
-        
+
+
     }//GEN-LAST:event_jButton10ActionPerformed
 
     private void btnGuardarProducto1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarProducto1ActionPerformed
@@ -701,7 +728,7 @@ public class Frm_Almacen extends javax.swing.JFrame {
                         row[5] = modelo1.getValueAt(filas[i], 5);
                         row[6] = modelo1.getValueAt(filas[i], 6);
                         String valorO = modelo1.getValueAt(filas[i], 2).toString();
-                        int valor = Integer.parseInt(CantidadVender);                             
+                        int valor = Integer.parseInt(CantidadVender);
                         // ----
                         String aux = row[0].toString();
                         Long aux1 = Long.valueOf(aux);
@@ -713,9 +740,9 @@ public class Frm_Almacen extends javax.swing.JFrame {
                             } else {
                                 JOptionPane.showMessageDialog(null, "ERROR INGRESO", "Stock Insuficiente", JOptionPane.ERROR_MESSAGE);
                             }
-                        }else{
-                             JOptionPane.showMessageDialog(null, "INTENTO NO VALIDO", "DATO YA HA SIDO AGREGADO", JOptionPane.ERROR_MESSAGE);
-                             v = true;
+                        } else {
+                            JOptionPane.showMessageDialog(null, "INTENTO NO VALIDO", "DATO YA HA SIDO AGREGADO", JOptionPane.ERROR_MESSAGE);
+                            v = true;
                         }
                     }
                 } else {
@@ -732,17 +759,16 @@ public class Frm_Almacen extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         DefaultTableModel modelo2 = (DefaultTableModel) TablaPedido.getModel();
-       // System.out.println("Filas: " + modelo2.getRowCount());
+        // System.out.println("Filas: " + modelo2.getRowCount());
         if (modelo2.getRowCount() > 0) {
             cp.guardarProducto(detalleReparacion.getIdDetalle());
             cp.ActualizaeStock();
             this.dispose();
-            
+
         } else {
             JOptionPane.showMessageDialog(null, "ERROR EN TABLA", "TABLA VACIA", JOptionPane.ERROR_MESSAGE);
         }
-       
-        
+
         //cp.actualizaBaseDatos();
 
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -821,13 +847,14 @@ public class Frm_Almacen extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JScrollPane jcroopPanel;
-    private javax.swing.JRadioButton rdApellido4;
-    private javax.swing.JRadioButton rdNombre4;
-    private javax.swing.JTextField txtBuscar4;
+    private javax.swing.JRadioButton rdExternalID;
+    private javax.swing.JRadioButton rdNombre;
+    private javax.swing.JTextField txtBuscar;
     private javax.swing.JTextField txtIva;
     private javax.swing.JTextField txtMarca;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtPrecio;
     private javax.swing.JTextField txtStock;
     // End of variables declaration//GEN-END:variables
+
 }

@@ -274,7 +274,6 @@ public class Frm_Detalle extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        
         new Frm_Almacen(codr.getDetalle()).setVisible(true);
 //        JOptionPane.showMessageDialog(null, "Confirma cambios");
         cargarTablas();
