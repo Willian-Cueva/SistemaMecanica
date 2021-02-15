@@ -102,6 +102,7 @@ public class Frm_Detalle extends javax.swing.JFrame {
                 "Titulo", "Valor", "Descripcion"
             }
         ));
+        tablaServicios.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tablaServicios);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -134,6 +135,7 @@ public class Frm_Detalle extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tablaRepuestos.getTableHeader().setReorderingAllowed(false);
         jScrollPane2.setViewportView(tablaRepuestos);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);

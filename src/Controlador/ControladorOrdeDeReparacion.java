@@ -32,6 +32,8 @@ public class ControladorOrdeDeReparacion {
     private DetalleReparacion detalle = new DetalleReparacion();
 //    private String placa = "";
     private Vehiculo vehiculo = new Vehiculo();
+    public static final String FACTURAS="0";
+    public static final String ORDENES="0";
 
     public Vehiculo getVehiculo() {
         return vehiculo;
@@ -42,7 +44,7 @@ public class ControladorOrdeDeReparacion {
     }
 
     public ControladorOrdeDeReparacion() {
-        cargarOrdenes();
+        cargarOrdenes(ORDENES);
     }
 
     public ListaSimpleAvanzada getOrdenes() {
@@ -50,6 +52,7 @@ public class ControladorOrdeDeReparacion {
     }
 
     public void setOrdenes(ListaSimpleAvanzada ordenes) {
+        this.ordenes = new ListaSimpleAvanzada();
         this.ordenes = ordenes;
     }
 
@@ -90,7 +93,11 @@ public class ControladorOrdeDeReparacion {
         orden.setTotal(Math.round(total*100.0)/100.0);
         actualizarOrden();
     }
-    
+    //BuscarFactura
+    /**
+     * Retorna una persona con los atributos de dicho propietario
+     * @return Persona
+     */
     public Persona propietario(){
         Persona p = (Persona) Utiles.busquedaSecuencial(Utiles.listaPersonas(Utiles.PERSONAS), vehiculo.getIdPersona(), "Id").obtenerObjetopp(0);
         return p;
@@ -108,7 +115,7 @@ public class ControladorOrdeDeReparacion {
             JOptionPane.showMessageDialog(null, "Error al actualizar la orden de reparacion", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
-    
+    //BuscarFactura
     /**
      * Este metodo permite actualizar los productos desde la tabla de salidaproducto de la base de datos
      * respectivamente a la lista de productos del detalle de reparacion en tiempo de ejecucion
@@ -169,10 +176,13 @@ public class ControladorOrdeDeReparacion {
         detalle.setListaServivios(lservicio);
         
     }
-
-    private void cargarOrdenes() {
+    /**
+     * Este metodo permite retornar una lista sea de ordenes o de facturas
+     * @param opcion ORDENDES/FACTURAS
+     */
+    public void cargarOrdenes(String opcion) {
         this.ordenes = new ListaSimpleAvanzada();
-        String sql = "Select * from ordenreparacion where estado = '1';";
+        String sql = "Select * from ordenreparacion where estado = '"+opcion+"';";
         try {
             Statement st = (Statement) ConeccionBDD.IniciarConexion().createStatement();
             ResultSet rs = st.executeQuery(sql);
@@ -210,13 +220,14 @@ public class ControladorOrdeDeReparacion {
             ps.setString(6, "1");
             ps.executeUpdate();
             System.out.println("Se creo la orden de reparacion con exito");
-            cargarOrdenes();
+            cargarOrdenes(ORDENES);
             JOptionPane.showMessageDialog(null, "Se creo la orden de reparacion con exito");
         } catch (SQLException ex) {
 //            Logger.getLogger(ControladorOrdeDeReparacion.class.getName()).log(Level.SEVERE, null, ex);
             System.err.println("Error al guardar la orden de reparacion en la base de datos");
         }
     }
+    //BuscarFactura
     /**
      * Este metodo permite dependiendo el vehiculo cargar el detalle de la orden de reparacoin desde la base de datos,
      * en el caso de no existir esa orden se crea una y vuelve a ejecutarce el metodo ingresando a el detalle de reparacion
@@ -270,14 +281,14 @@ public class ControladorOrdeDeReparacion {
             JOptionPane.showMessageDialog(null, "No se pudo  insertar");
         }
     }
-
+    
     /**
      * Este metodo permite buscar una orden de reparacion activa en base al vehiculo ingresado
      * @param vehiculo Vehiculo para buscar si existe una orden de reparacion activa
      * @return retorna true si existe una orden de reparacion activa para dicho vehiculo, y retorna false en caso de no existir
      */
     public boolean tieneOrdenActiva(Object vehiculo) {
-        cargarOrdenes();
+        cargarOrdenes(ORDENES);
         boolean chis = false;
         if (vehiculo != null) {
             Vehiculo v = (Vehiculo) vehiculo;

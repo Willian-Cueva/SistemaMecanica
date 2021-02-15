@@ -14,6 +14,16 @@ public class Factura {
     private String hora;
     private String fecha;
     private Long idOrden;
+    private OrdenReparacion orden;
+
+    public OrdenReparacion getOrden() {
+        return orden;
+    }
+
+    public void setOrden(OrdenReparacion orden) {
+        this.orden = orden;
+    }
+    
 
     public Factura() {
     }
@@ -55,6 +65,11 @@ public class Factura {
 
     public void setIdOrden(Long idOrden) {
         this.idOrden = idOrden;
+    }
+
+    @Override
+    public String toString() {
+        return idFactura+" "+fecha+" "+hora;
     }
     
 }
