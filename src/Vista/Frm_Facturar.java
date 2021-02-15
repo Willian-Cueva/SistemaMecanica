@@ -505,6 +505,7 @@ public class Frm_Facturar extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "No hay nada que facturar");
             }else{
                 emitirFactura();
+                this.dispose();
             }
         }
     }//GEN-LAST:event_jButton2ActionPerformed

@@ -60,7 +60,7 @@ public class Frm_Detalle extends javax.swing.JFrame {
         tablaRepuestos.setModel(tp);
         tablaRepuestos.updateUI();
         tablaServicios.updateUI();
-        
+            
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -282,7 +282,7 @@ public class Frm_Detalle extends javax.swing.JFrame {
 
     private void jPanel1MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseMoved
            // TODO add your handling code here:
-//           cargarTablas();
+           cargarTablas();
     }//GEN-LAST:event_jPanel1MouseMoved
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed

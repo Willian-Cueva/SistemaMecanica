@@ -83,11 +83,11 @@ public class ControladorOrdeDeReparacion {
             subtotal += p.getPrecio();
         }
         
-        orden.setSubtotal(subtotal);
+        orden.setSubtotal(Math.round(subtotal*100.0)/100.0);
         
         double total = subtotal - subtotal*orden.getDescuent();
         
-        orden.setTotal(total);
+        orden.setTotal(Math.round(total*100.0)/100.0);
         actualizarOrden();
     }
     
