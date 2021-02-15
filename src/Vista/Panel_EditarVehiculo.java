@@ -256,6 +256,11 @@ public class Panel_EditarVehiculo extends javax.swing.JPanel {
         add(jPanel1);
         jPanel1.setBounds(400, 70, 310, 340);
 
+        Tabla1 = new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIndex, int colIndex){
+                return false;
+            }
+        };
         Tabla1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 

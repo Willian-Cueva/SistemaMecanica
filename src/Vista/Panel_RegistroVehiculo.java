@@ -291,6 +291,11 @@ public class Panel_RegistroVehiculo extends javax.swing.JPanel {
         jPanel1.add(jPanel2);
         jPanel2.setBounds(20, 40, 360, 360);
 
+        Tabla1 = new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIndex, int colIndex){
+                return false;
+            }
+        };
         Tabla1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 

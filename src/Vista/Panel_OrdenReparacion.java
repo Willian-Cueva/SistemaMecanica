@@ -89,6 +89,11 @@ public class Panel_OrdenReparacion extends javax.swing.JPanel {
         setBackground(new java.awt.Color(61, 61, 61));
         setLayout(null);
 
+        Tabla1 = new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIndex, int colIndex){
+                return false;
+            }
+        };
         Tabla1.setForeground(new java.awt.Color(60, 63, 65));
         Tabla1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {

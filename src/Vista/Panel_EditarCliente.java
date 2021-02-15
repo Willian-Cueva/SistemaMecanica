@@ -108,6 +108,11 @@ public class Panel_EditarCliente extends javax.swing.JPanel {
         add(jCheckBox3);
         jCheckBox3.setBounds(310, 100, 90, 20);
 
+        Tabla1 = new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIndex, int colIndex){
+                return false;
+            }
+        };
         Tabla1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
