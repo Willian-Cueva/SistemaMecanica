@@ -38,16 +38,12 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  */
 public class UtilesMecanico {
 
-    /**
-     *
-     * @return
-     */
     static Connection conexion;
 
     /**
      * Metodo get estatico que permite establecer conexion con la base de datos
      *
-     * @return
+     * @return Retiorna una conexion de BDD
      */
     public Connection getConexion() {
         return conexion;
@@ -79,7 +75,7 @@ public class UtilesMecanico {
      * Metodo que permite realizar la busqueda de imagenes en el directorio de
      * el computador
      *
-     * @return
+     * @return Retorna una archivo de tipo imagen
      */
     public File BuscarImagen() {
         File file = null;
@@ -100,9 +96,9 @@ public class UtilesMecanico {
     /**
      * Metodo que permite convertir imagenes de formato Blod a Icono
      *
-     * @param imagen
-     * @param d
-     * @return
+     * @param imagen Imagen Blod
+     * @param d Dimensiones de la imagen
+     * @return Retorna una imagen ImageIcon
      */
     public ImageIcon img(Blob imagen, Dimension d) {
         if (imagen != null) {
@@ -128,7 +124,7 @@ public class UtilesMecanico {
     /**
      * Metodo que permite obtener la fecha actual
      *
-     * @return
+     * @return Fecha y hora actual del sistema
      */
     public String fechaActual() {
         String fechaHora = "";
