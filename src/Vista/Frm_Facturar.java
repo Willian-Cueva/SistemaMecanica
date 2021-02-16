@@ -47,7 +47,7 @@ public class Frm_Facturar extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         jButton2.setVisible(false);
         this.codr = codr;
-        this.codr.cargarDetalle();
+        this.codr.cargarDetalleFactura();
         cargarDatos();
     }
 

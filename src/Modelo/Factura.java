@@ -69,7 +69,7 @@ public class Factura {
 
     @Override
     public String toString() {
-        return idFactura+" "+fecha+" "+hora;
+        return idFactura+" "+fecha+" "+hora+" "+idOrden;
     }
     
 }
