@@ -56,7 +56,6 @@ public class Frm_Facturar extends javax.swing.JFrame {
         this.codr.cargarDetalleFactura();
 //        iniciarTabla();
         cargarDatos();
-        cargarTablaServicios();
     }
 
     private void cargarDatos() {
@@ -74,6 +73,7 @@ public class Frm_Facturar extends javax.swing.JFrame {
         labeTotal.setText(String.valueOf(codr.getOrden().getTotal()));
         consultar();
         cargarTablaProductos();
+        cargarTablaServicios();
     }
 
     private void consultar() {

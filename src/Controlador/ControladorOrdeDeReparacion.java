@@ -108,7 +108,7 @@ public class ControladorOrdeDeReparacion {
         try {
             PreparedStatement ps = (PreparedStatement) ConeccionBDD.IniciarConexion().prepareStatement(sql);
             ps.executeUpdate();
-            JOptionPane.showMessageDialog(null, "Se actualizo la orden de reparacion correctamente");
+//            JOptionPane.showMessageDialog(null, "Se actualizo la orden de reparacion correctamente");
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al actualizar la orden de reparacion", "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -251,10 +251,10 @@ public class ControladorOrdeDeReparacion {
 //                    JOptionPane.showMessageDialog(null, d.getIdOrden()==null);
 
                     if (d.getIdOrden()!=null) {
-                        JOptionPane.showMessageDialog(null, "Si existe un detalle para esta orden");
+//                        JOptionPane.showMessageDialog(null, "Si existe un detalle para esta orden");
                         detalle = d;
                     } else {
-                        JOptionPane.showMessageDialog(null, "No existe ningun detalle, se creará un detalle");
+//                        JOptionPane.showMessageDialog(null, "No existe ningun detalle, se creará un detalle");
                         crearDetalle(orden.getIdOrden());
                     }
                 } catch (SQLException ex) {
@@ -287,10 +287,10 @@ public class ControladorOrdeDeReparacion {
 //                    JOptionPane.showMessageDialog(null, d.getIdOrden()==null);
 
                     if (d.getIdOrden()!=null) {
-                        JOptionPane.showMessageDialog(null, "Si existe un detalle para esta orden");
+//                        JOptionPane.showMessageDialog(null, "Si existe un detalle para esta orden");
                         detalle = d;
                     } else {
-                        JOptionPane.showMessageDialog(null, "No existe ningun detalle, se creará un detalle - ControladorOrdenReparacion");
+//                        JOptionPane.showMessageDialog(null, "No existe ningun detalle, se creará un detalle - ControladorOrdenReparacion");
                         crearDetalle(orden.getIdOrden());
                     }
                 } catch (SQLException ex) {

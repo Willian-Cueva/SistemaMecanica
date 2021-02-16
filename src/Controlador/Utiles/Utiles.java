@@ -45,7 +45,7 @@ public class Utiles {
             Statement st = ConeccionBDD.IniciarConexion().createStatement();
             ResultSet rs = st.executeQuery(sql);
             while (rs.next()) {                
-                Servicio s = new Servicio(rs.getLong(1), rs.getString(2), rs.getDouble(3), rs.getString(4));
+                Servicio s = new Servicio(rs.getLong(1), rs.getString(4), rs.getDouble(3), rs.getString(3));
                 servicios.insertar(s);
             }
             System.out.println("Se extrajo los servicios con exito");

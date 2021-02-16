@@ -344,6 +344,8 @@ public class Frm_Detalle extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
+        ctr.llenarTablaServicio(lista,codr.getDetalle().getListaServivios(), modelo);
+        tablaServicios.updateUI();
         cargarTablas();
     }//GEN-LAST:event_jButton3ActionPerformed
     class eventoCerrar implements MouseListener {
