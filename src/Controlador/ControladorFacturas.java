@@ -33,7 +33,11 @@ public class ControladorFacturas {
         this.vehiculo = v;
     }
     private ControladorOrdeDeReparacion cntrl = new ControladorOrdeDeReparacion();
-
+    /**
+     * Este metodo sirve para cargar la lista de facturas de la base de datos
+     * a la lista de facturas de esta clase ControladorFacturas
+     * @param placa String placa del vehiculo
+     */
     public void cargarFacturas(String placa) {
 //        facturas = new ListaSimpleAvanzada();
 //        //hacer una consulta para obtener las facturas de dicho vehiculo
@@ -43,12 +47,16 @@ public class ControladorFacturas {
 //        listaDeOrdenes();
         listaFacturas(placa);
     }
-
+    /**
+     * Este metodo permite presentar las facturas emitidas
+     * @param nroFactura nro de la factura
+     */
     public void cargarDetalles(String nroFactura) {
         try {
             Factura f = obtenerFactura(nroFactura);
             System.err.println(f);
             cntrl.setOrden(obtenerOrden(f.getIdOrden().toString()));
+            System.err.println(obtenerOrden(f.getIdOrden().toString()));
             new Frm_Facturar(cntrl,Frm_Facturar.PROTOTIPOFACTURA).setVisible(true);
         } catch (Exception e) {
             System.err.println("Error al encontrar dicha factura en cargarDetalles");
@@ -140,7 +148,6 @@ public class ControladorFacturas {
         } catch (SQLException ex) {
             System.err.println("Error al obtener el orden de raparacion de la factura en obtenerOrden()");
         }
-
         return or;
     }
 

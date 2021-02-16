@@ -154,7 +154,7 @@
               <Color blue="0" green="66" red="ff" type="rgb"/>
             </Property>
             <Property name="horizontalAlignment" type="int" value="0"/>
-            <Property name="text" type="java.lang.String" value="Guardar"/>
+            <Property name="text" type="java.lang.String" value="Cancelar"/>
             <Property name="opaque" type="boolean" value="true"/>
           </Properties>
           <Events>

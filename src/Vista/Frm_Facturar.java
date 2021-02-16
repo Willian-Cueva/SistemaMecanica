@@ -7,6 +7,9 @@ package Vista;
 
 import Controlador.Conexion.ConeccionBDD;
 import Controlador.ControladorOrdeDeReparacion;
+import Controlador.ControladorServicio;
+import Lista.ListaSimple;
+import Modelo.Servicio;
 import Vista.Modelo.TablaProducto;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -15,6 +18,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import java.sql.PreparedStatement;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -24,7 +28,9 @@ public class Frm_Facturar extends javax.swing.JFrame {
 
     private ControladorOrdeDeReparacion codr = new ControladorOrdeDeReparacion();
     private TablaProducto tablaProducto = new TablaProducto();
-    public static final boolean PROTOTIPOFACTURA=true;
+    public static final boolean PROTOTIPOFACTURA = true;
+    private DefaultTableModel modelo;
+    private ControladorServicio ctr = new ControladorServicio();
 
     /**
      * Creates new form Frm_VerVehiculo
@@ -33,21 +39,29 @@ public class Frm_Facturar extends javax.swing.JFrame {
         initComponents();
     }
 
+    private void iniciarTabla() {
+        modelo = (DefaultTableModel) tablaServicios.getModel();
+        tablaServicios.setModel(modelo);
+    }
+
     public Frm_Facturar(ControladorOrdeDeReparacion codr) {
         this.setUndecorated(true);
         initComponents();
         this.setLocationRelativeTo(null);
         this.codr = codr;
         this.codr.cargarDetalle();
+        iniciarTabla();
         cargarDatos();
     }
-    public Frm_Facturar(ControladorOrdeDeReparacion codr,boolean opcion) {
+
+    public Frm_Facturar(ControladorOrdeDeReparacion codr, boolean opcion) {
         this.setUndecorated(true);
         initComponents();
         this.setLocationRelativeTo(null);
         jButton2.setVisible(false);
         this.codr = codr;
-        this.codr.cargarDetalle();
+        this.codr.cargarDetalleFactura();
+        iniciarTabla();
         cargarDatos();
     }
 
@@ -70,15 +84,15 @@ public class Frm_Facturar extends javax.swing.JFrame {
     }
 
     private void consultar() {
-        String marca="No encontro marca", modelo="No encontro modelo";
+        String marca = "No encontro marca", modelo = "No encontro modelo";
         String sql = "SELECT modelovehiculo.nombre,marca.nombre from modelovehiculo,marca "
-                + "where idmodeloVehiculo='"+codr.getVehiculo().getIdModeloVehiculo().toString()+"' and (modelovehiculo.idmarca=marca.idmarca);";
+                + "where idmodeloVehiculo='" + codr.getVehiculo().getIdModeloVehiculo().toString() + "' and (modelovehiculo.idmarca=marca.idmarca);";
         try {
             Statement st = ConeccionBDD.IniciarConexion().createStatement();
             ResultSet rs = st.executeQuery(sql);
             if (rs.next()) {
                 modelo = rs.getString(1);
-                marca=rs.getString(2);
+                marca = rs.getString(2);
             } else {
                 System.err.println("No se obtivo los valores de la tabla");
             }
@@ -90,10 +104,23 @@ public class Frm_Facturar extends javax.swing.JFrame {
     }
 
     private void cargarTablas() {
+//        codr.cargarListaServicios();
+//        codr.cargarListaProductos();
+//        tablaProducto.setLsp(codr.getDetalle().getListaProductos());
+//        tablaProductos.setModel(tablaProducto);
+//        tablaProductos.updateUI();
+//        ctr.llenarTablaServicio(codr.getDetalle().getListaServivios(),new ListaSimple<Servicio>(), modelo);
+//        codr.getDetalle().getListaServivios().verDatos();
+//        tablaServicios.updateUI();
+        codr.cargarListaServicios();
+        ctr.llenarTablaServicio(codr.getDetalle().getListaServivios(), new ListaSimple<Servicio>(), modelo);
+        System.out.println("Lista de servicios");
+        codr.getDetalle().getListaServivios().verDatos();
         codr.cargarListaProductos();
         tablaProducto.setLsp(codr.getDetalle().getListaProductos());
         tablaProductos.setModel(tablaProducto);
         tablaProductos.updateUI();
+        tablaServicios.updateUI();
     }
 
     /**
@@ -278,13 +305,10 @@ public class Frm_Facturar extends javax.swing.JFrame {
 
         tablaServicios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Titulo", "Valor", "Descripcion"
             }
         ));
         tablaServicios.getTableHeader().setReorderingAllowed(false);
@@ -295,15 +319,16 @@ public class Frm_Facturar extends javax.swing.JFrame {
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 471, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder("Repuestos"));
@@ -543,10 +568,10 @@ public class Frm_Facturar extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         int s = JOptionPane.showConfirmDialog(this, "¿Desea guardar emitir yá esta factura?", "Seleccione", JOptionPane.YES_NO_OPTION);
-        if (s==0) {
-            if (codr.getOrden().getTotal()==0) {
+        if (s == 0) {
+            if (codr.getOrden().getTotal() == 0) {
                 JOptionPane.showMessageDialog(this, "No hay nada que facturar");
-            }else{
+            } else {
                 emitirFactura();
                 this.dispose();
             }
@@ -554,7 +579,7 @@ public class Frm_Facturar extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void emitirFactura() {
-        String sql = "insert into factura(hora,fecha,idOrden) values('"+labelHora.getText()+"','"+labelFecha.getText()+"','"+codr.getOrden().getIdOrden().toString()+"');";
+        String sql = "insert into factura(hora,fecha,idOrden) values('" + labelHora.getText() + "','" + labelFecha.getText() + "','" + codr.getOrden().getIdOrden().toString() + "');";
         try {
             PreparedStatement ps = ConeccionBDD.IniciarConexion().prepareCall(sql);
             ps.executeUpdate();
@@ -563,11 +588,11 @@ public class Frm_Facturar extends javax.swing.JFrame {
             System.err.println("Error al insertar la factura en emitir factura");
             JOptionPane.showMessageDialog(this, "No se pudo emitir la factura");
         }
-        sql="UPDATE ordenreparacion set estado='0' where idordenreparacion='"+codr.getOrden().getIdOrden().toString()+"';";
-         try {
+        sql = "UPDATE ordenreparacion set estado='0' where idordenreparacion='" + codr.getOrden().getIdOrden().toString() + "';";
+        try {
             PreparedStatement ps = ConeccionBDD.IniciarConexion().prepareCall(sql);
             ps.executeUpdate();
-             System.out.println("Se actualizo la orden como inactiva correctamente");
+            System.out.println("Se actualizo la orden como inactiva correctamente");
         } catch (SQLException ex) {
             System.err.println("Error al actualizar la orden de reparacion a inactiva");
         }

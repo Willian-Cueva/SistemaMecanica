@@ -33,11 +33,8 @@ public class OrdenReparacion {
     }
     
     public OrdenReparacion(String fecha, String hora, double descuent, String observacion, Long idVehiculo, boolean estado) {
-        this.idOrden = idOrden;
         this.fecha = fecha;
         this.hora = hora;
-        this.subtotal = subtotal;
-        this.total = total;
         this.descuent = descuent;
         this.observacion = observacion;
         this.idVehiculo = idVehiculo;

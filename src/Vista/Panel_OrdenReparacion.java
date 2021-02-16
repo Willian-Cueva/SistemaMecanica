@@ -66,7 +66,6 @@ public class Panel_OrdenReparacion extends javax.swing.JPanel {
         jCheckBox2 = new javax.swing.JCheckBox();
         jCheckBox1 = new javax.swing.JCheckBox();
         jPanel1 = new javax.swing.JPanel();
-        jLabel7 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         labelFecha = new javax.swing.JLabel();
         labelHora = new javax.swing.JLabel();
@@ -74,16 +73,13 @@ public class Panel_OrdenReparacion extends javax.swing.JPanel {
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         labelTotal = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        cajaTexto = new javax.swing.JTextArea();
         jLabel14 = new javax.swing.JLabel();
         labelPlaca = new javax.swing.JLabel();
-        labelSubtotal = new javax.swing.JLabel();
-        txtDescuento = new javax.swing.JTextField();
-        btnFacturar = new javax.swing.JButton();
-        btnGuardarOrden = new javax.swing.JButton();
         btnDetalle = new javax.swing.JButton();
+        labelSubtotal = new javax.swing.JLabel();
+        btnGuardarOrden = new javax.swing.JButton();
+        btnFacturar = new javax.swing.JButton();
+        jSeparator1 = new javax.swing.JSeparator();
         jLabel2 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(61, 61, 61));
@@ -103,6 +99,7 @@ public class Panel_OrdenReparacion extends javax.swing.JPanel {
                 "Placa", "Modelo", "Propietario", "Cedula"
             }
         ));
+        Tabla1.setToolTipText("Seleccione para actualizar los datos");
         Tabla1.getTableHeader().setReorderingAllowed(false);
         Tabla1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
@@ -112,9 +109,9 @@ public class Panel_OrdenReparacion extends javax.swing.JPanel {
         jScrollPane1.setViewportView(Tabla1);
 
         add(jScrollPane1);
-        jScrollPane1.setBounds(360, 110, 350, 210);
+        jScrollPane1.setBounds(360, 110, 350, 290);
         add(txtBuscar);
-        txtBuscar.setBounds(360, 70, 230, 30);
+        txtBuscar.setBounds(360, 70, 210, 30);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
@@ -137,7 +134,7 @@ public class Panel_OrdenReparacion extends javax.swing.JPanel {
 
         jLabel1.setBackground(new java.awt.Color(255, 175, 0));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Buscar");
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/lupa.png"))); // NOI18N
         jLabel1.setOpaque(true);
         jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -145,11 +142,12 @@ public class Panel_OrdenReparacion extends javax.swing.JPanel {
             }
         });
         add(jLabel1);
-        jLabel1.setBounds(590, 70, 70, 30);
+        jLabel1.setBounds(570, 70, 40, 30);
 
         jCheckBox3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jCheckBox3.setForeground(new java.awt.Color(255, 153, 0));
         jCheckBox3.setText("Actualizar");
+        jCheckBox3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/actualizar.png"))); // NOI18N
         jCheckBox3.setOpaque(false);
         jCheckBox3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
@@ -157,7 +155,7 @@ public class Panel_OrdenReparacion extends javax.swing.JPanel {
             }
         });
         add(jCheckBox3);
-        jCheckBox3.setBounds(530, 30, 80, 30);
+        jCheckBox3.setBounds(610, 90, 100, 20);
 
         jCheckBox2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jCheckBox2.setForeground(new java.awt.Color(255, 153, 0));
@@ -175,10 +173,6 @@ public class Panel_OrdenReparacion extends javax.swing.JPanel {
         jCheckBox1.setBounds(360, 30, 80, 30);
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel7.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
-        jLabel7.setText("Observacion:");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 150, -1));
 
         jLabel5.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jLabel5.setText("Hora: ");
@@ -209,16 +203,6 @@ public class Panel_OrdenReparacion extends javax.swing.JPanel {
         labelTotal.setText("-");
         jPanel1.add(labelTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 140, 150, -1));
 
-        jLabel8.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
-        jLabel8.setText("Descuento:");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, 130, -1));
-
-        cajaTexto.setColumns(20);
-        cajaTexto.setRows(5);
-        jScrollPane2.setViewportView(cajaTexto);
-
-        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, 290, 70));
-
         jLabel14.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         jLabel14.setText("Placa:");
         jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 80, -1));
@@ -228,14 +212,32 @@ public class Panel_OrdenReparacion extends javax.swing.JPanel {
         labelPlaca.setText("-");
         jPanel1.add(labelPlaca, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 60, 150, -1));
 
+        btnDetalle.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        btnDetalle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/001-empleado.png"))); // NOI18N
+        btnDetalle.setText("Detalle de Reparacion");
+        btnDetalle.setEnabled(false);
+        btnDetalle.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDetalleActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnDetalle, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 260, 270, -1));
+
         labelSubtotal.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         labelSubtotal.setForeground(new java.awt.Color(51, 51, 51));
         labelSubtotal.setText("-");
         jPanel1.add(labelSubtotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 100, 150, -1));
-        jPanel1.add(txtDescuento, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 180, 160, 30));
 
-        add(jPanel1);
-        jPanel1.setBounds(10, 40, 340, 360);
+        btnGuardarOrden.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        btnGuardarOrden.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/002-disquete.png"))); // NOI18N
+        btnGuardarOrden.setText("Crear Orden");
+        btnGuardarOrden.setEnabled(false);
+        btnGuardarOrden.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarOrdenActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnGuardarOrden, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 210, 180, 30));
 
         btnFacturar.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         btnFacturar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/002-cuenta.png"))); // NOI18N
@@ -247,32 +249,11 @@ public class Panel_OrdenReparacion extends javax.swing.JPanel {
                 btnFacturarActionPerformed(evt);
             }
         });
-        add(btnFacturar);
-        btnFacturar.setBounds(450, 370, 150, 40);
+        jPanel1.add(btnFacturar, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 310, 150, -1));
+        jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 180, 340, 10));
 
-        btnGuardarOrden.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        btnGuardarOrden.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/002-disquete.png"))); // NOI18N
-        btnGuardarOrden.setText("Guardar");
-        btnGuardarOrden.setEnabled(false);
-        btnGuardarOrden.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGuardarOrdenActionPerformed(evt);
-            }
-        });
-        add(btnGuardarOrden);
-        btnGuardarOrden.setBounds(360, 330, 120, 30);
-
-        btnDetalle.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        btnDetalle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/001-empleado.png"))); // NOI18N
-        btnDetalle.setText("Detalle de Reparacion");
-        btnDetalle.setEnabled(false);
-        btnDetalle.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDetalleActionPerformed(evt);
-            }
-        });
-        add(btnDetalle);
-        btnDetalle.setBounds(500, 330, 200, 44);
+        add(jPanel1);
+        jPanel1.setBounds(10, 40, 340, 360);
 
         jLabel2.setBackground(new java.awt.Color(61, 61, 61));
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/FondoMetalico.jpg"))); // NOI18N
@@ -298,7 +279,6 @@ public class Panel_OrdenReparacion extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "No existe una orden de reparacion para este vehiculo", "Orden de Reparación", JOptionPane.INFORMATION_MESSAGE);
         }
         coddr.getVehiculo().setPlaca(labelPlaca.getText());
-        txtDescuento.setEnabled(true);
     }//GEN-LAST:event_Tabla1MouseReleased
     private void cargarCampos(int s) {
         String f = "", h = "", p = "", sub = "", t = "",d="", des = "";
@@ -325,8 +305,6 @@ public class Panel_OrdenReparacion extends javax.swing.JPanel {
         labelPlaca.setText(p);
         labelSubtotal.setText(sub);
         labelTotal.setText(t);
-        txtDescuento.setText(d);
-        cajaTexto.setText(des);
     }
     private void jLabel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MousePressed
         try {
@@ -359,7 +337,7 @@ public class Panel_OrdenReparacion extends javax.swing.JPanel {
 
     private void btnGuardarOrdenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarOrdenActionPerformed
         coddr.getVehiculo().setPlaca(labelPlaca.getText());
-        coddr.guardarOrden(labelFecha.getText(), labelHora.getText(), txtDescuento.getText(), cajaTexto.getText(), labelPlaca.getText());
+        coddr.guardarOrden(labelFecha.getText(),labelHora.getText(),"0.0" ,"ninguna", labelPlaca.getText());
 //        JOptionPane.showMessageDialog(this, coddr.getOrden());
         btnGuardarOrden.setEnabled(false);
         actualizardatos();
@@ -395,7 +373,6 @@ public class Panel_OrdenReparacion extends javax.swing.JPanel {
     private javax.swing.JButton btnDetalle;
     private javax.swing.JButton btnFacturar;
     private javax.swing.JButton btnGuardarOrden;
-    private javax.swing.JTextArea cajaTexto;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JCheckBox jCheckBox3;
@@ -409,24 +386,19 @@ public class Panel_OrdenReparacion extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel labelFecha;
     private javax.swing.JLabel labelHora;
     private javax.swing.JLabel labelPlaca;
     private javax.swing.JLabel labelSubtotal;
     private javax.swing.JLabel labelTotal;
     private javax.swing.JTextField txtBuscar;
-    private javax.swing.JTextField txtDescuento;
     // End of variables declaration//GEN-END:variables
 
     private void actualizardatos() {
         coddr.getOrden().setDescuent(Double.parseDouble(labelTotal.getText()));
-        coddr.getOrden().setDescuent(Double.parseDouble(txtDescuento.getText()));
-        coddr.getOrden().setObservacion(cajaTexto.getText());
         
     }
 
