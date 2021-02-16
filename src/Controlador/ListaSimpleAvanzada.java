@@ -95,8 +95,8 @@ public class ListaSimpleAvanzada extends ListaSimple{
     }
     /**
      * Este metodo permite insertar un elemento en la lista por posicion
-     * @param posicion
-     * @param dato 
+     * @param posicion posicion en la que se quiere insertar el nuevo objeto
+     * @param dato Objeto a insertar en la lista
      */
     public void insertarDppE(int posicion, Object dato) {
         if (estaVacia()) {
@@ -115,8 +115,8 @@ public class ListaSimpleAvanzada extends ListaSimple{
     }
     /**
      * Retorna un true si existe el objeto especificado, false si no lo encontro
-     * @param object
-     * @return 
+     * @param object objeto a comprobar su existencia
+     * @return un valor booleano False o True
      */
     public Boolean existe(Object object){
         Boolean chis = false;
