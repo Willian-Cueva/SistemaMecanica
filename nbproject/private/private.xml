@@ -5,11 +5,11 @@
         <group>
             <file>file:/C:/Users/william/Desktop/SistemaMecanica/src/Controlador/ControladorOrdeDeReparacion.java</file>
             <file>file:/C:/Users/william/Desktop/SistemaMecanica/src/Controlador/ControladorFacturas.java</file>
-            <file>file:/C:/Users/william/Desktop/SistemaMecanica/src/Vista/Frm_Mecanico.java</file>
+            <file>file:/C:/Users/william/Desktop/SistemaMecanica/src/Modelo/Factura.java</file>
             <file>file:/C:/Users/william/Desktop/SistemaMecanica/src/Vista/Frm_BuscarFacturas.java</file>
             <file>file:/C:/Users/william/Desktop/SistemaMecanica/src/Vista/Frm_Administrador.java</file>
-            <file>file:/C:/Users/william/Desktop/SistemaMecanica/src/Vista/Panel_OrdenReparacion.java</file>
-            <file>file:/C:/Users/william/Desktop/SistemaMecanica/src/Controlador/ControladorVehiculo.java</file>
+            <file>file:/C:/Users/william/Desktop/SistemaMecanica/src/Vista/Frm_Facturar.java</file>
+            <file>file:/C:/Users/william/Desktop/SistemaMecanica/src/Modelo/OrdenReparacion.java</file>
         </group>
     </open-files>
 </project-private>
