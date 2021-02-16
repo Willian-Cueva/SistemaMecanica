@@ -98,6 +98,7 @@ public class Panel_OrdenReparacion extends javax.swing.JPanel {
                 "Placa", "Modelo", "Propietario", "Cedula"
             }
         ));
+        Tabla1.setToolTipText("Seleccione para actualizar los datos");
         Tabla1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 Tabla1MouseReleased(evt);
@@ -108,7 +109,7 @@ public class Panel_OrdenReparacion extends javax.swing.JPanel {
         add(jScrollPane1);
         jScrollPane1.setBounds(360, 110, 350, 210);
         add(txtBuscar);
-        txtBuscar.setBounds(360, 70, 230, 30);
+        txtBuscar.setBounds(360, 70, 210, 30);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
@@ -131,7 +132,7 @@ public class Panel_OrdenReparacion extends javax.swing.JPanel {
 
         jLabel1.setBackground(new java.awt.Color(255, 175, 0));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Buscar");
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/lupa.png"))); // NOI18N
         jLabel1.setOpaque(true);
         jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -139,11 +140,12 @@ public class Panel_OrdenReparacion extends javax.swing.JPanel {
             }
         });
         add(jLabel1);
-        jLabel1.setBounds(590, 70, 70, 30);
+        jLabel1.setBounds(570, 70, 40, 30);
 
         jCheckBox3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jCheckBox3.setForeground(new java.awt.Color(255, 153, 0));
         jCheckBox3.setText("Actualizar");
+        jCheckBox3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/actualizar.png"))); // NOI18N
         jCheckBox3.setOpaque(false);
         jCheckBox3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
@@ -151,7 +153,7 @@ public class Panel_OrdenReparacion extends javax.swing.JPanel {
             }
         });
         add(jCheckBox3);
-        jCheckBox3.setBounds(530, 30, 80, 30);
+        jCheckBox3.setBounds(610, 90, 100, 20);
 
         jCheckBox2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jCheckBox2.setForeground(new java.awt.Color(255, 153, 0));
@@ -240,7 +242,7 @@ public class Panel_OrdenReparacion extends javax.swing.JPanel {
             }
         });
         add(jButton1);
-        jButton1.setBounds(450, 370, 150, 40);
+        jButton1.setBounds(450, 370, 150, 48);
 
         btnGuardarOrden.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         btnGuardarOrden.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/002-disquete.png"))); // NOI18N
@@ -264,7 +266,7 @@ public class Panel_OrdenReparacion extends javax.swing.JPanel {
             }
         });
         add(btnDetalle);
-        btnDetalle.setBounds(500, 330, 200, 32);
+        btnDetalle.setBounds(500, 330, 200, 40);
 
         jLabel2.setBackground(new java.awt.Color(61, 61, 61));
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/FondoMetalico.jpg"))); // NOI18N
