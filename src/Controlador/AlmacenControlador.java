@@ -73,8 +73,8 @@ public class AlmacenControlador {
     /**
      * Retorna un objeto de tipo producto, recibe como parametro row que es el
      * objeto a transdfrmar
-     *
-     * @return Object[] row
+     * @param row Object[]
+     * @return Producto
      */
     public Producto transformar(Object[] row) {
         Producto prdt = new Producto();

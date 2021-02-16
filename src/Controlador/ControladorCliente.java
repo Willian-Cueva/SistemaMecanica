@@ -34,14 +34,17 @@ public class ControladorCliente {
     public Persona getPersona() {
         return persona;
     }
-
+    /**
+     * Recibe una persona
+     * @param persona Persona
+     */
     public void setPersona(Persona persona) {
         this.persona = persona;
     }
     
     /**
      * Este metodo permite llenar la tabla clientes de forma general
-     * @param modelo 
+     * @param modelo DefaultTableModel
      */
     public void llenarTabla(DefaultTableModel modelo) {
         ctr.RecuperarData();
@@ -65,7 +68,7 @@ public class ControladorCliente {
     }
     /**
      * Metodo que permite relizar busqueda de una persona por cedula
-     * @param cedula 
+     * @param cedula String
      */
     public void Encuentracliente(String cedula) {
         persona = ctr1.BuscarCedula(Long.parseLong(cedula));
@@ -73,12 +76,12 @@ public class ControladorCliente {
     }
     /**
      * Este metodo permite modificar y o actualizar los datos de los clintes almacenados en la base de datos
-     * @param Correo
-     * @param telefono
-     * @param Direccion
-     * @param idpersona
-     * @param activo
-     * @param file 
+     * @param Correo String
+     * @param telefono String
+     * @param Direccion String
+     * @param idpersona String
+     * @param activo String
+     * @param file File
      */
     public void Editar(String Correo, String telefono, String Direccion, String idpersona, String activo, File file) {
 
@@ -125,8 +128,8 @@ public class ControladorCliente {
     }
     /**
      * Este metodo permite filtrar personas por apellido debido a las limitaciones solo hace la busqueda por apellido completo
-     * @param apellido
-     * @return 
+     * @param apellido String
+     * @return ListaSimple de tipo Persona
      */
     public ListaSimple<Persona> BuscarApellido(String apellido) {
         ListaSimple<Persona> aux=new ListaSimple<>();
@@ -135,8 +138,8 @@ public class ControladorCliente {
     }
     /**
      * Metodo encargado de rellenar la tabla de personas con los datos filtrados por apellido
-     * @param li
-     * @param modelo 
+     * @param li ListaSimple de tipo Persona
+     * @param modelo DefaultTableModel
      */
     public void llenarTablaFiltrarApellido(ListaSimple<Persona> li,DefaultTableModel modelo) {
         //ctr.RecuperarData();
@@ -152,8 +155,8 @@ public class ControladorCliente {
     }
     /**
      * Metodo encargado de rellenar la tabla con un unico dato obtenido mediante busqueda por cedula
-     * @param modelo
-     * @param persona 
+     * @param modelo DefaultTableModel
+     * @param persona Persona
      */
     public void llenarTablaBusqueda(DefaultTableModel modelo, Persona persona) {
         Object obj[] = new Object[3];

@@ -27,51 +27,87 @@ public class ControladorCuenta {
     Persona persona;
     Rol rol;
     Cuenta cuenta;
-
+    /**
+     * Retorna un Objeto Cuenta de esta clase
+     * @return Cuenta
+     */
     public Cuenta getCuenta() {
         return cuenta;
     }
-
+    /**
+     * Recive una Cuenta para el atributo cuenta de esta clase
+     * @param cuenta Cuenta
+     */
     public void setCuenta(Cuenta cuenta) {
         this.cuenta = cuenta;
     }
-    
+    /**
+     * Retorna el obbjeto Persona de esta clase
+     * @return Persona
+     */
     public Persona getPersona() {
         return persona;
     }
-    
+    /**
+     * recibe una Perosna
+     * @param persona Persona
+     */
     public void setPersona(Persona persona) {
         this.persona = persona;
     }
-    
+    /**
+     * Retorna un rol
+     * @return 
+     */
     public Rol getRol() {
         return rol;
     }
-    
+    /**
+     * Settea un Rol
+     * @param rol Rol
+     */
     public void setRol(Rol rol) {
         this.rol = rol;
     }
-    
+    /**
+     * Retorna una ListaSimple de tipo contas de esta clase
+     * @return ListaSimple de tipo Cuenta
+     */
     public ListaSimple<Cuenta> getLiCuenta() {
         return liCuenta;
     }
-    
+    /**
+     * settea una ListaSimple de tipo cuenta
+     * @param liCuenta ListaSimple de tipo cuenta
+     */
     public void setLiCuenta(ListaSimple<Cuenta> liCuenta) {
         this.liCuenta = liCuenta;
     }
-    
+    /**
+     * Retorna una ListaSimple de tipo Persona
+     * @return ListaSimple de tipo Persona
+     */
     public ListaSimple<Persona> getLiPersona() {
         return liPersona;
     }
-    
+    /**
+     * Recibe una ListaSimple de tipo Persona
+     * @param liPersona ListaSimple de tipo Persona
+     */
     public void setLiPersona(ListaSimple<Persona> liPersona) {
         this.liPersona = liPersona;
     }
-    
+    /**
+     * Retorna una ListaSimple de tipo Rol
+     * @return ListaSimple de tipo Rol
+     */
     public ListaSimple<Rol> getLiRol() {
         return liRol;
     }
-    
+    /**
+     * Recibe una ListaSimple de tipo Rol
+     * @param liRol ListaSimple de tipo Rol
+     */
     public void setLiRol(ListaSimple<Rol> liRol) {
         this.liRol = liRol;
     }
@@ -126,7 +162,7 @@ public class ControladorCuenta {
     }
     /**
      * Metodo que permite conocer si existe una cuenta
-     * @return 
+     * @return boolean
      */
     public boolean isExisteCuenta() {
         if (cuenta!=null) {
@@ -136,11 +172,11 @@ public class ControladorCuenta {
     }
     /**
      * Metodo encargado de buscar la cuenta de la persona que ingresa al sitema
-     * @param lic
-     * @param lip
-     * @param lir
-     * @param Usuario
-     * @param Contraseña 
+     * @param lic ListaSimple de tipo Cuenta
+     * @param lip ListaSimple de tipo Persona
+     * @param lir ListaSimple de tipo Rol
+     * @param Usuario String del Usuario
+     * @param Contraseña String contrasenia
      */
     public void buscarCuenta(ListaSimple<Cuenta> lic, ListaSimple<Persona> lip, ListaSimple<Rol> lir, String Usuario, String Contraseña) {     
         
