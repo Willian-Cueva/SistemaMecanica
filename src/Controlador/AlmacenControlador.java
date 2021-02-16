@@ -70,11 +70,12 @@ public class AlmacenControlador {
         return u.listaProductos();
     }
 
+ 
     /**
      * Retorna un objeto de tipo producto, recibe como parametro row que es el
      * objeto a transdfrmar
-     * @param row Object[]
-     * @return Producto
+     * @param row Arreglod e objetos
+     * @return Retorna uN producto
      */
     public Producto transformar(Object[] row) {
         Producto prdt = new Producto();
