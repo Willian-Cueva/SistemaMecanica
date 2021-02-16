@@ -50,18 +50,19 @@ public class ControladorServicio {
     public void llenarTablaServicio(ListaSimple<Servicio> li,ListaSimple<Servicio>li2, DefaultTableModel modelo) {
         Object obj[] = new Object[3];
         modelo.setRowCount(0);
-        for (int i = 0; i < li.tamano(); i++) {
+            for (int i = 0; i < li.tamano(); i++) {
             obj[0] = li.obtenerPorPosicion(i).getNombre();
             obj[1] = li.obtenerPorPosicion(i).getValor();
             obj[2] = li.obtenerPorPosicion(i).getDescripcion();
             modelo.addRow(obj);
         }
-        for (int i = 0; i < li2.tamano(); i++) {
+            for (int i = 0; i < li2.tamano(); i++) {
             obj[0] = li2.obtenerPorPosicion(i).getNombre();
             obj[1] = li2.obtenerPorPosicion(i).getValor();
             obj[2] = li2.obtenerPorPosicion(i).getDescripcion();
             modelo.addRow(obj);
         }
+        
     }
     /**
      * Metodo que permite guardar los datos de servicios en la base de datos

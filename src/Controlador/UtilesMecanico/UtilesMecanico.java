@@ -48,7 +48,7 @@ public class UtilesMecanico {
     public Connection getConexion() {
         return conexion;
     }
-
+    
     public void IniciarConexion() {
         Connection con = null;
         String Driver = "com.mysql.cj.jdbc.Driver";
@@ -68,7 +68,7 @@ public class UtilesMecanico {
                     + "\nDetalles del error: \n" + e.getMessage());
         }
         conexion = con;
-
+        
     }
 
     /**
@@ -101,21 +101,24 @@ public class UtilesMecanico {
      * @return
      */
     public ImageIcon img(Blob imagen, Dimension d) {
-
-        Image rpta = null;
-        try {
-            rpta = javax.imageio.ImageIO.read(imagen.getBinaryStream());
-            rpta = rpta.getScaledInstance(d.width, d.height, Image.SCALE_DEFAULT);
-            //rpta.getGraphics().dra;
-            ImageIcon image = new ImageIcon(rpta);
-            return image;
-        } catch (SQLException ex) {
-            System.out.println("Error: " + ex.getMessage());
-            return null;
-        } catch (IOException ex) {
-            System.out.println("Error: " + ex.getMessage());
-            return null;
+        if (imagen != null) {
+            Image rpta = null;
+            try {
+                rpta = javax.imageio.ImageIO.read(imagen.getBinaryStream());
+                rpta = rpta.getScaledInstance(d.width, d.height, Image.SCALE_DEFAULT);
+                //rpta.getGraphics().dra;
+                ImageIcon image = new ImageIcon(rpta);
+                return image;
+            } catch (SQLException ex) {
+                System.out.println("Error: " + ex.getMessage());
+                return null;
+            } catch (IOException ex) {
+                System.out.println("Error: " + ex.getMessage());
+                return null;
+            }
         }
+        return null;
+        
     }
 
     /**
@@ -137,19 +140,19 @@ public class UtilesMecanico {
         fechaHora = String.valueOf(año) + "-" + String.valueOf(mes + 1) + "-" + String.valueOf(dia) + " " + String.valueOf(hora) + ":" + String.valueOf(minuto) + ":" + String.valueOf(segundo);
         return fechaHora;
     }
-
+    
     public String tr(Long idDetalle) {
         String tr = "SELECT * FROM salidaservicio inner join servicio  using (idsalidaServicio) where idDetalle=" + idDetalle;
         return tr;
     }
-
+    
     public void retardo(JLabel lb, JLabel lb1, ImageIcon ico[]) {
         Timer timer;
         timer = new Timer();
         TimerTask task = new TimerTask() {
             int tic = 0;
             int cont = 0;
-
+            
             @Override
             public void run() {
                 lb.setIcon(ico[cont]);
@@ -158,15 +161,15 @@ public class UtilesMecanico {
                 if (cont == ico.length) {
                     cont = 0;
                 }
-
+                
             }
         };
         // Empezamos dentro de 10ms y luego lanzamos la tarea cada 1000ms
         timer.schedule(task, 10, 10000);
     }
-
-    public  File[] traerDirectorio() {
-
+    
+    public File[] traerDirectorio() {
+        
         String path = "./img/";
         String files;
         File folder = new File(path);
@@ -190,16 +193,16 @@ public class UtilesMecanico {
                         imgaux = null;
                         System.out.println(files);
                     }
-
+                    
                     img[img.length - 1] = listOfFiles[i];
                 }
             }
-
+            
         }
         System.out.println("tm: " + img.length);
         return img;
     }
-
+    
     public static void copiar(File[] uno, File[] dos) {
         for (int i = 0; i < dos.length; i++) {
             uno[i] = dos[i];

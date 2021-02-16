@@ -52,15 +52,15 @@ public class ControladorFacturas {
      * @param nroFactura nro de la factura
      */
     public void cargarDetalles(String nroFactura) {
-        try {
+        
             Factura f = obtenerFactura(nroFactura);
             System.err.println(f);
             cntrl.setOrden(obtenerOrden(f.getIdOrden().toString()));
             System.err.println(obtenerOrden(f.getIdOrden().toString()));
             new Frm_Facturar(cntrl,Frm_Facturar.PROTOTIPOFACTURA).setVisible(true);
-        } catch (Exception e) {
-            System.err.println("Error al encontrar dicha factura en cargarDetalles");
-        }
+        
+            //System.err.println("Error al encontrar dicha factura en cargarDetalles"+e.getMessage());
+        
     }
 
     private Factura obtenerFactura(String nroFactura) {

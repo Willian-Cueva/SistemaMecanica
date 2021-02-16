@@ -87,20 +87,20 @@ public class ControladorVehiculo {
     
     /**
      * Metodo que permite crear un vehiculo
-     * @param placa
-     * @param Modelo
-     * @param color
-     * @param observacion
-     * @param imagen
-     * @param Propietario 
+     * @param placa Placa del vehiculo
+     * @param Modelo Modelo del vehiculo
+     * @param color Color del vehiculo
+     * @param observacion Observacion sobre el vehiculo
+     * @param imagen Imagen del vehiculo
+     * @param Propietario Propietario del vehiculo
      */
     public void RegistrarVehiculo(String placa, Long Modelo, String color, String observacion, File imagen, Long Propietario) {
         vehiculo = new Vehiculo(Long.parseLong("0"), placa, Modelo, color, observacion, true, observacion, imagen, Propietario);
     }
     /**
      * Metodo que permite crear un modelode vehiculo
-     * @param Nombre
-     * @param Marca 
+     * @param Nombre Nombre del modelo a registrar
+     * @param Marca  Identificador de la marca
      */
     public void RegistrarModelo(String Nombre,Long Marca){
         modelo=new ModeloVehiculo(Long.parseLong("0"), Nombre, Marca);
@@ -156,7 +156,7 @@ public class ControladorVehiculo {
     }
     /**
      * Metodo encargado de rellenar la tabla de forma general
-     * @param modelo 
+     * @param modelo Modelo de tabla
      */
     public void llenarTabla(DefaultTableModel modelo) {
         ctr.RecuperarData();
@@ -172,7 +172,7 @@ public class ControladorVehiculo {
     }
     /**
      * Metodo encargado de rellenar la tabla de vehiculos
-     * @param modelo 
+     * @param modelo Modelo de tabla
      */
     public void llenarTablaVehiculo(DefaultTableModel modelo) {
         recuperarDatosMod();
@@ -203,8 +203,8 @@ public class ControladorVehiculo {
     }
     /**
      * Metodo encargado de rellenar los datos de clientes filtrados por apellido
-     * @param li
-     * @param modelo 
+     * @param li Lista de personas
+     * @param modelo Modelo de tabla
      */
     public void llenarTablaFiltrarApellido(ListaSimple<Persona> li,DefaultTableModel modelo) {
         ctr.RecuperarData();
@@ -220,8 +220,8 @@ public class ControladorVehiculo {
     }
     /**
      * Metodo encargado de rellenar la tabla de busqueda por cedula
-     * @param modelo
-     * @param persona 
+     * @param modelo Modelo de tabla
+     * @param persona Persona a mostrar en la tabla
      */
     public void llenarTablaBusqueda(DefaultTableModel modelo, Persona persona) {
         Object obj[] = new Object[3];
@@ -233,9 +233,9 @@ public class ControladorVehiculo {
     }
     /**
      * Metodo de busqueda binaria
-     * @param lista
-     * @param codigo
-     * @return 
+     * @param lista Lista de personas donde se ejecutara la busqueda
+     * @param codigo Identificador de la persona buscada
+     * @return Retorna una Persona
      */
     public Persona busquedaBinaria(Lista.ListaSimple<Persona> lista, Long codigo) {
         int n = lista.tamano();
@@ -255,8 +255,8 @@ public class ControladorVehiculo {
     }
     /**
      * Metodo de ordenacio shell
-     * @param arreglo
-     * @return 
+     * @param arreglo Lista de personas a ordenar
+     * @return Retorna una lista de personas ordenada
      */
     public ListaSimple<Persona> shell(ListaSimple<Persona> arreglo) {
         int inta, i;
@@ -420,8 +420,8 @@ public class ControladorVehiculo {
     }
     /**
      * Metodo de buscar personas por cedula
-     * @param Cedula
-     * @return 
+     * @param Cedula Cedula de la persona buscada
+     * @return Retorna Una persona
      */
     public Persona BuscarCedula(Long Cedula) {
         ctr.RecuperarData();
@@ -437,8 +437,8 @@ public class ControladorVehiculo {
     }
     /**
      * Metodo para buscar personas por su id
-     * @param id
-     * @return 
+     * @param id Identificador de Persona buscada
+     * @return Retorna una Persona
      */
     public Persona BuscarIDPersona(Long id) {
         ctr.RecuperarData();
@@ -456,8 +456,8 @@ public class ControladorVehiculo {
     }
     /**
      * Metodo de busqueda de vehiculas por id
-     * @param idVehiculo
-     * @return 
+     * @param idVehiculo Identificador del vehiculo buscado
+     * @return Retorna un vehiculo
      */
     public Vehiculo BuscarVehiculo(Long idVehiculo) {
         ctr.RecuperarData();
@@ -473,8 +473,8 @@ public class ControladorVehiculo {
     }
     /**
      * Metodo de busqueda de modelos de vehiculos por id
-     * @param idModelo
-     * @return 
+     * @param idModelo Identificador de modelo de vehiculo buscado
+     * @return Retorna un modelo de vehiculo
      */
     public ModeloVehiculo BuscarModelo(Long idModelo) {
         ctr.RecuperarData();
@@ -490,8 +490,8 @@ public class ControladorVehiculo {
     }
     /**
      * Metodo de filtrado de personas por apellido
-     * @param apellido
-     * @return 
+     * @param apellido Apellido de la Persona a buscar
+     * @return Retorna una Lista de personas
      */
     public ListaSimple<Persona> BuscarApellido(String apellido) {
         ctr.RecuperarData();
@@ -506,8 +506,8 @@ public class ControladorVehiculo {
     }
     /**
      * Metodo que permite buscar la vehiculo por placa
-     * @param placa
-     * @return 
+     * @param placa Placa del vehiculo buscado
+     * @return Retorna una lista de vehiculos
      */
     public ListaSimple<Vehiculo> BuscarPlaca(String placa) {
         ListaSimple<Vehiculo> aux=new ListaSimple<>();
@@ -522,7 +522,7 @@ public class ControladorVehiculo {
     }
     /**
      * Metodo que permite llenar los campos de placa
-     * @param placa 
+     * @param placa Placa de vehiculo
      */
     public void llenartxt(String placa){
         for (int i = 0; i < live.tamano(); i++) {
@@ -533,8 +533,8 @@ public class ControladorVehiculo {
     }
     /**
      * Metodo que permite rellenar la tabla de vehiculos filtrados por placa
-     * @param li
-     * @param modelo 
+     * @param li Lista de vehiculos
+     * @param modelo Modelo de Tabla
      */
      public void llenarTablaFiltrarPlaca(ListaSimple<Vehiculo> li,DefaultTableModel modelo) {
         ctr.RecuperarData();
@@ -567,7 +567,7 @@ public class ControladorVehiculo {
     Long idMarca;
     /**
      * Metodo que permite llenar los modelos de vehiculos en el jcombo box correspondiente
-     * @param cb 
+     * @param cb  JComboBox a llenar con datos
      */
     public void llenarboxModelos(JComboBox cb) {
         
@@ -583,7 +583,7 @@ public class ControladorVehiculo {
     Marca[] ma;
     /**
      * Metodo que permite llenar las marcas de vehiculos en el jCombo box correspondiente
-     * @param cb 
+     * @param cb JCombo box a cargar con datos
      */
     public void llenarboxMarcas(JComboBox cb){
        recuperarDatosMod();
@@ -597,8 +597,8 @@ public class ControladorVehiculo {
     //igual muy importante para la vistas
     /**
      * Metodo que permite buscar el id de un modelo de vehiculo por nombre
-     * @param item
-     * @return 
+     * @param item Nombre del modelo a buscar
+     * @return Retorna el identificador del modelo buscado
      */
     public Long idModelo(String item) {
         long lg = 0;
@@ -612,7 +612,7 @@ public class ControladorVehiculo {
     }
     /**
      * Metodo que permite buscar una marca de un vehiculo
-     * @return 
+     * @return  Retorna el nombre de la marca buscada
      */
     public String buscarMarca() {
         String nombreMarca = "";
@@ -672,8 +672,8 @@ public class ControladorVehiculo {
     }//cargo la lista con los datos de la BD
     /**
      * Metodo que permite buscar marcas por su nombre i obtener su id
-     * @param Nombre
-     * @return 
+     * @param Nombre Nombre de la marca buscada
+     * @return Retorna el identificador de la marca buscada
      */
     public Long buscarMNombre(String Nombre){
         Long id = null;
@@ -686,11 +686,11 @@ public class ControladorVehiculo {
     }
     /**
      * Metodo que permite modificar y o actualizar los datos de un vehiculo
-     * @param color
-     * @param observacion
-     * @param activo
-     * @param file
-     * @param idVehiculo 
+     * @param color Color del vehiculo
+     * @param observacion Observacion(Comentario) del vehiculo
+     * @param activo Estado del vehiculo en la base de datos
+     * @param file Archivo de imagen del vehiculo
+     * @param idVehiculo identificador del vehiculo
      */
     public void Editar(String color,String observacion,String activo,File file,String idVehiculo){
          boolean isActivo;
@@ -737,8 +737,8 @@ public class ControladorVehiculo {
     }
     /**
      * Metodo que permite llenar la tabla de vehiculos dependiendo de la persona que sea propietaria
-     * @param modelo
-     * @param pe 
+     * @param modelo modelo de tabla
+     * @param pe Objeto de tipo persona
      */
     public void llenarTablaBusquedaVehiculo(DefaultTableModel modelo,Persona pe){
         Object obj[] = new Object[4];
@@ -766,7 +766,7 @@ public class ControladorVehiculo {
     }
     /**
      * Metodo para buiscar vehiculo
-     * @param id 
+     * @param id Identitificador de el vehiculo buscado
      */
     public void buscarVehiculo(String id){
         Long lg=Long.parseLong(id);
@@ -774,7 +774,7 @@ public class ControladorVehiculo {
     }
     /**
      * Metodo para buscar modelo de vehiculo
-     * @param id 
+     * @param id  Identificador de el modelo de vehiculo buscado
      */
     public void buscarModeloVehiculo(String id){
         Long lg=Long.parseLong(id);
@@ -782,7 +782,7 @@ public class ControladorVehiculo {
     }
     /**
      * Metodo para buscar personas
-     * @param id 
+     * @param id Identificador de la persona buscada
      */
     public void buscarPersona(String id){
         Long lg=Long.parseLong(id);
