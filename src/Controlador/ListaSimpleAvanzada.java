@@ -95,8 +95,8 @@ public class ListaSimpleAvanzada extends ListaSimple{
     }
     /**
      * Este metodo permite insertar un elemento en la lista por posicion
-     * @param posicion
-     * @param dato 
+     * @param posicion posicion donde que desee insertar un objeto
+     * @param dato objeto a ser insertado
      */
     public void insertarDppE(int posicion, Object dato) {
         if (estaVacia()) {
@@ -114,9 +114,9 @@ public class ListaSimpleAvanzada extends ListaSimple{
         }
     }
     /**
-     * Retorna un true si existe el objeto especificado, false si no lo encontro
-     * @param object
-     * @return 
+     *verifica si exite un objeto 
+     * @param object objeto
+     * @return  Retorna un true si existe el objeto especificado, false si no lo encontro
      */
     public Boolean existe(Object object){
         Boolean chis = false;
@@ -128,9 +128,10 @@ public class ListaSimpleAvanzada extends ListaSimple{
         }
         return chis;
     }
+    
     /**
      * permite eliminar todos los elementos de la lista
-     * @return 
+     * @return true si elimino el nodo y caso contraro retorna false 
      */
     public Boolean vaciar(){
         Boolean bandera=false;

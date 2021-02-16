@@ -35,7 +35,7 @@ public class UtilesComponentes {
     }
     /**
      * Permite convertir una imagen de una persona Blob a ImagenIcon para cargarlos como Icon en los Jlabel
-     * @param obj Objeto -> Persona
+     * @param obj Objeto  Persona
      * @param d dimenciones de la imagen
      * @return ImagenIcon
      */

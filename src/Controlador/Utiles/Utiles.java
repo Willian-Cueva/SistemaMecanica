@@ -27,8 +27,8 @@ public class Utiles {
     public static final int CLIENTES = 1;
     public static final int PERSONAS = 0;
     /**
-     * retorna una ListaSimpleAvanzada con los productos de la base de datos
-     * @return 
+     * Obtener los datos de la BDD, tabla persona
+     * @return retorna una ListaSimpleAvanzada con los productos de la base de datos
      */
     public static ListaSimpleAvanzada listaProductos() {
         ListaSimpleAvanzada producto = new ListaSimpleAvanzada();
@@ -53,11 +53,11 @@ public class Utiles {
         return producto;
     }
     /**
-     * retorna arreglo de String con los valores de una persona buscados por idPersona
+     * Buscar objetos personas por el parametro idPersona 
      * @param lsa ListaimpleAvanzada
      * @param dato dato a buscar. Ejemplo 12 del atributo edad de una clase
      * @param atributoClase atrubuto de una clase
-     * @return 
+     * @return retorna arreglo de String con los valores de una persona buscados por idPersona
      */
     public static String[] idPersona(ListaSimpleAvanzada lsa, int dato, String atributoClase) {
         String[] persona = new String[8];
@@ -150,10 +150,11 @@ public class Utiles {
         }
     }
 
+   
     /**
      * Retorna una lista de macanicos consultada directamente de la base de
      * datos
-     *
+     * @param seleccion entero que identica lo seleccionado
      * @return lista de persona
      */
     public static ListaSimpleAvanzada listaPersonas(int seleccion) {
@@ -245,9 +246,9 @@ public class Utiles {
     }
 
     /**
-     * Este metodo retorna un arreglo de Roles
+     * Obtener ROLES de la BDD
      *
-     * @return
+     * @return Este metodo retorna un arreglo de Roles
      */
     public static Rol[] roles() {
         Rol[] arr = new Rol[3];
@@ -279,7 +280,7 @@ public class Utiles {
      * Devuelve el valor del rol seleccionado
      *
      * @param r JComboBox.getSelectedItem();
-     * @return
+     * @return rol seleccionado
      */
     public static long rolSelect(Object r) {
         Rol rol = (Rol) r;

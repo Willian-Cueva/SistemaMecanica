@@ -11,9 +11,7 @@ package Vista;
  */
 public class Dlg_Producto extends javax.swing.JDialog {
 
-    /**
-     * Creates new form Dlg_Producto
-     */
+   
     public Dlg_Producto(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
