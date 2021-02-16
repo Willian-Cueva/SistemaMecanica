@@ -8,9 +8,9 @@ package Vista;
 import Controlador.Conexion.ConeccionBDD;
 import Controlador.ControladorOrdeDeReparacion;
 import Controlador.ControladorServicio;
-import Lista.ListaSimple;
-import Modelo.Servicio;
+import Controlador.Utiles.Utiles;
 import Vista.Modelo.TablaProducto;
+import Vista.Modelo.TablaServicios;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.sql.Statement;
@@ -18,7 +18,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import java.sql.PreparedStatement;
-import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -29,8 +28,8 @@ public class Frm_Facturar extends javax.swing.JFrame {
     private ControladorOrdeDeReparacion codr = new ControladorOrdeDeReparacion();
     private TablaProducto tablaProducto = new TablaProducto();
     public static final boolean PROTOTIPOFACTURA = true;
-    private DefaultTableModel modelo;
     private ControladorServicio ctr = new ControladorServicio();
+    private TablaServicios tablaServicio = new TablaServicios();
 
     /**
      * Creates new form Frm_VerVehiculo
@@ -39,18 +38,12 @@ public class Frm_Facturar extends javax.swing.JFrame {
         initComponents();
     }
 
-    private void iniciarTabla() {
-        modelo = (DefaultTableModel) tablaServicios.getModel();
-        tablaServicios.setModel(modelo);
-    }
-
     public Frm_Facturar(ControladorOrdeDeReparacion codr) {
         this.setUndecorated(true);
         initComponents();
         this.setLocationRelativeTo(null);
         this.codr = codr;
         this.codr.cargarDetalle();
-        iniciarTabla();
         cargarDatos();
     }
 
@@ -61,8 +54,9 @@ public class Frm_Facturar extends javax.swing.JFrame {
         jButton2.setVisible(false);
         this.codr = codr;
         this.codr.cargarDetalleFactura();
-        iniciarTabla();
+//        iniciarTabla();
         cargarDatos();
+        cargarTablaServicios();
     }
 
     private void cargarDatos() {
@@ -79,8 +73,7 @@ public class Frm_Facturar extends javax.swing.JFrame {
         labelDescuento.setText(String.valueOf(codr.getOrden().getDescuent()));
         labeTotal.setText(String.valueOf(codr.getOrden().getTotal()));
         consultar();
-//        labelMarca.setMarca
-        cargarTablas();
+        cargarTablaProductos();
     }
 
     private void consultar() {
@@ -103,25 +96,21 @@ public class Frm_Facturar extends javax.swing.JFrame {
         }
     }
 
-    private void cargarTablas() {
-//        codr.cargarListaServicios();
-//        codr.cargarListaProductos();
-//        tablaProducto.setLsp(codr.getDetalle().getListaProductos());
-//        tablaProductos.setModel(tablaProducto);
-//        tablaProductos.updateUI();
-//        ctr.llenarTablaServicio(codr.getDetalle().getListaServivios(),new ListaSimple<Servicio>(), modelo);
-//        codr.getDetalle().getListaServivios().verDatos();
-//        tablaServicios.updateUI();
-        codr.cargarListaServicios();
-        ctr.llenarTablaServicio(codr.getDetalle().getListaServivios(), new ListaSimple<Servicio>(), modelo);
+    private void cargarTablaProductos() {
+        System.err.println("<========= SI LLEGA HASTA AKI ======>");
         System.out.println("Lista de servicios");
-        codr.getDetalle().getListaServivios().verDatos();
         codr.cargarListaProductos();
         tablaProducto.setLsp(codr.getDetalle().getListaProductos());
         tablaProductos.setModel(tablaProducto);
         tablaProductos.updateUI();
+    }
+    
+    private void cargarTablaServicios() {
+        tablaServicio.setLsa(Utiles.listaServiciosFactura(codr.getDetalle().getIdDetalle().toString()));
+        tablaServicios.setModel(tablaServicio);
         tablaServicios.updateUI();
     }
+
 
     /**
      * This method is called from within the constructor to initialize the form.

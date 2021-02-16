@@ -11,12 +11,15 @@ import Modelo.DetalleReparacion;
 import Modelo.Persona;
 import Modelo.Producto;
 import Modelo.Rol;
+import Modelo.Servicio;
 import Modelo.Vehiculo;
 import java.sql.Statement;
 import java.sql.ResultSet;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -26,9 +29,39 @@ public class Utiles {
 
     public static final int CLIENTES = 1;
     public static final int PERSONAS = 0;
+
+    /**
+     * Este metodo retorna la lista de servicios se aplicaron a dicha factura
+     *
+     * @param idDetalle id del detalle
+     * @return ListaSimpleAvanzada
+     */
+    public static ListaSimpleAvanzada listaServiciosFactura(String idDetalle) {
+        ListaSimpleAvanzada servicios = new ListaSimpleAvanzada();
+        String sql = "SELECT * FROM baseddmecanica.servicio"
+                + " where idSalidaServicio=(select salidaservicio.idsalidaServicio from salidaservicio "
+                + " where salidaservicio.idDetalle = '"+idDetalle+"');";
+        try {
+            Statement st = ConeccionBDD.IniciarConexion().createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            while (rs.next()) {                
+                Servicio s = new Servicio(rs.getLong(1), rs.getString(2), rs.getDouble(3), rs.getString(4));
+                servicios.insertar(s);
+            }
+            System.out.println("Se extrajo los servicios con exito");
+            return servicios;
+        } catch (SQLException ex) {
+            System.err.println("Error ejecutar las sentencia sql en listaServiciosFactura() - Utiles");
+            Logger.getLogger(Utiles.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+        
+    }
+
     /**
      * retorna una ListaSimpleAvanzada con los productos de la base de datos
-     * @return 
+     *
+     * @return
      */
     public static ListaSimpleAvanzada listaProductos() {
         ListaSimpleAvanzada producto = new ListaSimpleAvanzada();
@@ -52,12 +85,15 @@ public class Utiles {
         }
         return producto;
     }
+
     /**
-     * retorna arreglo de String con los valores de una persona buscados por idPersona
+     * retorna arreglo de String con los valores de una persona buscados por
+     * idPersona
+     *
      * @param lsa ListaimpleAvanzada
      * @param dato dato a buscar. Ejemplo 12 del atributo edad de una clase
      * @param atributoClase atrubuto de una clase
-     * @return 
+     * @return
      */
     public static String[] idPersona(ListaSimpleAvanzada lsa, int dato, String atributoClase) {
         String[] persona = new String[8];
@@ -75,14 +111,17 @@ public class Utiles {
 
         return persona;
     }
-    
+
     private static Boolean comparar(Object o, Object o1, String atributoClase) {
         String uno = extraccionDato(o, atributoClase);
         String dos = extraccionDato(o1, atributoClase);
         return (uno != null && dos != null) ? uno.equals(dos) : false;
     }
+
     /**
-     * Este metodo retorna una ListaSimpleAvanzada con los elementos correspondientes a la busqueda
+     * Este metodo retorna una ListaSimpleAvanzada con los elementos
+     * correspondientes a la busqueda
+     *
      * @param lsa ListaSimpleAvanzada
      * @param dato dato a buscar. Ejemplo 12 del atributo edad de una clase
      * @param atributoClase atrubuto de una clase
@@ -100,8 +139,10 @@ public class Utiles {
         }
         return encontrados;
     }
+
     /**
      * Retorna un objeto con el dato encontrado
+     *
      * @param lsa ListaSimpleAvanzada
      * @param dato dato a buscar. Ejemplo 12 del atributo edad de una clase
      * @param atributoClase atriburo de una clase
@@ -122,8 +163,11 @@ public class Utiles {
         }
         return null;
     }
+
     /**
-     * Este metodo permite ordenar una listaSimpleAvanzada por cualquier atributo de los elementos
+     * Este metodo permite ordenar una listaSimpleAvanzada por cualquier
+     * atributo de los elementos
+     *
      * @param lsa ListaSimpleAvanzada
      * @param atributo atributo de una clase
      */
@@ -190,8 +234,11 @@ public class Utiles {
         }
         return persona;
     }
+
     /**
-     * Retorna una ListaSimpleAvanzada de los detalles de las ordenes de reparacio que estan en la base de datos
+     * Retorna una ListaSimpleAvanzada de los detalles de las ordenes de
+     * reparacio que estan en la base de datos
+     *
      * @return ListaSimpleAvanzada
      */
     public static ListaSimpleAvanzada listaDetalles() {
@@ -200,7 +247,7 @@ public class Utiles {
         try {
             Statement st = (Statement) ConeccionBDD.IniciarConexion().createStatement();
             ResultSet rs = st.executeQuery(sql);
-            while (rs.next()) {                
+            while (rs.next()) {
                 DetalleReparacion d = new DetalleReparacion();
                 d.setIdDetalle(rs.getLong(1));
                 d.setIdOrden(rs.getLong(2));
@@ -212,8 +259,11 @@ public class Utiles {
         }
         return detalles;
     }
+
     /**
-     * Retorna una ListaSimpleAvanzada de los vehiculos que estan en la base de datos
+     * Retorna una ListaSimpleAvanzada de los vehiculos que estan en la base de
+     * datos
+     *
      * @return ListaSimpleAvanzada
      */
     public static ListaSimpleAvanzada listaVehiculos() {

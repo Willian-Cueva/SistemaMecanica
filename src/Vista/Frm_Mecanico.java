@@ -73,9 +73,7 @@ public class Frm_Mecanico extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
         btnAgregarCliente = new javax.swing.JButton();
         btnHome = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
@@ -100,78 +98,56 @@ public class Frm_Mecanico extends javax.swing.JFrame {
         jButton2.setContentAreaFilled(false);
         jButton2.setFocusable(false);
         jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton2.setOpaque(false);
         jButton2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 0, 35, 35));
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 0, 35, 35));
 
         jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/descarga (1).png"))); // NOI18N
         jButton5.setToolTipText("Administrar Vehiculos");
         jButton5.setContentAreaFilled(false);
         jButton5.setFocusable(false);
         jButton5.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton5.setOpaque(false);
         jButton5.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jButton5.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jButton5MousePressed(evt);
             }
         });
-        jPanel1.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 0, 35, 35));
+        jPanel1.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 0, 35, 35));
 
         jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icon.png"))); // NOI18N
         jButton6.setToolTipText("Orden de reparacion");
         jButton6.setContentAreaFilled(false);
         jButton6.setFocusable(false);
         jButton6.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton6.setOpaque(false);
         jButton6.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton6ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 0, 35, 35));
-
-        jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/20699.png"))); // NOI18N
-        jButton7.setContentAreaFilled(false);
-        jButton7.setFocusable(false);
-        jButton7.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton7.setOpaque(false);
-        jButton7.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jPanel1.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 0, 35, 35));
+        jPanel1.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 0, 35, 35));
 
         jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/modCliente.png"))); // NOI18N
         jButton4.setToolTipText("Administrar clientes");
         jButton4.setContentAreaFilled(false);
         jButton4.setFocusable(false);
         jButton4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton4.setOpaque(false);
         jButton4.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 0, 35, 35));
-
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/IconoVerCliente.png"))); // NOI18N
-        jButton3.setToolTipText("Ver clientes");
-        jButton3.setContentAreaFilled(false);
-        jButton3.setFocusable(false);
-        jButton3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton3.setOpaque(false);
-        jButton3.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 0, 35, 35));
+        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 0, 35, 35));
 
         btnAgregarCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/clienteNuevos.png"))); // NOI18N
         btnAgregarCliente.setToolTipText("Registrar clientes");
         btnAgregarCliente.setContentAreaFilled(false);
-        btnAgregarCliente.setOpaque(false);
         btnAgregarCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAgregarClienteActionPerformed(evt);
@@ -184,7 +160,6 @@ public class Frm_Mecanico extends javax.swing.JFrame {
         btnHome.setContentAreaFilled(false);
         btnHome.setFocusable(false);
         btnHome.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnHome.setOpaque(false);
         btnHome.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnHome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -194,7 +169,7 @@ public class Frm_Mecanico extends javax.swing.JFrame {
         jPanel1.add(btnHome, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 35, 35));
 
         jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
-        jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(198, 2, 20, 30));
+        jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 0, 20, 30));
 
         txtNombre.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         txtNombre.setForeground(new java.awt.Color(255, 255, 255));
@@ -316,11 +291,9 @@ public class Frm_Mecanico extends javax.swing.JFrame {
     private javax.swing.JButton btnAgregarCliente;
     private javax.swing.JButton btnHome;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSeparator jSeparator1;
