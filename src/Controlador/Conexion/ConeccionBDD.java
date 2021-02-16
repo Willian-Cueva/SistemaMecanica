@@ -18,7 +18,7 @@ import java.util.logging.Logger;
 public class ConeccionBDD {
     /**
      * Permite establecer la coneccion de con la base de datos
-     * @return 
+     * @return Devuelve una conneccion
      */
      public static Connection IniciarConexion() {
         Connection con = null;

@@ -32,6 +32,10 @@ import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+/**
+ * Clase Utiles mecanico, esta clase contiene metodos que serán implementados en el controladorMecanico
+ * @author Willian
+ */
 public class UtilesMecanico {
 
     /**

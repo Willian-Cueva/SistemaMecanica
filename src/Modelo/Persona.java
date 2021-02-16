@@ -11,7 +11,10 @@ package Modelo;
  */
 import java.io.File;
 import java.sql.Blob;
-
+/**
+ * Clase Persona
+ * @author Willian
+ */
 public class Persona{
     private Long id;
     private String nombre;

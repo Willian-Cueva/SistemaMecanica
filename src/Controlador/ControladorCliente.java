@@ -27,7 +27,10 @@ public class ControladorCliente {
     ControladorVehiculo ctr1 = new ControladorVehiculo();
     UtilesMecanico uti = new UtilesMecanico();
     Persona persona;
-    
+    /**
+     * Retorna el objeto persona de esta clase
+     * @return Persona
+     */
     public Persona getPersona() {
         return persona;
     }

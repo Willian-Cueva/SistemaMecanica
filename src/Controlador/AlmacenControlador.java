@@ -26,31 +26,46 @@ public class AlmacenControlador {
     private ListaSimpleAvanzada productoOrden = new ListaSimpleAvanzada();
     private ListaSimpleAvanzada producto = new ListaSimpleAvanzada();
     private ListaSimpleAvanzada productoBaseDatos = u.listaProductos();
-
+    /**
+     * Retorna una ListaSimpleAvanzada de productos de esta clase
+     * @return ListaSimpleAvanzada
+     */
     public ListaSimpleAvanzada getProducto() {
         if (producto == null) {
             producto = new ListaSimpleAvanzada();
         }
         return producto;
     }
-
+    /**
+     * Recive una ListaSimpleAvanzada de productos
+     * @param producto ListaSimpleAvanzada
+     */
     public void setProducto(ListaSimpleAvanzada producto) {
         this.producto = new ListaSimpleAvanzada();
         this.producto = producto;
     }
-
+    /**
+     * Retorna una ListaSimpleAvanzada de los productos de dicha orden en 
+     * @return ListaSimpleAvanzada 
+     */
     public ListaSimpleAvanzada getProductoOrden() {
         if (productoOrden == null) {
             productoOrden = new ListaSimpleAvanzada();
         }
         return productoOrden;
     }
-
+    /**
+     * Recibe una ListaSimpleAvanzada de productos de dicha orden
+     * @param productoOrden ListaSimpleAvanzada
+     */
     public void setProductoOrden(ListaSimpleAvanzada productoOrden) {
         this.productoOrden = new ListaSimpleAvanzada();
         this.productoOrden = productoOrden;
     }
-
+    /**
+     * Retorna una ListaSimpleAvanzada extraida del atributo utiles de esta clase
+     * @return ListaSimpleAvanzada
+     */
     public ListaSimpleAvanzada obtenerLista() {
         return u.listaProductos();
     }
@@ -59,8 +74,7 @@ public class AlmacenControlador {
      * Retorna un objeto de tipo producto, recibe como parametro row que es el
      * objeto a transdfrmar
      *
-     *
-     * @return Un objeto Producto
+     * @return Object[] row
      */
     public Producto transformar(Object[] row) {
         Producto prdt = new Producto();
