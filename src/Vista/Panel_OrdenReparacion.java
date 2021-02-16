@@ -75,10 +75,10 @@ public class Panel_OrdenReparacion extends javax.swing.JPanel {
         labelTotal = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         labelPlaca = new javax.swing.JLabel();
+        btnDetalle = new javax.swing.JButton();
         labelSubtotal = new javax.swing.JLabel();
         btnGuardarOrden = new javax.swing.JButton();
         btnFacturar = new javax.swing.JButton();
-        btnDetalle = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel2 = new javax.swing.JLabel();
 
@@ -99,6 +99,7 @@ public class Panel_OrdenReparacion extends javax.swing.JPanel {
                 "Placa", "Modelo", "Propietario", "Cedula"
             }
         ));
+        Tabla1.setToolTipText("Seleccione para actualizar los datos");
         Tabla1.getTableHeader().setReorderingAllowed(false);
         Tabla1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
@@ -110,7 +111,7 @@ public class Panel_OrdenReparacion extends javax.swing.JPanel {
         add(jScrollPane1);
         jScrollPane1.setBounds(360, 110, 350, 290);
         add(txtBuscar);
-        txtBuscar.setBounds(360, 70, 230, 30);
+        txtBuscar.setBounds(360, 70, 210, 30);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
@@ -133,7 +134,7 @@ public class Panel_OrdenReparacion extends javax.swing.JPanel {
 
         jLabel1.setBackground(new java.awt.Color(255, 175, 0));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Buscar");
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/lupa.png"))); // NOI18N
         jLabel1.setOpaque(true);
         jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -141,11 +142,12 @@ public class Panel_OrdenReparacion extends javax.swing.JPanel {
             }
         });
         add(jLabel1);
-        jLabel1.setBounds(590, 70, 70, 30);
+        jLabel1.setBounds(570, 70, 40, 30);
 
         jCheckBox3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jCheckBox3.setForeground(new java.awt.Color(255, 153, 0));
         jCheckBox3.setText("Actualizar");
+        jCheckBox3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/actualizar.png"))); // NOI18N
         jCheckBox3.setOpaque(false);
         jCheckBox3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
@@ -153,7 +155,7 @@ public class Panel_OrdenReparacion extends javax.swing.JPanel {
             }
         });
         add(jCheckBox3);
-        jCheckBox3.setBounds(530, 30, 80, 30);
+        jCheckBox3.setBounds(610, 90, 100, 20);
 
         jCheckBox2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jCheckBox2.setForeground(new java.awt.Color(255, 153, 0));
@@ -210,6 +212,17 @@ public class Panel_OrdenReparacion extends javax.swing.JPanel {
         labelPlaca.setText("-");
         jPanel1.add(labelPlaca, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 60, 150, -1));
 
+        btnDetalle.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        btnDetalle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/001-empleado.png"))); // NOI18N
+        btnDetalle.setText("Detalle de Reparacion");
+        btnDetalle.setEnabled(false);
+        btnDetalle.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDetalleActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnDetalle, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 260, 270, -1));
+
         labelSubtotal.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         labelSubtotal.setForeground(new java.awt.Color(51, 51, 51));
         labelSubtotal.setText("-");
@@ -237,17 +250,6 @@ public class Panel_OrdenReparacion extends javax.swing.JPanel {
             }
         });
         jPanel1.add(btnFacturar, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 310, 150, -1));
-
-        btnDetalle.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        btnDetalle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/001-empleado.png"))); // NOI18N
-        btnDetalle.setText("Detalle de Reparacion");
-        btnDetalle.setEnabled(false);
-        btnDetalle.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDetalleActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnDetalle, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 260, 270, -1));
         jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 180, 340, 10));
 
         add(jPanel1);

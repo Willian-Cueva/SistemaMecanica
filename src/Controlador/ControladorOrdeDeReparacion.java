@@ -142,36 +142,22 @@ public class ControladorOrdeDeReparacion {
      * Este metodo permite cargar la lista de servicios que se le han relizado al vehiculo desde la base de datos a una lista Simple
      */
     public void cargarListaServicios(){
-        String sql ="SELECT * FROM salidaServicio where idDetalle='"+detalle.getIdDetalle().toString()+"'";
+        System.out.println("detalle: ----------"+detalle.getIdDetalle());
         Lista.ListaSimple<Servicio> lservicio=new Lista.ListaSimple<>();    
-        Long idServicio=0L;
+        UtilesMecanico ut=new UtilesMecanico();
+        
         try {
             
             Statement st = (Statement) uti.getConexion().createStatement();
-            ResultSet rs = st.executeQuery(sql);
+            ResultSet rs = st.executeQuery(ut.tr(detalle.getIdDetalle()));
             while (rs.next()) { 
-                if (detalle.getIdDetalle()==rs.getLong(1)) {
-                    idServicio=rs.getLong(1);
-                    break;
-                }
-                
-                
+                lservicio.insertar(new Servicio(rs.getLong(3),rs.getString(4),rs.getDouble(5), rs.getString(6)));
             }
         } catch (SQLException ex) {
-            System.err.println("Error al consultar la tabla salida producto");;
-        }
-        String sql2 ="SELECT * FROM servicio where idSalidaServicio='"+idServicio+"'";
-        try {
-            
-            Statement st = (Statement) uti.getConexion().createStatement();
-            ResultSet rs = st.executeQuery(sql2);
-            while (rs.next()) { 
-                lservicio.insertar(new Servicio(rs.getLong(1),rs.getString(2),rs.getDouble(3), rs.getString(4)));
-            }
-        } catch (SQLException ex) {
-            System.err.println("Error al consultar la tabla salida producto");;
+            System.err.println("Error al consultar la tabla salida producto\n"+ex.getMessage());
         }
         detalle.setListaServivios(lservicio);
+        lservicio.verDatos();
         
     }
     /**
@@ -255,7 +241,7 @@ public class ControladorOrdeDeReparacion {
                         crearDetalle(orden.getIdOrden());
                     }
                 } catch (SQLException ex) {
-                    System.err.println("Error al ejecutar la sentencia sql del metodo cargarDetalle()");
+                    System.err.println("Error al ejecutar la sentencia sql del metodo cargarDetalle()\n"+ex.getMessage());
                 }
             } else {
                 System.err.println("Error al crear detalle - por que no tiene una orden activa  porque placa esta vacio");
@@ -268,6 +254,7 @@ public class ControladorOrdeDeReparacion {
     public void cargarDetalleFactura() {
 //        DetalleReparacion d = (DetalleReparacion) Utiles.busquedaSecuencial(Utiles.listaDetalles(), orden.getIdOrden().toString(), "IdOrden").obtenerObjetopp(0);
         Vehiculo v = (Vehiculo) Utiles.busquedaSecuencial(Utiles.listaVehiculos(), this.vehiculo.getPlaca(), "Placa").obtenerObjetopp(0);
+        System.err.println(v);
         if (v != null) {
             if (true) {
                 String sql = "select * from detallereparacion where idOrden='" + orden.getIdOrden().toString() + "';";
@@ -286,17 +273,17 @@ public class ControladorOrdeDeReparacion {
                         JOptionPane.showMessageDialog(null, "Si existe un detalle para esta orden");
                         detalle = d;
                     } else {
-                        JOptionPane.showMessageDialog(null, "No existe ningun detalle, se creará un detalle");
+                        JOptionPane.showMessageDialog(null, "No existe ningun detalle, se creará un detalle - ControladorOrdenReparacion");
                         crearDetalle(orden.getIdOrden());
                     }
                 } catch (SQLException ex) {
-                    System.err.println("Error al ejecutar la sentencia sql del metodo cargarDetalle()");
+                    System.err.println("Error al ejecutar la sentencia sql del metodo cargarDetalleFactura() - ControladorOrdenReparacion");
                 }
             } else {
-                System.err.println("Error al crear detalle - por que no tiene una orden activa  porque placa esta vacio");
+                System.err.println("Error al crear detalle - por que no tiene una orden activa  porque placa esta vacio - ControladorOrdenReparacion");
             }
         } else {
-            System.err.println("No se encontro el vehiculo en cargardetalle()");
+            System.err.println("No se encontro el vehiculo en cargardetalle() - ControladorOrdenReparacion");
         }
 
     }

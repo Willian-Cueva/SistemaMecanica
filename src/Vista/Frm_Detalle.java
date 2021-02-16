@@ -54,7 +54,8 @@ public class Frm_Detalle extends javax.swing.JFrame {
     }
     private void cargarTablas(){
         codr.cargarListaServicios();
-        ctr.llenarTablaServicio(codr.getDetalle().getListaServivios(), modelo);
+        ctr.llenarTablaServicio(codr.getDetalle().getListaServivios(),new ListaSimple<Servicio>(), modelo);
+        System.out.println("Lista de servicios");
         codr.getDetalle().getListaServivios().verDatos();
         codr.cargarListaProductos();
         tp.setLsp(codr.getDetalle().getListaProductos());
@@ -318,6 +319,7 @@ public class Frm_Detalle extends javax.swing.JFrame {
         cargarTablas();
         codr.calcularValores();
         for (int i = 0; i < lista.tamano(); i++) {
+            codr.cargarListaServicios();
             ctr.GuardarServicio(lista.obtenerPorPosicion(i), codr.getDetalle().getIdDetalle());
             subtotal+=lista.obtenerPorPosicion(i).getValor();
             
@@ -359,7 +361,7 @@ public class Frm_Detalle extends javax.swing.JFrame {
         @Override
         public void mouseReleased(MouseEvent e) {
             lista.insertar(serv.pasardato());
-            ctr.llenarTablaServicio(lista, modelo);
+            ctr.llenarTablaServicio(lista,codr.getDetalle().getListaServivios(), modelo);
             //To change body of generated methods, choose Tools | Templates.
         }
 

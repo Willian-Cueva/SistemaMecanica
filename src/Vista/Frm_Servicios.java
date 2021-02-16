@@ -98,7 +98,7 @@ public class Frm_Servicios extends javax.swing.JFrame {
 
         btnCancelar.setBackground(new java.awt.Color(255, 102, 0));
         btnCancelar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        btnCancelar.setText("Guardar");
+        btnCancelar.setText("Cancelar");
         btnCancelar.setOpaque(true);
         btnCancelar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {

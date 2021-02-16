@@ -27,16 +27,16 @@ public class MantenerCesion<T> {
      */
     public T listar(String ruta) {
         conexion.setREPO(ruta);
-        T rol=null;
+        T dato=null;
         try {
-            rol = (T) conexion.getXtrStream().fromXML(new FileReader(conexion.getREPO() + File.separatorChar + ruta + ".json"));
+            dato = (T) conexion.getXtrStream().fromXML(new FileReader(conexion.getREPO() + File.separatorChar + ruta + ".json"));
            //Object obj = xtrStream.fromXML(new FileReader(url+File.separatorChar+"horario.json") );
 
         } catch (Exception e) {
             System.out.println("No se pudo listar " + e);
             e.printStackTrace();
         }
-        return rol;
+        return dato;
     }
     /**
      * Metodo encargado de guardar los datos del usuario que se a logueado en el sistema
