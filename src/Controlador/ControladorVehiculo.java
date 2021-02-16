@@ -567,7 +567,7 @@ public class ControladorVehiculo {
     Long idMarca;
     /**
      * Metodo que permite llenar los modelos de vehiculos en el jcombo box correspondiente
-     * @param cb  JComboBox a llenar con datos
+     * @param cb JComboBox
      */
     public void llenarboxModelos(JComboBox cb) {
         
@@ -583,7 +583,7 @@ public class ControladorVehiculo {
     Marca[] ma;
     /**
      * Metodo que permite llenar las marcas de vehiculos en el jCombo box correspondiente
-     * @param cb JCombo box a cargar con datos
+     * @param cb  JComboBox
      */
     public void llenarboxMarcas(JComboBox cb){
        recuperarDatosMod();

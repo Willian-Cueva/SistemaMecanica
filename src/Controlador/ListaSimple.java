@@ -19,8 +19,8 @@ public class ListaSimple {
         return cabecera==null;
     }
     /**
-     * 
-     * @return Retorna un int "Entero" de el tamanio de los elemento de la lista
+     * Obtener el tamanio
+     * @return un int "Entero" de el tamanio de los elemento de la lista
      */
     public int tamano(){
         if (estaVacia()) {

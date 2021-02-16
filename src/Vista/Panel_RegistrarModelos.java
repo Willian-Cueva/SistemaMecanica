@@ -21,6 +21,10 @@ public class Panel_RegistrarModelos extends javax.swing.JPanel {
      */
     ControladorVehiculo ctr=new ControladorVehiculo();
     UtilesMecanico uti=new UtilesMecanico();
+    /**
+     * 
+     * @param   evento de soltar el mouse
+     */
     public Panel_RegistrarModelos(MouseListener aL) {
         initComponents();
         uti.IniciarConexion();
@@ -28,8 +32,7 @@ public class Panel_RegistrarModelos extends javax.swing.JPanel {
         btnGuardar.addMouseListener(aL);
         ctr.recuperarDatosMod();
         ctr.llenarboxMarcas(bxMarca);
-        bxMarca.updateUI();
-        
+        bxMarca.updateUI();  
     }
 
     /**

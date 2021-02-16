@@ -128,9 +128,10 @@ public class ListaSimpleAvanzada extends ListaSimple{
         }
         return chis;
     }
+    
     /**
      * permite eliminar todos los elementos de la lista
-     * @return 
+     * @return true si elimino el nodo y caso contraro retorna false 
      */
     public Boolean vaciar(){
         Boolean bandera=false;

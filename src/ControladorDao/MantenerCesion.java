@@ -22,8 +22,8 @@ public class MantenerCesion<T> {
     private Conexion conexion=new Conexion();
     /**
      * Metodo encargado de almacenar los datos de la persona que ingreso al sistema durante el timpo que este ste activo para luego borrarse
-     * @param ruta
-     * @return 
+     * @param ruta string ruta
+     * @return un generico rol
      */
     public T listar(String ruta) {
         conexion.setREPO(ruta);
@@ -40,9 +40,9 @@ public class MantenerCesion<T> {
     }
     /**
      * Metodo encargado de guardar los datos del usuario que se a logueado en el sistema
-     * @param o
-     * @param ruta
-     * @throws Exception 
+     * @param o generico
+     * @param ruta ruta de imagen
+     * @throws Exception en caso no se guarde los datos no me detenga la ejecucion del programa.
      */
     public void guardar(T o,String ruta) throws Exception {
         conexion.setREPO(ruta);
