@@ -41,7 +41,8 @@ public class Frm_Facturar extends javax.swing.JFrame {
         initComponents();
     }
     /**
-     * Contructor de Frm_factura con controlador de orden de reparacion
+     * Crear una nuevo Frm_Facturar
+     * @param codr ControladorOrdeDeReparacion
      */
     public Frm_Facturar(ControladorOrdeDeReparacion codr) {
         this.setUndecorated(true);

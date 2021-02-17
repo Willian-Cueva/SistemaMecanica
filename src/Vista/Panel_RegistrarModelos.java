@@ -15,10 +15,7 @@ import java.awt.event.MouseListener;
  */
 public class Panel_RegistrarModelos extends javax.swing.JPanel {
 
-    /**
-     * Creates new form Panel_RegistrarModelos
-     * @param aL evento de raton que tiene efecto en la ventana de registrar vehiculo
-     */
+
     ControladorVehiculo ctr=new ControladorVehiculo();
     UtilesMecanico uti=new UtilesMecanico();
    
