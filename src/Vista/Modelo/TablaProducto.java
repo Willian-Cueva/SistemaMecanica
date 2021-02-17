@@ -14,11 +14,17 @@ import Modelo.Producto;
  */
 public class TablaProducto extends AbstractTableModel{
     private ListaSimpleAvanzada lsp = new ListaSimpleAvanzada();
-
+    /**
+     * Trae una ListaSimpleAvanzada
+     * @return 
+     */
     public ListaSimpleAvanzada getLsp() {
         return lsp;
     }
-
+    /**
+     * Enviamos una ListaSimpleAvanzada
+     * @param lsp ListaSimpleAvanzada
+     */
     public void setLsp(ListaSimpleAvanzada lsp) {
         this.lsp =new ListaSimpleAvanzada();
         this.lsp = lsp;

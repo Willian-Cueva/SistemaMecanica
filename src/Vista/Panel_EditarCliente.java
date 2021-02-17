@@ -23,13 +23,15 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Panel_EditarCliente extends javax.swing.JPanel {
 
-    /**
-     * Creates new form Panel_EditarCliente
-     */
+   
     DefaultTableModel modelo;
     ControladorCliente ctr=new ControladorCliente();
     UtilesMecanico uti=new UtilesMecanico();
     File file=null;
+    
+     /**
+     * Creates new form Panel_EditarCliente
+     */
     public Panel_EditarCliente() {
         initComponents();
         jScrollPane1.getViewport().setBackground(new Color(51,51,51));

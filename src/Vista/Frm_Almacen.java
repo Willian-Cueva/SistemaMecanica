@@ -35,6 +35,10 @@ public class Frm_Almacen extends javax.swing.JFrame {
     private ImageIcon wallpp1 = new ImageIcon("src\\Imagenes\\fondoRayas.jpg");
     private DetalleReparacion detalleReparacion = new DetalleReparacion();
 
+    /**
+     * Creates new form Frm_Almacen
+     * @param detalleReparacion  DetalleReparacion 
+     */
     public Frm_Almacen(DetalleReparacion detalleReparacion) {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -47,7 +51,9 @@ public class Frm_Almacen extends javax.swing.JFrame {
         this.detalleReparacion = detalleReparacion;
         llenarTabla();
     }
-
+    /**
+     * Creates new form Frm_Almacen
+     */
     public Frm_Almacen() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -61,13 +67,13 @@ public class Frm_Almacen extends javax.swing.JFrame {
 
     }
 
-    public void escalar(JLabel x, ImageIcon wallpp) {
+    private void escalar(JLabel x, ImageIcon wallpp) {
         Icon icono = new ImageIcon(wallpp.getImage().getScaledInstance(x.getWidth(), x.getHeight(), Image.SCALE_DEFAULT));
         x.setIcon(icono);
         this.repaint();
     }
 
-    public void LimpiarCampos() {
+    private void LimpiarCampos() {
         txtNombre.setText("");
         txtMarca.setText("");
         txtPrecio.setText("");
@@ -89,7 +95,7 @@ public class Frm_Almacen extends javax.swing.JFrame {
 
     }
 
-    public void llenarTabla() {
+    private void llenarTabla() {
         cargarTablaProducto();
         for (int i = 0; i < tp.getLsp().tamano(); i++) {
             tp.getValueAt(i, i);
