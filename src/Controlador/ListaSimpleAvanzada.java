@@ -10,7 +10,9 @@ package Controlador;
  * @author Willian
  */
 public class ListaSimpleAvanzada extends ListaSimple{
-
+    /**
+     * constructor de ListaSimpleAvanzada
+     */
     public ListaSimpleAvanzada() {
         super();
     }

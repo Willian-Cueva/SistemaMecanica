@@ -22,14 +22,24 @@ public class Conexion {
         xtrStream = new XStream(new JettisonMappedXmlDriver());
         xtrStream.setMode(XStream.NO_REFERENCES);
     }
-
+    /**
+     * recibe un String repo
+     * @param REPO String
+     */
     public void setREPO(String REPO) {
         this.REPO = REPO;
     }
-
+    /**
+     * retorna un String repo
+     * @return String
+     */
     public String getREPO() {
         return REPO;
     }
+    /**
+     * retorna un Xtream
+     * @return Xtream
+     */
     public XStream getXtrStream() {
         return xtrStream;
     }

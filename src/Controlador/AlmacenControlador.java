@@ -7,12 +7,9 @@ package Controlador;
 
 import Controlador.Conexion.ConeccionBDD;
 import Controlador.Utiles.Producto.Utiles;
-import Modelo.DetalleReparacion;
 import Modelo.Producto;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 

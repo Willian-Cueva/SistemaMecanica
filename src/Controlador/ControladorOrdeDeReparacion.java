@@ -185,24 +185,6 @@ public class ControladorOrdeDeReparacion {
         detalle.setListaServivios(lservicio);
         lservicio.verDatos();
     }
-//    public void cargarListaServiciosFactura(){
-//        System.out.println("detalle: ----------"+detalle.getIdDetalle());
-//        Lista.ListaSimple<Servicio> lservicio=new Lista.ListaSimple<>();    
-//        UtilesMecanico ut=new UtilesMecanico();
-//        
-//        try {
-//            
-//            Statement st = (Statement) uti.getConexion().createStatement();
-//            ResultSet rs = st.executeQuery(ut.tr(detalle.getIdDetalle()));
-//            while (rs.next()) { 
-//                lservicio.insertar(new Servicio(rs.getLong(3),rs.getString(4),rs.getDouble(5), rs.getString(6)));
-//            }
-//        } catch (SQLException ex) {
-//            System.err.println("Error al consultar la tabla salida producto\n"+ex.getMessage());
-//        }
-//        detalle.setListaServivios(lservicio);
-//        lservicio.verDatos();
-//    }
     /**
      * En este metodo se cargan en la lsita de ordenes todas las que se encuentren como activas
      */

@@ -132,10 +132,6 @@ public class ControladorFacturas {
         this.cntrl = cntrl;
     }
 
-//    private void listaDeOrdenes() {
-//        cntrl.cargarOrdenes(ControladorOrdeDeReparacion.FACTURAS);
-//        cntrl.setOrdenes(Utiles.busquedaSecuencial(cntrl.getOrdenes(), cntrl.getVehiculo().getId().toString(), "IdVehiculo"));
-//    }
     private void listaFacturas(String placa) {
         facturas = new ListaSimpleAvanzada();
         String sql = "SELECT * FROM baseddmecanica.factura "

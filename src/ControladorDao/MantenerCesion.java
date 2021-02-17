@@ -5,13 +5,9 @@
  */
 package ControladorDao;
 
-import Lista.ListaSimple;
-import Modelo.Rol;
-import com.thoughtworks.xstream.XStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileReader;
-import java.util.List;
 
 /**
  *
@@ -49,11 +45,12 @@ public class MantenerCesion<T> {
         conexion.getXtrStream().toXML(o, new FileOutputStream(conexion.getREPO() + File.separatorChar + ruta + ".json"));
 
     }
-
+    /**
+     * modificar un objeto T
+     * @param o T
+     * @return boolean
+     */
     public Boolean modificar(T o) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
-    
-
 }

@@ -8,11 +8,6 @@ package Controlador;
 import Controlador.UtilesMecanico.UtilesMecanico;
 import Modelo.Servicio;
 import Lista.ListaSimple;
-import Modelo.Cuenta;
-import Modelo.DetalleReparacion;
-import Modelo.Persona;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -119,8 +114,6 @@ public class ControladorServicio {
         } catch (SQLException ex) {
             System.out.println("Error: " + ex.getMessage());
         }
-       
-
     }
 
 }

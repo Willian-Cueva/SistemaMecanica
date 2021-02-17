@@ -64,32 +64,53 @@ public class ControladorVehiculo {
     public Vehiculo getVaux() {
         return vaux;
     }
-
+    /**
+     * recibe un Vehiculo
+     * @param vaux Vehiculo
+     */
     public void setVaux(Vehiculo vaux) {
         this.vaux = vaux;
     }
 
-    
+    /**
+     * Retorna una ListaSimple de tipo Vehiculo
+     * @return ListaSimple de tipo Vehiculo
+     */
     public ListaSimple<Vehiculo> getLive() {
         return live;
     }
-
+    /**
+     * recibe una ListaSimple de tipo Vehiculo
+     * @param live ListaSimple de tipo Vehiculo
+     */
     public void setLive(ListaSimple<Vehiculo> live) {
         this.live = live;
     }
-
+    /**
+     * Devuelve una ListaSimple de tipo Marca
+     * @return ListaSimple de tipo Marca
+     */
     public ListaSimple<Marca> getLima() {
         return lima;
     }
-
+    /**
+     * recive una ListaSimple de tipo Marca
+     * @param lima ListaSimple de tipo Marca
+     */
     public void setLima(ListaSimple<Marca> lima) {
         this.lima = lima;
     }
-
+    /**
+     * retorna una Persona
+     * @return Persona
+     */
     public Persona getPaux() {
         return paux;
     }
-
+    /**
+     * Recibe una Persona
+     * @param paux Persona
+     */
     public void setPaux(Persona paux) {
         this.paux = paux;
     }
@@ -208,7 +229,6 @@ public class ControladorVehiculo {
             obj[3] = aux.getCedula();
             modelo.addRow(obj);
         }
-
     }
     /**
      * Metodo encargado de rellenar los datos de clientes filtrados por apellido
@@ -294,8 +314,13 @@ public class ControladorVehiculo {
         }
         return arreglo;
     }
-    
-     public Persona busquedaBinariaID(Lista.ListaSimple<Persona> lista, Long codigo) {
+    /**
+     * Busca de con el algoritmmo de busqueda binarria en una lista simple de tipo Persona y retorna una Persona
+     * @param lista ListaSimple de tipo Persona
+     * @param codigo Long
+     * @return Persona
+     */
+    public Persona busquedaBinariaID(Lista.ListaSimple<Persona> lista, Long codigo) {
         int n = lista.tamano();
         int centro, inf = 0, sup = n;
         while (inf <= sup) {
@@ -311,7 +336,11 @@ public class ControladorVehiculo {
         lista.verDatos();
         return null;
     }
-
+    /**
+     * retorna una ListaSimple de tipo persona ordenada por shell
+     * @param arreglo ListaSimple de tipo Persona
+     * @return ListaSimple de tipo Persona
+     */
     public ListaSimple<Persona> shellID(ListaSimple<Persona> arreglo) {
         int inta, i;
         Persona aux;
@@ -339,6 +368,12 @@ public class ControladorVehiculo {
         }
         return arreglo;
     }
+    /**
+     * retorna un Vehiculo de una ListaSimple de tipo vehiculo usando busqueda binaria
+     * @param lista ListaSimple de tipo Vehiculo
+     * @param codigo Long
+     * @return Vehiculo
+     */
     public Vehiculo busquedaBinariaV(Lista.ListaSimple<Vehiculo> lista, Long codigo) {
         int n = lista.tamano();
         int centro, inf = 0, sup = n;
@@ -355,7 +390,11 @@ public class ControladorVehiculo {
         lista.verDatos();
         return null;
     }
-
+    /**
+     * devuelve una ListaSimple de tipo Vehiculo ordenado por shell
+     * @param arreglo ListaSimple de Vehiculo
+     * @return ListaSimple de Vehiculo
+     */
     public ListaSimple<Vehiculo> shellV(ListaSimple<Vehiculo> arreglo) {
         int inta, i;
         Vehiculo aux;
@@ -383,6 +422,12 @@ public class ControladorVehiculo {
         }
         return arreglo;
     }
+    /**
+     * retorna un ModeloVehiculo usando busqueda binaria en una ListaSimple de tipo modelovehiculo por codigo
+     * @param lista ListaSimple de tipo ModeloVehiculo
+     * @param codigo Long
+     * @return ModeloVehiculo
+     */
     public ModeloVehiculo busquedaBinariaMod(Lista.ListaSimple<ModeloVehiculo> lista, Long codigo) {
         int n = lista.tamano();
         int centro, inf = 0, sup = n;
@@ -399,7 +444,11 @@ public class ControladorVehiculo {
         lista.verDatos();
         return null;
     }
-
+    /**
+     * retorna una ListaSimpleAvanzada de tipo vehiculos ordenada por shell
+     * @param arreglo ListaSimple de tipo ModeloVehiculo
+     * @return ListaSimple de tipo ModeloVehiculo
+     */
     public ListaSimple<ModeloVehiculo> shellMod(ListaSimple<ModeloVehiculo> arreglo) {
         int inta, i;
         ModeloVehiculo aux;
@@ -633,9 +682,9 @@ public class ControladorVehiculo {
         return nombreMarca;
 
     }
-/**
- * Metodo encargado de llenar las listas de vehiculos, modelos, marcas con los datos obtenidos de la base de datos
- */
+    /**
+     * Metodo encargado de llenar las listas de vehiculos, modelos, marcas con los datos obtenidos de la base de datos
+     */
     public void recuperarDatosMod() {
         live=new ListaSimple<>();
         limo=new ListaSimple<>();

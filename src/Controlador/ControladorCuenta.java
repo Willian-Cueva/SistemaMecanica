@@ -184,7 +184,6 @@ public class ControladorCuenta {
             if (lic.obtenerPorPosicion(i).getUsuario().equals(Usuario) && lic.obtenerPorPosicion(i).getContraseña().equals(Contraseña)) {
                 System.out.println("Existe Cuenta"+lic.obtenerPorPosicion(i).getUsuario());
                 cuenta = lic.obtenerPorPosicion(i);
-            }else{
             }
         }
         if (cuenta != null) {

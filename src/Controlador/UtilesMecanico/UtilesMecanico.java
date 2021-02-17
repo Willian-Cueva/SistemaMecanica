@@ -24,10 +24,7 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.ImageIcon;
-import javax.swing.JColorChooser;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -48,7 +45,9 @@ public class UtilesMecanico {
     public Connection getConexion() {
         return conexion;
     }
-    
+    /**
+     * Inicia o establece la coneccion con la base de datos
+     */
     public void IniciarConexion() {
         Connection con = null;
         String Driver = "com.mysql.cj.jdbc.Driver";
@@ -140,12 +139,21 @@ public class UtilesMecanico {
         fechaHora = String.valueOf(año) + "-" + String.valueOf(mes + 1) + "-" + String.valueOf(dia) + " " + String.valueOf(hora) + ":" + String.valueOf(minuto) + ":" + String.valueOf(segundo);
         return fechaHora;
     }
-    
+    /**
+     * Devuelve un sql con el idDetalle
+     * @param idDetalle Long
+     * @return String - sql
+     */
     public String tr(Long idDetalle) {
         String tr = "SELECT * FROM salidaservicio inner join servicio  using (idsalidaServicio) where idDetalle=" + idDetalle;
         return tr;
     }
-    
+    /**
+     * retorna una imagen un un tiempo de espera
+     * @param lb JLabel
+     * @param lb1 JLabel
+     * @param ico ImageIcon 
+     */
     public void retardo(JLabel lb, JLabel lb1, ImageIcon ico[]) {
         Timer timer;
         timer = new Timer();
@@ -167,7 +175,10 @@ public class UtilesMecanico {
         // Empezamos dentro de 10ms y luego lanzamos la tarea cada 1000ms
         timer.schedule(task, 10, 10000);
     }
-    
+    /**
+     * Retorna un arreglo de File
+     * @return File[]
+     */
     public File[] traerDirectorio() {
         
         String path = "./img/";
@@ -202,7 +213,11 @@ public class UtilesMecanico {
         System.out.println("tm: " + img.length);
         return img;
     }
-    
+    /**
+     * Clona un File
+     * @param uno File[]
+     * @param dos File[]
+     */
     public static void copiar(File[] uno, File[] dos) {
         for (int i = 0; i < dos.length; i++) {
             uno[i] = dos[i];

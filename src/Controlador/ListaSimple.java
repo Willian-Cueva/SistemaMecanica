@@ -10,6 +10,9 @@ package Controlador;
  * @author Willian
  */
 public class ListaSimple {
+    /**
+     * Nodo cabecera
+     */
     public Nodo cabecera;
     /**
      * 
