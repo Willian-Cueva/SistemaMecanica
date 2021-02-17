@@ -122,7 +122,7 @@ public class Producto {
     }
     /**
      * Enviar el Iva Producto
-     * @param iva 
+     * @param iva double
      */
     public void setIva(double iva) {
         this.iva = iva;

@@ -16,7 +16,7 @@ public class TablaProducto extends AbstractTableModel{
     private ListaSimpleAvanzada lsp = new ListaSimpleAvanzada();
     /**
      * Trae una ListaSimpleAvanzada
-     * @return 
+     * @return ListaSimpleAvanzada
      */
     public ListaSimpleAvanzada getLsp() {
         return lsp;

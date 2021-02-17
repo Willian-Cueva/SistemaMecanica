@@ -26,6 +26,10 @@ public class Frm_BuscarFacturas extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         cargarTabla();
     }
+    /**
+     * constructor de factura por placa
+     * @param placa String 
+     */
     public Frm_BuscarFacturas(String placa) {
         this.setUndecorated(true);
         initComponents();

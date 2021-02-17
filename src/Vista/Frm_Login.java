@@ -30,6 +30,9 @@ public class Frm_Login extends javax.swing.JFrame {
     ControladorCuenta ctr = new ControladorCuenta();
     Frm_Mecanico mec = new Frm_Mecanico();
     Frm_Administrador adm=new Frm_Administrador();
+    /**
+     * Constructor
+     */
     public Frm_Login() {
         initComponents();
         ctr.RecuperarData();

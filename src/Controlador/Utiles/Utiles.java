@@ -26,8 +26,13 @@ import java.util.logging.Logger;
  * @author Willian
  */
 public class Utiles {
-
+    /**
+     * Extraccion de Clientes
+     */
     public static final int CLIENTES = 1;
+    /**
+     * Extraccion de Personas
+     */
     public static final int PERSONAS = 0;
 
     /**

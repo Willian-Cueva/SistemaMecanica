@@ -20,6 +20,10 @@ public class Frm_Servicios extends javax.swing.JFrame {
      * Creates new form Frm_Servicios
      */
     ControladorServicio ctr=new ControladorServicio();
+    /**
+     * Constructor
+     * @param aL MouseListener
+     */
     public Frm_Servicios(MouseListener aL) {
         initComponents();
         btnGuardar.addMouseListener(aL);
@@ -133,6 +137,10 @@ public class Frm_Servicios extends javax.swing.JFrame {
     private void btnCancelarMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarMouseReleased
         this.dispose();        // TODO add your handling code here:
     }//GEN-LAST:event_btnCancelarMouseReleased
+    /**
+     * devuelve un Servicio
+     * @return Servicio
+     */
     public Servicio pasardato(){
         return ctr.getServicio();
     }

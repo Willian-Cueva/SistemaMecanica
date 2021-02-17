@@ -21,9 +21,10 @@ public class Panel_RegistrarModelos extends javax.swing.JPanel {
      */
     ControladorVehiculo ctr=new ControladorVehiculo();
     UtilesMecanico uti=new UtilesMecanico();
+   
     /**
-     * 
-     * @param   evento de soltar el mouse
+     * constructor 
+     * @param aL MouseListener
      */
     public Panel_RegistrarModelos(MouseListener aL) {
         initComponents();

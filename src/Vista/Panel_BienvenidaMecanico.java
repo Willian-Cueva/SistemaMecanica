@@ -21,6 +21,10 @@ public class Panel_BienvenidaMecanico extends javax.swing.JPanel {
      * Creates new form Pane_BienvenidaMecanico
      */
     UtilesMecanico uti=new UtilesMecanico();
+    /**
+     * String nombre controlador
+     * @param nombre String
+     */
     public Panel_BienvenidaMecanico(String nombre) {
         initComponents();
         int alto=jLabel2.getSize().height;

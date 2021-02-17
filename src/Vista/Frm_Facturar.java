@@ -27,6 +27,9 @@ public class Frm_Facturar extends javax.swing.JFrame {
 
     private ControladorOrdeDeReparacion codr = new ControladorOrdeDeReparacion();
     private TablaProducto tablaProducto = new TablaProducto();
+    /**
+     * boolean para factar formato factura
+     */
     public static final boolean PROTOTIPOFACTURA = true;
     private ControladorServicio ctr = new ControladorServicio();
     private TablaServicios tablaServicio = new TablaServicios();
@@ -37,7 +40,9 @@ public class Frm_Facturar extends javax.swing.JFrame {
     public Frm_Facturar() {
         initComponents();
     }
-
+    /**
+     * Contructor de Frm_factura con controlador de orden de reparacion
+     */
     public Frm_Facturar(ControladorOrdeDeReparacion codr) {
         this.setUndecorated(true);
         initComponents();
@@ -46,7 +51,11 @@ public class Frm_Facturar extends javax.swing.JFrame {
         this.codr.cargarDetalle();
         cargarDatos();
     }
-
+    /**
+     * Frm_Facturar constructor formato factura
+     * @param codr ControladorOrdeDeReparacion
+     * @param opcion Boolean true
+     */
     public Frm_Facturar(ControladorOrdeDeReparacion codr, boolean opcion) {
         this.setUndecorated(true);
         initComponents();

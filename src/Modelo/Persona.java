@@ -36,7 +36,7 @@ public class Persona{
     }
     /**
     * Crea una Persona
-    * @param id 
+    * @param id Long
     */
     public Persona(Long id) {
         this.id = id;
@@ -98,7 +98,7 @@ public class Persona{
     }
     /**
      * Trae un IdRol Persona
-     * @return 
+     * @return Long
      */
     public Long getIdRol() {
         return idRol;
@@ -119,7 +119,7 @@ public class Persona{
     }
     /**
      * Enviar el EstadoPersona
-     * @param estado 
+     * @param estado Boolean
      */
     public void setEstado(Boolean estado) {
         this.estado = estado;

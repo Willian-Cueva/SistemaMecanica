@@ -100,7 +100,7 @@ public class Cuenta{
     }
     /**
      * recibe un String
-     * @param External_id
+     * @param External_id String
      */
     public void setExternal_id(String External_id) {
         this.External_id = External_id;

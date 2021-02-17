@@ -38,6 +38,10 @@ public class Frm_Detalle extends javax.swing.JFrame {
         tablaServicios.setModel(modelo);
         cargarTablas();
     }
+    /**
+     * Construccion de Frm_Detalle 
+     * @param codr ControladorOrdeDeReparacion
+     */
     public Frm_Detalle(ControladorOrdeDeReparacion codr) {
         this.setUndecorated(true);
         initComponents();
