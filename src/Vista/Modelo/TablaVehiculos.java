@@ -15,11 +15,17 @@ import javax.swing.table.AbstractTableModel;
  */
 public class TablaVehiculos extends AbstractTableModel{
     private ListaSimpleAvanzada lsa = new ListaSimpleAvanzada();
-
+    /**
+     * Trae una ListaSimpleAvanzada
+     * @return ListaSimpleAvanzada
+     */
     public ListaSimpleAvanzada getLsa() {
         return lsa;
     }
-
+    /**
+     * Enviamos una ListaSimpleAvanzada
+     * @param lsa ListaSimpleAvanzada
+     */
     public void setLsa(ListaSimpleAvanzada lsa) {
         this.lsa = new ListaSimpleAvanzada();
         this.lsa = lsa;

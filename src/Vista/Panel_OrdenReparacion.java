@@ -21,9 +21,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Panel_OrdenReparacion extends javax.swing.JPanel {
 
-    /**
-     * Creates new form Panel_OrdenReparacion
-     */
+    
     DefaultTableModel modelo;
     ControladorVehiculo ctr = new ControladorVehiculo();
     UtilesMecanico uti = new UtilesMecanico();
@@ -33,7 +31,10 @@ public class Panel_OrdenReparacion extends javax.swing.JPanel {
     private ControladorOrdeDeReparacion coddr;
     private final int PRECARGA = 0;
     private final int ENCONTRADO = 1;
-
+    
+    /**
+     * Creates new form Panel_OrdenReparacion
+     */
     public Panel_OrdenReparacion() {
         initComponents();
         uti.IniciarConexion();

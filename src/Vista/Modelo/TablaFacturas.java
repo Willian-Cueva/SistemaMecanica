@@ -16,11 +16,17 @@ import javax.swing.table.AbstractTableModel;
 public class TablaFacturas extends AbstractTableModel {
 
     private ControladorFacturas cf = new ControladorFacturas();
-
+    /**
+     * Trae un ControladorFacturas
+     * @return ControladorFacturas
+     */
     public ControladorFacturas getCf() {
         return cf;
     }
-
+    /**
+     * Envia  un ControladorFacturas
+     * @param cf ControladorFacturas
+     */
     public void setCf(ControladorFacturas cf) {
         this.cf = cf;
     }

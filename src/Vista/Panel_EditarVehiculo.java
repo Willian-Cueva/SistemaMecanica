@@ -21,9 +21,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Panel_EditarVehiculo extends javax.swing.JPanel {
 
-    /**
-     * Creates new form Panel_EditarVehiculo
-     */
+    
     DefaultTableModel modelo;
     ControladorVehiculo ctr = new ControladorVehiculo();
     UtilesMecanico uti = new UtilesMecanico();
@@ -31,6 +29,9 @@ public class Panel_EditarVehiculo extends javax.swing.JPanel {
     String ColorRGB;
     Long idLong = null;
     
+    /**
+     * Creates new form Panel_EditarVehiculo
+     */
     public Panel_EditarVehiculo() {
         initComponents();
         uti.IniciarConexion();

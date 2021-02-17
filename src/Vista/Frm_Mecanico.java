@@ -19,9 +19,6 @@ import javax.swing.ImageIcon;
  */
 public class Frm_Mecanico extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Frm_Mecanico
-     */
     Panel_RegistroVehiculo PRVehiculo = new Panel_RegistroVehiculo();
     Panel_RegistroCliente PRCliente = new Panel_RegistroCliente();
     Panel_EditarCliente PRECliente=new Panel_EditarCliente();
@@ -30,6 +27,9 @@ public class Frm_Mecanico extends javax.swing.JFrame {
     Panel_BienvenidaMecanico PBien;
     UtilesMecanico uti=new UtilesMecanico();
     
+    /**
+     * Creates new form Frm_Mecanico
+     */
     public Frm_Mecanico() {
         initComponents();
         cargarFondo();
