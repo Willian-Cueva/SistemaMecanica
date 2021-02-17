@@ -41,17 +41,26 @@ public class ControladorVehiculo {
     ModeloVehiculo modelo;
     ModeloVehiculo maux;
     Persona paux;
-
+    /**
+     * Obtiene un objeto ModeloVehiculo
+     * @return ModeloVehiculo
+     */
     public ModeloVehiculo getMaux() {
         return maux;
     }
-
+    /**
+     * recibe un ModeloVehiculo
+     * @param maux ModeloVehiculo
+     */
     public void setMaux(ModeloVehiculo maux) {
         this.maux = maux;
     }
     
     
-
+    /**
+     * Retorna un Vehiculo  
+     * @return Vehiculo
+     */
     public Vehiculo getVaux() {
         return vaux;
     }

@@ -33,40 +33,66 @@ public class ControladorOrdeDeReparacion {
 //    private String placa = "";
     OrdenReparacion aux=new OrdenReparacion();
     private Vehiculo vehiculo = new Vehiculo();
-
+    /**
+     * Retorna Vehiculo
+     * @return Vehiculo
+     */
     public Vehiculo getVehiculo() {
         return vehiculo;
     }
-
+    /**
+     * Recibe un vehiculo
+     * @param vehiculo Vehiculo
+     */
     public void setVehiculo(Vehiculo vehiculo) {
         this.vehiculo = vehiculo;
     }
-
+    /**
+     * Constructor que al instanciarlo ejecuta el metodo cargarOrdenes()
+     */
     public ControladorOrdeDeReparacion() {
         cargarOrdenes();
     }
-
+    /**
+     * Retorna una ListaSimpleAvanzada
+     * @return ListaSimpleAvanzada
+     */
     public ListaSimpleAvanzada getOrdenes() {
         return ordenes;
     }
-
+    /**
+     * Recive ListaSimpleAvanzada
+     * @param ordenes ListaSimpleAvanzada
+     */
     public void setOrdenes(ListaSimpleAvanzada ordenes) {
         this.ordenes = new ListaSimpleAvanzada();
         this.ordenes = ordenes;
     }
-
+    /**
+     * retorna una OrdenReparacion
+     * @return OrdenReparacion
+     */
     public OrdenReparacion getOrden() {
         return orden;
     }
-
+    /**
+     * Recibe una OrdenReparacion
+     * @param orden OrdenReparacion 
+     */
     public void setOrden(OrdenReparacion orden) {
         this.orden = orden;
     }
-
+    /**
+     * Devuelve un DetalleReparacion
+     * @return DetalleReparacion
+     */
     public DetalleReparacion getDetalle() {
         return detalle;
     }
-
+    /**
+     * recibe un Detallereparacion
+     * @param detalle Detallereparacion
+     */
     public void setDetalle(DetalleReparacion detalle) {
         this.detalle = detalle;
     }
@@ -178,8 +204,7 @@ public class ControladorOrdeDeReparacion {
 //        lservicio.verDatos();
 //    }
     /**
-     * Este metodo permite retornar una lista sea de ordenes o de facturas
-     * @param opcion ORDENDES/FACTURAS
+     * En este metodo se cargan en la lsita de ordenes todas las que se encuentren como activas
      */
     public void cargarOrdenes() {
         this.ordenes = new ListaSimpleAvanzada();
@@ -268,6 +293,9 @@ public class ControladorOrdeDeReparacion {
         }
 
     }
+    /**
+     * Carga los detalles de la orden de reparacion de dicha factura
+     */
     public void cargarDetalleFactura() {
 //        DetalleReparacion d = (DetalleReparacion) Utiles.busquedaSecuencial(Utiles.listaDetalles(), orden.getIdOrden().toString(), "IdOrden").obtenerObjetopp(0);
         Vehiculo v = (Vehiculo) Utiles.busquedaSecuencial(Utiles.listaVehiculos(), this.vehiculo.getPlaca(), "Placa").obtenerObjetopp(0);
@@ -347,7 +375,7 @@ public class ControladorOrdeDeReparacion {
     }
     /**
      * Este metodo permite actualizar los servicios que se le relizan al vehiculo el cual tirne una orden de reparacion activa
-     * @param subtotal 
+     * @param subtotal double subtotal
      */
      public void actualizarOrdenServicio(double subtotal){
          try {

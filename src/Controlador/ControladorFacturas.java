@@ -24,11 +24,17 @@ public class ControladorFacturas {
     private ListaSimpleAvanzada facturas = new ListaSimpleAvanzada();
     private Factura factura;
     private Vehiculo vehiculo;
-
+    /**
+     * Retorna un Vehiculo
+     * @return Vehiculo
+     */
     public Vehiculo getVehiculo() {
         return vehiculo;
     }
-
+    /**
+     * Recibe un Vehiculo
+     * @param v Vehiculo
+     */
     public void setVehiculo(Vehiculo v) {
         this.vehiculo = v;
     }
@@ -83,27 +89,45 @@ public class ControladorFacturas {
             return null;
         }
     }
-
+    /**
+     * Devuelve una ListaSimpleAvanzada
+     * @return ListaSimpleAvanzada
+     */
     public ListaSimpleAvanzada getFacturas() {
         return facturas;
     }
-
+    /**
+     * Recibe una ListaSimpleAvanzada de facturas
+     * @param facturas ListaSimpleAvanzada de facturas
+     */
     public void setFacturas(ListaSimpleAvanzada facturas) {
         this.facturas = facturas;
     }
-
+    /**
+     * retorna la factura de esta clase
+     * @return Factura
+     */
     public Factura getFactura() {
         return factura;
     }
-
+    /**
+     * Recibe una factura
+     * @param factura Factura
+     */
     public void setFactura(Factura factura) {
         this.factura = factura;
     }
-
+    /**
+     * devuelve un ControladorOrdeDeReparacion
+     * @return ControladorOrdeDeReparacion
+     */
     public ControladorOrdeDeReparacion getCntrl() {
         return cntrl;
     }
-
+    /**
+     * Recibe un ControladorOrdeDeReparacion
+     * @param cntrl ControladorOrdeDeReparacion
+     */
     public void setCntrl(ControladorOrdeDeReparacion cntrl) {
         this.cntrl = cntrl;
     }

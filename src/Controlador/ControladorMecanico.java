@@ -30,33 +30,45 @@ public class ControladorMecanico {
     UtilesMecanico uti = new UtilesMecanico();
     ControladorCuenta ctr = new ControladorCuenta();
     Rol[] arr;
-
+    /**
+     * Devuelve una Persona
+     * @return Persona
+     */
     public Persona getPersona() {
         return persona;
     }
-    
+    /**
+     * Recibe una Persona
+     * @param persona Persona
+     */
     public void setPersona(Persona persona) {
         this.persona = persona;
     }
-    
+    /**
+     * Retorna una Cuenta
+     * @return Cuenta
+     */
     public Cuenta getCuenta() {
         return cuenta;
     }
-    
+    /**
+     * recibe una Cuenta
+     * @param cuenta Cuenta
+     */
     public void setCuenta(Cuenta cuenta) {
         this.cuenta = cuenta;
     }
     /**
      * Metodo para crear un cliente
-     * @param cedula
-     * @param nombre
-     * @param apellido
-     * @param correo
-     * @param telefono
-     * @param direccion
-     * @param file
-     * @param idRol
-     * @param contraseña 
+     * @param cedula String cedula
+     * @param nombre String nombre
+     * @param apellido String apellido
+     * @param correo String correo
+     * @param telefono String telefono
+     * @param direccion String direccion
+     * @param file File file
+     * @param idRol Long idRol
+     * @param contraseña String contrasenia
      */
     public void RegistrarCliente(String cedula, String nombre, String apellido, String correo, String telefono, String direccion, File file, Long idRol, String contraseña) {
         persona = new Persona(Long.parseLong("0"), nombre, apellido, cedula, correo, telefono, direccion,false, "f57c756c6fj6", idRol, file);
@@ -67,7 +79,7 @@ public class ControladorMecanico {
     }
     /**
      * Metodo encargado de guardar los clientes en la base de datos
-     * @param persona 
+     * @param persona Persona
      */
     public void GuardarPersona(Persona persona) {
         try {
@@ -121,7 +133,7 @@ public class ControladorMecanico {
     }
     /**
      * Metodo encargado de cargar los datos de roles en un combo box
-     * @param cb 
+     * @param cb JcomboBox
      */
     public void llenarboxRoles(JComboBox cb) {
         ctr.RecuperarData();
@@ -135,8 +147,8 @@ public class ControladorMecanico {
     }
     /**
      * Metodo encargado de buscar el id del rol selecionado en el combo box
-     * @param item
-     * @return 
+     * @param item item
+     * @return Long
      */
     public Long idRol(String item) {
         long lg = 0;

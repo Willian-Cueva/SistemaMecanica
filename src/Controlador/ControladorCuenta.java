@@ -57,7 +57,7 @@ public class ControladorCuenta {
     }
     /**
      * Retorna un rol
-     * @return 
+     * @return Rol
      */
     public Rol getRol() {
         return rol;

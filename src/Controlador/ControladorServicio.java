@@ -25,27 +25,33 @@ import javax.swing.table.DefaultTableModel;
  * @author Cris2
  */
 public class ControladorServicio {
-
+    /**
+     * UtilesMeccanico static
+     */
     public static UtilesMecanico uti = new UtilesMecanico();
 
     Servicio servicio = null;
-
+    /**
+     * Retorna un Servicio
+     * @return Servicio
+     */
     public Servicio getServicio() {
         return servicio;
     }
     /**
      * Metodo encargado de crear servicios
-     * @param Titulo
-     * @param Valor
-     * @param Descripcion 
+     * @param Titulo String
+     * @param Valor String
+     * @param Descripcion String
      */
     public void CrearServicio(String Titulo, Double Valor, String Descripcion) {
         servicio = new Servicio(0L, Descripcion, Valor, Titulo);
     }
     /**
      * Metodo encargado de rellenar la tabla de Servicios
-     * @param li
-     * @param modelo 
+     * @param li ListaSimple de tipo Servicio 
+     * @param li2 ListaSimple de tipo Servicio 
+     * @param modelo DefaultTableModel modelo
      */
     public void llenarTablaServicio(ListaSimple<Servicio> li,ListaSimple<Servicio>li2, DefaultTableModel modelo) {
         Object obj[] = new Object[3];
@@ -66,8 +72,8 @@ public class ControladorServicio {
     }
     /**
      * Metodo que permite guardar los datos de servicios en la base de datos
-     * @param Servicio
-     * @param Detalle 
+     * @param Servicio Servicio
+     * @param Detalle Long
      */
     public void GuardarServicio(Servicio Servicio, Long Detalle) {
         System.out.println("Dato importante: " + Detalle);
